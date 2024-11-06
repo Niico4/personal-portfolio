@@ -1,4 +1,4 @@
-import { Button, Card, CardBody } from '@nextui-org/react';
+import { Button, Card, CardBody, Tooltip } from '@nextui-org/react';
 import React from 'react';
 import Image from 'next/image';
 import {
@@ -7,6 +7,7 @@ import {
   IconCircleCheck,
   IconFileText,
 } from '@tabler/icons-react';
+import Link from 'next/link';
 
 import imgProfile from '@/../public/test.webp';
 import { DESCRIPTION } from '@/(pages)/(home)/constants/hero.data';
@@ -46,14 +47,27 @@ const ProfileCard = () => {
 
             <p className="text-lg tracking-wider my-4">{DESCRIPTION}</p>
           </div>
-          <Button
-            startContent={<IconFileText />}
-            color="primary"
-            variant="shadow"
-            className="text-gray-900 font-semibold text-base"
+          <Link
+            href="https://drive.google.com/file/d/1q9klaXbJcQRWaY1JntJmqvvvuYI--5ln/view?usp=drive_link"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            Curriculum
-          </Button>
+            <Tooltip
+              content="Ver o descargar mi CV profesional"
+              placement="bottom"
+              showArrow
+            >
+              <Button
+                startContent={<IconFileText />}
+                color="primary"
+                radius="sm"
+                variant="shadow"
+                className="text-gray-900 font-semibold text-base"
+              >
+                Currículum
+              </Button>
+            </Tooltip>
+          </Link>
         </div>
       </CardBody>
     </Card>

@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { BreadcrumbItem, Breadcrumbs } from '@nextui-org/react';
+import { BreadcrumbItem, Breadcrumbs, Tooltip } from '@nextui-org/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
@@ -9,14 +9,17 @@ const navbarItems = [
   {
     label: 'Inicio',
     href: '/',
-  },
-  {
-    label: 'Acerca de Mi',
-    href: '/about-me',
+    description: 'Bienvenido a mi Sitio Web',
   },
   {
     label: 'Portafolio',
     href: '/portfolio',
+    description: 'Mis proyectos y logros',
+  },
+  {
+    label: 'Sobre de Mi',
+    href: '/about-me',
+    description: 'Conoce un poco más sobre mi',
   },
 ];
 
@@ -37,16 +40,23 @@ const NavBar = () => {
               item: 'text-IColorSecondary',
             }}
           >
-            {navbarItems.map(({ href, label }, index) => (
+            {navbarItems.map(({ href, label, description }, index) => (
               <BreadcrumbItem key={index}>
-                <Link
-                  className={`${
-                    currentPathname === href && 'text-primary'
-                  } text-lg`}
-                  href={href}
+                <Tooltip
+                  content={description}
+                  color="primary"
+                  className="text-gray-900"
+                  showArrow
                 >
-                  {label}
-                </Link>
+                  <Link
+                    className={`${
+                      currentPathname === href && 'text-primary'
+                    } text-lg`}
+                    href={href}
+                  >
+                    {label}
+                  </Link>
+                </Tooltip>
               </BreadcrumbItem>
             ))}
           </Breadcrumbs>

@@ -20,7 +20,7 @@ export async function generateMetadata({
   description: string;
 }): Promise<Metadata> {
   return {
-    title: `Portafolio | ${title}`,
+    title: `${title} | Nicolas Garzón`,
     description,
   };
 }
