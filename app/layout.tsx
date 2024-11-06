@@ -32,6 +32,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
+      <head>
+        <link rel="shortcut icon" href="/Subtract.svg" type="image/x-icon" />
+      </head>
       <body
         className={`${raleway.className} antialiased bg-gradient-layout h-screen`}
       >
