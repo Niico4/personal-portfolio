@@ -36,7 +36,7 @@
   transition: background 0.3s;
 }
 
-.embla__dot--selected {
+.embla__dot__selected {
   background: #007bff;
   transform: scale(1.2);
 }

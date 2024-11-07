@@ -8,13 +8,13 @@ const CardSoftSkill: FC<{ title: string; description: string; icon: Icon }> = ({
   icon: Icon,
 }) => {
   return (
-    <Card className="w-[350px] bg-neutral-800/90 grid grid-cols-[auto_1fr] items-start place-content-center">
+    <Card className="w-[400px] bg-neutral-800/90 grid grid-cols-[auto_1fr] items-start place-content-center">
       <CardHeader className="justify-center items-center">
-        <Icon size={38} color="#7cc1fd" />
+        <Icon size={42} color="#7cc1fd" />
       </CardHeader>
       <CardBody>
-        <h3 className="text-IColorSecondary text-lg tracking-wider">{title}</h3>
-        <p className="text-IColorPrimary text-sm font-light">{description}</p>
+        <h3 className="text-gray-50 text-xl tracking-wider">{title}</h3>
+        <p className="text-gray-300 text-sm font-light">{description}</p>
       </CardBody>
     </Card>
   );

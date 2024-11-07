@@ -17,6 +17,7 @@ const ButtonSocial = ({
     color="primary"
     className="text-gray-900"
     placement="bottom"
+    showArrow
   >
     <Link href={href} target="_blank" rel="noopener noreferrer">
       <Button
