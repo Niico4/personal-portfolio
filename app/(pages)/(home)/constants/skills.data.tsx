@@ -6,8 +6,6 @@ import {
 } from '@tabler/icons-react';
 import { EmblaOptionsType } from 'embla-carousel';
 
-import CardSoftSkill from '../../../components/sections/skills/CardSoftSkill';
-
 import { TECH_SKILLS } from './iconsSkills';
 
 export const OPTIONS_SOFT_SKILLS: EmblaOptionsType = {
@@ -45,14 +43,6 @@ export const SOFT_SKILLS = [
     icon: IconBoltFilled,
   },
 ];
-
-export const SOFT_SKILLS_SLIDES = SOFT_SKILLS.map(
-  ({ title, icon, description }, index) => (
-    <div className="embla__slide" key={index}>
-      <CardSoftSkill title={title} icon={icon} description={description} />
-    </div>
-  )
-);
 
 export const TECH_SKILLS_SLIDES = TECH_SKILLS.map(
   ({ title, icon: Icon }, index) => (

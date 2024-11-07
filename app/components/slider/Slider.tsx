@@ -6,8 +6,11 @@ import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 import AutoScroll from 'embla-carousel-auto-scroll';
 
+import styles from '@/styles/slider.module.css';
+
 import { DotButton, useDotButton } from './DotButtons';
-import '../../styles/embla.css';
+
+import '@/styles/slider.module.css';
 
 type PropType = {
   slides: React.ReactNode[];
@@ -32,15 +35,17 @@ const Slider: FC<PropType> = ({ slides, isAutoScroll, options }) => {
     useDotButton(emblaApi);
 
   return (
-    <section className="embla">
-      <div className="embla__viewport" ref={emblaRef}>
-        <div className="embla__container">
+    <section className={styles.embla}>
+      <div className={styles.embla__viewport} ref={emblaRef}>
+        <div className={styles.embla__container}>
           {slides.map((slide, index) => (
             <div
-              className={`${isAutoScroll ? 'tech_carousel' : 'embla__slide'}`}
+              className={`${
+                isAutoScroll ? styles.tech_carousel : styles.embla__slide
+              }`}
               key={index}
             >
-              <div className="embla__slide__number">{slide}</div>
+              <div className={styles.embla__slide__number}>{slide}</div>
             </div>
           ))}
         </div>
@@ -53,8 +58,8 @@ const Slider: FC<PropType> = ({ slides, isAutoScroll, options }) => {
               <DotButton
                 key={index}
                 onClick={() => onDotButtonClick(index)}
-                className={'embla__dot'.concat(
-                  index === selectedIndex ? ' embla__dot--selected' : ''
+                className={styles.embla__dot.concat(
+                  index === selectedIndex ? styles.embla__dot__selected : ''
                 )}
               />
             ))}

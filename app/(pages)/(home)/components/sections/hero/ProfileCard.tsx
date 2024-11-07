@@ -23,11 +23,14 @@ const ProfileCard = () => {
     >
       <CardBody className="flex-row items-center gap-10">
         <div className="w-[30%]">
-          <Image
-            src={imgProfile}
-            alt="Imagen de Perfil"
-            className="w-48 aspect-square object-cover rounded-full mx-auto mb-5"
-          />
+          <figure className="w-48 aspect-square mx-auto mb-5">
+            <Image
+              src={imgProfile}
+              alt="Imagen de Perfil"
+              className="w-full h-full object-cover rounded-full"
+              loading="lazy"
+            />
+          </figure>
           <ul className="w-full flex flex-col items-start gap-2">
             <InfoItem icon={IconSchool} label="Desarrollador Frontend" />
             <InfoItem icon={IconMapPin} label="Bogotá, Colombia" />

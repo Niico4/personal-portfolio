@@ -1,7 +1,9 @@
 import React from 'react';
 
 import { generateMetadata } from '@/layout';
-import HeroSection from '@/components/sections/hero/HeroSection';
+
+import HeroSection from './components/sections/hero/HeroSection';
+import SkillsSection from './components/sections/skills/SkillsSection';
 
 export const metadata = generateMetadata({
   title: 'Desarrollador Frontend',
@@ -11,8 +13,9 @@ export const metadata = generateMetadata({
 
 const HomePage = () => {
   return (
-    <div>
+    <div className="flex flex-col gap-10">
       <HeroSection />
+      <SkillsSection />
     </div>
   );
 };

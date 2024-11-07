@@ -1,10 +1,11 @@
 import type { Metadata } from 'next';
 import { Raleway } from 'next/font/google';
 
-import './globals.css';
 import { Provider } from '@/providers/Provider';
 
 import NavBar from './components/layout/NavBar';
+
+import '@/styles/globals.css';
 
 const raleway = Raleway({
   subsets: ['latin'],
@@ -36,7 +37,7 @@ export default function RootLayout({
         <link rel="shortcut icon" href="/Subtract.svg" type="image/x-icon" />
       </head>
       <body
-        className={`${raleway.className} antialiased bg-gradient-layout h-screen`}
+        className={`${raleway.className} antialiased bg-gradient-layout min-h-screen flex flex-col`}
       >
         <Provider>
           <div className="w-1/2 mx-auto">
