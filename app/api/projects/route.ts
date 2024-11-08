@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-import { db } from '@/app/utils/prisma';
+import { db } from '@/utils/prisma';
 
 const formatTechnologies = (technologies: string | string[]) => {
   if (Array.isArray(technologies)) {
