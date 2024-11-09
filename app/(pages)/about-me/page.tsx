@@ -20,18 +20,18 @@ export const metadata = generateMetadata({
 
 const AboutMePage = () => {
   return (
-    <div className="flex flex-col gap-10 mx-auto">
+    <div className="flex flex-col gap-10 mx-auto md:mx-5 max-lg:mx-5">
       <h2 className="text-IColorPrimary text-4xl font-semibold mx-auto">
         Conóceme Mejor
       </h2>
       <section className="flex flex-col gap-4">
-        <div className="flex gap-4">
-          <article className="flex flex-col gap-4 w-7/12">
+        <div className="flex flex-col md:flex-row gap-4">
+          <article className="flex flex-col gap-4 md:w-7/12">
             <CardAboutMe />
             <CardInterests />
           </article>
 
-          <article className="flex flex-col gap-4 w-2/5">
+          <article className="flex flex-col gap-4 md:w-2/5">
             <CardEducation />
             <CardService />
           </article>

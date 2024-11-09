@@ -39,7 +39,7 @@ const NavBar = () => {
   return (
     <Navbar
       onMenuOpenChange={setIsMenuOpen}
-      className="w-full xl:w-1/2 mx-auto bg-transparent rounded-xl mt-3"
+      className="w-[95%] xl:w-2/3 min-[1300px]:w-1/2 mx-auto bg-transparent rounded-xl mt-3"
     >
       <NavbarContent>
         <NavbarBrand>

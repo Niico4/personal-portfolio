@@ -6,7 +6,6 @@ import { Provider } from '@/providers/Provider';
 import NavBar from './components/layout/NavBar';
 import GradientBg from './components/layout/GradientBg';
 import '@/styles/globals.css';
-// import Footer from './components/layout/Footer';
 
 const raleway = Raleway({
   subsets: ['latin'],
@@ -43,10 +42,9 @@ export default function RootLayout({
         <GradientBg />
         <Provider>
           <NavBar />
-          <div className="w-1/2 mx-auto">
+          <div className="w-[95%] xl:w-2/3 min-[1300px]:w-1/2 mx-auto">
             <main className="my-10">{children}</main>
           </div>
-          {/* <Footer/> */}
         </Provider>
       </body>
     </html>

@@ -19,7 +19,7 @@ const GitHubContribution = () => {
   };
   return (
     <article className="w-[90%] flex flex-col items-end gap-10 mx-auto">
-      <div className="w-full flex items-center justify-between">
+      <div className="w-full flex flex-col items-start md:flex-row md:items-center justify-between">
         <h2 className="text-IColorSecondary text-2xl font-semibold">
           Mi Huella en GitHub
         </h2>
@@ -28,7 +28,7 @@ const GitHubContribution = () => {
           value={selectedYear.toString()}
           onChange={handleYearChange}
           aria-label="Select the year"
-          className="w-[12%]"
+          className="w-1/3 md:w-[20%] lg:w-[12%]"
           startContent={<IconCalendarMonth />}
           size="sm"
         >

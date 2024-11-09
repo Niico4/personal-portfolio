@@ -22,7 +22,7 @@ const ProjectsSection = () => {
       <h2 className="text-IColorPrimary text-4xl font-semibold mx-auto">
         Mis Proyectos
       </h2>
-      <div className="grid grid-cols-2 gap-10">
+      <div className="flex flex-col md:grid grid-cols-2 gap-10 mx-0 md:mx-5 max-lg:mx-5">
         {projects.map(
           (
             { image, title, description, repository, technologies, web_site },

@@ -25,7 +25,7 @@ const ButtonsFooterCard: FC<Pick<ICardProps, 'repository' | 'webSite'>> = ({
   repository,
   webSite,
 }) => (
-  <div className="flex mx-auto gap-4 items-center">
+  <div className="flex flex-col min-[400px]:flex-row mx-auto gap-4 items-center">
     {repository && (
       <Link href={repository}>
         <Button
