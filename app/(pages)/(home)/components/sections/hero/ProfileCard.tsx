@@ -9,7 +9,7 @@ import {
 } from '@tabler/icons-react';
 import Link from 'next/link';
 
-import imgProfile from '@/../public/test.webp';
+import imgProfile from '@/../public/profile.webp';
 import { DESCRIPTION } from '@/(pages)/(home)/constants/hero.data';
 
 import InfoItem from './InfoItem';

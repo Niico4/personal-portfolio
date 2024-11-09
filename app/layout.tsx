@@ -34,7 +34,7 @@ export default function RootLayout({
   return (
     <html lang="es">
       <head>
-        <link rel="shortcut icon" href="/favicon.svg.svg" type="image/x-icon" />
+        <link rel="shortcut icon" href="/favicon.svg" type="image/x-icon" />
       </head>
       <body
         className={`${raleway.className} antialiased min-h-screen flex flex-col`}
