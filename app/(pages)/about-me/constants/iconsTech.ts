@@ -15,9 +15,9 @@ import {
   TailwindCSSIcon,
   TypeScriptIcon,
   ViteIcon,
-} from '../components/icons';
+} from '../../(home)/components/icons';
 
-export const TECH_SKILLS = [
+export const TECH_ICONS = [
   {
     title: 'JavaScript',
     icon: JavaScriptIcon,

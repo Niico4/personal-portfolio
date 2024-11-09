@@ -40,10 +40,10 @@
   position: fixed;
   overflow: hidden;
   background: linear-gradient(40deg, var(--color-bg1), var(--color-bg2));
-  backdrop-filter: 600px;
   top: 0;
   left: 0;
   z-index: -1;
+  opacity: 0.96;
 
   .svgBlur {
     display: none;

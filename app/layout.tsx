@@ -6,11 +6,12 @@ import { Provider } from '@/providers/Provider';
 import NavBar from './components/layout/NavBar';
 import GradientBg from './components/layout/GradientBg';
 import '@/styles/globals.css';
+// import Footer from './components/layout/Footer';
 
 const raleway = Raleway({
   subsets: ['latin'],
   display: 'swap',
-  weight: ['200', '300', '400', '500', '600', '700', '900'],
+  weight: ['200', '300', '400', '500', '600', '700', '800', '900'],
 });
 
 export async function generateMetadata({
@@ -41,10 +42,11 @@ export default function RootLayout({
       >
         <GradientBg />
         <Provider>
+          <NavBar />
           <div className="w-1/2 mx-auto">
-            <NavBar />
             <main className="my-10">{children}</main>
           </div>
+          {/* <Footer/> */}
         </Provider>
       </body>
     </html>

@@ -41,3 +41,9 @@
     background-position: 200% center;
   }
 }
+
+@layer utilities {
+  .bg-tech {
+    background-image: linear-gradient(to top, #0ba36100 0%, #9900ff4a 100%);
+  }
+}

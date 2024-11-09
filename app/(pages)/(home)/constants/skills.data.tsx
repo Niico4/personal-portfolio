@@ -6,14 +6,8 @@ import {
 } from '@tabler/icons-react';
 import { EmblaOptionsType } from 'embla-carousel';
 
-import { TECH_SKILLS } from './iconsSkills';
-
 export const OPTIONS_SOFT_SKILLS: EmblaOptionsType = {
   slidesToScroll: 'auto',
-  loop: true,
-};
-export const OPTIONS_TECH_SKILLS: EmblaOptionsType = {
-  slidesToScroll: 10,
   loop: true,
 };
 
@@ -43,11 +37,3 @@ export const SOFT_SKILLS = [
     icon: IconBoltFilled,
   },
 ];
-
-export const TECH_SKILLS_SLIDES = TECH_SKILLS.map(
-  ({ title, icon: Icon }, index) => (
-    <div className="gap-2" key={index}>
-      <Icon className="size-16" aria-label={`Icono de ${title}`} />
-    </div>
-  )
-);
