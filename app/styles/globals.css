@@ -3,14 +3,22 @@
 @tailwind utilities;
 
 :root {
-  --background-gradient: rgba(7, 27, 72, 1) 7.5%, rgba(24, 24, 24, 1) 88.7%;
-  --linear-gradient: rgba(24, 24, 24, 1) 0%, rgba(24, 24, 24, 0.5) 100%;
-
   --primary: #7cc1fd;
   --secondary: #005cd4;
 
   --primary-color-text: #e6e6e7;
   --secondary-color-text: #f5f5f6;
+
+  --color-bg1: rgb(8, 10, 15);
+  --color-bg2: rgb(0, 17, 32);
+  --color1: 18, 113, 255;
+  --color2: 107, 74, 255;
+  --color3: 100, 100, 255;
+  --color4: 50, 160, 220;
+  --color5: 80, 47, 122;
+  --color-interactive: 140, 100, 255;
+  --circle-size: 80%;
+  --blending: hard-light;
 }
 
 .text-animate {
@@ -35,7 +43,7 @@
 }
 
 @layer utilities {
-  .bg-gradient-layout {
-    background-image: radial-gradient(var(--background-gradient));
+  .bg-tech {
+    background-image: linear-gradient(to top, #0ba36100 0%, #9900ff4a 100%);
   }
 }

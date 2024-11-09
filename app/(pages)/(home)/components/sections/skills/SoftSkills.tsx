@@ -11,7 +11,7 @@ const SoftSkills = () => {
         Fortalezas Profesionales
       </h2>
 
-      <div className="w-full flex flex-wrap justify-center gap-10">
+      <div className="w-full flex flex-wrap justify-center gap-4">
         {SOFT_SKILLS.map(({ title, icon, description }, index) => (
           <CardSoftSkill
             key={index}

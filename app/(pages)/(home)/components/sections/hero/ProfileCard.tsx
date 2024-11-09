@@ -21,8 +21,8 @@ const ProfileCard = () => {
       radius="lg"
       isBlurred
     >
-      <CardBody className="flex-row items-center gap-10">
-        <div className="w-[30%]">
+      <CardBody className="md:flex-row items-center gap-10">
+        <div className="md:w-[30%]">
           <figure className="w-48 aspect-square mx-auto mb-5">
             <Image
               src={imgProfile}
@@ -44,11 +44,11 @@ const ProfileCard = () => {
 
         <div className="text-IColorPrimary">
           <div>
-            <h1 className="text-IColorSecondary text-4xl font-semibold">
+            <h1 className="text-IColorSecondary text-3xl md:text-4xl font-semibold">
               ¡Hola!, soy <span className="text-animate">Nicolas</span>
             </h1>
 
-            <p className="text-lg tracking-wider my-4">{DESCRIPTION}</p>
+            <p className="lg:text-lg tracking-wider my-4">{DESCRIPTION}</p>
           </div>
           <Link
             href="https://drive.google.com/file/d/1q9klaXbJcQRWaY1JntJmqvvvuYI--5ln/view?usp=drive_link"

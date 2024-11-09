@@ -41,10 +41,10 @@ const HeroSection = () => {
     <section className="flex flex-col gap-y-6 w-[90%] mx-auto">
       <ProfileCard />
 
-      <article className="flex gap-6 w-full justify-center">
+      <article className="flex flex-col md:flex-row gap-6 w-full justify-center">
         {renderedDatesDetails}
 
-        <Card className="bg-slate-900/80  border-1 border-slate-800 flex-1">
+        <Card className="bg-slate-900/80 border-1 border-slate-800 flex-1">
           <CardBody className="text-IColorPrimary text-xl gap-3 items-center justify-center">
             <span className="text-primary text-2xl font-semibold">
               Redes Sociales

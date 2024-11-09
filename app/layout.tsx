@@ -4,13 +4,13 @@ import { Raleway } from 'next/font/google';
 import { Provider } from '@/providers/Provider';
 
 import NavBar from './components/layout/NavBar';
-
+import GradientBg from './components/layout/GradientBg';
 import '@/styles/globals.css';
 
 const raleway = Raleway({
   subsets: ['latin'],
   display: 'swap',
-  weight: ['200', '300', '400', '500', '600', '700', '900'],
+  weight: ['200', '300', '400', '500', '600', '700', '800', '900'],
 });
 
 export async function generateMetadata({
@@ -34,14 +34,15 @@ export default function RootLayout({
   return (
     <html lang="es">
       <head>
-        <link rel="shortcut icon" href="/Subtract.svg" type="image/x-icon" />
+        <link rel="shortcut icon" href="/favicon.svg.svg" type="image/x-icon" />
       </head>
       <body
-        className={`${raleway.className} antialiased bg-gradient-layout min-h-screen flex flex-col`}
+        className={`${raleway.className} antialiased min-h-screen flex flex-col`}
       >
+        <GradientBg />
         <Provider>
-          <div className="w-1/2 mx-auto">
-            <NavBar />
+          <NavBar />
+          <div className="w-[95%] xl:w-2/3 min-[1300px]:w-1/2 mx-auto">
             <main className="my-10">{children}</main>
           </div>
         </Provider>
