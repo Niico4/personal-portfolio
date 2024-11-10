@@ -1,8 +1,7 @@
-import axios from 'axios';
 import { Project } from '@prisma/client';
 import { create } from 'zustand';
 
-// import { axiosClient } from '../services/axios';
+import { axiosClient } from '../services/axios';
 
 type Store = {
   projects: Project[];
@@ -22,7 +21,7 @@ export const useProjectStore = create<Store>()((set) => {
       set({ loading: true, error: null });
 
       try {
-        const { data } = await axios.get<Project[]>('/api/projects/');
+        const { data } = await axiosClient.get<Project[]>('/projects/');
         set({ projects: data, loading: false });
       } catch (error) {
         console.error(error);
