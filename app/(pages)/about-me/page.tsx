@@ -17,6 +17,16 @@ export async function generateMetadata(): Promise<Metadata> {
     title: 'Sobre Mi | Nicolas Garzón',
     description:
       'Soy un desarrollador web con experiencia en React, Next.js, y tecnologías web modernas. Descubre mi trayectoria, habilidades y educación en desarrollo web. ¡Ve cómo puedo ayudarte a construir soluciones digitales innovadoras!',
+    openGraph: {
+      title: 'Sobre Mi | Nicolas Garzón',
+      description:
+        'Soy un desarrollador web con experiencia en React, Next.js, y tecnologías web modernas. Descubre mi trayectoria, habilidades y educación en desarrollo web. ¡Ve cómo puedo ayudarte a construir soluciones digitales innovadoras!',
+    },
+    twitter: {
+      title: 'Sobre Mi | Nicolás Garzón',
+      description:
+        'Soy un desarrollador web con experiencia en React, Next.js, y tecnologías web modernas. Descubre mi trayectoria, habilidades y educación en desarrollo web. ¡Ve cómo puedo ayudarte a construir soluciones digitales innovadoras!',
+    },
   };
 }
 

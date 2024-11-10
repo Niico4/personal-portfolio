@@ -8,6 +8,16 @@ export async function generateMetadata(): Promise<Metadata> {
     title: 'Portafolio | Nicolas Garzón',
     description:
       'Bienvenido a la sección donde podrás explorar los proyectos que he creado. Aquí he recopilado trabajos que muestran mi habilidad en el desarrollo frontend, abarcando diferentes tecnologías y enfoques. Cada proyecto refleja mi compromiso con la calidad, la innovación y la experiencia del usuario. ¡Echa un vistazo a mi trabajo y descubre cómo puedo ayudar a materializar tus ideas!',
+    openGraph: {
+      title: 'Portafolio | Nicolas Garzón',
+      description:
+        'Bienvenido a la sección donde podrás explorar los proyectos que he creado. Aquí he recopilado trabajos que muestran mi habilidad en el desarrollo frontend, abarcando diferentes tecnologías y enfoques. Cada proyecto refleja mi compromiso con la calidad, la innovación y la experiencia del usuario. ¡Echa un vistazo a mi trabajo y descubre cómo puedo ayudar a materializar tus ideas!',
+    },
+    twitter: {
+      title: 'Portafolio | Nicolás Garzón',
+      description:
+        'Bienvenido a la sección donde podrás explorar los proyectos que he creado. Aquí he recopilado trabajos que muestran mi habilidad en el desarrollo frontend, abarcando diferentes tecnologías y enfoques. Cada proyecto refleja mi compromiso con la calidad, la innovación y la experiencia del usuario. ¡Echa un vistazo a mi trabajo y descubre cómo puedo ayudar a materializar tus ideas!',
+    },
   };
 }
 
