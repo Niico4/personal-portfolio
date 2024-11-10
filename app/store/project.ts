@@ -2,8 +2,6 @@ import axios from 'axios';
 import { Project } from '@prisma/client';
 import { create } from 'zustand';
 
-// import { axiosClient } from '../services/axios';
-
 type Store = {
   projects: Project[];
   loading: boolean;
