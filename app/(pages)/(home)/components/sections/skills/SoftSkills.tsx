@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { SOFT_SKILLS } from '@/(pages)/(home)/constants/skills.data';
+import { SOFT_SKILLS } from '../../../constants/skills.data';
 
 import CardSoftSkill from './CardSoftSkill';
 

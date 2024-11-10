@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import styles from '../../styles/bg.module.css';
 
@@ -45,10 +45,26 @@ const GradientBg = () => {
     };
   }, []);
 
+  const [svgSize, setSvgSize] = useState({ width: 0, height: 0 });
+
+  useEffect(() => {
+    const updateSize = () => {
+      setSvgSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    };
+
+    updateSize();
+    window.addEventListener('resize', updateSize);
+
+    return () => window.removeEventListener('resize', updateSize);
+  }, []);
+
   return (
     <div className={styles.gradient_bg}>
       <svg
-        viewBox="0 0 100vw 100vw"
+        viewBox={`0 0 ${svgSize.width} ${svgSize.height}`}
         xmlns="http://www.w3.org/2000/svg"
         className={styles.noiseBg}
       >

@@ -7,7 +7,7 @@ import CountUp from 'react-countup';
 import {
   EXPERIENCE_DETAILS,
   SOCIALS_LINKS,
-} from '@/(pages)/(home)/constants/hero.data';
+} from '../../../constants/hero.data';
 
 import CardDetail from './CardDetail';
 import ButtonSocial from './ButtonSocial';

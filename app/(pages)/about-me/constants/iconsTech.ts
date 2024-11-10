@@ -15,7 +15,7 @@ import {
   TailwindCSSIcon,
   TypeScriptIcon,
   ViteIcon,
-} from '../../(home)/components/icons';
+} from '../components/icons';
 
 export const TECH_ICONS = [
   {

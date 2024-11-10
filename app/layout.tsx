@@ -1,4 +1,3 @@
-import type { Metadata } from 'next';
 import { Raleway } from 'next/font/google';
 
 import { Provider } from '@/providers/Provider';
@@ -10,21 +9,7 @@ import '@/styles/globals.css';
 const raleway = Raleway({
   subsets: ['latin'],
   display: 'swap',
-  weight: ['200', '300', '400', '500', '600', '700', '800', '900'],
 });
-
-export async function generateMetadata({
-  title,
-  description,
-}: {
-  title: string;
-  description: string;
-}): Promise<Metadata> {
-  return {
-    title: `${title} | Nicolas Garzón`,
-    description,
-  };
-}
 
 export default function RootLayout({
   children,

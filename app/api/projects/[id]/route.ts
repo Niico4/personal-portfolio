@@ -6,11 +6,9 @@ const resMessage = (message: string, status: number) => {
   return NextResponse.json({ message }, { status });
 };
 
-export async function DELETE(
-  req: Request,
-  { params }: { params: { id: string } }
-) {
-  const { id } = params;
+export async function DELETE(req: Request) {
+  const url = new URL(req.url);
+  const id = url.pathname.split('/').pop();
 
   if (!id) {
     return resMessage(

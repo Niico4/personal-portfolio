@@ -1,9 +1,8 @@
 import React from 'react';
+import { Metadata } from 'next';
 
-import { generateMetadata } from '@/layout';
 import Slider from '@/components/slider/Slider';
 
-import { OPTIONS_TECH_SKILLS, TECH_SKILLS_SLIDES } from './constants/tech.data';
 import {
   CardAboutMe,
   CardEducation,
@@ -11,12 +10,15 @@ import {
   CardInterests,
   CardService,
 } from './components/cards';
+import { OPTIONS_TECH_SKILLS, TECH_SKILLS_SLIDES } from './constants/tech.data';
 
-export const metadata = generateMetadata({
-  title: 'Sobre Mi',
-  description:
-    'Soy un desarrollador web con experiencia en React, Next.js, y tecnologías web modernas. Descubre mi trayectoria, habilidades y educación en desarrollo web. ¡Ve cómo puedo ayudarte a construir soluciones digitales innovadoras!',
-});
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: 'Sobre Mi | Nicolas Garzón',
+    description:
+      'Soy un desarrollador web con experiencia en React, Next.js, y tecnologías web modernas. Descubre mi trayectoria, habilidades y educación en desarrollo web. ¡Ve cómo puedo ayudarte a construir soluciones digitales innovadoras!',
+  };
+}
 
 const AboutMePage = () => {
   return (

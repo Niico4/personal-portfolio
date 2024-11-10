@@ -1,15 +1,16 @@
 import React from 'react';
-
-import { generateMetadata } from '@/layout';
+import { Metadata } from 'next';
 
 import HeroSection from './components/sections/hero/HeroSection';
 import SkillsSection from './components/sections/skills/SkillsSection';
 
-export const metadata = generateMetadata({
-  title: 'Desarrollador Frontend',
-  description:
-    'Bienvenido al portafolio de Nicolás Garzón, un desarrollador frontend con experiencia en crear webs innovadoras, rápidas y optimizadas. Descubre proyectos web modernos y responsivos, los servicios de desarrollo frontend que ofrece, y su experiencia en tecnologías como React, Next.js y JavaScript. Conoce más sobre su trayectoria y cómo puede ayudarte a crear sitios web de alto rendimiento.',
-});
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: 'Desarrollador Frontend | Nicolas Garzón',
+    description:
+      'Bienvenido al portafolio de Nicolás Garzón, un desarrollador frontend con experiencia en crear webs innovadoras, rápidas y optimizadas. Descubre proyectos web modernos y responsivos, los servicios de desarrollo frontend que ofrece, y su experiencia en tecnologías como React, Next.js y JavaScript. Conoce más sobre su trayectoria y cómo puede ayudarte a crear sitios web de alto rendimiento.',
+  };
+}
 
 const HomePage = () => {
   return (
