@@ -9,8 +9,6 @@ import {
 } from '@tabler/icons-react';
 import Link from 'next/link';
 
-import imgProfile from '@/../public/profile.webp';
-
 import { DESCRIPTION } from '../../../constants/hero.data';
 
 import InfoItem from './InfoItem';
@@ -24,11 +22,14 @@ const ProfileCard = () => {
     >
       <CardBody className="md:flex-row items-center gap-10">
         <div className="md:w-[30%]">
-          <figure className="w-48 aspect-square mx-auto mb-5">
+          <figure className="w-48 aspect-square mx-auto mb-5 gradient-profile rounded-full overflow-hidden">
             <Image
-              src={imgProfile}
+              src="https://ik.imagekit.io/0isq9u6sl/profile?updatedAt=1731378169208"
               alt="Imagen de Perfil"
-              className="w-full h-full object-cover rounded-full"
+              width={0}
+              height={0}
+              sizes="100vw"
+              className="w-full h-full object-cover"
               loading="lazy"
             />
           </figure>
