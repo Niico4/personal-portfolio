@@ -1,5 +1,5 @@
 import { Chip } from '@nextui-org/react';
-import { Icon, IconCircleCheck } from '@tabler/icons-react';
+import { Icon } from '@tabler/icons-react';
 import React, { FC } from 'react';
 
 const InfoItem: FC<{ icon: Icon; label: string; className?: string }> = ({
@@ -8,16 +8,10 @@ const InfoItem: FC<{ icon: Icon; label: string; className?: string }> = ({
   icon: Icon,
 }) => (
   <Chip
-    startContent={
-      <Icon
-        color={Icon === IconCircleCheck ? '#17c964' : '#7cc1fd'}
-        size={27}
-        stroke={1.25}
-      />
-    }
-    color={Icon === IconCircleCheck ? 'success' : 'primary'}
-    variant={Icon === IconCircleCheck ? 'flat' : 'light'}
-    className={`text-base tracking-wider text-IColorPrimary gap-1 ${className}`}
+    startContent={<Icon color="#7cc1fd" size={26} stroke={1.25} />}
+    color="primary"
+    variant="light"
+    className={`text-sm tracking-widest text-IColorPrimary gap-1 ${className}`}
     radius="sm"
   >
     {label}

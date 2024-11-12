@@ -49,12 +49,12 @@ export async function generateMetadata(): Promise<Metadata> {
 
 const AboutMePage = () => {
   return (
-    <div className="flex flex-col gap-10 mx-auto md:mx-5 max-lg:mx-5">
+    <div className="flex flex-col gap-14 mx-auto">
       <h2 className="text-IColorPrimary text-4xl font-semibold mx-auto">
         Conóceme Mejor
       </h2>
       <section className="flex flex-col gap-4">
-        <div className="flex flex-col md:flex-row gap-4">
+        <div className="flex max-md:flex-col gap-4">
           <article className="flex flex-col gap-4 md:w-7/12">
             <CardAboutMe />
             <CardInterests />
@@ -69,7 +69,7 @@ const AboutMePage = () => {
           <CardExperience />
         </article>
       </section>
-      <section className="bg-tech p-8 backdrop-blur-lg">
+      <section className="tech-gradient p-8 backdrop-blur-lg">
         <Slider
           options={OPTIONS_TECH_SKILLS}
           slides={TECH_SKILLS_SLIDES}

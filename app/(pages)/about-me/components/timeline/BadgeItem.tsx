@@ -15,9 +15,7 @@ const TimelineBadgeItem: FC<Omit<TimelineProps, 'description' | 'variant'>> = ({
       <IconLink color="#c2c2c2" />
     </div>
     <div className="flex flex-col gap-2">
-      <time className="mb-1 text-base font-normal leading-none text-slate-400">
-        {date}
-      </time>
+      <time className="timeline-time">{date}</time>
       <Chip radius="sm" className="mb-2 text-slate-200" variant="flat">
         {badgeLabel}
       </Chip>

@@ -10,7 +10,7 @@ export const OPTIONS_TECH_SKILLS: EmblaOptionsType = {
 export const TECH_SKILLS_SLIDES = TECH_ICONS.map(
   ({ title, icon: Icon }, index) => (
     <div className="gap-2" key={index}>
-      <Icon className="size-16" aria-label={`Icono de ${title}`} />
+      <Icon className="size-12 lg:size-16" aria-label={`Icono de ${title}`} />
     </div>
   )
 );

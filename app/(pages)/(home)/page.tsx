@@ -2,7 +2,8 @@ import React from 'react';
 import { Metadata } from 'next';
 
 import HeroSection from './components/sections/hero/HeroSection';
-import SkillsSection from './components/sections/skills/SkillsSection';
+import GitHubContribution from './components/GitHubContribution';
+import SoftSkills from './components/SoftSkills';
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
@@ -41,9 +42,10 @@ export async function generateMetadata(): Promise<Metadata> {
 
 const HomePage = () => {
   return (
-    <div className="flex flex-col gap-10">
+    <div className="flex flex-col gap-14 lg:w-[90%] mx-auto">
       <HeroSection />
-      <SkillsSection />
+      <GitHubContribution />
+      <SoftSkills />
     </div>
   );
 };

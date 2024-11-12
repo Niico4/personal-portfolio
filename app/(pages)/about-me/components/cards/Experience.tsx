@@ -8,7 +8,7 @@ const CardExperience = () => {
   return (
     <>
       {EXPERIENCE_DATA.map(({ date, description, title }, index) => (
-        <Card className="bg-black/50 p-4" key={index} isBlurred>
+        <Card className="card-bg-blur" key={index} isBlurred>
           <CardBody>
             <Timeline
               variant="description"

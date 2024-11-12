@@ -3,6 +3,7 @@
   margin: 0 auto;
   --slide-size: 50%;
 }
+
 .embla__viewport {
   overflow: hidden;
 }

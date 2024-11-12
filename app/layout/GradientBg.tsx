@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 
-import styles from '../../styles/bg.module.css';
+import styles from '@/styles/bg.module.css';
 
 const GradientBg = () => {
   const interBubbleRef = useRef<HTMLDivElement | null>(null);

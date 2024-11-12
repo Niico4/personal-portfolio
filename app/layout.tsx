@@ -1,13 +1,18 @@
-import { Raleway } from 'next/font/google';
+import { Fira_Code, Raleway } from 'next/font/google';
 
 import { Provider } from '@/providers/Provider';
 
-import NavBar from './components/layout/NavBar';
-import GradientBg from './components/layout/GradientBg';
+import NavBar from './layout/NavBar';
+import GradientBg from './layout/GradientBg';
 
 import '@/styles/globals.css';
 
 const raleway = Raleway({
+  subsets: ['latin'],
+  display: 'swap',
+});
+
+export const fira_Code = Fira_Code({
   subsets: ['latin'],
   display: 'swap',
 });
@@ -27,8 +32,8 @@ export default function RootLayout({
       >
         <GradientBg />
         <Provider>
-          <NavBar />
-          <div className="w-[95%] xl:w-2/3 min-[1300px]:w-1/2 mx-auto">
+          <div className="w-[95%] xl:w-1/2 mx-auto">
+            <NavBar />
             <main className="my-10">{children}</main>
           </div>
         </Provider>

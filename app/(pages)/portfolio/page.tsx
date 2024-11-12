@@ -38,10 +38,6 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const PortfolioPage = () => {
-  return (
-    <div className="flex flex-col gap-10">
-      <ProjectsSection />
-    </div>
-  );
+  return <ProjectsSection />;
 };
 export default PortfolioPage;
