@@ -13,7 +13,12 @@ import {
 } from '@nextui-org/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { fira_Code } from '@/layout';
+import { Fira_Code } from 'next/font/google';
+
+export const fira_Code = Fira_Code({
+  subsets: ['latin'],
+  display: 'swap',
+});
 
 const navbarItems = [
   {

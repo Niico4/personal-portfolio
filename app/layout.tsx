@@ -1,4 +1,4 @@
-import { Fira_Code, Raleway } from 'next/font/google';
+import { Raleway } from 'next/font/google';
 
 import { Provider } from '@/providers/Provider';
 
@@ -8,11 +8,6 @@ import GradientBg from './layout/GradientBg';
 import '@/styles/globals.css';
 
 const raleway = Raleway({
-  subsets: ['latin'],
-  display: 'swap',
-});
-
-export const fira_Code = Fira_Code({
   subsets: ['latin'],
   display: 'swap',
 });
