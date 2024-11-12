@@ -1,8 +1,8 @@
 'use client';
 
+import React, { useState } from 'react';
 import { Select, SelectItem } from '@nextui-org/react';
 import { IconCalendarMonth } from '@tabler/icons-react';
-import React, { useState } from 'react';
 import GitHubCalendar from 'react-github-calendar';
 
 const GitHubContribution = () => {
@@ -17,31 +17,45 @@ const GitHubContribution = () => {
   const handleYearChange = (event: { target: { value: string } }) => {
     setSelectedYear(parseInt(event.target.value, 10));
   };
+
+  const colourTheme = {
+    dark: ['#161B22', '#ea83fa'],
+  };
+
   return (
-    <article className="w-[90%] flex flex-col items-end gap-10 mx-auto">
-      <div className="w-full flex flex-col items-start md:flex-row md:items-center justify-between">
+    <article className="flex flex-col gap-10">
+      <div className="flex items-center justify-between">
         <h2 className="text-IColorSecondary text-2xl font-semibold">
           Mi Huella en GitHub
         </h2>
         <Select
+          color="secondary"
           placeholder={selectedYear.toString()}
           value={selectedYear.toString()}
           onChange={handleYearChange}
           aria-label="Select the year"
-          className="w-1/3 md:w-[20%] lg:w-[12%]"
           startContent={<IconCalendarMonth />}
+          className="w-28"
           size="sm"
         >
           {years.map((year) => (
-            <SelectItem key={year}>{year.toString()}</SelectItem>
+            <SelectItem key={year} color="secondary" variant="flat">
+              {year.toString()}
+            </SelectItem>
           ))}
         </Select>
       </div>
 
       <GitHubCalendar
         username="Niico4"
+        theme={colourTheme}
+        colorScheme="dark"
         year={selectedYear}
-        style={{ color: '#e1e1e1', width: '100%', margin: '0 auto' }}
+        style={{
+          color: '#f3f3f3',
+          width: '100%',
+          margin: '0 auto',
+        }}
         labels={{
           totalCount: `{{count}} contribuciones en ${selectedYear}`,
         }}

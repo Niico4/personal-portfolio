@@ -2,10 +2,10 @@
 
 import React from 'react';
 
-import useProjects from '../../hooks/useProjects';
+import useProjects from '../../../../hooks/useProjects';
 import Loading from '../Loading';
 import Error from '../Error';
-import ProjectCard from '../CardProyect';
+import ProjectCard from '../CardProject';
 
 const ProjectsSection = () => {
   const { projects, loading, error } = useProjects();
@@ -14,7 +14,7 @@ const ProjectsSection = () => {
 
   if (loading) return <Loading />;
 
-  if (error || projects.length === 0)
+  if (error && projects.length === 0)
     return <Error error={error ?? 'No se encontraron Proyectos'} />;
 
   return (
@@ -22,7 +22,7 @@ const ProjectsSection = () => {
       <h2 className="text-IColorPrimary text-4xl font-semibold mx-auto">
         Mis Proyectos
       </h2>
-      <div className="flex flex-col md:grid grid-cols-2 gap-10 mx-0 md:mx-5 max-lg:mx-5">
+      <div className="grid lg:grid-cols-2 gap-10">
         {projects.map(
           (
             { image, title, description, repository, technologies, web_site },

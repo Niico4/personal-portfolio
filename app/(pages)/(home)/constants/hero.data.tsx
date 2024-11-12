@@ -3,6 +3,8 @@ import {
   IconBrandLinkedin,
   IconBrandX,
   IconMail,
+  IconMapPin,
+  IconSchool,
 } from '@tabler/icons-react';
 
 export const SOCIALS_LINKS = [
@@ -24,6 +26,17 @@ export const EXPERIENCE_DETAILS = [
     value: new Date().getFullYear() - startYear,
   },
   { label: 'Proyectos Realizados', value: 20 },
+];
+
+export const INFO_ITEMS = [
+  {
+    icon: IconSchool,
+    label: 'Desarrollador Frontend',
+  },
+  {
+    icon: IconMapPin,
+    label: 'Bogotá, Colombia',
+  },
 ];
 
 export const DESCRIPTION =

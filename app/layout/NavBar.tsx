@@ -13,6 +13,7 @@ import {
 } from '@nextui-org/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { fira_Code } from '@/layout';
 
 const navbarItems = [
   {
@@ -39,13 +40,17 @@ const NavBar = () => {
   return (
     <Navbar
       onMenuOpenChange={setIsMenuOpen}
-      className="w-[95%] xl:w-2/3 min-[1300px]:w-1/2 mx-auto bg-transparent rounded-xl mt-3"
+      className="bg-transparent rounded-xl mt-3"
     >
       <NavbarContent>
         <NavbarBrand>
-          <span className="text-3xl text-white">{'<'}</span>
-          <p className="text-3xl text-animate">Niico</p>
-          <span className="text-3xl text-white">{'/>'}</span>
+          <Link href="/">
+            <p className={`text-3xl text-animate ${fira_Code.className}`}>
+              <span className="text-white">{'<'}</span>
+              Niico
+              <span className="text-white">{'/>'}</span>
+            </p>
+          </Link>
         </NavbarBrand>
 
         <NavbarMenuToggle
@@ -56,10 +61,15 @@ const NavBar = () => {
 
       <NavbarContent className="hidden sm:flex gap-4" justify="end">
         <Breadcrumbs
+          separator="/"
           itemClasses={{
             separator: 'text-IColorPrimary',
             item: 'text-IColorSecondary',
           }}
+          classNames={{
+            list: 'bg-black/10',
+          }}
+          variant="solid"
         >
           {navbarItems.map(({ href, label, description }, index) => (
             <BreadcrumbItem key={index}>
@@ -70,9 +80,10 @@ const NavBar = () => {
                 showArrow
               >
                 <Link
-                  className={`${
-                    currentPathname === href && 'text-primary font-extrabold'
-                  } text-lg font-medium hover:text-white/60 transition-all`}
+                  className={`text-lg hover:text-white/70 transition-all 
+                  ${fira_Code.className} ${
+                    currentPathname === href && 'link-animate font-extrabold'
+                  }`}
                   href={href}
                 >
                   {label}
@@ -87,9 +98,11 @@ const NavBar = () => {
         {navbarItems.map(({ href, label }, index) => (
           <Link
             key={index}
-            className={`${
-              currentPathname === href ? 'text-primary' : 'text-slate-200'
-            } text-2xl mx-auto font-semibold`}
+            className={`w-full text-center text-lg hover:text-white/70 transition-all mx-auto text-slate-200 bg-black/20 px-5
+              py-3 rounded-lg
+                  ${fira_Code.className} ${
+              currentPathname === href && 'link-animate font-extrabold'
+            }`}
             href={href}
           >
             {label}

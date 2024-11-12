@@ -6,7 +6,7 @@ import { EDUCATION_DATA } from '../../constants/data.data';
 
 const CardEducation = () => {
   return (
-    <Card className="bg-black/50 p-4 flex-1" isBlurred>
+    <Card className="card-bg-blur" isBlurred>
       <CardBody>
         {EDUCATION_DATA.map(({ title, badgeLabel, date }, index) => (
           <Timeline

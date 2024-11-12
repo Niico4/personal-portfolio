@@ -9,10 +9,7 @@ interface CardDetailProps {
 }
 
 const CardDetail: FC<CardDetailProps> = ({ title, description, className }) => (
-  <Card
-    className={`bg-slate-900/80 border-1 border-slate-800 flex-1 ${className}`}
-    radius="lg"
-  >
+  <Card className={`card-bg flex-1 ${className}`} radius="lg">
     <CardBody className="text-IColorPrimary text-xl gap-3 justify-center">
       <span className="text-primary text-3xl font-semibold">{title}</span>
       <p>{description}</p>

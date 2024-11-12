@@ -25,7 +25,7 @@ const ButtonsFooterCard: FC<Pick<ICardProps, 'repository' | 'webSite'>> = ({
   repository,
   webSite,
 }) => (
-  <div className="flex flex-col min-[400px]:flex-row mx-auto gap-4 items-center">
+  <>
     {repository && (
       <Link href={repository}>
         <Button
@@ -41,16 +41,16 @@ const ButtonsFooterCard: FC<Pick<ICardProps, 'repository' | 'webSite'>> = ({
     {webSite && (
       <Link href={webSite}>
         <Button
-          variant="shadow"
+          variant="solid"
           color="primary"
-          className="text-blue-800 font-semibold"
+          className="text-slate-800 font-semibold"
           startContent={<IconWorldWww />}
         >
           Sitio Web
         </Button>
       </Link>
     )}
-  </div>
+  </>
 );
 
 const ProjectCard: FC<ICardProps> = ({
@@ -64,9 +64,9 @@ const ProjectCard: FC<ICardProps> = ({
 }) => {
   const srcImage = `${urlEndpoint}${image}.webp`;
   return (
-    <Card className="flex-1 bg-slate-900/70 border-1 border-slate-600">
+    <Card className="bg-slate-900/70 border border-slate-600 flex-1">
       <CardHeader>
-        <figure className="w-full h-full aspect-video">
+        <figure className="aspect-video">
           <Image
             src={srcImage}
             alt={`Imagen de ${title}`}
@@ -78,17 +78,17 @@ const ProjectCard: FC<ICardProps> = ({
           />
         </figure>
       </CardHeader>
-      <CardBody className="w-full mx-auto px-6">
+      <CardBody className="px-6">
         <h3 className="text-3xl font-bold text-IColorPrimary mb-5 text-slate-200">
           {title}
         </h3>
         <p className="text-lg text-slate-300">{description}</p>
-        <div className="flex flex-wrap items-center justify-start gap-3 mt-3">
+        <div className="flex flex-wrap items-center justify-center gap-3 mt-3">
           {technologies.map((technology, index) => (
             <Chip
               key={index}
               variant="flat"
-              className="text-blue-400 capitalize"
+              className="text-blue-300 capitalize"
               color="primary"
               radius="lg"
             >
@@ -97,7 +97,7 @@ const ProjectCard: FC<ICardProps> = ({
           ))}
         </div>
       </CardBody>
-      <CardFooter className="mb-5">
+      <CardFooter className="flex-row justify-center gap-4 mb-5">
         <ButtonsFooterCard repository={repository} webSite={webSite} />
       </CardFooter>
     </Card>

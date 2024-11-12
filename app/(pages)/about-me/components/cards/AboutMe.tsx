@@ -3,11 +3,7 @@ import { Card, CardBody } from '@nextui-org/react';
 
 const CardAboutMe = () => {
   return (
-    <Card
-      className="bg-slate-900/80 border-1 border-slate-800 p-4"
-      radius="lg"
-      isBlurred
-    >
+    <Card className="card-bg p-4" radius="lg" isBlurred>
       <CardBody>
         <p className="text-slate-300">
           Soy Nicolás Garzón, un desarrollador web joven con una gran pasión por

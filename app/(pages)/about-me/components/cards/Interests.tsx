@@ -5,10 +5,10 @@ import { INTERESTS_DATA } from '../../constants/data.data';
 
 const CardInterests = () => {
   return (
-    <Card className="bg-slate-900/80 border-1 border-slate-800 p-4 flex-1">
+    <Card className="card-bg p-4 flex-1">
       <CardBody className="flex-row flex-wrap gap-3">
         {INTERESTS_DATA.map((interest, index) => (
-          <Chip key={index} variant="flat" color="warning" className="flex-1">
+          <Chip key={index} variant="flat" color="success" className="flex-1">
             {interest}
           </Chip>
         ))}
