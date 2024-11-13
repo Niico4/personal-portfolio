@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { Metadata } from 'next';
 
+import Loading from '@/components/Loading';
+
 import HeroSection from './components/sections/hero/HeroSection';
-import GitHubContribution from './components/GitHubContribution';
 import SoftSkills from './components/SoftSkills';
+
+const GitHubContribution = lazy(
+  () => import('./components/GitHubContribution')
+);
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
@@ -44,7 +49,9 @@ const HomePage = () => {
   return (
     <div className="flex flex-col gap-14 lg:w-[90%] mx-auto">
       <HeroSection />
-      <GitHubContribution />
+      <Suspense fallback={<Loading />}>
+        <GitHubContribution />
+      </Suspense>
       <SoftSkills />
     </div>
   );

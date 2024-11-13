@@ -2,9 +2,10 @@
 
 import React from 'react';
 
-import useProjects from '../../../../hooks/useProjects';
-import Loading from '../Loading';
-import Error from '../Error';
+import useProjects from '@/hooks/useProjects';
+import Loading from '@/components/Loading';
+import Error from '@/components/Error';
+
 import ProjectCard from '../CardProject';
 
 const ProjectsSection = () => {
