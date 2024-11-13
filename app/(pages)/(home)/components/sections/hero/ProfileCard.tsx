@@ -15,8 +15,8 @@ const ProfileCard = () => {
         <article>
           <figure className="w-48 aspect-square mx-auto mb-5 profile-gradient rounded-full overflow-hidden">
             <Image
-              src="https://ik.imagekit.io/0isq9u6sl/profile?updatedAt=1731378169208"
-              alt="Imagen de Perfil"
+              src="https://ik.imagekit.io/0isq9u6sl/profile.webp?updatedAt=1731466256645"
+              alt="Avatar de Nicolas"
               width={0}
               height={0}
               sizes="100vw"
