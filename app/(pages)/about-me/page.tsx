@@ -3,14 +3,12 @@ import { Metadata } from 'next';
 
 import Slider from '@/components/slider/Slider';
 
-import {
-  CardAboutMe,
-  CardEducation,
-  CardExperience,
-  CardInterests,
-  CardService,
-} from './components/cards';
 import { OPTIONS_TECH_SKILLS, TECH_SKILLS_SLIDES } from './constants/tech.data';
+import CardAboutMe from './components/cards/AboutMe';
+import CardEducation from './components/cards/Education';
+import CardExperience from './components/cards/Experience';
+import CardInterests from './components/cards/Interests';
+import CardService from './components/cards/Service';
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
@@ -26,7 +24,7 @@ export async function generateMetadata(): Promise<Metadata> {
       siteName: 'Portafolio de Nicolás Garzón',
       images: [
         {
-          url: 'https://ik.imagekit.io/0isq9u6sl/portfolio.webp?updatedAt=1731277630302',
+          url: 'https://ik.imagekit.io/0isq9u6sl/home-page.webp?updatedAt=1738949541258',
           width: 1200,
           height: 630,
           alt: 'Imagen destacada del portafolio de Nicolás Garzón',
@@ -40,7 +38,7 @@ export async function generateMetadata(): Promise<Metadata> {
         'Soy un desarrollador web con experiencia en React, Next.js, y tecnologías web modernas. Descubre mi trayectoria, habilidades y educación en desarrollo web. ¡Ve cómo puedo ayudarte a construir soluciones digitales innovadoras!',
       card: 'summary_large_image',
       images: [
-        'https://ik.imagekit.io/0isq9u6sl/portfolio.webp?updatedAt=1731277630302',
+        'https://ik.imagekit.io/0isq9u6sl/home-page.webp?updatedAt=1738949541258',
       ],
     },
     robots: 'index, follow',

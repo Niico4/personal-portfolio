@@ -1,14 +1,10 @@
-import React, { lazy, Suspense } from 'react';
+import React from 'react';
 import { Metadata } from 'next';
 
-import Loading from '@/components/Loading';
-
-import HeroSection from './components/sections/hero/HeroSection';
-import SoftSkills from './components/SoftSkills';
-
-const GitHubContribution = lazy(
-  () => import('./components/GitHubContribution')
-);
+import HeroSection from './sections/HeroSection';
+import SoftSkills from './sections/SoftSkillsSection';
+import MyToolsSection from './sections/MyToolsSection';
+import GitHubContribution from './sections/GitHubContributionSection';
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
@@ -24,7 +20,7 @@ export async function generateMetadata(): Promise<Metadata> {
       siteName: 'Portafolio de Nicolás Garzón',
       images: [
         {
-          url: 'https://ik.imagekit.io/0isq9u6sl/portfolio.webp?updatedAt=1731277630302',
+          url: 'https://ik.imagekit.io/0isq9u6sl/home-page.webp?updatedAt=1738949541258',
           width: 1200,
           height: 630,
           alt: 'Imagen destacada del portafolio de Nicolás Garzón',
@@ -38,7 +34,7 @@ export async function generateMetadata(): Promise<Metadata> {
         'Bienvenido al portafolio de Nicolás Garzón, un desarrollador frontend con experiencia en crear webs innovadoras, rápidas y optimizadas. Descubre proyectos web modernos y responsivos, los servicios de desarrollo frontend que ofrece, y su experiencia en tecnologías como React, Next.js y JavaScript.',
       card: 'summary_large_image',
       images: [
-        'https://ik.imagekit.io/0isq9u6sl/portfolio.webp?updatedAt=1731277630302',
+        'https://ik.imagekit.io/0isq9u6sl/home-page.webp?updatedAt=1738949541258',
       ],
     },
     robots: 'index, follow',
@@ -47,11 +43,10 @@ export async function generateMetadata(): Promise<Metadata> {
 
 const HomePage = () => {
   return (
-    <div className="flex flex-col gap-14 lg:w-[90%] mx-auto">
+    <div className="flex flex-col gap-14 mx-auto">
       <HeroSection />
-      <Suspense fallback={<Loading />}>
-        <GitHubContribution />
-      </Suspense>
+      <GitHubContribution />
+      <MyToolsSection />
       <SoftSkills />
     </div>
   );

@@ -1,7 +1,8 @@
-import { Button, Tooltip } from '@nextui-org/react';
-import { Icon } from '@tabler/icons-react';
-import Link from 'next/link';
 import React from 'react';
+import Link from 'next/link';
+import { Button } from '@heroui/button';
+import { Tooltip } from '@heroui/tooltip';
+import { Icon } from '@tabler/icons-react';
 
 const ButtonSocial = ({
   icon: Icon,
@@ -12,23 +13,16 @@ const ButtonSocial = ({
   label: string;
   href: string;
 }) => (
-  <Tooltip
-    content={label}
-    color="primary"
-    className="text-gray-900"
-    placement="bottom"
-    showArrow
-  >
-    <Link href={href} target="_blank" rel="noopener noreferrer">
-      <Button
-        isIconOnly
-        startContent={<Icon stroke={1.5} color="#e6e6e7" size={28} />}
-        radius="full"
-        variant="light"
-        color="default"
-        size="lg"
-      />
-    </Link>
+  <Tooltip content={label} color="secondary" placement="bottom" showArrow>
+    <Button
+      as={Link}
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      isIconOnly
+      startContent={<Icon color="#E6E6E7" size={28} />}
+      variant="flat"
+    />
   </Tooltip>
 );
 

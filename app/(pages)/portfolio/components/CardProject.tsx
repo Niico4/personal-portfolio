@@ -1,15 +1,10 @@
 import React, { FC } from 'react';
-import {
-  Button,
-  Card,
-  CardBody,
-  CardFooter,
-  CardHeader,
-  Chip,
-} from '@nextui-org/react';
-import Image from 'next/image';
-import { IconBrandGithub, IconWorldWww } from '@tabler/icons-react';
 import Link from 'next/link';
+import Image from 'next/image';
+import { Card, CardBody, CardFooter, CardHeader } from '@heroui/card';
+import { Button } from '@heroui/button';
+import { Chip } from '@heroui/chip';
+import { IconBrandGithub, IconWorldWww } from '@tabler/icons-react';
 
 interface ICardProps {
   title: string;

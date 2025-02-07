@@ -1,21 +1,19 @@
-import {
-  CSSIcon,
-  FigmaIcon,
-  GithubIcon,
-  GitIcon,
-  HTML5Icon,
-  JavaScriptIcon,
-  MaterialUIIcon,
-  MongoDBIcon,
-  NextjsIcon,
-  NotionIcon,
-  PrismaIcon,
-  ReactIcon,
-  StyledComponentsIcon,
-  TailwindCSSIcon,
-  TypeScriptIcon,
-  ViteIcon,
-} from '../components/icons';
+import CSSIcon from '@/components/common/icons/CSS';
+import FigmaIcon from '@/components/common/icons/Figma';
+import GitIcon from '@/components/common/icons/Git';
+import GithubIcon from '@/components/common/icons/GitHub';
+import HTML5Icon from '@/components/common/icons/HTML';
+import JavaScriptIcon from '@/components/common/icons/JavaScript';
+import MaterialUIIcon from '@/components/common/icons/MaterialUI';
+import MongoDBIcon from '@/components/common/icons/MongoDB';
+import NextjsIcon from '@/components/common/icons/Nextjs';
+import NotionIcon from '@/components/common/icons/Notion';
+import PrismaIcon from '@/components/common/icons/Prisma';
+import ReactIcon from '@/components/common/icons/React';
+import StyledComponentsIcon from '@/components/common/icons/StyledComponents';
+import TailwindCSSIcon from '@/components/common/icons/TailwindCSS';
+import TypeScriptIcon from '@/components/common/icons/TypeScript';
+import ViteIcon from '@/components/common/icons/Vite';
 
 export const TECH_ICONS = [
   {
