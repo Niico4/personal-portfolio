@@ -1,30 +1,28 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import {
-  BreadcrumbItem,
-  Breadcrumbs,
   Navbar,
   NavbarBrand,
   NavbarContent,
   NavbarMenu,
   NavbarMenuToggle,
-  Tooltip,
-} from '@nextui-org/react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { Fira_Code } from 'next/font/google';
+} from '@heroui/navbar';
+import { Tooltip } from '@heroui/tooltip';
+import { Breadcrumbs, BreadcrumbItem } from '@heroui/breadcrumbs';
 
-export const fira_Code = Fira_Code({
-  subsets: ['latin'],
-  display: 'swap',
-});
+import useBackgroundStore from '@/store/useBackgroundStore';
+import { grandstander } from '@/layout';
+
+import ToggleBackground from './components/navbar/ToggleBackground';
 
 const navbarItems = [
   {
     label: 'Inicio',
     href: '/',
-    description: 'Bienvenido a mi Sitio Web',
+    description: 'Bienvenido a mi sitio web',
   },
   {
     label: 'Portafolio',
@@ -32,28 +30,38 @@ const navbarItems = [
     description: 'Mis proyectos y logros',
   },
   {
-    label: 'Sobre de Mi',
+    label: 'Sobre Mi',
     href: '/about-me',
-    description: 'Conoce un poco más sobre mi',
+    description: 'Conóceme un poco más',
   },
 ];
 
 const NavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const currentPathname = usePathname();
+  const { initializeState, toggleChange } = useBackgroundStore();
+
+  useEffect(() => {
+    initializeState();
+  }, [initializeState]);
 
   return (
     <Navbar
       onMenuOpenChange={setIsMenuOpen}
-      className="bg-transparent rounded-xl mt-3"
+      className="bg-card rounded-lg md:p-3"
+      style={{
+        boxShadow: '0px 0px 4px 3px rgba(255, 255, 255, .1)',
+      }}
     >
       <NavbarContent>
         <NavbarBrand>
           <Link href="/">
-            <p className={`text-3xl text-animate ${fira_Code.className}`}>
-              <span className="text-white">{'<'}</span>
+            <p
+              className={`text-4xl text-animate md:text-5xl ${grandstander.className}`}
+            >
+              <span className="text-title">{'<'}</span>
               Niico
-              <span className="text-white">{'/>'}</span>
+              <span className="text-title">{'/>'}</span>
             </p>
           </Link>
         </NavbarBrand>
@@ -68,11 +76,11 @@ const NavBar = () => {
         <Breadcrumbs
           separator="/"
           itemClasses={{
-            separator: 'text-IColorPrimary',
-            item: 'text-IColorSecondary',
+            separator: 'text-paragraph',
+            item: 'text-title',
           }}
           classNames={{
-            list: 'bg-black/10',
+            list: 'bg-white/5 p-3',
           }}
           variant="solid"
         >
@@ -80,14 +88,17 @@ const NavBar = () => {
             <BreadcrumbItem key={index}>
               <Tooltip
                 content={description}
-                color="primary"
-                className="text-gray-900"
+                radius="sm"
+                color="secondary"
+                placement="bottom"
                 showArrow
               >
                 <Link
-                  className={`text-lg hover:text-white/70 transition-all 
-                  ${fira_Code.className} ${
-                    currentPathname === href && 'link-animate font-extrabold'
+                  className={`text-xl transition-all sm:text-medium max-xl:text-lg
+                  ${grandstander.className} ${
+                    currentPathname === href
+                      ? 'text-primary-200 font-semibold underline underline-offset-4'
+                      : 'text-paragraph hover:text-paragraph/80'
                   }`}
                   href={href}
                 >
@@ -97,22 +108,27 @@ const NavBar = () => {
             </BreadcrumbItem>
           ))}
         </Breadcrumbs>
+        <ToggleBackground onChange={toggleChange} />
       </NavbarContent>
 
-      <NavbarMenu className="p-10">
-        {navbarItems.map(({ href, label }, index) => (
-          <Link
-            key={index}
-            className={`w-full text-center text-lg hover:text-white/70 transition-all mx-auto text-slate-200 bg-black/20 px-5
-              py-3 rounded-lg
-                  ${fira_Code.className} ${
-              currentPathname === href && 'link-animate font-extrabold'
-            }`}
-            href={href}
-          >
-            {label}
-          </Link>
-        ))}
+      <NavbarMenu className="p-10 mt-10 justify-evenly items-center">
+        <div className="flex-col-center gap-4">
+          {navbarItems.map(({ href, label }, index) => (
+            <Link
+              key={index}
+              className={`text-xl transition-all 
+                  ${grandstander.className} ${
+                currentPathname === href
+                  ? 'text-primary-200 font-semibold underline underline-offset-4'
+                  : 'text-paragraph hover:text-paragraph/80'
+              }`}
+              href={href}
+            >
+              {label}
+            </Link>
+          ))}
+        </div>
+        <ToggleBackground onChange={toggleChange} />
       </NavbarMenu>
     </Navbar>
   );

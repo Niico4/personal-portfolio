@@ -1,5 +1,6 @@
 import React from 'react';
-import { Card, CardBody, Chip } from '@nextui-org/react';
+import { Card, CardBody } from '@heroui/card';
+import { Chip } from '@heroui/chip';
 
 import { INTERESTS_DATA } from '../../constants/data.data';
 

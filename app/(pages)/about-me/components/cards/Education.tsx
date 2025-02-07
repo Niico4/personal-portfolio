@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardBody } from '@nextui-org/react';
+import { Card, CardBody } from '@heroui/card';
 
 import Timeline from '../timeline/Timeline';
 import { EDUCATION_DATA } from '../../constants/data.data';

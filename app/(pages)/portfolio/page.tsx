@@ -16,7 +16,7 @@ export async function generateMetadata(): Promise<Metadata> {
       siteName: 'Portafolio de Nicolás Garzón',
       images: [
         {
-          url: 'https://ik.imagekit.io/0isq9u6sl/portfolio.webp?updatedAt=1731277630302',
+          url: 'https://ik.imagekit.io/0isq9u6sl/home-page.webp?updatedAt=1738949541258',
           width: 1200,
           height: 630,
           alt: 'Imagen destacada del portafolio de Nicolás Garzón',
@@ -30,7 +30,7 @@ export async function generateMetadata(): Promise<Metadata> {
         'Bienvenido a la sección donde podrás explorar los proyectos que he creado. Aquí he recopilado trabajos que muestran mi habilidad en el desarrollo frontend, abarcando diferentes tecnologías y enfoques. Cada proyecto refleja mi compromiso con la calidad, la innovación y la experiencia del usuario. ¡Echa un vistazo a mi trabajo y descubre cómo puedo ayudar a materializar tus ideas!',
       card: 'summary_large_image',
       images: [
-        'https://ik.imagekit.io/0isq9u6sl/portfolio.webp?updatedAt=1731277630302',
+        'https://ik.imagekit.io/0isq9u6sl/home-page.webp?updatedAt=1738949541258',
       ],
     },
     robots: 'index, follow',

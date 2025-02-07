@@ -1,9 +1,10 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Select, SelectItem } from '@nextui-org/react';
-import { IconCalendarMonth } from '@tabler/icons-react';
 import GitHubCalendar from 'react-github-calendar';
+import { Select, SelectItem } from '@heroui/select';
+
+import { grandstander } from '@/layout';
 
 const GitHubContribution = () => {
   const [selectedYear, setSelectedYear] = useState(2023);
@@ -18,25 +19,20 @@ const GitHubContribution = () => {
     setSelectedYear(parseInt(event.target.value, 10));
   };
 
-  const colourTheme = {
-    dark: ['#161B22', '#ea83fa'],
-  };
-
   return (
-    <article className="flex flex-col gap-10">
-      <div className="flex items-center justify-between">
-        <h2 className="text-IColorSecondary text-2xl font-semibold">
-          Mi Huella en GitHub
+    <section className="flex flex-col gap-10">
+      <div className="flex flex-col justify-between md:items-center md:flex-row max-sm:gap-4">
+        <h2 className={`title-section ${grandstander.className}`}>
+          Cada commit cuenta
         </h2>
         <Select
           color="secondary"
+          variant="faded"
+          aria-label="Select the year"
+          className="w-2/5 md:w-[12%]"
           placeholder={selectedYear.toString()}
           value={selectedYear.toString()}
           onChange={handleYearChange}
-          aria-label="Select the year"
-          startContent={<IconCalendarMonth />}
-          className="w-28"
-          size="sm"
         >
           {years.map((year) => (
             <SelectItem key={year} color="secondary" variant="flat">
@@ -48,19 +44,18 @@ const GitHubContribution = () => {
 
       <GitHubCalendar
         username="Niico4"
-        theme={colourTheme}
+        theme={{ dark: ['#373131', '#ea83fa'] }}
         colorScheme="dark"
         year={selectedYear}
         style={{
-          color: '#f3f3f3',
-          width: '100%',
+          color: '#E6E6E7',
           margin: '0 auto',
         }}
         labels={{
           totalCount: `{{count}} contribuciones en ${selectedYear}`,
         }}
       />
-    </article>
+    </section>
   );
 };
 

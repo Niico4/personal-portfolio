@@ -71,8 +71,20 @@
   }
 }
 
+.flex-center {
+  @apply flex items-center justify-center;
+}
+
+.flex-col-center {
+  @apply flex flex-col items-center justify-center;
+}
+
 .card-bg {
-  @apply bg-slate-900/80 border border-slate-700;
+  @apply bg-card border border-gray-500/40;
+}
+
+.title-section {
+  @apply text-paragraph text-4xl font-medium max-sm:text-center;
 }
 
 .card-bg-blur {

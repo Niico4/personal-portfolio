@@ -1,6 +1,6 @@
 import { FC } from 'react';
+import { Chip } from '@heroui/chip';
 import { IconLink } from '@tabler/icons-react';
-import { Chip } from '@nextui-org/react';
 
 import { TimelineProps } from './Timeline';
 
