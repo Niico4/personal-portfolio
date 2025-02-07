@@ -1,10 +1,14 @@
 'use client';
 
 import React, { useState } from 'react';
+import { Grandstander } from 'next/font/google';
 import GitHubCalendar from 'react-github-calendar';
 import { Select, SelectItem } from '@heroui/select';
 
-import { grandstander } from '@/layout';
+export const grandstander = Grandstander({
+  subsets: ['latin'],
+  display: 'swap',
+});
 
 const GitHubContribution = () => {
   const [selectedYear, setSelectedYear] = useState(2023);

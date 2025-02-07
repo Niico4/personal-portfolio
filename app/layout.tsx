@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { Grandstander, Raleway } from 'next/font/google';
+import { Raleway } from 'next/font/google';
 import { HeroUIProvider } from '@heroui/system';
 
 import NavBar from './layout/NavBar';
@@ -11,11 +11,6 @@ import useBackgroundStore from './store/useBackgroundStore';
 import '@/styles/globals.css';
 
 const raleway = Raleway({
-  subsets: ['latin'],
-  display: 'swap',
-});
-
-export const grandstander = Grandstander({
   subsets: ['latin'],
   display: 'swap',
 });

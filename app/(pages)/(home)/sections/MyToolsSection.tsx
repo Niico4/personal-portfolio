@@ -1,12 +1,16 @@
 'use client';
 
 import React from 'react';
+import { Grandstander } from 'next/font/google';
 import { Card, CardBody, CardHeader } from '@heroui/card';
 import { Tooltip } from '@heroui/tooltip';
 
-import { grandstander } from '@/layout';
-
 import { TECH_ICONS, TOOLS_ICONS } from '../constants/tools.data';
+
+export const grandstander = Grandstander({
+  subsets: ['latin'],
+  display: 'swap',
+});
 
 const MyToolsSection = () => {
   return (

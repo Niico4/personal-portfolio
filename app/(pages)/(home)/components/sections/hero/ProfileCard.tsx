@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { Grandstander } from 'next/font/google';
 import { Card, CardBody, CardHeader } from '@heroui/card';
 import { Button } from '@heroui/button';
 import { Tooltip } from '@heroui/tooltip';
@@ -11,7 +12,10 @@ import {
   IconUserFilled,
 } from '@tabler/icons-react';
 
-import { grandstander } from '@/layout';
+export const grandstander = Grandstander({
+  subsets: ['latin'],
+  display: 'swap',
+});
 
 const ProfileCard = () => {
   return (

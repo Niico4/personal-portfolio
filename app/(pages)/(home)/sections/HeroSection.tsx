@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { Grandstander } from 'next/font/google';
 import CountUp from 'react-countup';
 import { Card, CardBody } from '@heroui/card';
 import {
@@ -10,10 +11,13 @@ import {
   IconMail,
 } from '@tabler/icons-react';
 
-import { grandstander } from '@/layout';
-
 import ButtonSocial from '../components/sections/hero/ButtonSocial';
 import ProfileCard from '../components/sections/hero/ProfileCard';
+
+export const grandstander = Grandstander({
+  subsets: ['latin'],
+  display: 'swap',
+});
 
 const HeroSection = () => {
   return (

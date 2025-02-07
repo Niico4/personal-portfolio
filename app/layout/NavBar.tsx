@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { Grandstander } from 'next/font/google';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import {
@@ -14,9 +15,13 @@ import { Tooltip } from '@heroui/tooltip';
 import { Breadcrumbs, BreadcrumbItem } from '@heroui/breadcrumbs';
 
 import useBackgroundStore from '@/store/useBackgroundStore';
-import { grandstander } from '@/layout';
 
 import ToggleBackground from './components/navbar/ToggleBackground';
+
+export const grandstander = Grandstander({
+  subsets: ['latin'],
+  display: 'swap',
+});
 
 const navbarItems = [
   {

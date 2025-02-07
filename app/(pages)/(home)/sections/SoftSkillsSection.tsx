@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { Grandstander } from 'next/font/google';
 import {
   IconBook,
   IconDeviceLaptop,
@@ -8,9 +9,12 @@ import {
   IconBulb,
 } from '@tabler/icons-react';
 
-import { grandstander } from '@/layout';
-
 import CardSoftSkill from '../components/sections/soft-skills/CardSoftSkill';
+
+export const grandstander = Grandstander({
+  subsets: ['latin'],
+  display: 'swap',
+});
 
 const SoftSkills = () => {
   return (
