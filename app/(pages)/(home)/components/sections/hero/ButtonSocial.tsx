@@ -22,6 +22,7 @@ const ButtonSocial = ({
       isIconOnly
       startContent={<Icon color="#E6E6E7" size={28} />}
       variant="light"
+      aria-label={`Enlace de ${label}`}
     />
   </Tooltip>
 );
