@@ -1,21 +1,40 @@
 import React, { FC } from 'react';
-import { Card, CardBody, CardHeader } from '@heroui/card';
+import { Grandstander } from 'next/font/google';
+import { Card, CardBody } from '@heroui/card';
 import { Icon } from '@tabler/icons-react';
 
-const CardSoftSkill: FC<{ title: string; description: string; icon: Icon }> = ({
-  title,
-  description,
-  icon: Icon,
-}) => {
+const grandstander = Grandstander({
+  subsets: ['latin'],
+  display: 'swap',
+});
+
+interface Props {
+  title: string;
+  description: string;
+  icon: Icon;
+}
+
+const CardSoftSkill: FC<Props> = ({ title, description, icon: Icon }) => {
   return (
-    <Card className="flex-row items-center bg-gradient-to-l from-[#7828C8]/40 via-[#4B2981]/40 to-[#1E293B]/40 border border-[#7828c8b0] px-4 py-2">
-      <CardHeader className="flex-center w-auto p-3 rounded-full bg-white/10">
-        <Icon size={32} color="#EFDCFF" stroke={1.5} />
-      </CardHeader>
-      <CardBody className="w-full">
-        <h3 className="text-title text-xl font-medium md:tracking-wider md:text-2xl">
-          {title}
-        </h3>
+    <Card className="items-center bg-black/50 px-4 py-2 shadow-sm shadow-zinc-800">
+      <CardBody className="gap-3">
+        <div className="flex items-center gap-3">
+          <Icon
+            size={32}
+            color="#CD93FF"
+            stroke={1.5}
+            style={{ filter: 'drop-shadow(0 0 5px rgba(205,147,255,1))' }}
+          />
+          <h3
+            className={`${grandstander.className} text-title font-semibold text-xl md:tracking-wider md:text-xl`}
+            style={{
+              filter: 'drop-shadow(2px 0 5px rgba(205,147,255, 1))',
+              WebkitTextStroke: '0.2px #CD93FF',
+            }}
+          >
+            {title}
+          </h3>
+        </div>
         <p className="text-paragraph/80 text-base md:text-medium">
           {description}
         </p>

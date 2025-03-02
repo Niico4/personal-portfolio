@@ -13,12 +13,13 @@ const config: Config = {
     extend: {
       colors: {
         'custom-primary': '#7cc1fd',
+        'custom-secondary': '#CD93FF',
         background: 'var(--background-gradient)',
         IColorPrimary: 'var(--primary-color-text)',
         IColorSecondary: 'var(--secondary-color-text)',
       },
       backgroundColor: {
-        card: 'rgba(0, 9, 31, 0.6)',
+        card: 'rgba(50, 50, 50, 0.2)',
       },
       textColor: {
         title: '#F5F5F6',
