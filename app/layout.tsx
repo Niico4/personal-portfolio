@@ -1,12 +1,8 @@
-'use client';
-
-import { useEffect } from 'react';
 import { Raleway } from 'next/font/google';
 import { HeroUIProvider } from '@heroui/system';
 
 import NavBar from './layout/NavBar';
 import GradientBg from './layout/GradientBg';
-import useBackgroundStore from './store/useBackgroundStore';
 
 import '@/styles/globals.css';
 
@@ -20,22 +16,12 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { initializeState, isActiveBgGradient } = useBackgroundStore();
-
-  useEffect(() => {
-    initializeState();
-  }, [initializeState]);
-
   return (
     <html lang="es">
-      <body
-        className={`${raleway.className} flex flex-col py-8 ${
-          isActiveBgGradient
-            ? ''
-            : 'bg-gradient-to-r from-black via-blue-950 to-black'
-        }`}
-      >
-        {isActiveBgGradient ? <GradientBg /> : null}
+      <body className={`${raleway.className} flex flex-col bg-black/85 py-8`}>
+        <div className="absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#4f4f4f1f_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f16_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
+        <GradientBg />
+
         <HeroUIProvider>
           <div className="w-[95%] xl:w-1/2 mx-auto custom-theme">
             <NavBar />

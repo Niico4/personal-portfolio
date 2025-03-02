@@ -6,13 +6,13 @@ import { Card, CardBody, CardHeader } from '@heroui/card';
 import { Button } from '@heroui/button';
 import { Tooltip } from '@heroui/tooltip';
 import {
+  IconDeviceLaptop,
   IconFileText,
-  IconMapPin,
-  IconSchool,
+  IconMapPinFilled,
   IconUserFilled,
 } from '@tabler/icons-react';
 
-export const grandstander = Grandstander({
+const grandstander = Grandstander({
   subsets: ['latin'],
   display: 'swap',
 });
@@ -20,11 +20,12 @@ export const grandstander = Grandstander({
 const ProfileCard = () => {
   return (
     <Card
-      className="md:flex-row items-center justify-center card-bg p-6 md:gap-10"
+      className="grid items-center justify-center card-bg px-4 py-2 md:grid-cols-[30%_1fr]"
       fullWidth
+      isBlurred
     >
-      <CardHeader className="flex-col-center md:w-1/4">
-        <div className="w-48 mx-auto mb-5 profile-gradient rounded-full overflow-hidden">
+      <CardHeader className="flex-col-center">
+        <div className="aspect-square max-w-52 mx-auto mb-5 profile-gradient rounded-full overflow-hidden">
           <Image
             src="https://ik.imagekit.io/0isq9u6sl/profile.webp?updatedAt=1731466256645"
             alt="Avatar de Nicolas"
@@ -37,12 +38,12 @@ const ProfileCard = () => {
         </div>
 
         <ul className="flex flex-col gap-2">
-          <li className="flex items-center text-sm md:text-base font-medium text-paragraph gap-2">
-            <IconSchool color="#7cc1fd" />
+          <li className="flex items-center text-sm md:text-base font-medium text-paragraph/85 gap-2">
+            <IconDeviceLaptop color="#7cc1fd" />
             Desarrollador Frontend
           </li>
-          <li className="flex items-center text-sm md:text-base font-medium text-paragraph gap-2">
-            <IconMapPin color="#7cc1fd" />
+          <li className="flex items-center text-sm md:text-base font-medium text-paragraph/85 gap-2">
+            <IconMapPinFilled color="#7cc1fd" />
             Bogotá, Colombia
           </li>
         </ul>
@@ -57,10 +58,10 @@ const ProfileCard = () => {
             </h1>
 
             <p className="lg:text-xl text-paragraph font-light">
-              Me encanta crear sitios web que no solo se vean increíbles, sino
-              que también se sientan fluidos y fáciles de usar. Disfruto
-              combinando creatividad y tecnología para que cada proyecto tenga
-              su propia esencia y conecte con quien lo visita.
+              Diseño y desarrollo experiencias web fluidas, atractivas y
+              funcionales. Disfruto combinando creatividad y tecnología para que
+              cada proyecto tenga su propia esencia y conecte con quien lo
+              visite.
             </p>
           </div>
 
@@ -69,7 +70,7 @@ const ProfileCard = () => {
               content="Ver mi Currículum Profesional"
               placement="bottom"
               radius="sm"
-              color="secondary"
+              color="primary"
               showArrow
             >
               <Button
@@ -78,9 +79,9 @@ const ProfileCard = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 color="primary"
+                variant="faded"
                 radius="sm"
-                startContent={<IconFileText />}
-                className="text-primary-800 font-medium tracking-wide md:text-medium"
+                startContent={<IconFileText stroke={1.5} />}
               >
                 Currículum
               </Button>
@@ -90,7 +91,7 @@ const ProfileCard = () => {
               content="Conóceme un poco más"
               placement="bottom"
               radius="sm"
-              color="secondary"
+              color="primary"
               showArrow
             >
               <Button
@@ -100,7 +101,7 @@ const ProfileCard = () => {
                 radius="sm"
                 variant="flat"
                 startContent={<IconUserFilled />}
-                className="text-primary-200 font-medium tracking-wide md:text-medium"
+                className="text-primary-200"
               >
                 Más sobre mi
               </Button>

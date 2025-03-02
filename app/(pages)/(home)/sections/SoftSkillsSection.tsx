@@ -1,17 +1,15 @@
-'use client';
-
 import React from 'react';
 import { Grandstander } from 'next/font/google';
 import {
   IconBook,
   IconDeviceLaptop,
   IconUsersGroup,
-  IconBulb,
+  IconCode,
 } from '@tabler/icons-react';
 
 import CardSoftSkill from '../components/sections/soft-skills/CardSoftSkill';
 
-export const grandstander = Grandstander({
+const grandstander = Grandstander({
   subsets: ['latin'],
   display: 'swap',
 });
@@ -25,24 +23,24 @@ const SoftSkills = () => {
 
       <div className="grid md:grid-cols-2 gap-4">
         <CardSoftSkill
-          title="Siempre aprendiendo"
-          description="La tecnología avanza, y yo con ella."
+          title="De la Idea al Producto Final"
+          description="Desarrollo soluciones intuitivas y atractivas, priorizando la experiencia del usuario en cada decisión de diseño."
+          icon={IconDeviceLaptop}
+        />
+        <CardSoftSkill
+          title="Metodología Ágil"
+          description="Trabajo con sprints iterativos, adaptándome rápidamente a cambios y nuevos requerimientos."
           icon={IconBook}
         />
         <CardSoftSkill
-          title="Del problema a la solución"
-          description="Resolver desafíos es lo que más disfruto."
-          icon={IconBulb}
+          title="Código Limpio"
+          description="Escribo código mantenible y escalable, siguiendo las mejores prácticas y patrones de diseño modernos."
+          icon={IconCode}
         />
         <CardSoftSkill
-          title="Colaboración primero"
-          description="Me gusta trabajar en equipo y hacer que las ideas fluyan."
+          title="Colaboración Efectiva"
+          description="Comunicación clara y constante con el equipo y stakeholders para garantizar resultados óptimos."
           icon={IconUsersGroup}
-        />
-        <CardSoftSkill
-          title="Desarrollo con propósito"
-          description="No solo escribo código, sino que creo soluciones reales."
-          icon={IconDeviceLaptop}
         />
       </div>
     </section>

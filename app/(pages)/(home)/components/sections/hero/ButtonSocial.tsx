@@ -21,7 +21,7 @@ const ButtonSocial = ({
       rel="noopener noreferrer"
       isIconOnly
       startContent={<Icon color="#E6E6E7" size={28} />}
-      variant="flat"
+      variant="light"
     />
   </Tooltip>
 );

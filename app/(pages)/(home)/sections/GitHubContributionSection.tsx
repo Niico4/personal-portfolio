@@ -5,7 +5,7 @@ import { Grandstander } from 'next/font/google';
 import GitHubCalendar from 'react-github-calendar';
 import { Select, SelectItem } from '@heroui/select';
 
-export const grandstander = Grandstander({
+const grandstander = Grandstander({
   subsets: ['latin'],
   display: 'swap',
 });
@@ -53,7 +53,7 @@ const GitHubContribution = () => {
         year={selectedYear}
         style={{
           color: '#E6E6E7',
-          margin: '0 auto',
+          margin: '16px auto',
         }}
         labels={{
           totalCount: `{{count}} contribuciones en ${selectedYear}`,
