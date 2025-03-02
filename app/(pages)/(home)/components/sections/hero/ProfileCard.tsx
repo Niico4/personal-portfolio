@@ -27,7 +27,7 @@ const ProfileCard = () => {
       <CardHeader className="flex-col-center">
         <div className="aspect-square max-w-52 mx-auto mb-5 profile-gradient rounded-full overflow-hidden">
           <Image
-            src="https://ik.imagekit.io/0isq9u6sl/profile.webp?updatedAt=1731466256645"
+            src="/avatar.webp"
             alt="Avatar de Nicolas"
             width={0}
             height={0}
