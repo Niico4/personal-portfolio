@@ -17,17 +17,25 @@ export const useProjectStore = create<Store>()((set) => {
     error: null,
 
     getProjects: async () => {
-      set({ loading: true, error: null });
+      set((state) => {
+        if (state.projects.length > 0) return state;
+
+        return { loading: true, error: null };
+      });
 
       try {
         const { data } = await axios.get<Project[]>('/api/projects/');
         set({ projects: data, loading: false });
       } catch (error) {
         console.error(error);
+
+        const errorMessage = axios.isAxiosError(error)
+          ? error.response?.data?.message || error.message
+          : 'No se pudieron obtener mis proyectos. Por favor, intenta nuevamente.';
+
         set({
           loading: false,
-          error:
-            'No se pudieron obtener los proyectos. Por favor, intenta nuevamente más tarde.',
+          error: errorMessage,
         });
       }
     },

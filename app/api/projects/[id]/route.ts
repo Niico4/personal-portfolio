@@ -18,16 +18,20 @@ export async function DELETE(req: Request) {
   }
 
   try {
-    await db.project.delete({
+    const deletedProject = await db.project.delete({
       where: { id },
     });
+
+    if (!deletedProject) {
+      return resMessage('No se encontró el proyecto.', 404);
+    }
 
     return resMessage('El proyecto se ha eliminado con éxito.', 200);
   } catch (error) {
     console.error(error);
 
     return resMessage(
-      'Se produjo un error al intentar eliminar el proyecto. Por favor, intente nuevamente más tarde.',
+      'Se produjo un error al intentar eliminar el proyecto. Por favor, intente nuevamente.',
       500
     );
   }

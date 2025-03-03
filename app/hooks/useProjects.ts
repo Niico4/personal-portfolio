@@ -9,11 +9,10 @@ const useProjects = () => {
   const error = useProjectStore((state) => state.error);
 
   useEffect(() => {
-    const fetchProjects = async () => {
-      await getProjects();
-    };
-    fetchProjects();
-  }, [getProjects]);
+    if (projects.length === 0) {
+      getProjects();
+    }
+  }, [projects.length, getProjects]);
 
   return {
     projects,
