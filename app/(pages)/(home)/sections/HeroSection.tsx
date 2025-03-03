@@ -10,8 +10,8 @@ import {
   IconMail,
 } from '@tabler/icons-react';
 
-import ButtonSocial from '../components/sections/hero/ButtonSocial';
-import ProfileCard from '../components/sections/hero/ProfileCard';
+import ButtonSocial from '../components/ButtonSocial';
+import ProfileCard from '../components/ProfileCard';
 
 export const grandstander = Grandstander({
   subsets: ['latin'],

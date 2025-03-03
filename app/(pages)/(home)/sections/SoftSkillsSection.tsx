@@ -7,7 +7,7 @@ import {
   IconCode,
 } from '@tabler/icons-react';
 
-import CardSoftSkill from '../components/sections/soft-skills/CardSoftSkill';
+import CardSoftSkill from '../components/CardSoftSkill';
 
 const grandstander = Grandstander({
   subsets: ['latin'],

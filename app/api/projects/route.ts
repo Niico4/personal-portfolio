@@ -3,13 +3,16 @@ import { NextResponse } from 'next/server';
 import { db } from '@/utils/prisma';
 
 const formatTechnologies = (technologies: string | string[]) => {
-  if (Array.isArray(technologies)) {
-    return technologies.map((tech) => tech.trim().toLowerCase());
+  if (
+    !technologies ||
+    (Array.isArray(technologies) && technologies.length === 0)
+  ) {
+    throw new Error('Debe haber al menos una tecnología');
   }
 
-  return technologies
-    .split(',')
-    .map((tech: string) => tech.trim().toLowerCase());
+  return Array.isArray(technologies)
+    ? technologies
+    : technologies.split(',').map((tech: string) => tech.trim());
 };
 
 export async function GET() {
@@ -18,10 +21,11 @@ export async function GET() {
     return NextResponse.json(projects);
   } catch (error) {
     console.error(error);
+    const errorMessage =
+      error instanceof Error ? error.message : 'Error desconocido';
     return NextResponse.json(
       {
-        error:
-          'No se pudieron recuperar los proyectos. Por favor, intente nuevamente más tarde.',
+        error: errorMessage,
       },
       { status: 500 }
     );
@@ -30,8 +34,22 @@ export async function GET() {
 
 export const POST = async (req: Request) => {
   try {
-    const { title, description, image, repository, technologies, web_site } =
-      await req.json();
+    const {
+      title,
+      description,
+      image,
+      isDev,
+      repository,
+      technologies,
+      web_site,
+    } = await req.json();
+
+    if (!title || !description || !image || !technologies || isDev === null) {
+      return NextResponse.json(
+        { error: 'Faltan campos obligatorios.' },
+        { status: 400 }
+      );
+    }
 
     const formattedTechnologies = formatTechnologies(technologies);
 
@@ -40,6 +58,7 @@ export const POST = async (req: Request) => {
         title,
         description,
         image,
+        isDev,
         repository,
         technologies: formattedTechnologies,
         web_site,
@@ -49,10 +68,13 @@ export const POST = async (req: Request) => {
     return NextResponse.json(newProject, { status: 201 });
   } catch (error) {
     console.error(error);
+    const errorMessage =
+      error instanceof Error
+        ? error.message
+        : 'No se pudo crear el proyecto. Asegúrese de que todos los campos estén completos y vuelva a intentarlo.';
     return NextResponse.json(
       {
-        error:
-          'No se pudo crear el proyecto. Asegúrese de que todos los campos estén completos y vuelva a intentarlo.',
+        error: errorMessage,
       },
       { status: 500 }
     );

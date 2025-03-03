@@ -12,6 +12,7 @@ model Project {
   createdAt    DateTime @default(now())
   description  String
   image        String
+  isDev        Boolean
   repository   String?
   technologies String[]
   title        String

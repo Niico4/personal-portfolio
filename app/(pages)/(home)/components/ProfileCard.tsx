@@ -33,7 +33,7 @@ const ProfileCard = () => {
             height={0}
             sizes="100%"
             className="size-full object-cover"
-            loading="lazy"
+            priority
           />
         </div>
 
