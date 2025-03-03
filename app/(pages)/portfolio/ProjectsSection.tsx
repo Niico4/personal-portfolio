@@ -6,8 +6,9 @@ import { Grandstander } from 'next/font/google';
 import useProjects from '@/hooks/useProjects';
 
 import LoaderGhost from '../../components/common/LoaderGhost';
-import ProjectsList from './components/ProjectsList';
 import ErrorSection from '../../components/common/ErrorSection';
+
+import ProjectsList from './components/ProjectsList';
 
 const grandstander = Grandstander({
   subsets: ['latin'],
