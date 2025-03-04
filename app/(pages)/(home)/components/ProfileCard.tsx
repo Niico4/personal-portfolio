@@ -29,10 +29,9 @@ const ProfileCard = () => {
           <Image
             src="/avatar.webp"
             alt="Avatar de Nicolas"
-            width={0}
-            height={0}
-            sizes="100%"
-            className="size-full object-cover"
+            width={200}
+            height={200}
+            className="size-full aspect-square object-cover"
             priority
           />
         </div>

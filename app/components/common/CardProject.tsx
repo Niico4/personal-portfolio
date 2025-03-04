@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Grandstander } from 'next/font/google';
@@ -33,13 +33,22 @@ const ProjectCard: FC<Props> = ({
   webSite,
 }) => {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   const timestamp = new Date().getTime();
   const srcImage = `${urlEndpoint}${image}.webp?=${timestamp}`;
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 500);
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
     <Card
       isFooterBlurred
-      className="relative max-w-[450px]  col-span-12 sm:col-span-7 border-2 border-white/15 hover:scale-105"
+      className="relative w-full md:w-[450px] col-span-12 sm:col-span-7 border border-white/15 md:hover:scale-105"
     >
       <CardHeader className="absolute z-10 top-1 flex-col items-start gap-4">
         {isDev && (
@@ -55,18 +64,18 @@ const ProjectCard: FC<Props> = ({
 
       <Skeleton
         isLoaded={isImageLoaded}
-        className="z-0 aspect-video w-full h-full"
+        className="aspect-video w-full md:w-[450px]"
       >
         <Image
-          width={0}
-          height={0}
-          sizes="100%"
+          width={450}
+          height={300}
           alt={title}
           className="z-0 aspect-video w-full h-full object-cover"
           src={srcImage}
           onLoad={() => setIsImageLoaded(true)}
         />
       </Skeleton>
+
       <div
         className={
           'absolute w-full h-full bg-gradient-to-t from-black/25 via-black/60 to-black/85'
@@ -79,7 +88,7 @@ const ProjectCard: FC<Props> = ({
         >
           {title}
         </h4>
-        <div className="flex-center max-md-gap-1 gap-4">
+        <div className="flex items-center md:items-start max-md-gap-1 gap-4 w-full">
           {webSite && (
             <Button
               as={Link}
@@ -88,10 +97,12 @@ const ProjectCard: FC<Props> = ({
               variant="faded"
               color="secondary"
               startContent={<IconExternalLink />}
+              aria-label="Sitio Web"
               target="_blank"
               rel="noopener noreferrer"
+              isIconOnly={isMobile}
             >
-              Sitio Web
+              {!isMobile && 'Sitio Web'}
             </Button>
           )}
 
@@ -100,7 +111,6 @@ const ProjectCard: FC<Props> = ({
             color="warning"
             showArrow
             backdrop="opaque"
-            size="sm"
           >
             <PopoverTrigger>
               <Button
@@ -108,8 +118,9 @@ const ProjectCard: FC<Props> = ({
                 variant="solid"
                 color="secondary"
                 startContent={<IconEye />}
+                isIconOnly={isMobile}
               >
-                Ver Detalles
+                {!isMobile && 'Ver Detalles'}
               </Button>
             </PopoverTrigger>
             <PopoverContent>

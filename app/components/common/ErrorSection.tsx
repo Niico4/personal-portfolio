@@ -1,9 +1,8 @@
 import React from 'react';
-import Link from 'next/link';
 import Image from 'next/image';
 import { Grandstander } from 'next/font/google';
 import { Button } from '@heroui/button';
-import { IconReload, IconArrowBackUp } from '@tabler/icons-react';
+import { IconReload } from '@tabler/icons-react';
 
 const grandstander = Grandstander({
   subsets: ['latin'],
@@ -19,26 +18,15 @@ const ErrorSection = ({ error }: { error: string }) => {
         >
           {error}
         </p>
-        <div className="flex-center gap-4">
-          <Button
-            variant="faded"
-            color="secondary"
-            onPress={() => window.location.reload()}
-            startContent={<IconReload stroke={1} />}
-          >
-            Recargar Página
-          </Button>
-          <Button
-            as={Link}
-            href="/"
-            color="secondary"
-            variant="flat"
-            className="text-secondary-300"
-            startContent={<IconArrowBackUp stroke={1} />}
-          >
-            Regresar al Inicio
-          </Button>
-        </div>
+        <Button
+          color="secondary"
+          variant="flat"
+          className="text-secondary-300"
+          onPress={() => window.location.reload()}
+          startContent={<IconReload stroke={1} />}
+        >
+          Recargar Página
+        </Button>
       </div>
 
       <figure

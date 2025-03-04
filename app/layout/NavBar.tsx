@@ -74,7 +74,7 @@ const NavBar = () => {
         </div>
       </NavbarContent>
 
-      <NavbarMenu className="justify-evenly items-center">
+      <NavbarMenu className="justify-evenly items-center top-0 bottom-0 !h-auto">
         <div className="flex-col-center gap-4">
           {navbarItems.map(({ href, label }, index) => (
             <LinkItem
