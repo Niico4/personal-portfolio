@@ -21,6 +21,31 @@
   --blending: hard-light;
 }
 
+body {
+  --sb-track-color: #333333;
+  --sb-size: 6px;
+}
+
+body::-webkit-scrollbar {
+  width: var(--sb-size);
+}
+
+body::-webkit-scrollbar-track {
+  background: var(--sb-track-color);
+  border-radius: 4px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 4px;
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  body {
+    scrollbar-color: var(--primary) var(--sb-track-color);
+  }
+}
+
 .text-animate {
   background: linear-gradient(
     to right,

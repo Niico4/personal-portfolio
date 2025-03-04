@@ -21,7 +21,9 @@ const ProjectsSection = () => {
     return (
       <section className="flex-col-center gap-6 mt-40">
         <LoaderGhost />
-        <h4 className={`${grandstander.className} text-2xl text-paragraph/95`}>
+        <h4
+          className={`${grandstander.className} text-2xl text-center text-paragraph/95`}
+        >
           Invocando mis creaciones...
         </h4>
       </section>
