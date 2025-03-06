@@ -4,7 +4,7 @@ import { Button } from '@heroui/button';
 import { Tooltip } from '@heroui/tooltip';
 import { Icon } from '@tabler/icons-react';
 
-const ButtonSocial = ({
+const SocialButton = ({
   icon: Icon,
   label,
   href,
@@ -27,4 +27,4 @@ const ButtonSocial = ({
   </Tooltip>
 );
 
-export default ButtonSocial;
+export default SocialButton;

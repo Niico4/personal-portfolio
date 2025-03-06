@@ -14,7 +14,7 @@ interface Props {
   icon: Icon;
 }
 
-const CardSoftSkill: FC<Props> = ({ title, description, icon: Icon }) => {
+const SoftSkillCard: FC<Props> = ({ title, description, icon: Icon }) => {
   return (
     <Card className="items-center bg-black/50 px-4 py-2 shadow-sm shadow-zinc-800">
       <CardBody className="gap-3">
@@ -43,4 +43,4 @@ const CardSoftSkill: FC<Props> = ({ title, description, icon: Icon }) => {
   );
 };
 
-export default CardSoftSkill;
+export default SoftSkillCard;

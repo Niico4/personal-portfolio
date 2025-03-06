@@ -9,9 +9,10 @@ import { Card, CardBody, CardFooter, CardHeader } from '@heroui/card';
 
 import { EnvConfig } from '@/config/env.config';
 import useProjects from '@/hooks/useProjects';
-import ProjectCard from '@/components/common/CardProject';
+import ProjectCard from '@/components/common/ProjectCard';
 import LoaderGhost from '@/components/common/LoaderGhost';
 import ErrorSection from '@/components/common/ErrorSection';
+import Title from '@/components/common/Title';
 
 export const grandstander = Grandstander({
   subsets: ['latin'],
@@ -41,9 +42,7 @@ const RecentProjectsSection = () => {
   return (
     <Card className="card-bg">
       <CardHeader className="justify-center">
-        <h2 className={`title-section ${grandstander.className}`}>
-          Mis proyectos destacados
-        </h2>
+        <Title title="Mis proyectos destacados" />
       </CardHeader>
 
       <CardBody className="flex-col flex-wrap justify-center gap-4 md:flex-row">

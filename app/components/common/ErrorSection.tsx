@@ -38,10 +38,9 @@ const ErrorSection = ({ error }: { error: string }) => {
         <Image
           src="/astronaut.webp"
           alt="Astronauta"
-          width={0}
-          height={0}
-          sizes="100%"
-          className="size-full aspect-square object-cover"
+          width={500}
+          height={300}
+          className="w-full h-auto aspect-square object-cover"
           priority
         />
       </figure>

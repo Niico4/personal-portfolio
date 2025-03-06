@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 
 import { portfolioMetadata } from '@/config/metadata/portfolio';
 
-import ProjectsSection from './ProjectsSection';
+import ProjectsSection from './sections/ProjectsSection';
 
 export async function generateMetadata(): Promise<Metadata> {
   return portfolioMetadata;

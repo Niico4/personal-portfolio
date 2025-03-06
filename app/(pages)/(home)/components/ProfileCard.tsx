@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Grandstander } from 'next/font/google';
@@ -18,6 +18,24 @@ const grandstander = Grandstander({
 });
 
 const ProfileCard = () => {
+  const [isMobile, setIsMobile] = useState(false);
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  useEffect(() => {
+    if (isClient) {
+      const handleResize = () => setIsMobile(window.innerWidth < 500);
+      handleResize();
+      window.addEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
+    }
+  }, [isClient]);
+
+  if (!isClient) return null;
+
   return (
     <Card
       className="grid items-center justify-center card-bg px-4 py-2 md:grid-cols-[30%_1fr]"
@@ -28,7 +46,7 @@ const ProfileCard = () => {
         <div className="aspect-square max-w-52 mx-auto mb-5 profile-gradient rounded-full overflow-hidden">
           <Image
             src="/avatar.webp"
-            alt="Avatar de Nicolas"
+            alt="Avatar"
             width={200}
             height={200}
             className="size-full aspect-square object-cover"
@@ -80,6 +98,8 @@ const ProfileCard = () => {
                 color="primary"
                 variant="faded"
                 radius="sm"
+                aria-label="Currículum"
+                size={isMobile ? 'sm' : 'md'}
                 startContent={<IconFileText stroke={1.5} />}
               >
                 Currículum
@@ -99,10 +119,12 @@ const ProfileCard = () => {
                 color="primary"
                 radius="sm"
                 variant="flat"
+                aria-label="Sobre mi"
+                size={isMobile ? 'sm' : 'md'}
                 startContent={<IconUserFilled />}
                 className="text-primary-200"
               >
-                Más sobre mi
+                Sobre mi
               </Button>
             </Tooltip>
           </div>
