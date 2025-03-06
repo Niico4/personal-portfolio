@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Grandstander } from 'next/font/google';
@@ -12,15 +12,20 @@ import {
   IconUserFilled,
 } from '@tabler/icons-react';
 
-import useMobile from '@/hooks/useMobile';
-
 const grandstander = Grandstander({
   subsets: ['latin'],
   display: 'swap',
 });
 
 const ProfileCard = () => {
-  const { isMobile } = useMobile();
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 500);
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   return (
     <Card

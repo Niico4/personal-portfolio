@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Grandstander } from 'next/font/google';
@@ -12,8 +12,6 @@ import {
   IconExternalLink,
   IconEye,
 } from '@tabler/icons-react';
-
-import useMobile from '@/hooks/useMobile';
 
 const grandstander = Grandstander({
   display: 'swap',
@@ -35,10 +33,17 @@ const ProjectCard: FC<Props> = ({
   webSite,
 }) => {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
-  const { isMobile } = useMobile();
+  const [isMobile, setIsMobile] = useState(false);
 
   const timestamp = new Date().getTime();
   const srcImage = `${urlEndpoint}${image}.webp?=${timestamp}`;
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 500);
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   return (
     <Card
