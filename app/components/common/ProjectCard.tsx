@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Grandstander } from 'next/font/google';
@@ -12,6 +12,8 @@ import {
   IconExternalLink,
   IconEye,
 } from '@tabler/icons-react';
+
+import useMobile from '@/hooks/useMobile';
 
 const grandstander = Grandstander({
   display: 'swap',
@@ -33,21 +35,15 @@ const ProjectCard: FC<Props> = ({
   webSite,
 }) => {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  const { isMobile } = useMobile();
 
   const timestamp = new Date().getTime();
   const srcImage = `${urlEndpoint}${image}.webp?=${timestamp}`;
 
-  useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 500);
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
   return (
     <Card
       isFooterBlurred
+      radius="sm"
       className="relative w-full md:w-[450px] col-span-12 sm:col-span-7 border border-white/15 md:hover:scale-105"
     >
       <CardHeader className="absolute z-10 top-1 flex-col items-start gap-4">
@@ -82,9 +78,9 @@ const ProjectCard: FC<Props> = ({
         }
       />
 
-      <CardFooter className="flex-col items-start gap-2 bg-black/15 border-gray-400/30 border-1 overflow-hidden py-1 absolute before:rounded-xl rounded-large bottom-1 w-[calc(100%_-_8px)] shadow-small ml-1 z-10">
+      <CardFooter className="flex-col items-start gap-2 bg-black/15 border-gray-400/30 border-1 overflow-hidden py-1 absolute before:rounded-lg rounded-lg bottom-1 w-[calc(100%_-_8px)] shadow-small ml-1 z-10">
         <h4
-          className={`${grandstander.className} text-neutral-300 font-bold text-3xl`}
+          className={`${grandstander.className} text-neutral-300 font-bold max-sm:text-2xl text-3xl`}
         >
           {title}
         </h4>
@@ -100,9 +96,9 @@ const ProjectCard: FC<Props> = ({
               aria-label="Sitio Web"
               target="_blank"
               rel="noopener noreferrer"
-              isIconOnly={isMobile}
+              size={isMobile ? 'sm' : 'md'}
             >
-              {!isMobile && 'Sitio Web'}
+              Sitio Web
             </Button>
           )}
 
@@ -117,10 +113,11 @@ const ProjectCard: FC<Props> = ({
                 radius="sm"
                 variant="solid"
                 color="secondary"
+                aria-label="Ver Detalles"
                 startContent={<IconEye />}
-                isIconOnly={isMobile}
+                size={isMobile ? 'sm' : 'md'}
               >
-                {!isMobile && 'Ver Detalles'}
+                Ver Detalles
               </Button>
             </PopoverTrigger>
             <PopoverContent>

@@ -1,14 +1,10 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Grandstander } from 'next/font/google';
 import GitHubCalendar from 'react-github-calendar';
 import { Select, SelectItem } from '@heroui/select';
 
-const grandstander = Grandstander({
-  subsets: ['latin'],
-  display: 'swap',
-});
+import Title from '@/components/common/Title';
 
 const GitHubContribution = () => {
   const [selectedYear, setSelectedYear] = useState(2023);
@@ -26,9 +22,7 @@ const GitHubContribution = () => {
   return (
     <section className="flex flex-col gap-10">
       <div className="flex flex-col justify-between md:items-center md:flex-row max-sm:gap-4">
-        <h2 className={`title-section ${grandstander.className}`}>
-          Cada commit cuenta
-        </h2>
+        <Title title="Cada commit cuenta" />
         <Select
           color="secondary"
           variant="faded"

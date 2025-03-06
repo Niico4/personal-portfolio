@@ -10,7 +10,7 @@ import {
   IconMail,
 } from '@tabler/icons-react';
 
-import ButtonSocial from '../components/ButtonSocial';
+import SocialButton from '../components/SocialButton';
 import ProfileCard from '../components/ProfileCard';
 
 export const grandstander = Grandstander({
@@ -63,17 +63,17 @@ const HeroSection = () => {
               ¿Hablamos?
             </span>
             <div className="flex-center md:gap-1 lg:gap-3">
-              <ButtonSocial
+              <SocialButton
                 href="mailto:nicogarzon131@gmail.com"
                 icon={IconMail}
                 label="Gmail"
               />
-              <ButtonSocial
-                href="https://www.linkedin.com/in/nicolasgarzon131/'"
+              <SocialButton
+                href="https://www.linkedin.com/in/nicolasgarzon131/"
                 icon={IconBrandLinkedin}
                 label="LinkedIn"
               />
-              <ButtonSocial
+              <SocialButton
                 href="https://github.com/Niico4"
                 icon={IconBrandGithub}
                 label="GitHub"

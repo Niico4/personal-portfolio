@@ -15,69 +15,69 @@ import TailwindCSSIcon from '@/components/common/icons/TailwindCSS';
 import TypeScriptIcon from '@/components/common/icons/TypeScript';
 import ViteIcon from '@/components/common/icons/Vite';
 
-export const TECH_ICONS = [
+export const TECHNOLOGIES_LIST = [
   {
-    title: 'JavaScript',
+    label: 'JavaScript',
     icon: JavaScriptIcon,
   },
   {
-    title: 'React',
+    label: 'React',
     icon: ReactIcon,
   },
   {
-    title: 'HTML',
+    label: 'HTML',
     icon: HTML5Icon,
   },
   {
-    title: 'CSS',
+    label: 'CSS',
     icon: CSSIcon,
   },
   {
-    title: 'TypeScript',
+    label: 'TypeScript',
     icon: TypeScriptIcon,
   },
   {
-    title: 'Material UI',
+    label: 'Material UI',
     icon: MaterialUIIcon,
   },
   {
-    title: 'Vite',
+    label: 'Vite',
     icon: ViteIcon,
   },
   {
-    title: 'TailwindCSS',
+    label: 'TailwindCSS',
     icon: TailwindCSSIcon,
   },
   {
-    title: 'Styled Components',
+    label: 'Styled Components',
     icon: StyledComponentsIcon,
   },
   {
-    title: 'Prisma',
+    label: 'Prisma',
     icon: PrismaIcon,
   },
   {
-    title: 'Notion',
+    label: 'Notion',
     icon: NotionIcon,
   },
   {
-    title: 'Figma',
+    label: 'Figma',
     icon: FigmaIcon,
   },
   {
-    title: 'Next.js',
+    label: 'Next.js',
     icon: NextjsIcon,
   },
   {
-    title: 'MongoDB',
+    label: 'MongoDB',
     icon: MongoDBIcon,
   },
   {
-    title: 'GitHub',
+    label: 'GitHub',
     icon: GithubIcon,
   },
   {
-    title: 'Git',
+    label: 'Git',
     icon: GitIcon,
   },
 ];
