@@ -19,13 +19,22 @@ const grandstander = Grandstander({
 
 const ProfileCard = () => {
   const [isMobile, setIsMobile] = useState(false);
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 500);
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    setIsClient(true);
   }, []);
+
+  useEffect(() => {
+    if (isClient) {
+      const handleResize = () => setIsMobile(window.innerWidth < 500);
+      handleResize();
+      window.addEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
+    }
+  }, [isClient]);
+
+  if (!isClient) return null;
 
   return (
     <Card
