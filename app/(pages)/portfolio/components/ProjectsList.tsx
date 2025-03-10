@@ -8,11 +8,11 @@ import ProjectCard from '../../../components/common/ProjectCard';
 
 const ProjectsList = ({ projects }: { projects: Project[] }) => {
   return (
-    <section className="flex-col-center gap-10">
-      <article className="flex-col-center md:w-4/5 gap-5">
+    <section className="flex flex-col justify-center gap-10">
+      <article className="flex-col-center mx-auto md:w-4/5 gap-5">
         <Title title="Mi Pequeño Universo Creativo" />
 
-        <p className="text-lg md:text-xl font-medium md:text-center text-paragraph/85">
+        <p className="text-lg md:text-xl font-medium md:text-center text-muted">
           Aquí están algunos de mis proyectos favoritos, creados con pasión,
           creatividad y muchas líneas de código{' '}
           <span className="text-primary-200">(¡pero con amor!)</span>.

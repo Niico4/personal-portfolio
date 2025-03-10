@@ -36,7 +36,7 @@ const HeroSection = () => {
                 duration={2.5}
               />
             </span>
-            <p className="text-2xl font-medium text-paragraph">
+            <p className="text-2xl font-medium text-default">
               Años de Experiencia
             </p>
           </CardBody>
@@ -49,7 +49,7 @@ const HeroSection = () => {
             >
               +<CountUp end={20} start={0} duration={2} />
             </span>
-            <p className="text-2xl font-medium text-paragraph">
+            <p className="text-2xl font-medium text-default">
               Proyectos Realizados
             </p>
           </CardBody>

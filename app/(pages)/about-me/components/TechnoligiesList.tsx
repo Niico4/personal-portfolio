@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 
-import { TECHNOLOGIES_LIST } from '../data/technologies';
+import { TECHNOLOGIES_LIST } from '../../../data/technologies';
 
 import TechnologyCard from './TechnologyCard';
 
@@ -27,7 +27,7 @@ const TechnologiesList = () => {
         x: [0, -width],
       }}
       transition={{
-        duration: 10,
+        duration: 15,
         ease: 'linear',
         repeat: Infinity,
         repeatType: 'loop',

@@ -19,7 +19,7 @@ const LinkItem: FC<Props> = ({ label, href, currentPathname }) => {
       className={`${mogra.className} text-xl transition-all ${
         currentPathname === href
           ? 'text-primary-200 font-semibold underline underline-offset-4'
-          : 'text-paragraph hover:text-paragraph/85'
+          : 'text-default hover:text-muted'
       }`}
       href={href}
     >

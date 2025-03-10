@@ -55,11 +55,11 @@ const ProfileCard = () => {
         </div>
 
         <ul className="flex flex-col gap-2">
-          <li className="flex items-center text-sm md:text-base font-medium text-paragraph/85 gap-2">
+          <li className="flex items-center text-sm md:text-base font-medium text-muted gap-2">
             <IconDeviceLaptop color="#7cc1fd" />
             Desarrollador Frontend
           </li>
-          <li className="flex items-center text-sm md:text-base font-medium text-paragraph/85 gap-2">
+          <li className="flex items-center text-sm md:text-base font-medium text-muted gap-2">
             <IconMapPinFilled color="#7cc1fd" />
             Bogotá, Colombia
           </li>
@@ -74,7 +74,7 @@ const ProfileCard = () => {
               ¡Hola!, soy <span className="text-animate">Nicolas</span>
             </h1>
 
-            <p className="lg:text-xl text-paragraph font-light">
+            <p className="lg:text-xl text-default font-light">
               Diseño y desarrollo experiencias web fluidas, atractivas y
               funcionales. Disfruto combinando creatividad y tecnología para que
               cada proyecto tenga su propia esencia y conecte con quien lo

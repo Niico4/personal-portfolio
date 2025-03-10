@@ -35,9 +35,7 @@ const SoftSkillCard: FC<Props> = ({ title, description, icon: Icon }) => {
             {title}
           </h3>
         </div>
-        <p className="text-paragraph/80 text-base md:text-medium">
-          {description}
-        </p>
+        <p className="text-dimmed text-base md:text-medium">{description}</p>
       </CardBody>
     </Card>
   );
