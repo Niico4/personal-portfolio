@@ -5,7 +5,7 @@ const AboutMeCard = () => {
   return (
     <Card className="card-bg p-4" radius="sm" isBlurred>
       <CardBody>
-        <p className="text-paragraph/75">
+        <p className="text-soft">
           Me encanta crear cosas para la web. Más que solo verse bien, quiero
           que cada proyecto se sienta natural, fácil de usar y con su propia
           esencia. Disfruto cada paso, desde la idea hasta los últimos retoques,

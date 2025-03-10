@@ -26,7 +26,7 @@ const RecentProjectsSection = () => {
     return (
       <section className="flex-col-center gap-6 mt-40">
         <LoaderGhost />
-        <h4 className={`${grandstander.className} text-2xl text-paragraph/95`}>
+        <h4 className={`${grandstander.className} text-2xl text-faint`}>
           Invocando mis creaciones...
         </h4>
       </section>
@@ -36,6 +36,7 @@ const RecentProjectsSection = () => {
     return (
       <ErrorSection
         error={error ?? '¡Ups! No tenemos proyectos disponibles por ahora'}
+        reload
       />
     );
 

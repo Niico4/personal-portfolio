@@ -42,7 +42,7 @@ const HeroSection = () => {
         <article className="relative w-full rounded-lg bg-[#32323266] overflow-hidden z-10">
           <div className="absolute top-0 left-0 w-full">
             <div className="relative flex-center py-2 px-2 bg-black/50">
-              <span className="text-sm text-paragraph/80">developer.ts</span>
+              <span className="text-sm text-dimmed">developer.ts</span>
               <div className="absolute flex-center gap-2 left-2">
                 <div className="rounded-full bg-red-500/85 size-3" />
                 <div className="rounded-full bg-yellow-500/85 size-3" />

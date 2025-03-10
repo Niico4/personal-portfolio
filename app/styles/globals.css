@@ -93,11 +93,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .title-section {
-  @apply text-paragraph text-4xl font-medium max-sm:text-center;
-}
-
-.card-bg-blur {
-  @apply bg-black/50 p-4 flex-1;
+  @apply text-default text-4xl font-medium max-sm:text-center;
 }
 
 .timeline-time {

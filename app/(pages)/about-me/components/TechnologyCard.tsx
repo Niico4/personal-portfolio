@@ -27,7 +27,7 @@ const TechnologyCard: FC<Props> = ({ label, icon: Icon }) => {
               initial={{ y: 10 }}
               animate={{ y: 0 }}
               exit={{ y: 10 }}
-              className="z-10 flex-center text-paragraph font-semibold text-sm text-center"
+              className="z-10 flex-center text-default font-semibold text-sm text-center"
             >
               {label}
             </motion.span>

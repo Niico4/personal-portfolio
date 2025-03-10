@@ -37,8 +37,8 @@ const EducationCard: FC<Props> = ({
           )}
 
           <div className="flex flex-col justify-center gap-1">
-            <h3 className="text-title/85 text-lg font-medium">{title}</h3>
-            <p className="text-paragraph/80 text-md">{institution}</p>
+            <h3 className="text-faint text-lg font-medium">{title}</h3>
+            <p className="text-dimmed text-md">{institution}</p>
           </div>
         </div>
       </CardBody>

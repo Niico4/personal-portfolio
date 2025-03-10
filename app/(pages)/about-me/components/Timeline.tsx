@@ -17,9 +17,7 @@ const Timeline: FC<Props> = ({ title, date, description }) => {
         <h3 className="max-md:text-xl text-lg mb-3 font-semibold text-title">
           {title}
         </h3>
-        <p className="mb-4 text-base font-normal text-paragraph/80">
-          {description}
-        </p>
+        <p className="mb-4 text-base font-normal text-dimmed">{description}</p>
       </li>
     </ol>
   );

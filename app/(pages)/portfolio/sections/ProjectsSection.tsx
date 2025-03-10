@@ -21,7 +21,7 @@ const ProjectsSection = () => {
       <section className="flex-col-center gap-6 mt-40">
         <LoaderGhost />
         <h4
-          className={`${grandstander.className} text-2xl text-center text-paragraph/95`}
+          className={`${grandstander.className} text-2xl text-center text-faint`}
         >
           Invocando mis creaciones...
         </h4>
@@ -32,6 +32,7 @@ const ProjectsSection = () => {
     return (
       <ErrorSection
         error={error ?? '¡Ups! No tenemos proyectos disponibles por ahora'}
+        reload
       />
     );
 

@@ -1,20 +1,30 @@
+'use client';
+
 import React from 'react';
 import Image from 'next/image';
 import { Grandstander } from 'next/font/google';
 import { Button } from '@heroui/button';
-import { IconReload } from '@tabler/icons-react';
+import { IconArrowNarrowRight, IconReload } from '@tabler/icons-react';
+import { useRouter } from 'next/navigation';
 
 const grandstander = Grandstander({
   subsets: ['latin'],
   display: 'swap',
 });
 
-const ErrorSection = ({ error }: { error: string }) => {
+const ErrorSection = ({
+  error,
+  reload,
+}: {
+  error: string;
+  reload?: boolean;
+}) => {
+  const router = useRouter();
   return (
     <section className="grid gap-6 md:grid-cols-2 md:gap-0 items-center justify-center w-11/12 mx-auto">
       <div className="flex flex-col items-center justify-center gap-4 md:items-start">
         <p
-          className={`${grandstander.className} text-3xl md:text-5xl max-md:text-center font-bold text-title/85 z-10`}
+          className={`${grandstander.className} text-3xl md:text-5xl max-md:text-center font-bold text-faint z-10`}
         >
           {error}
         </p>
@@ -22,10 +32,16 @@ const ErrorSection = ({ error }: { error: string }) => {
           color="secondary"
           variant="flat"
           className="text-secondary-300"
-          onPress={() => window.location.reload()}
-          startContent={<IconReload stroke={1} />}
+          onPress={reload ? () => router.refresh() : () => router.push('/')}
+          endContent={
+            reload ? (
+              <IconReload stroke={1} />
+            ) : (
+              <IconArrowNarrowRight stroke={1} />
+            )
+          }
         >
-          Recargar Página
+          {reload ? 'Recargar Página' : 'Volver al Inicio'}
         </Button>
       </div>
 
