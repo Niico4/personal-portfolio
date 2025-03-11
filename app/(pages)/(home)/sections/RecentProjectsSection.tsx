@@ -5,14 +5,13 @@ import { Grandstander } from 'next/font/google';
 import Link from 'next/link';
 import { IconArrowNarrowRight } from '@tabler/icons-react';
 import { Button } from '@heroui/button';
-import { Card, CardBody, CardFooter, CardHeader } from '@heroui/card';
 
 import { EnvConfig } from '@/config/env.config';
 import useProjects from '@/hooks/useProjects';
 import ProjectCard from '@/components/common/ProjectCard';
 import LoaderGhost from '@/components/common/LoaderGhost';
 import ErrorSection from '@/components/common/ErrorSection';
-import Title from '@/components/common/Title';
+import SubTitle from '@/components/common/SubTitle';
 
 export const grandstander = Grandstander({
   subsets: ['latin'],
@@ -26,7 +25,9 @@ const RecentProjectsSection = () => {
     return (
       <section className="flex-col-center gap-6 mt-40">
         <LoaderGhost />
-        <h4 className={`${grandstander.className} text-2xl text-faint`}>
+        <h4
+          className={`${grandstander.className} text-2xl text-center text-faint`}
+        >
           Invocando mis creaciones...
         </h4>
       </section>
@@ -41,12 +42,10 @@ const RecentProjectsSection = () => {
     );
 
   return (
-    <Card className="card-bg">
-      <CardHeader className="justify-center">
-        <Title title="Mis proyectos destacados" />
-      </CardHeader>
+    <section className="flex-col-center gap-6">
+      <SubTitle title="Mis proyectos destacados" />
 
-      <CardBody className="flex-col flex-wrap justify-center gap-4 md:flex-row">
+      <article className="grid gap-8 sm:grid-cols-2 sm:gap-5">
         {projects
           .slice(0, 2)
           .map(({ image, title, isDev, web_site }, index) => (
@@ -59,9 +58,9 @@ const RecentProjectsSection = () => {
               urlEndpoint={EnvConfig.url_endpoint}
             />
           ))}
-      </CardBody>
+      </article>
 
-      <CardFooter className="justify-center">
+      <article className="flex-col-center">
         <Button
           as={Link}
           href="/portfolio"
@@ -71,8 +70,8 @@ const RecentProjectsSection = () => {
         >
           Ver más
         </Button>
-      </CardFooter>
-    </Card>
+      </article>
+    </section>
   );
 };
 

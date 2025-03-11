@@ -9,7 +9,7 @@ const ExperienceCard = () => {
   return (
     <>
       <Card
-        className="bg-zinc-900/70 p-4"
+        className="bg-zinc-900/70 p-1 md:p-4"
         isBlurred
         radius="sm"
         style={{

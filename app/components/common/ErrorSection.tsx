@@ -30,6 +30,7 @@ const ErrorSection = ({
         </p>
         <Button
           color="secondary"
+          radius="sm"
           variant="flat"
           className="text-secondary-300"
           onPress={reload ? () => router.refresh() : () => router.push('/')}

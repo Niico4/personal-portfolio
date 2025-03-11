@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import GitHubCalendar from 'react-github-calendar';
 import { Select, SelectItem } from '@heroui/select';
 
-import Title from '@/components/common/Title';
+import SubTitle from '@/components/common/SubTitle';
 
 const GitHubContribution = () => {
   const [selectedYear, setSelectedYear] = useState(2023);
@@ -20,14 +20,15 @@ const GitHubContribution = () => {
   };
 
   return (
-    <section className="flex flex-col gap-10">
-      <div className="flex flex-col justify-between md:items-center md:flex-row max-sm:gap-4">
-        <Title title="Cada commit cuenta" />
+    <section className="flex flex-col gap-3">
+      <SubTitle title="Cada commit cuenta" className="mb-6" />
+      <div className="flex items-center justify-center order-2">
         <Select
           color="secondary"
-          variant="faded"
-          aria-label="Select the year"
-          className="w-2/5 md:w-[12%]"
+          variant="bordered"
+          aria-label="Seleccionar el año"
+          size="sm"
+          className="w-2/5 md:w-[15%] min-[1500px]:w-[10%]"
           placeholder={selectedYear.toString()}
           value={selectedYear.toString()}
           onChange={handleYearChange}

@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { useMediaQuery } from '@uidotdev/usehooks';
 import Image from 'next/image';
 import { Grandstander } from 'next/font/google';
 import { useParams, useRouter } from 'next/navigation';
@@ -13,8 +14,8 @@ import {
   IconArrowNarrowRight,
   IconBrandGithub,
   IconCircleCheckFilled,
-  IconCode,
   IconExternalLink,
+  IconLoader,
 } from '@tabler/icons-react';
 
 import useProjects from '@/hooks/useProjects';
@@ -29,26 +30,10 @@ const grandstander = Grandstander({
 
 const ProjectDetail = () => {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-  const [isClient, setIsClient] = useState(false);
   const { projects } = useProjects();
+  const isSmallDevice = useMediaQuery('only screen and (max-width : 370px)');
   const params = useParams();
   const router = useRouter();
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
-  useEffect(() => {
-    if (isClient) {
-      const handleResize = () => setIsMobile(window.innerWidth < 500);
-      handleResize();
-      window.addEventListener('resize', handleResize);
-      return () => window.removeEventListener('resize', handleResize);
-    }
-  }, [isClient]);
-
-  if (!isClient) return null;
 
   const project = projects.find((project) => project.image === params.image);
 
@@ -103,11 +88,12 @@ const ProjectDetail = () => {
               className="md:absolute top-2 right-2"
               color={project.isDev ? 'warning' : 'success'}
               variant="flat"
+              radius="sm"
               startContent={
                 project.isDev ? (
-                  <IconCode stroke={1.5} />
+                  <IconLoader stroke={1.5} size={20} />
                 ) : (
-                  <IconCircleCheckFilled />
+                  <IconCircleCheckFilled size={20} />
                 )
               }
             >
@@ -130,9 +116,9 @@ const ProjectDetail = () => {
               aria-label="Sitio Web"
               startContent={<IconExternalLink stroke={1.5} />}
               radius="sm"
-              isIconOnly={isMobile}
+              isIconOnly={isSmallDevice}
             >
-              {!isMobile && 'Sitio Web'}
+              {!isSmallDevice && 'Sitio Web'}
             </Button>
             <Button
               as={Link}
@@ -144,9 +130,9 @@ const ProjectDetail = () => {
               aria-label="Repositorio"
               startContent={<IconBrandGithub stroke={1.5} />}
               radius="sm"
-              isIconOnly={isMobile}
+              isIconOnly={isSmallDevice}
             >
-              {!isMobile && 'Repositorio'}
+              {!isSmallDevice && 'Repositorio'}
             </Button>
           </CardFooter>
         </Card>

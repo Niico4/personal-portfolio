@@ -1,12 +1,6 @@
 import React, { FC } from 'react';
-import { Grandstander } from 'next/font/google';
-import { Card, CardBody } from '@heroui/card';
+import { Card, CardBody, CardHeader } from '@heroui/card';
 import { Icon } from '@tabler/icons-react';
-
-const grandstander = Grandstander({
-  subsets: ['latin'],
-  display: 'swap',
-});
 
 interface Props {
   title: string;
@@ -16,26 +10,20 @@ interface Props {
 
 const SoftSkillCard: FC<Props> = ({ title, description, icon: Icon }) => {
   return (
-    <Card className="items-center bg-black/50 px-4 py-2 shadow-sm shadow-zinc-800">
-      <CardBody className="gap-3">
-        <div className="flex items-center gap-3">
-          <Icon
-            size={32}
-            color="#CD93FF"
-            stroke={1.5}
-            style={{ filter: 'drop-shadow(0 0 5px rgba(205,147,255,1))' }}
-          />
-          <h3
-            className={`${grandstander.className} text-title font-semibold text-xl md:tracking-wider md:text-xl`}
-            style={{
-              filter: 'drop-shadow(2px 0 5px rgba(205,147,255, 1))',
-              WebkitTextStroke: '0.2px #CD93FF',
-            }}
-          >
-            {title}
-          </h3>
+    <Card
+      className="p-6 gap-4 transition-all duration-500 backdrop-blur-md bg-white/[0.07] border border-white/[0.08] hover:bg-white/[0.12] hover:scale-[1.02]"
+      radius="sm"
+    >
+      <CardHeader className="gap-4 p-0">
+        <div className="rounded-xl bg-white/[0.08] p-2.5 ring-1 ring-white/[0.06]">
+          <Icon size={24} color="#ffffff" stroke={1.5} className="opacity-80" />
         </div>
-        <p className="text-dimmed text-base md:text-medium">{description}</p>
+        <h3 className="text-2xl font-semibold text-faint">{title}</h3>
+      </CardHeader>
+      <CardBody className="p-0">
+        <p className="text-sm md:text-base text-soft leading-relaxed">
+          {description}
+        </p>
       </CardBody>
     </Card>
   );
