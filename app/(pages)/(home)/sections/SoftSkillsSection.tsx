@@ -6,14 +6,14 @@ import {
   IconCode,
 } from '@tabler/icons-react';
 
-import Title from '@/components/common/Title';
+import SubTitle from '@/components/common/SubTitle';
 
 import SoftSkillCard from '../components/SoftSkillCard';
 
 const SoftSkills = () => {
   return (
     <section className="flex flex-col gap-5">
-      <Title title="¿Cómo trabajo?" />
+      <SubTitle title="¿Cómo trabajo?" />
 
       <div className="grid md:grid-cols-2 gap-4">
         <SoftSkillCard

@@ -9,9 +9,13 @@ import {
   IconBrandLinkedin,
   IconMail,
 } from '@tabler/icons-react';
+import dynamic from 'next/dynamic';
 
 import SocialButton from '../components/SocialButton';
-import ProfileCard from '../components/ProfileCard';
+
+const ProfileCard = dynamic(() => import('../components/ProfileCard'), {
+  ssr: false,
+});
 
 export const grandstander = Grandstander({
   subsets: ['latin'],
@@ -24,7 +28,7 @@ const HeroSection = () => {
       <ProfileCard />
 
       <article className="flex flex-col gap-6 md:flex-row">
-        <Card className="card-bg flex-1 p-4" isBlurred>
+        <Card className="flex-1 card-bg p-1 md:p-4" isBlurred>
           <CardBody>
             <span
               className={`${grandstander.className} text-primary-200 text-4xl font-semibold`}
@@ -42,7 +46,7 @@ const HeroSection = () => {
           </CardBody>
         </Card>
 
-        <Card className="card-bg flex-1 p-4" isBlurred>
+        <Card className="flex-1 card-bg p-1 md:p-4" isBlurred>
           <CardBody>
             <span
               className={`${grandstander.className} text-primary-200 text-4xl font-semibold`}
@@ -55,10 +59,10 @@ const HeroSection = () => {
           </CardBody>
         </Card>
 
-        <Card className="card-bg p-4" isBlurred>
+        <Card className="card-bg p-1 md:p-4" isBlurred>
           <CardBody>
             <span
-              className={`${grandstander.className} text-primary-200 text-3xl font-semibold max-md:text-center`}
+              className={`${grandstander.className} text-primary-200 text-3xl font-semibold text-center`}
             >
               ¿Hablamos?
             </span>

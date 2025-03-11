@@ -3,7 +3,7 @@ import { Card, CardBody } from '@heroui/card';
 
 const AboutMeCard = () => {
   return (
-    <Card className="card-bg p-4" radius="sm" isBlurred>
+    <Card className="card-bg p-1 md:p-4" radius="sm" isBlurred>
       <CardBody>
         <p className="text-soft">
           Me encanta crear cosas para la web. Más que solo verse bien, quiero

@@ -1,25 +1,30 @@
+'use client';
+
 import React from 'react';
+import dynamic from 'next/dynamic';
 import { Project } from '@prisma/client';
 
 import { EnvConfig } from '@/config/env.config';
-import Title from '@/components/common/Title';
+import SubTitle from '@/components/common/SubTitle';
 
-import ProjectCard from '../../../components/common/ProjectCard';
+const ProjectCard = dynamic(() => import('@/components/common/ProjectCard'), {
+  ssr: false,
+});
 
 const ProjectsList = ({ projects }: { projects: Project[] }) => {
   return (
     <section className="flex flex-col justify-center gap-10">
-      <article className="flex-col-center mx-auto md:w-4/5 gap-5">
-        <Title title="Mi Pequeño Universo Creativo" />
+      <article className="flex-col-center lg:mx-auto lg:w-4/5 gap-2">
+        <SubTitle title="Mi Pequeño Universo Creativo" />
 
-        <p className="text-lg md:text-xl font-medium md:text-center text-muted">
+        <p className="text-base md:text-lg text-center text-muted">
           Aquí están algunos de mis proyectos favoritos, creados con pasión,
           creatividad y muchas líneas de código{' '}
           <span className="text-primary-200">(¡pero con amor!)</span>.
         </p>
       </article>
 
-      <div className="flex-center flex-wrap gap-4">
+      <div className="grid gap-8 sm:grid-cols-2 sm:gap-5">
         {projects.map(({ image, title, isDev, web_site }, index) => (
           <ProjectCard
             key={index}

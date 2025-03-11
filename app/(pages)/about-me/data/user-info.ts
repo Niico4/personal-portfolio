@@ -27,22 +27,20 @@ export const EDUCATION_LIST = [
   },
 ];
 
-export const CODE_STRING = `
-    const coder = {
-    name: 'Nicolas Garzón',
-    experienceLevel: 'Middle Developer',
-    skills: ['Next.js', 'React', 'JavaScript',
-        'TypeScript', 'MongoDB', 'Figma'],
-    hardWorker: true,
-    fastLearner: true,
-    problemResolver: true,
+export const CODE_STRING = `const coder = {
+  name: 'Nicolas Garzón',
+  experienceLevel: 'Middle Developer',
+  skills: ['Next.js', 'React', 'JavaScript',
+  'TypeScript', 'MongoDB', 'Figma'],
+  hardWorker: true,
+  fastLearner: true,
+  problemResolver: true,
 
-    hireable: function() {
-        return (
-            this.hardWorker &&
-            this.problemResolver &&
-            this.skills.length >= 5
-        );
-    },
-  };
-`;
+  hireable: function () {
+    return (
+      this.hardWorker &&
+      this.problemResolver &&
+      this.skills.length >= 5
+    );
+  },
+};`;

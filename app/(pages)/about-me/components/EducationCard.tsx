@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Card, CardBody } from '@heroui/card';
+import { Card } from '@heroui/card';
 import { IconExternalLink, IconSchool } from '@tabler/icons-react';
 import { Popover, PopoverTrigger, PopoverContent } from '@heroui/popover';
 
@@ -18,30 +18,24 @@ const EducationCard: FC<Props> = ({
 }) => {
   const cardContent = (
     <Card
-      className="bg-white/10 md:hover:scale-105"
-      isBlurred
+      className="bg-white/10 md:hover:scale-105 items-start gap-2 p-4"
       radius="sm"
-      style={{
-        border: '1px solid rgba(124, 193, 253, 0.2)',
-      }}
     >
-      <CardBody className="justify-center gap-1">
-        <div className="flex-center">
-          <h4 className="text-custom-secondary text-sm">{date}</h4>
-        </div>
-        <div className="flex items-center gap-4">
+      <div className="flex-center gap-3">
+        <span className="p-2 bg-white/[0.07] rounded-lg">
           {certificationUrl ? (
-            <IconExternalLink stroke={1} color="#C084FC" size={48} />
+            <IconExternalLink stroke={1.5} color="#df87b0" size={28} />
           ) : (
-            <IconSchool stroke={1} color="#C084FC" size={48} />
+            <IconSchool stroke={1.5} color="#df87b0" size={28} />
           )}
+        </span>
+        <h3 className="text-faint text-lg font-medium">{title}</h3>
+      </div>
 
-          <div className="flex flex-col justify-center gap-1">
-            <h3 className="text-faint text-lg font-medium">{title}</h3>
-            <p className="text-dimmed text-md">{institution}</p>
-          </div>
-        </div>
-      </CardBody>
+      <div className="flex items-center justify-between w-full">
+        <p className="text-dimmed text-base">{institution}</p>
+        <time className="text-secondary-400 text-sm">{date}</time>
+      </div>
     </Card>
   );
 
