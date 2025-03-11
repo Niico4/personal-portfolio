@@ -9,9 +9,13 @@ import {
   IconBrandLinkedin,
   IconMail,
 } from '@tabler/icons-react';
+import dynamic from 'next/dynamic';
 
 import SocialButton from '../components/SocialButton';
-import ProfileCard from '../components/ProfileCard';
+
+const ProfileCard = dynamic(() => import('../components/ProfileCard'), {
+  ssr: false,
+});
 
 export const grandstander = Grandstander({
   subsets: ['latin'],

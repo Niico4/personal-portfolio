@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState } from 'react';
-import { useMediaQuery } from '@uidotdev/usehooks';
 import Image from 'next/image';
 import { Grandstander } from 'next/font/google';
 import { useParams, useRouter } from 'next/navigation';
@@ -17,6 +16,7 @@ import {
   IconExternalLink,
   IconLoader,
 } from '@tabler/icons-react';
+import { useMediaQuery } from '@uidotdev/usehooks';
 
 import useProjects from '@/hooks/useProjects';
 import ErrorSection from '@/components/common/ErrorSection';
