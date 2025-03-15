@@ -1,18 +1,11 @@
-import React from 'react';
+import React, { FC } from 'react';
 import Link from 'next/link';
 import { Button } from '@heroui/button';
 import { Tooltip } from '@heroui/tooltip';
-import { Icon } from '@tabler/icons-react';
 
-const SocialButton = ({
-  icon: Icon,
-  label,
-  href,
-}: {
-  icon: Icon;
-  label: string;
-  href: string;
-}) => (
+import { SocialLinkProps } from '../types/profile';
+
+const SocialLink: FC<SocialLinkProps> = ({ label, href, icon: Icon }) => (
   <Tooltip content={label} color="secondary" placement="bottom" showArrow>
     <Button
       as={Link}
@@ -27,4 +20,4 @@ const SocialButton = ({
   </Tooltip>
 );
 
-export default SocialButton;
+export default SocialLink;

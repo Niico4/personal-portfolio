@@ -21,7 +21,7 @@ export const grandstander = Grandstander({
 const RecentProjectsSection = () => {
   const { projects, loading, error } = useProjects();
 
-  if (loading)
+  if (loading) {
     return (
       <section className="flex-col-center gap-6 mt-40">
         <LoaderGhost />
@@ -32,8 +32,9 @@ const RecentProjectsSection = () => {
         </h4>
       </section>
     );
+  }
 
-  if (error || projects.length === 0)
+  if (!loading && (error || projects.length === 0))
     return (
       <ErrorSection
         error={error ?? '¡Ups! No tenemos proyectos disponibles por ahora'}

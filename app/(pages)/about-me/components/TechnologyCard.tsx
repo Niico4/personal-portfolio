@@ -1,12 +1,9 @@
 import React, { FC } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
-interface Props {
-  label: string;
-  icon: (props: React.SVGProps<SVGSVGElement>) => React.JSX.Element;
-}
+import { TechnologyCardProps } from '../types/about-me';
 
-const TechnologyCard: FC<Props> = ({ label, icon: Icon }) => {
+const TechnologyCard: FC<TechnologyCardProps> = ({ label, icon: Icon }) => {
   const [isHovered, setIsHovered] = React.useState(false);
   return (
     <motion.div

@@ -16,7 +16,7 @@ import {
   IconExternalLink,
   IconLoader,
 } from '@tabler/icons-react';
-import { useMediaQuery } from '@uidotdev/usehooks';
+import { useMediaQuery } from 'usehooks-ts';
 
 import useProjects from '@/hooks/useProjects';
 import ErrorSection from '@/components/common/ErrorSection';

@@ -3,14 +3,9 @@ import { Card } from '@heroui/card';
 import { IconExternalLink, IconSchool } from '@tabler/icons-react';
 import { Popover, PopoverTrigger, PopoverContent } from '@heroui/popover';
 
-interface Props {
-  title: string;
-  date: string;
-  institution: string;
-  certificationUrl?: string;
-}
+import { EducationCardProps } from '../types/about-me';
 
-const EducationCard: FC<Props> = ({
+const EducationCard: FC<EducationCardProps> = ({
   title,
   date,
   institution,

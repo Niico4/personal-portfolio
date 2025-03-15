@@ -1,15 +1,9 @@
-'use client';
-
 import React from 'react';
-import dynamic from 'next/dynamic';
 import { Project } from '@prisma/client';
 
 import { EnvConfig } from '@/config/env.config';
 import SubTitle from '@/components/common/SubTitle';
-
-const ProjectCard = dynamic(() => import('@/components/common/ProjectCard'), {
-  ssr: false,
-});
+import ProjectCard from '@/components/common/ProjectCard';
 
 const ProjectsList = ({ projects }: { projects: Project[] }) => {
   return (

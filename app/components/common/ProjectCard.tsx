@@ -11,7 +11,7 @@ import {
   IconInfoCircle,
   IconLoader,
 } from '@tabler/icons-react';
-import { useMediaQuery } from '@uidotdev/usehooks';
+import { useMediaQuery } from 'usehooks-ts';
 
 interface Props {
   title: string;
@@ -29,7 +29,7 @@ const ProjectCard: FC<Props> = ({
   webSite,
 }) => {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
-  const isSmallDevice = useMediaQuery('only screen and (max-width : 375px)');
+  const isSmallDevice = useMediaQuery('(max-width : 375px)');
 
   const router = useRouter();
 
@@ -50,7 +50,9 @@ const ProjectCard: FC<Props> = ({
               variant="flat"
               radius="sm"
               size={isSmallDevice ? 'sm' : 'md'}
-              startContent={<IconLoader stroke={1.5} size={20} />}
+              startContent={
+                <IconLoader stroke={1.5} size={isSmallDevice ? 18 : 24} />
+              }
             >
               En Desarrollo
             </Chip>
@@ -68,6 +70,7 @@ const ProjectCard: FC<Props> = ({
             alt={title}
             onLoad={() => setIsImageLoaded(true)}
             className="w-full h-full object-cover transition-all opacity-85 hover:scale-110"
+            priority
           />
         </Skeleton>
       </CardHeader>
@@ -85,7 +88,9 @@ const ProjectCard: FC<Props> = ({
               radius="sm"
               variant="flat"
               color="secondary"
-              startContent={<IconExternalLink stroke={1.5} />}
+              startContent={
+                <IconExternalLink stroke={1.5} size={isSmallDevice ? 20 : 24} />
+              }
               aria-label="Sitio Web"
               target="_blank"
               rel="noopener noreferrer"
@@ -101,7 +106,9 @@ const ProjectCard: FC<Props> = ({
             variant="flat"
             color="default"
             aria-label="Ver Detalles"
-            startContent={<IconInfoCircle stroke={1.5} />}
+            startContent={
+              <IconInfoCircle stroke={1.5} size={isSmallDevice ? 20 : 24} />
+            }
             size={isSmallDevice ? 'sm' : 'md'}
             onPress={() => router.push(`/portfolio/${image}`)}
           >

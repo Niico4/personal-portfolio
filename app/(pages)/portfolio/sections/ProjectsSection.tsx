@@ -28,7 +28,7 @@ const ProjectsSection = () => {
       </section>
     );
 
-  if (error || projects.length === 0)
+  if (!loading && (error || projects.length === 0))
     return (
       <ErrorSection
         error={error ?? '¡Ups! No tenemos proyectos disponibles por ahora'}
