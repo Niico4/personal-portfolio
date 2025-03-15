@@ -1,12 +1,8 @@
 import React, { FC } from 'react';
 
-interface Props {
-  date: string;
-  title: string;
-  description: string;
-}
+import { TimeLineProps } from '../types/about-me';
 
-const Timeline: FC<Props> = ({ title, date, description }) => {
+const Timeline: FC<TimeLineProps> = ({ title, date, description }) => {
   return (
     <ol className="relative border-s border-gray-500">
       <li className="mb-10 ms-4">

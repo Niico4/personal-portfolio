@@ -89,7 +89,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .card-bg {
-  @apply bg-card border border-white/10;
+  @apply bg-card border border-white/[0.06];
 }
 
 .timeline-time {

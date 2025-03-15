@@ -1,4 +1,6 @@
-export const EXPERIENCE_LIST = [
+import { EducationCardProps, TimeLineProps } from '../types/about-me';
+
+export const EXPERIENCE_LIST: TimeLineProps[] = [
   {
     title: 'Frontend Developer – Refactorización y Optimización',
     date: '2023 - 2023',
@@ -13,7 +15,7 @@ export const EXPERIENCE_LIST = [
   },
 ];
 
-export const EDUCATION_LIST = [
+export const EDUCATION_LIST: EducationCardProps[] = [
   {
     institution: 'SENA',
     title: 'Análisis y Desarrollo de Software',

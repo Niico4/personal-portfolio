@@ -2,20 +2,12 @@
 
 import React from 'react';
 import { Grandstander } from 'next/font/google';
-import CountUp from 'react-countup';
 import { Card, CardBody } from '@heroui/card';
-import {
-  IconBrandGithub,
-  IconBrandLinkedin,
-  IconMail,
-} from '@tabler/icons-react';
-import dynamic from 'next/dynamic';
 
-import SocialButton from '../components/SocialButton';
-
-const ProfileCard = dynamic(() => import('../components/ProfileCard'), {
-  ssr: false,
-});
+import SocialLink from '../components/SocialLink';
+import ProfileCard from '../components/ProfileCard';
+import StatCard from '../components/StatCard';
+import { PROJECTS_COMPLETED, SOCIAL_LINKS } from '../data/profile';
 
 export const grandstander = Grandstander({
   subsets: ['latin'],
@@ -23,41 +15,20 @@ export const grandstander = Grandstander({
 });
 
 const HeroSection = () => {
+  const currentYear = new Date().getFullYear();
+  const yearOfExperience = currentYear - 2022;
+
   return (
     <section className="flex flex-col gap-6">
       <ProfileCard />
 
       <article className="flex flex-col gap-6 md:flex-row">
-        <Card className="flex-1 card-bg p-1 md:p-4" isBlurred>
-          <CardBody>
-            <span
-              className={`${grandstander.className} text-primary-200 text-4xl font-semibold`}
-            >
-              +
-              <CountUp
-                end={new Date().getFullYear() - 2022}
-                start={0}
-                duration={2.5}
-              />
-            </span>
-            <p className="text-2xl font-medium text-default">
-              Años de Experiencia
-            </p>
-          </CardBody>
-        </Card>
-
-        <Card className="flex-1 card-bg p-1 md:p-4" isBlurred>
-          <CardBody>
-            <span
-              className={`${grandstander.className} text-primary-200 text-4xl font-semibold`}
-            >
-              +<CountUp end={20} start={0} duration={2} />
-            </span>
-            <p className="text-2xl font-medium text-default">
-              Proyectos Realizados
-            </p>
-          </CardBody>
-        </Card>
+        <StatCard
+          label="Años de Experiencia"
+          duration={3}
+          value={yearOfExperience}
+        />
+        <StatCard label="Proyectos Realizados" value={PROJECTS_COMPLETED} />
 
         <Card className="card-bg p-1 md:p-4" isBlurred>
           <CardBody>
@@ -67,21 +38,9 @@ const HeroSection = () => {
               ¿Hablamos?
             </span>
             <div className="flex-center md:gap-1 lg:gap-3">
-              <SocialButton
-                href="mailto:nicogarzon131@gmail.com"
-                icon={IconMail}
-                label="Gmail"
-              />
-              <SocialButton
-                href="https://www.linkedin.com/in/nicolasgarzon131/"
-                icon={IconBrandLinkedin}
-                label="LinkedIn"
-              />
-              <SocialButton
-                href="https://github.com/Niico4"
-                icon={IconBrandGithub}
-                label="GitHub"
-              />
+              {SOCIAL_LINKS.map(({ label, href, icon }, index) => (
+                <SocialLink key={index} href={href} icon={icon} label={label} />
+              ))}
             </div>
           </CardBody>
         </Card>

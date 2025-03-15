@@ -1,14 +1,13 @@
 import React, { FC } from 'react';
 import { Card, CardBody, CardHeader } from '@heroui/card';
-import { Icon } from '@tabler/icons-react';
 
-interface Props {
-  title: string;
-  description: string;
-  icon: Icon;
-}
+import { SoftSkillProps } from '../types/profile';
 
-const SoftSkillCard: FC<Props> = ({ title, description, icon: Icon }) => {
+const SoftSkillCard: FC<SoftSkillProps> = ({
+  title,
+  description,
+  icon: Icon,
+}) => {
   return (
     <Card
       className="p-6 gap-4 transition-all duration-500 backdrop-blur-md bg-white/[0.07] border border-white/[0.08] hover:bg-white/[0.12] hover:scale-[1.02]"
