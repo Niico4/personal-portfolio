@@ -10,10 +10,8 @@ const Timeline: FC<TimeLineProps> = ({ title, date, description }) => {
         <time className="mb-1 text-sm font-normal leading-none text-secondary-400">
           {date}
         </time>
-        <h3 className="max-md:text-xl text-lg mb-3 font-semibold text-title">
-          {title}
-        </h3>
-        <p className="mb-4 text-base font-normal text-dimmed">{description}</p>
+        <h3 className="text-xl mb-3 font-semibold text-subtitle/95">{title}</h3>
+        <p className="mb-4 text-base font-normal text-default">{description}</p>
       </li>
     </ol>
   );

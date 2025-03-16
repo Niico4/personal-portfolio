@@ -12,18 +12,14 @@ const grandstander = Grandstander({
 
 const StatCard: FC<StatCardProps> = ({ label, value, duration = 2 }) => {
   return (
-    <Card
-      className="flex-1 card-bg p-1 md:p-4"
-      isBlurred
-      suppressHydrationWarning
-    >
+    <Card className="flex-1 card-bg p-1 md:p-4" isBlurred>
       <CardBody>
         <span
           className={`${grandstander.className} text-primary-200 text-4xl font-semibold`}
         >
           +<CountUp end={value} start={0} duration={duration} />
         </span>
-        <p className="text-2xl font-medium text-default">{label}</p>
+        <p className="text-2xl font-medium text-soft">{label}</p>
       </CardBody>
     </Card>
   );

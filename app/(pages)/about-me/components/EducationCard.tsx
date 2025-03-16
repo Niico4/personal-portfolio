@@ -13,23 +13,23 @@ const EducationCard: FC<EducationCardProps> = ({
 }) => {
   const cardContent = (
     <Card
-      className="bg-white/10 md:hover:scale-105 items-start gap-2 p-4"
+      className="bg-purple-300/[0.1] border border-purple-400/5 md:hover:scale-105 items-start gap-2 p-4"
       radius="sm"
     >
       <div className="flex-center gap-3">
         <span className="p-2 bg-white/[0.07] rounded-lg">
           {certificationUrl ? (
-            <IconExternalLink stroke={1.5} color="#df87b0" size={28} />
+            <IconExternalLink stroke={1.5} color="#a78bfa" size={28} />
           ) : (
-            <IconSchool stroke={1.5} color="#df87b0" size={28} />
+            <IconSchool stroke={1.5} color="#a78bfa" size={28} />
           )}
         </span>
-        <h3 className="text-faint text-lg font-medium">{title}</h3>
+        <h3 className="text-subtitle/95 text-lg font-semibold">{title}</h3>
       </div>
 
       <div className="flex items-center justify-between w-full">
-        <p className="text-dimmed text-base">{institution}</p>
-        <time className="text-secondary-400 text-sm">{date}</time>
+        <p className="text-default text-sm">{institution}</p>
+        <time className="text-secondary-200 text-sm">{date}</time>
       </div>
     </Card>
   );

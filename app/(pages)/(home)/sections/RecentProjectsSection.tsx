@@ -26,7 +26,7 @@ const RecentProjectsSection = () => {
       <section className="flex-col-center gap-6 mt-40">
         <LoaderGhost />
         <h4
-          className={`${grandstander.className} text-2xl text-center text-faint`}
+          className={`${grandstander.className} text-2xl text-center text-subtitle`}
         >
           Invocando mis creaciones...
         </h4>
@@ -43,8 +43,8 @@ const RecentProjectsSection = () => {
     );
 
   return (
-    <section className="flex-col-center gap-6">
-      <SubTitle title="Mis proyectos destacados" />
+    <section className="flex flex-col justify-center gap-8">
+      <SubTitle title="Mis proyectos destacados" className="text-center" />
 
       <article className="grid gap-8 sm:grid-cols-2 sm:gap-5">
         {projects

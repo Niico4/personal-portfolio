@@ -22,7 +22,7 @@ const ErrorSection = ({
     <section className="grid gap-6 md:grid-cols-2 md:gap-0 items-center justify-center w-11/12 mx-auto">
       <div className="flex flex-col items-center justify-center gap-4 md:items-start">
         <p
-          className={`${grandstander.className} text-3xl md:text-5xl max-md:text-center font-bold text-faint z-10`}
+          className={`${grandstander.className} text-3xl md:text-5xl max-md:text-center font-bold text-subtitle z-10`}
         >
           {error}
         </p>

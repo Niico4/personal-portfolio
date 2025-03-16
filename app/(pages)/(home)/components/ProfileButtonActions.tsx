@@ -29,7 +29,7 @@ const ButtonActions = () => {
           target="_blank"
           rel="noopener noreferrer"
           color="primary"
-          variant="faded"
+          variant="solid"
           radius="sm"
           aria-label="Currículum"
           size={buttonSize}
@@ -55,7 +55,7 @@ const ButtonActions = () => {
           aria-label="Sobre mi"
           size={buttonSize}
           startContent={<IconUserFilled size={iconSize} />}
-          className="text-primary-200"
+          className="text-primary-300"
         >
           Sobre mi
         </Button>
