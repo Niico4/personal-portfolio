@@ -15,7 +15,7 @@ const SubTitle = ({
 }) => {
   return (
     <h2
-      className={`${grandstander.className} ${className} text-default text-4xl min-[425px]:text-4xl max-sm:text-center md:text-4xl font-semibold z-20`}
+      className={`${grandstander.className} ${className} text-subtitle text-4xl min-[425px]:text-4xl max-sm:text-center md:text-4xl font-semibold z-20`}
     >
       {title}
     </h2>

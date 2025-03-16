@@ -17,7 +17,7 @@ const SoftSkillCard: FC<SoftSkillProps> = ({
         <div className="rounded-xl bg-white/[0.08] p-2.5 ring-1 ring-white/[0.06]">
           <Icon size={24} color="#ffffff" stroke={1.5} className="opacity-80" />
         </div>
-        <h3 className="text-2xl font-semibold text-faint">{title}</h3>
+        <h3 className="text-2xl font-semibold text-subtitle/90">{title}</h3>
       </CardHeader>
       <CardBody className="p-0">
         <p className="text-sm md:text-base text-soft leading-relaxed">

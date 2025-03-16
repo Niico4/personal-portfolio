@@ -25,7 +25,7 @@ const GitHubContribution = () => {
       <div className="flex items-center justify-center order-2">
         <Select
           color="secondary"
-          variant="bordered"
+          variant="faded"
           aria-label="Seleccionar el año"
           size="sm"
           className="w-2/5 md:w-[15%] min-[1500px]:w-[10%]"

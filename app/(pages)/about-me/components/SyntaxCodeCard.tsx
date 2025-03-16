@@ -21,7 +21,7 @@ const SyntaxCodeCard = () => {
       <CardHeader>
         <div className="absolute top-0 left-0 w-full">
           <div className="relative flex-center py-2 px-2 bg-white/[0.09]">
-            <span className="text-sm text-muted">developer.ts</span>
+            <span className="text-sm text-soft">developer.ts</span>
             <div className="absolute flex-center gap-2 left-2">
               <span className="rounded-full bg-red-500/85 size-3" />
               <span className="rounded-full bg-yellow-500/85 size-3" />

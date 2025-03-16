@@ -38,13 +38,16 @@ const ProjectCard: FC<Props> = ({
 
   return (
     <Card
-      className="project-card-animated border border-white/10 p-3 gap-5"
+      className="relative border border-white/10 overflow-hidden backdrop-blur-lg"
+      isBlurred
       fullWidth
       radius="sm"
     >
-      <CardHeader className="overflow-hidden rounded-lg aspect-video p-0">
+      <div className="absolute inset-0 -z-10 h-full w-full items-center px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)] opacity-[0.06]"></div>
+
+      <CardHeader className="overflow-hidden aspect-video h-[220px] p-0 z-20">
         {isDev && (
-          <div className="absolute top-0 left-0 right-0 flex items-center justify-end p-2 z-10 w-full backdrop-blur-sm bg-white/5">
+          <div className="absolute top-0 left-0 right-0 flex items-center justify-end p-2 z-10 w-full backdrop-blur-md bg-white/5">
             <Chip
               color="warning"
               variant="flat"
@@ -64,8 +67,8 @@ const ProjectCard: FC<Props> = ({
           classNames={{ content: 'h-full w-full' }}
         >
           <Image
-            width={440}
-            height={250}
+            width={390}
+            height={220}
             src={srcImage}
             alt={title}
             onLoad={() => setIsImageLoaded(true)}
@@ -75,8 +78,8 @@ const ProjectCard: FC<Props> = ({
         </Skeleton>
       </CardHeader>
 
-      <CardBody className="flex-1 gap-3 p-0">
-        <h3 className="text-faint font-bold text-[28px] lg:text-3xl">
+      <CardBody className="flex-1 gap-4 backdrop-blur-sm bg-white/[0.06] z-20">
+        <h3 className="text-default font-bold text-[28px] lg:text-3xl">
           {title}
         </h3>
 
@@ -86,7 +89,7 @@ const ProjectCard: FC<Props> = ({
               as={Link}
               href={webSite}
               radius="sm"
-              variant="flat"
+              variant="solid"
               color="secondary"
               startContent={
                 <IconExternalLink stroke={1.5} size={isSmallDevice ? 20 : 24} />
@@ -94,7 +97,6 @@ const ProjectCard: FC<Props> = ({
               aria-label="Sitio Web"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-secondary-300"
               size={isSmallDevice ? 'sm' : 'md'}
             >
               Sitio Web

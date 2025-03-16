@@ -57,21 +57,18 @@ const ProjectDetail = () => {
 
   return (
     <section className="flex-col-center gap-4 md:gap-8">
-      <Card
-        className="card-bg p-2 md:p-8 w-full h-full aspect-video flex-center"
-        radius="sm"
-      >
-        <Skeleton isLoaded={isImageLoaded} className="rounded-lg">
+      <figure className="w-full card-bg p-2 md:p-4 rounded-lg">
+        <Skeleton isLoaded={isImageLoaded} className="w-full h-full rounded-lg">
           <Image
             src={srcImage}
-            width={900}
-            height={600}
+            width={800}
+            height={400}
             onLoad={() => setIsImageLoaded(true)}
             alt={project.image}
-            className="w-full h-full aspect-video object-cover rounded-lg opacity-90"
+            className="w-full object-cover rounded-lg opacity-85"
           />
         </Skeleton>
-      </Card>
+      </figure>
 
       <article className="grid grid-cols-1 lg:grid-cols-[1fr_30%] gap-4 md:gap-8">
         <Card
@@ -80,7 +77,7 @@ const ProjectDetail = () => {
         >
           <CardHeader className="max-sm:flex-col max-sm:items-start justify-between">
             <h2
-              className={`${grandstander.className} text-3xl md:text-5xl font-bold text-title`}
+              className={`${grandstander.className} text-3xl md:text-5xl font-bold text-subtitle/90`}
             >
               {project.title}
             </h2>
@@ -101,7 +98,7 @@ const ProjectDetail = () => {
             </Chip>
           </CardHeader>
           <CardBody>
-            <p className="text-muted text-medium md:text-lg">
+            <p className="text-default text-medium md:text-lg">
               {project.description}
             </p>
           </CardBody>
@@ -139,7 +136,7 @@ const ProjectDetail = () => {
 
         <Card className="justify-between card-bg p-4 gap-4" radius="sm">
           <div className="flex flex-col gap-3">
-            <h3 className="text-faint text-xl md:text-2xl font-semibold">
+            <h3 className="text-soft text-xl md:text-2xl font-semibold">
               Creado con:
             </h3>
             <div className="flex flex-wrap gap-2">
@@ -157,8 +154,8 @@ const ProjectDetail = () => {
           </div>
           <Button
             onPress={() => router.back()}
-            variant="faded"
-            color="primary"
+            variant="solid"
+            color="secondary"
             endContent={<IconArrowNarrowRight stroke={1.5} />}
             radius="sm"
           >

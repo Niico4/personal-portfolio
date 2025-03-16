@@ -25,14 +25,14 @@ const AboutMePage = () => {
       <section className="grid md:grid-cols-[1fr_40%] max-md:gap-14 gap-4 place-content-center">
         <Card className="card-bg p-1 md:p-4" radius="sm" isBlurred>
           <CardBody>
-            <p className="text-soft">
+            <p className="text-default">
               Me encanta crear cosas para la web. Más que solo verse bien,
               quiero que cada proyecto se sienta natural, fácil de usar y con su
               propia esencia. Disfruto cada paso, desde la idea hasta los
               últimos retoques, siempre buscando que quien lo use tenga la mejor
               experiencia. Me gusta aprender, experimentar y llevar todo un poco
               más allá, porque creo que{' '}
-              <span className="text-custom-primary">
+              <span className="text-primary-300">
                 la web está para conectar, inspirar y sorprender
               </span>
               .

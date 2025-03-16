@@ -11,7 +11,7 @@ const ProjectsList = ({ projects }: { projects: Project[] }) => {
       <article className="flex-col-center lg:mx-auto lg:w-4/5 gap-2">
         <SubTitle title="Mi Pequeño Universo Creativo" />
 
-        <p className="text-base md:text-lg text-center text-muted">
+        <p className="text-base md:text-lg text-center text-soft">
           Aquí están algunos de mis proyectos favoritos, creados con pasión,
           creatividad y muchas líneas de código{' '}
           <span className="text-primary-200">(¡pero con amor!)</span>.
