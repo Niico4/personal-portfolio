@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Card, CardBody } from '@heroui/card';
+import { Card } from '@heroui/card';
 import { Grandstander } from 'next/font/google';
 import CountUp from 'react-countup';
 
@@ -12,15 +12,17 @@ const grandstander = Grandstander({
 
 const StatCard: FC<StatCardProps> = ({ label, value, duration = 2 }) => {
   return (
-    <Card className="flex-1 card-bg p-1 md:p-4" isBlurred>
-      <CardBody>
-        <span
-          className={`${grandstander.className} text-primary-200 text-4xl font-semibold`}
-        >
-          +<CountUp end={value} start={0} duration={duration} />
-        </span>
-        <p className="text-2xl font-medium text-soft">{label}</p>
-      </CardBody>
+    <Card className="flex-1 flex-col-center card-bg p-4" radius="sm" isBlurred>
+      <span
+        className={`${grandstander.className} text-primary-200 text-4xl font-semibold`}
+      >
+        +<CountUp end={value} start={0} duration={duration} />
+      </span>
+      <p
+        className={`${grandstander.className} text-xl text-soft/95 tracking-wide`}
+      >
+        {label}
+      </p>
     </Card>
   );
 };

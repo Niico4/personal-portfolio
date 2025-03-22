@@ -1,66 +1,40 @@
 import React from 'react';
 import Link from 'next/link';
-import { Tooltip } from '@heroui/tooltip';
 import { Button } from '@heroui/button';
-import { useIsClient, useMediaQuery } from 'usehooks-ts';
-import { IconFileText, IconUserFilled } from '@tabler/icons-react';
+import { IconFileTextFilled, IconUserFilled } from '@tabler/icons-react';
 
 const ButtonActions = () => {
-  const isClient = useIsClient();
-  const isSmallDevice = useMediaQuery('(max-width : 370px)', {
-    initializeWithValue: isClient,
-  });
-
-  const buttonSize = isSmallDevice ? 'sm' : 'md';
-  const iconSize = isSmallDevice ? 20 : 24;
-
   return (
-    <>
-      <Tooltip
-        content="Ver mi Currículum Profesional"
-        placement="bottom"
-        radius="sm"
+    <div className="flex justify-center sm:justify-start items-center gap-4">
+      <Button
+        aria-label="Currículum"
+        as={Link}
         color="primary"
-        showArrow
+        href="https://drive.google.com/file/d/1q9klaXbJcQRWaY1JntJmqvvvuYI--5ln/view?usp=drive_link"
+        radius="sm"
+        rel="noopener noreferrer"
+        startContent={<IconFileTextFilled size={20} />}
+        size="sm"
+        target="_blank"
+        variant="solid"
       >
-        <Button
-          as={Link}
-          href="https://drive.google.com/file/d/1q9klaXbJcQRWaY1JntJmqvvvuYI--5ln/view?usp=drive_link"
-          target="_blank"
-          rel="noopener noreferrer"
-          color="primary"
-          variant="solid"
-          radius="sm"
-          aria-label="Currículum"
-          size={buttonSize}
-          startContent={<IconFileText stroke={1.5} size={iconSize} />}
-        >
-          Currículum
-        </Button>
-      </Tooltip>
+        Currículum
+      </Button>
 
-      <Tooltip
-        content="Conóceme un poco más"
-        placement="bottom"
-        radius="sm"
+      <Button
+        aria-label="Sobre mi"
+        as={Link}
+        className="text-primary-300"
         color="primary"
-        showArrow
+        href="/about-me"
+        radius="sm"
+        startContent={<IconUserFilled size={20} />}
+        size="sm"
+        variant="flat"
       >
-        <Button
-          as={Link}
-          href="/about-me"
-          color="primary"
-          radius="sm"
-          variant="flat"
-          aria-label="Sobre mi"
-          size={buttonSize}
-          startContent={<IconUserFilled size={iconSize} />}
-          className="text-primary-300"
-        >
-          Sobre mi
-        </Button>
-      </Tooltip>
-    </>
+        Sobre mi
+      </Button>
+    </div>
   );
 };
 

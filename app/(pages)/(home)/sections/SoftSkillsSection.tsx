@@ -1,14 +1,18 @@
 import React from 'react';
 
-import SubTitle from '@/components/common/SubTitle';
+import SubTitle from '@/components/common/Heading';
 
 import SoftSkillCard from '../components/SoftSkillCard';
 import { SOFT_SKILLS } from '../data/profile';
 
 const SoftSkills = () => {
   return (
-    <section className="flex flex-col gap-5">
-      <SubTitle title="¿Cómo trabajo?" />
+    <section className="flex flex-col gap-6">
+      <SubTitle
+        type="h2"
+        title="¿Cómo trabajo?"
+        className="text-center sm:text-start"
+      />
 
       <div className="grid md:grid-cols-2 gap-4">
         {SOFT_SKILLS.map(({ title, description, icon }, index) => (

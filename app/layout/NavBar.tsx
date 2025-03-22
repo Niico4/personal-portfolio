@@ -12,6 +12,9 @@ import {
   NavbarMenuToggle,
 } from '@heroui/navbar';
 
+import { SOCIAL_LINKS } from '@/(pages)/(home)/data/profile';
+import SocialLink from '@/(pages)/(home)/components/SocialLink';
+
 import LinkItem from './components/navbar/LinkItem';
 
 const mogra = Mogra({
@@ -44,14 +47,17 @@ const NavBar = () => {
   return (
     <Navbar
       onMenuOpenChange={setIsMenuOpen}
-      className="bg-[#5353534c] rounded-lg"
+      className="bg-white/[0.04] rounded-full mx-auto"
+      maxWidth="full"
     >
       <NavbarContent>
-        <NavbarBrand>
-          <Link href="/" className={`${mogra.className} text-4xl text-animate`}>
-            <span className="text-title">{'<'}</span>
-            Niico
-            <span className="text-title">{'/>'}</span>
+        <NavbarBrand className="hidden sm:block">
+          <Link
+            href="/"
+            className={`${mogra.className} text-4xl text-animate`}
+            aria-label="Logo"
+          >
+            N
           </Link>
         </NavbarBrand>
 
@@ -61,8 +67,8 @@ const NavBar = () => {
         />
       </NavbarContent>
 
-      <NavbarContent className="hidden sm:flex gap-4" justify="end">
-        <div className="flex-center gap-3 px-4 py-2 rounded-lg bg-white/5">
+      <NavbarContent className="hidden sm:flex gap-4" justify="center">
+        <div className="flex-center gap-3 px-4 py-2 rounded-lg ">
           {navbarItems.map(({ href, label }, index) => (
             <LinkItem
               key={index}
@@ -72,6 +78,16 @@ const NavBar = () => {
             />
           ))}
         </div>
+      </NavbarContent>
+
+      <NavbarContent justify="end">
+        <ul className="flex-center gap-3 mb-1 bg-white/5 rounded-full px-2 py-1">
+          {SOCIAL_LINKS.map(({ label, href, icon }, index) => (
+            <li key={index}>
+              <SocialLink href={href} icon={icon} label={label} />
+            </li>
+          ))}
+        </ul>
       </NavbarContent>
 
       <NavbarMenu className="justify-evenly items-center top-0 bottom-0 !h-auto">

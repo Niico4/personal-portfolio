@@ -13,9 +13,7 @@ const SyntaxCodeCard = () => {
   const isSmallDevice = useMediaQuery('only screen and (max-width : 768px)', {
     initializeWithValue: isClient,
   });
-  const is1440px = useMediaQuery('only screen and (width: 1440px)', {
-    initializeWithValue: isClient,
-  });
+
   return (
     <Card className="bg-white/[0.08]" radius="sm" isBlurred>
       <CardHeader>
@@ -23,9 +21,9 @@ const SyntaxCodeCard = () => {
           <div className="relative flex-center py-2 px-2 bg-white/[0.09]">
             <span className="text-sm text-soft">developer.ts</span>
             <div className="absolute flex-center gap-2 left-2">
-              <span className="rounded-full bg-red-500/85 size-3" />
-              <span className="rounded-full bg-yellow-500/85 size-3" />
-              <span className="rounded-full bg-green-500/85 size-3" />
+              <span className="rounded-full bg-red-500/85 size-3 hover:cursor-pointer" />
+              <span className="rounded-full bg-yellow-500/85 size-3 hover:cursor-pointer" />
+              <span className="rounded-full bg-green-500/85 size-3 hover:cursor-pointer" />
             </div>
           </div>
         </div>
@@ -36,7 +34,7 @@ const SyntaxCodeCard = () => {
           style={nightOwl}
           customStyle={{
             backgroundColor: 'transparent',
-            fontSize: isSmallDevice || is1440px ? '12px' : '16px',
+            fontSize: isSmallDevice ? '12px' : '16px',
           }}
         >
           {CODE_STRING}

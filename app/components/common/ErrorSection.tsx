@@ -55,7 +55,7 @@ const ErrorSection = ({
           alt="Astronauta"
           width={500}
           height={300}
-          className="w-full h-auto aspect-square object-cover"
+          className="w-auto h-auto aspect-square object-cover"
           priority
         />
       </figure>

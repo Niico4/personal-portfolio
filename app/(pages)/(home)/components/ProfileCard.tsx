@@ -16,46 +16,44 @@ const grandstander = Grandstander({
 const ProfileCard = () => {
   return (
     <Card
-      className="grid items-center justify-center card-bg p-1 md:px-4 md:py-2 md:grid-cols-[30%_1fr]"
-      fullWidth
+      className="grid place-items-center card-bg gap-6 p-4 md:grid-cols-[30%_1fr]"
+      radius="sm"
       isBlurred
     >
-      <CardHeader className="flex-col-center">
-        <figure className="aspect-square max-w-52 mx-auto mb-5 profile-gradient rounded-full overflow-hidden">
+      <CardHeader className="flex-col-center gap-3 p-0">
+        <figure className="w-44 xl1440:w-44 lg:w-40 profile-gradient rounded-full overflow-hidden shadow-[inset_0_0_10px_rgba(255,255,255,0.2),_0_0_15px_rgba(255,255,255,0.3)]">
           <Image
-            src="/avatar.webp"
             alt="Avatar"
-            width={200}
-            height={200}
-            className="w-full h-full object-cover hover:scale-105 transition-all"
+            className="w-auto h-auto object-cover backdrop-blur-sm p-1 bg-black/15 rounded-full border-2 border-white/20"
+            src="/avatar.webp"
+            height={208}
+            width={208}
             priority
           />
         </figure>
 
-        <ul className="flex flex-col gap-2">
+        <ul className="flex flex-col justify-center items-start gap-[2px]">
           {PROFILE_DETAILS.map(({ label, icon }, index) => (
             <ProfileInfoItem key={index} label={label} icon={icon} />
           ))}
         </ul>
       </CardHeader>
-      <CardBody className="gap-4 md:gap-6">
-        <div className="flex flex-col gap-3">
+      <CardBody className="gap-5 p-0">
+        <div className="flex flex-col gap-2">
           <h1
-            className={`${grandstander.className} text-title text-5xl text-center font-semibold md:text-start md:text-6xl`}
+            className={`${grandstander.className} text-title text-5xl text-center font-medium md:text-start`}
           >
             ¡Hola!, soy <span className="text-animate">Nicolas</span>
           </h1>
 
-          <p className="text-base lg:text-xl text-default font-light">
+          <p className="text-base text-default font-light text-pretty tracking-wide">
             Diseño y desarrollo experiencias web fluidas, atractivas y
             funcionales. Disfruto combinando creatividad y tecnología para que
             cada proyecto tenga su propia esencia y conecte con quien lo visite.
           </p>
         </div>
 
-        <div className="flex max-sm:justify-center items-center gap-4">
-          <ButtonActions />
-        </div>
+        <ButtonActions />
       </CardBody>
     </Card>
   );

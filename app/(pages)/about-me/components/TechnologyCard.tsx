@@ -9,7 +9,7 @@ const TechnologyCard: FC<TechnologyCardProps> = ({ label, icon: Icon }) => {
     <motion.div
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
-      className="relative flex-center w-20 md:w-24 h-20 md:h-24 p-4 aspect-square bg-slate-800 border border-slate-600 rounded-md "
+      className="relative flex-center size-20 md:size-24 p-4 aspect-square bg-slate-800 border border-slate-600 rounded-md "
     >
       <Icon className="size-full" />
       <AnimatePresence>

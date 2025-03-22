@@ -11,8 +11,6 @@ import {
 
 import { SocialLinkProps, SoftSkillProps } from '../types/profile';
 
-export const PROJECTS_COMPLETED = 20;
-
 export const PROFILE_DETAILS = [
   {
     label: 'Desarrollador Frontend',
