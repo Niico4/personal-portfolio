@@ -11,7 +11,7 @@ import useProjects from '@/hooks/useProjects';
 import ProjectCard from '@/components/common/ProjectCard';
 import LoaderGhost from '@/components/common/LoaderGhost';
 import ErrorSection from '@/components/common/ErrorSection';
-import SubTitle from '@/components/common/SubTitle';
+import SubTitle from '@/components/common/Heading';
 
 export const grandstander = Grandstander({
   subsets: ['latin'],
@@ -44,7 +44,11 @@ const RecentProjectsSection = () => {
 
   return (
     <section className="flex flex-col justify-center gap-8">
-      <SubTitle title="Mis proyectos destacados" className="text-center" />
+      <SubTitle
+        type="h2"
+        title="Mis proyectos destacados"
+        className="text-center"
+      />
 
       <article className="grid gap-8 sm:grid-cols-2 sm:gap-5">
         {projects
@@ -67,7 +71,9 @@ const RecentProjectsSection = () => {
           href="/portfolio"
           variant="light"
           color="primary"
-          endContent={<IconArrowNarrowRight />}
+          className="text-primary-300"
+          radius="full"
+          endContent={<IconArrowNarrowRight stroke={1.5} size={20} />}
         >
           Ver más
         </Button>

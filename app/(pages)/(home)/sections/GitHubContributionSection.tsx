@@ -2,58 +2,55 @@
 
 import React, { useState } from 'react';
 import GitHubCalendar from 'react-github-calendar';
-import { Select, SelectItem } from '@heroui/select';
+import { Tab, Tabs } from '@heroui/tabs';
 
-import SubTitle from '@/components/common/SubTitle';
+import SubTitle from '@/components/common/Heading';
 
 const GitHubContribution = () => {
   const [selectedYear, setSelectedYear] = useState(2023);
 
   const currentYear = new Date().getFullYear();
   const years = Array.from(
-    { length: currentYear - 2022 + 1 },
-    (_, i) => 2022 + i
+    { length: currentYear - 2023 + 1 },
+    (_, i) => 2023 + i
   );
 
-  const handleYearChange = (event: { target: { value: string } }) => {
-    setSelectedYear(parseInt(event.target.value, 10));
-  };
-
   return (
-    <section className="flex flex-col gap-3">
-      <SubTitle title="Cada commit cuenta" className="mb-6" />
-      <div className="flex items-center justify-center order-2">
-        <Select
-          color="secondary"
-          variant="faded"
-          aria-label="Seleccionar el año"
-          size="sm"
-          className="w-2/5 md:w-[15%] min-[1500px]:w-[10%]"
-          placeholder={selectedYear.toString()}
-          value={selectedYear.toString()}
-          onChange={handleYearChange}
-        >
-          {years.map((year) => (
-            <SelectItem key={year} color="secondary" variant="flat">
-              {year.toString()}
-            </SelectItem>
-          ))}
-        </Select>
-      </div>
+    <section className="flex flex-col gap-4">
+      <SubTitle
+        type="h2"
+        title="Cada commit cuenta"
+        className="mb-2 text-center sm:text-start"
+      />
 
       <GitHubCalendar
         username="Niico4"
-        theme={{ dark: ['#373131', '#ea83fa'] }}
+        theme={{ dark: ['rgba(255, 255, 255, 0.08)', '#CD93FF'] }}
         colorScheme="dark"
         year={selectedYear}
         style={{
-          color: '#E6E6E7',
+          color: '#adadad',
           margin: '16px auto',
         }}
         labels={{
           totalCount: `{{count}} contribuciones en ${selectedYear}`,
         }}
       />
+
+      <div className="mx-auto">
+        <Tabs
+          aria-label="Seleccionar año"
+          color="secondary"
+          selectedKey={selectedYear.toString()}
+          onSelectionChange={(key) =>
+            setSelectedYear(parseInt(key as string, 10))
+          }
+        >
+          {years.map((year) => (
+            <Tab key={year.toString()} title={year.toString()}></Tab>
+          ))}
+        </Tabs>
+      </div>
     </section>
   );
 };

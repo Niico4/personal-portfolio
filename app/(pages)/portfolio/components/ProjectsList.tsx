@@ -2,14 +2,14 @@ import React from 'react';
 import { Project } from '@prisma/client';
 
 import { EnvConfig } from '@/config/env.config';
-import SubTitle from '@/components/common/SubTitle';
+import SubTitle from '@/components/common/Heading';
 import ProjectCard from '@/components/common/ProjectCard';
 
 const ProjectsList = ({ projects }: { projects: Project[] }) => {
   return (
     <section className="flex flex-col justify-center gap-10">
-      <article className="flex-col-center lg:mx-auto lg:w-4/5 gap-2">
-        <SubTitle title="Mi Pequeño Universo Creativo" />
+      <article className="flex-col-center lg:mx-auto lg:w-[90%] gap-4">
+        <SubTitle title="Mi Pequeño Universo Creativo" type="h1" />
 
         <p className="text-base md:text-lg text-center text-soft">
           Aquí están algunos de mis proyectos favoritos, creados con pasión,

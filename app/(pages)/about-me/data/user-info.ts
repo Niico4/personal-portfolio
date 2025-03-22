@@ -3,13 +3,13 @@ import { EducationCardProps, TimeLineProps } from '../types/about-me';
 export const EXPERIENCE_LIST: TimeLineProps[] = [
   {
     title: 'Frontend Developer – Refactorización y Optimización',
-    date: '2023 - 2023',
+    date: '2023',
     description:
       'Formé parte de un equipo encargado de refactorizar una aplicación para mejorar su rendimiento y calidad, colaborando en la optimización del código para hacerlo más eficiente y mantenible. También trabajé junto a otros desarrolladores en la fase inicial de una aplicación diseñada para optimizar un sistema de entregas, contribuyendo a una base sólida para su escalabilidad y funcionamiento.',
   },
   {
     title: 'Frontend Developer - UI/UX & Animaciones',
-    date: '2022 - 2023',
+    date: '2023 - 2024',
     description:
       'Trabajé en el desarrollo y optimización de interfaces frontend, mejorando la experiencia del usuario con soluciones creativas, ajustes en el diseño y animaciones interactivas. Implementé efectos visuales para hacer la interfaz más atractiva y funcional, logrando una navegación fluida e intuitiva.',
   },

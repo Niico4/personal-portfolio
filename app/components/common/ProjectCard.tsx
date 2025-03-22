@@ -45,7 +45,7 @@ const ProjectCard: FC<Props> = ({
     >
       <div className="absolute inset-0 -z-10 h-full w-full items-center px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)] opacity-[0.06]"></div>
 
-      <CardHeader className="overflow-hidden aspect-video h-[220px] p-0 z-20">
+      <CardHeader className="overflow-hidden h-[150px] sm:h-[200px] p-0">
         {isDev && (
           <div className="absolute top-0 left-0 right-0 flex items-center justify-end p-2 z-10 w-full backdrop-blur-md bg-white/5">
             <Chip
@@ -54,7 +54,7 @@ const ProjectCard: FC<Props> = ({
               radius="sm"
               size={isSmallDevice ? 'sm' : 'md'}
               startContent={
-                <IconLoader stroke={1.5} size={isSmallDevice ? 18 : 24} />
+                <IconLoader stroke={1.5} size={isSmallDevice ? 18 : 20} />
               }
             >
               En Desarrollo
@@ -78,8 +78,8 @@ const ProjectCard: FC<Props> = ({
         </Skeleton>
       </CardHeader>
 
-      <CardBody className="flex-1 gap-4 backdrop-blur-sm bg-white/[0.06] z-20">
-        <h3 className="text-default font-bold text-[28px] lg:text-3xl">
+      <CardBody className="flex-1 gap-3 backdrop-blur-sm bg-white/[0.06]">
+        <h3 className="text-default font-bold text-[28px] lg:text-2xl">
           {title}
         </h3>
 
@@ -89,11 +89,8 @@ const ProjectCard: FC<Props> = ({
               as={Link}
               href={webSite}
               radius="sm"
-              variant="solid"
               color="secondary"
-              startContent={
-                <IconExternalLink stroke={1.5} size={isSmallDevice ? 20 : 24} />
-              }
+              startContent={<IconExternalLink stroke={1.5} size={20} />}
               aria-label="Sitio Web"
               target="_blank"
               rel="noopener noreferrer"
@@ -108,13 +105,11 @@ const ProjectCard: FC<Props> = ({
             variant="flat"
             color="default"
             aria-label="Ver Detalles"
-            startContent={
-              <IconInfoCircle stroke={1.5} size={isSmallDevice ? 20 : 24} />
-            }
+            startContent={<IconInfoCircle stroke={1.5} size={20} />}
             size={isSmallDevice ? 'sm' : 'md'}
             onPress={() => router.push(`/portfolio/${image}`)}
           >
-            Ver Detalles
+            Detalles
           </Button>
         </div>
       </CardBody>
