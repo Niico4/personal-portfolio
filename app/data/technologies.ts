@@ -84,10 +84,6 @@ export const TECHNOLOGIES_LIST = [
     icon: Icon.AstroIcon,
   },
   {
-    label: 'Zustand',
-    icon: IconError404,
-  },
-  {
     label: 'shadcn/ui',
     icon: Icon.ShadcnIcon,
   },
