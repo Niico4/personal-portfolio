@@ -1,6 +1,7 @@
 import React from 'react';
-import ProjectDetailPage from '../components/ProjectDetail';
 import { Metadata } from 'next';
+
+import ProjectDetailPage from '../components/ProjectDetail';
 
 export async function generateMetadata(): Promise<Metadata> {
   return {

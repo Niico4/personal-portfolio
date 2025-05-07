@@ -1,4 +1,3 @@
-import Heading from '@/components/common/Heading';
 import { Button } from '@heroui/button';
 import { Card, CardHeader, CardBody, CardFooter } from '@heroui/card';
 import { IconExternalLink, IconBrandGithub } from '@tabler/icons-react';
@@ -6,6 +5,8 @@ import Link from 'next/link';
 import React from 'react';
 import { Project } from '@prisma/client';
 import { useMediaQuery } from 'usehooks-ts';
+
+import Heading from '@/components/common/Heading';
 
 const DescriptionCard = (
   project: Pick<Project, 'title' | 'description' | 'repository' | 'web_site'>

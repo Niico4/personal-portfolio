@@ -11,6 +11,7 @@ import { useMediaQuery } from 'usehooks-ts';
 import useProjects from '@/hooks/useProjects';
 import ErrorSection from '@/components/common/ErrorSection';
 import { TECHNOLOGIES_LIST } from '@/data/technologies';
+
 import DescriptionCard from '../components/DescriptionCard';
 
 type Feature = {
