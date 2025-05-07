@@ -53,7 +53,7 @@ const RecentProjectsSection = () => {
       <article className="grid gap-8 sm:grid-cols-2 sm:gap-5">
         {projects
           .slice(0, 2)
-          .map(({ image, title, isDev, web_site }, index) => (
+          .map(({ image, title, isDev, web_site, slug }, index) => (
             <ProjectCard
               key={index}
               title={title}
@@ -61,6 +61,7 @@ const RecentProjectsSection = () => {
               isDev={isDev}
               webSite={web_site ?? ''}
               urlEndpoint={EnvConfig.url_endpoint}
+              slug={slug}
             />
           ))}
       </article>

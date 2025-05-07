@@ -19,7 +19,7 @@ const ProjectsList = ({ projects }: { projects: Project[] }) => {
       </article>
 
       <div className="grid gap-8 sm:grid-cols-2 sm:gap-5">
-        {projects.map(({ image, title, isDev, web_site }, index) => (
+        {projects.map(({ image, title, isDev, web_site, slug }, index) => (
           <ProjectCard
             key={index}
             title={title}
@@ -27,6 +27,7 @@ const ProjectsList = ({ projects }: { projects: Project[] }) => {
             isDev={isDev}
             webSite={web_site ?? ''}
             urlEndpoint={EnvConfig.url_endpoint}
+            slug={slug}
           />
         ))}
       </div>

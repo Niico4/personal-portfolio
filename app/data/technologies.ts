@@ -1,4 +1,5 @@
 import * as Icon from '@/components/common/icons/index';
+import { IconError404 } from '@tabler/icons-react';
 
 export const TECHNOLOGIES_LIST = [
   {
@@ -80,5 +81,13 @@ export const TECHNOLOGIES_LIST = [
   {
     label: 'Astro',
     icon: Icon.AstroIcon,
+  },
+  {
+    label: 'Zustand',
+    icon: IconError404,
+  },
+  {
+    label: 'shadcn/ui',
+    icon: Icon.ShadcnIcon,
   },
 ];

@@ -19,6 +19,7 @@ interface Props {
   isDev: boolean;
   urlEndpoint: string;
   webSite?: string;
+  slug: string;
 }
 
 const ProjectCard: FC<Props> = ({
@@ -27,6 +28,7 @@ const ProjectCard: FC<Props> = ({
   title,
   urlEndpoint,
   webSite,
+  slug,
 }) => {
   const [isImageLoaded, setIsImageLoaded] = useState(false);
   const isSmallDevice = useMediaQuery('(max-width : 375px)');
@@ -107,7 +109,7 @@ const ProjectCard: FC<Props> = ({
             aria-label="Ver Detalles"
             startContent={<IconInfoCircle stroke={1.5} size={20} />}
             size={isSmallDevice ? 'sm' : 'md'}
-            onPress={() => router.push(`/portfolio/${image}`)}
+            onPress={() => router.push(`/portfolio/${slug}`)}
           >
             Detalles
           </Button>

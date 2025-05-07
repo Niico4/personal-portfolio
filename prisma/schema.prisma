@@ -11,9 +11,11 @@ model Project {
   id           String   @id @default(auto()) @map("_id") @db.ObjectId
   createdAt    DateTime @default(now())
   description  String
+  features     Json?
   image        String
   isDev        Boolean
   repository   String?
+  slug         String   @unique
   technologies String[]
   title        String
   updatedAt    DateTime @updatedAt
