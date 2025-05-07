@@ -81,4 +81,8 @@ export const TECHNOLOGIES_LIST = [
     label: 'Astro',
     icon: Icon.AstroIcon,
   },
+  {
+    label: 'shadcn/ui',
+    icon: Icon.ShadcnIcon,
+  },
 ];

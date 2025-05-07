@@ -35,16 +35,25 @@ export async function GET() {
 export const POST = async (req: Request) => {
   try {
     const {
-      title,
       description,
+      features,
       image,
       isDev,
       repository,
+      slug,
       technologies,
+      title,
       web_site,
     } = await req.json();
 
-    if (!title || !description || !image || !technologies || isDev === null) {
+    if (
+      !description ||
+      !image ||
+      !slug ||
+      !technologies ||
+      !title ||
+      isDev === null
+    ) {
       return NextResponse.json(
         { error: 'Faltan campos obligatorios.' },
         { status: 400 }
@@ -55,12 +64,14 @@ export const POST = async (req: Request) => {
 
     const newProject = await db.project.create({
       data: {
-        title,
         description,
+        features,
         image,
         isDev,
         repository,
+        slug,
         technologies: formattedTechnologies,
+        title,
         web_site,
       },
     });

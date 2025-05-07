@@ -13,6 +13,10 @@
         ],
         "newlines-between": "always"
       }
-    ]
+    ],
+
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-uses-react": "off",
+    "no-console": ["error", { "allow": ["error"] }]
   }
 }

@@ -20,6 +20,7 @@ import VisualStudioCodeIcon from './VSCode';
 import ViteIcon from './Vite';
 import WarpIcon from './Warp';
 import ZODIcon from './ZOD';
+import ShadcnIcon from './Shadcn';
 
 export {
   AstroIcon,
@@ -44,4 +45,5 @@ export {
   ViteIcon,
   WarpIcon,
   ZODIcon,
+  ShadcnIcon,
 };
