@@ -1,5 +1,3 @@
-import { IconError404 } from '@tabler/icons-react';
-
 import * as Icon from '@/components/common/icons/index';
 
 export const TECHNOLOGIES_LIST = [
