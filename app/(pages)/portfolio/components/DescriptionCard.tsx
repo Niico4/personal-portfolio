@@ -9,7 +9,7 @@ import { useMediaQuery } from 'usehooks-ts';
 import Heading from '@/components/common/Heading';
 
 const DescriptionCard = (
-  project: Pick<Project, 'title' | 'description' | 'repository' | 'web_site'>
+  project: Pick<Project, 'title' | 'description' | 'repository' | 'web_site'>,
 ) => {
   const isSmallDevice = useMediaQuery('only screen and (max-width : 370px)');
   return (

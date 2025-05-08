@@ -309,7 +309,8 @@ body::-webkit-scrollbar-thumb {
   --y-4: 93%;
   --c-4: hsla(349, 0%, 0%, 0.5);
   background-color: hsla(356, 0%, 0%, 0.5);
-  background-image: radial-gradient(
+  background-image:
+    radial-gradient(
       circle at var(--x-0) var(--y-0),
       var(--c-0) var(--s-start-0),
       transparent var(--s-end-0)
