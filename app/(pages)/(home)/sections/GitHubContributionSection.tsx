@@ -12,7 +12,7 @@ const GitHubContribution = () => {
   const currentYear = new Date().getFullYear();
   const years = Array.from(
     { length: currentYear - 2023 + 1 },
-    (_, i) => 2023 + i
+    (_, i) => 2023 + i,
   );
 
   return (

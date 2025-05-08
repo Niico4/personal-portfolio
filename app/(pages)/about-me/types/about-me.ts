@@ -2,7 +2,7 @@ export interface EducationCardProps {
   title: string;
   date: string;
   institution: string;
-  certificationUrl?: string;
+  hasCertificate?: boolean;
 }
 
 export interface TechnologyCardProps {

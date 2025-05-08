@@ -20,7 +20,7 @@ const GradientBg = () => {
 
       if (interBubbleRef.current) {
         interBubbleRef.current.style.transform = `translate(${Math.round(
-          curX
+          curX,
         )}px, ${Math.round(curY)}px)`;
       }
       requestAnimationFrame(move);

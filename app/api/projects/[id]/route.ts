@@ -13,7 +13,7 @@ export async function DELETE(req: Request) {
   if (!id) {
     return resMessage(
       'No se proporcionó un ID válido para eliminar el proyecto.',
-      400
+      400,
     );
   }
 
@@ -32,7 +32,7 @@ export async function DELETE(req: Request) {
 
     return resMessage(
       'Se produjo un error al intentar eliminar el proyecto. Por favor, intente nuevamente.',
-      500
+      500,
     );
   }
 }

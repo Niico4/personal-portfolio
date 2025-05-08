@@ -27,7 +27,7 @@ export async function GET() {
       {
         error: errorMessage,
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -56,7 +56,7 @@ export const POST = async (req: Request) => {
     ) {
       return NextResponse.json(
         { error: 'Faltan campos obligatorios.' },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -87,7 +87,7 @@ export const POST = async (req: Request) => {
       {
         error: errorMessage,
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 };

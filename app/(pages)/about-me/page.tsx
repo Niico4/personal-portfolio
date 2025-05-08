@@ -2,14 +2,14 @@ import React from 'react';
 import { Metadata } from 'next';
 import { Card } from '@heroui/card';
 
-import { aboutMeMetadata } from '@/config/metadata/about-me';
-import SubTitle from '@/components/common/Heading';
-
 import EducationCard from './components/EducationCard';
 import ExperienceCard from './components/ExperienceCard';
 import { EDUCATION_LIST } from './data/user-info';
 import TechnologiesList from './components/TechnoligiesList';
 import SyntaxCodeCard from './components/SyntaxCodeCard';
+
+import { aboutMeMetadata } from '@/config/metadata/about-me';
+import SubTitle from '@/components/common/Heading';
 
 export async function generateMetadata(): Promise<Metadata> {
   return aboutMeMetadata;
@@ -29,15 +29,15 @@ const AboutMePage = () => {
 
         <article className="flex flex-col gap-4 justify-center max-md:-order-1">
           {EDUCATION_LIST.map(
-            ({ title, date, institution, certificationUrl }, index) => (
+            ({ title, date, institution, hasCertificate }, index) => (
               <EducationCard
                 key={index}
                 title={title}
                 date={date}
                 institution={institution}
-                certificationUrl={certificationUrl}
+                hasCertificate={hasCertificate}
               />
-            )
+            ),
           )}
           <Card className="card-bg p-4" radius="sm" isBlurred>
             <p className="text-default">

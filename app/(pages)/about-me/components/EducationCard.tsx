@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
+import Link from 'next/link';
 import { Card } from '@heroui/card';
 import { IconExternalLink, IconSchool } from '@tabler/icons-react';
-import { Popover, PopoverTrigger, PopoverContent } from '@heroui/popover';
 
 import { EducationCardProps } from '../types/about-me';
 
@@ -9,7 +9,7 @@ const EducationCard: FC<EducationCardProps> = ({
   title,
   date,
   institution,
-  certificationUrl,
+  hasCertificate,
 }) => {
   const cardContent = (
     <Card
@@ -19,7 +19,7 @@ const EducationCard: FC<EducationCardProps> = ({
     >
       <div className="flex-center gap-3">
         <span className="p-2 bg-white/[0.07] rounded-lg">
-          {certificationUrl ? (
+          {hasCertificate ? (
             <IconExternalLink
               stroke={1.5}
               className="text-secondary-300"
@@ -39,19 +39,13 @@ const EducationCard: FC<EducationCardProps> = ({
     </Card>
   );
 
-  return certificationUrl ? (
-    <Popover placement="bottom" color="warning" showArrow backdrop="opaque">
-      <PopoverTrigger className="cursor-pointer">{cardContent}</PopoverTrigger>
-      <PopoverContent>
-        <div className="px-1 py-2">
-          <h3 className="text-base font-bold">Funcionalidad en desarrollo</h3>
-          <p className="text-small">
-            ¡Estoy trabajando en esta sección! Pronto podrás ver mis
-            certificados.
-          </p>
-        </div>
-      </PopoverContent>
-    </Popover>
+  return hasCertificate ? (
+    <Link
+      href="/about-me/certifications"
+      aria-label="Ver todos los certificados"
+    >
+      {cardContent}
+    </Link>
   ) : (
     cardContent
   );

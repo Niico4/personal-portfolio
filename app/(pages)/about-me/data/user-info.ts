@@ -25,7 +25,7 @@ export const EDUCATION_LIST: EducationCardProps[] = [
     institution: 'Udemy',
     title: 'Desarrollo Web',
     date: '2021 - Actualmente',
-    certificationUrl: '/certification-udemy',
+    hasCertificate: true,
   },
 ];
 

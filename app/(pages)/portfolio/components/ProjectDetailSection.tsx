@@ -2,17 +2,15 @@
 
 import React from 'react';
 import { useParams } from 'next/navigation';
-import Link from 'next/link';
 import { Card } from '@heroui/card';
 import { Chip } from '@heroui/chip';
-import { IconArrowNarrowLeft } from '@tabler/icons-react';
-import { useMediaQuery } from 'usehooks-ts';
+
+import DescriptionCard from './DescriptionCard';
 
 import useProjects from '@/hooks/useProjects';
 import ErrorSection from '@/components/common/ErrorSection';
 import { TECHNOLOGIES_LIST } from '@/data/technologies';
-
-import DescriptionCard from '../components/DescriptionCard';
+import GoBackLink from '@/components/common/GoBackLink';
 
 type Feature = {
   title: string;
@@ -58,10 +56,9 @@ const renderFeature = (feature: Feature, index: number) => {
   );
 };
 
-const ProjectDetail = () => {
-  const { projects } = useProjects();
-  const isSmallDevice = useMediaQuery('only screen and (max-width : 370px)');
+const ProjectDetailSection = () => {
   const params = useParams();
+  const { projects } = useProjects();
 
   const project = projects.find((project) => project.slug === params.slug);
 
@@ -76,7 +73,7 @@ const ProjectDetail = () => {
 
   const renderTech = (tech: string) => {
     const techItem = TECHNOLOGIES_LIST.find(
-      (techObj) => techObj.label === tech
+      (techObj) => techObj.label === tech,
     );
     return techItem ? <techItem.icon className="size-full p-1" /> : null;
   };
@@ -85,16 +82,7 @@ const ProjectDetail = () => {
     <>
       <section className="flex flex-col gap-8 md:gap-8">
         <div className="flex flex-col items-start">
-          <Link
-            href="/portfolio"
-            className="flex-center gap-2 text-secondary-200 text-lg underline hover:-translate-y-1 hover:text-secondary-200/75 underline-offset-2 transition-all group z-20"
-          >
-            <IconArrowNarrowLeft
-              stroke={1.5}
-              className="group-hover:-translate-x-1 transition-all"
-            />
-            volver
-          </Link>
+          <GoBackLink href="/portfolio" />
         </div>
 
         <article className="grid md:grid-cols-[1fr_40%] gap-8">
@@ -115,7 +103,7 @@ const ProjectDetail = () => {
                   <Chip
                     key={index}
                     startContent={renderTech(tech)}
-                    size={isSmallDevice ? 'sm' : 'md'}
+                    size="md"
                     variant="flat"
                     radius="sm"
                   >
@@ -124,7 +112,7 @@ const ProjectDetail = () => {
                 ))}
               </div>
               <Chip
-                size={isSmallDevice ? 'sm' : 'md'}
+                size="md"
                 variant="flat"
                 radius="sm"
                 color={project.isDev ? 'warning' : 'success'}
@@ -154,4 +142,4 @@ const ProjectDetail = () => {
   );
 };
 
-export default ProjectDetail;
+export default ProjectDetailSection;
