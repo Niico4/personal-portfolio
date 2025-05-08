@@ -5,12 +5,12 @@ import { useParams } from 'next/navigation';
 import { Card } from '@heroui/card';
 import { Chip } from '@heroui/chip';
 
+import DescriptionCard from './DescriptionCard';
+
 import useProjects from '@/hooks/useProjects';
 import ErrorSection from '@/components/common/ErrorSection';
 import { TECHNOLOGIES_LIST } from '@/data/technologies';
 import GoBackLink from '@/components/common/GoBackLink';
-
-import DescriptionCard from './DescriptionCard';
 
 type Feature = {
   title: string;
@@ -73,7 +73,7 @@ const ProjectDetailSection = () => {
 
   const renderTech = (tech: string) => {
     const techItem = TECHNOLOGIES_LIST.find(
-      (techObj) => techObj.label === tech
+      (techObj) => techObj.label === tech,
     );
     return techItem ? <techItem.icon className="size-full p-1" /> : null;
   };

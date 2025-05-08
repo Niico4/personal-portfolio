@@ -12,10 +12,10 @@ import {
   NavbarMenuToggle,
 } from '@heroui/navbar';
 
+import LinkItem from './components/navbar/LinkItem';
+
 import { SOCIAL_LINKS } from '@/(pages)/(home)/data/profile';
 import SocialLink from '@/(pages)/(home)/components/SocialLink';
-
-import LinkItem from './components/navbar/LinkItem';
 
 const mogra = Mogra({
   subsets: ['latin'],

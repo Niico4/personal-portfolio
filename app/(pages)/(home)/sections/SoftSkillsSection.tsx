@@ -1,9 +1,9 @@
 import React from 'react';
 
-import SubTitle from '@/components/common/Heading';
-
 import SoftSkillCard from '../components/SoftSkillCard';
 import { SOFT_SKILLS } from '../data/profile';
+
+import SubTitle from '@/components/common/Heading';
 
 const SoftSkills = () => {
   return (

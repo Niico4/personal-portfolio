@@ -3,11 +3,11 @@
 import React from 'react';
 import { Grandstander } from 'next/font/google';
 
+import ProjectsList from '../components/ProjectsList';
+
 import useProjects from '@/hooks/useProjects';
 import ErrorSection from '@/components/common/ErrorSection';
 import LoaderGhost from '@/components/common/LoaderGhost';
-
-import ProjectsList from '../components/ProjectsList';
 
 const grandstander = Grandstander({
   subsets: ['latin'],

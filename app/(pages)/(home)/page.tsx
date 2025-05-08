@@ -1,12 +1,12 @@
 import React from 'react';
 import { Metadata } from 'next';
 
-import { homeMetadata } from '@/config/metadata/home';
-
 import HeroSection from './sections/HeroSection';
 import SoftSkills from './sections/SoftSkillsSection';
 import RecentProjectsSection from './sections/RecentProjectsSection';
 import GitHubContribution from './sections/GitHubContributionSection';
+
+import { homeMetadata } from '@/config/metadata/home';
 
 export async function generateMetadata(): Promise<Metadata> {
   return homeMetadata;

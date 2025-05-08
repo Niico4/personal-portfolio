@@ -3,27 +3,23 @@ import globals from 'globals';
 import js from '@eslint/js';
 import tseslint from 'typescript-eslint';
 import pluginReact from 'eslint-plugin-react';
+import pluginNext from '@next/eslint-plugin-next';
 import importOrder from 'eslint-plugin-import';
 import prettier from 'eslint-plugin-prettier';
 
 export default defineConfig([
-  { files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'] },
   {
     files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'],
     languageOptions: { globals: globals.browser },
-  },
-  {
-    files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'],
-    plugins: { js },
-    extends: ['js/recommended'],
-  },
-  {
-    files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'],
     plugins: {
       import: importOrder,
       react: pluginReact.configs.recommended,
-      prettier: prettier,
+      prettier,
+      js,
+      '@next/next': pluginNext,
     },
+    extends: ['js/recommended'],
+
     rules: {
       'prettier/prettier': 'error',
       'import/order': [
