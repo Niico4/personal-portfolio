@@ -1,7 +1,7 @@
 import React from 'react';
 import { Metadata } from 'next';
 
-import ProjectDetailPage from '../components/ProjectDetail';
+import ProjectDetailSection from '../components/ProjectDetailSection';
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
@@ -9,8 +9,8 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-const Page = () => {
-  return <ProjectDetailPage />;
+const ProjectDetail = () => {
+  return <ProjectDetailSection />;
 };
 
-export default Page;
+export default ProjectDetail;

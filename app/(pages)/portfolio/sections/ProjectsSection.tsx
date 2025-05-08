@@ -13,6 +13,7 @@ const grandstander = Grandstander({
   subsets: ['latin'],
   display: 'swap',
 });
+
 const ProjectsSection = () => {
   const { projects, loading, error } = useProjects();
 

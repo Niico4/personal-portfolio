@@ -29,13 +29,13 @@ const AboutMePage = () => {
 
         <article className="flex flex-col gap-4 justify-center max-md:-order-1">
           {EDUCATION_LIST.map(
-            ({ title, date, institution, certificationUrl }, index) => (
+            ({ title, date, institution, hasCertificate }, index) => (
               <EducationCard
                 key={index}
                 title={title}
                 date={date}
                 institution={institution}
-                certificationUrl={certificationUrl}
+                hasCertificate={hasCertificate}
               />
             )
           )}
