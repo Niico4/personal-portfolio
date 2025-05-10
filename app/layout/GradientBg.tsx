@@ -2,63 +2,72 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 
-import styles from '@/styles/bg.module.css';
+import styles from './styles/gradient-bg.module.css';
 
 const GradientBg = () => {
-  const interBubbleRef = useRef<HTMLDivElement | null>(null);
+  const [svgSize, setSvgSize] = useState({ width: 0, height: 0 });
+  const bubbleRef = useRef<HTMLDivElement | null>(null);
+  const animationFrameRef = useRef<number | null>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    let curX = 0;
-    let curY = 0;
-    let tgX = 0;
-    let tgY = 0;
-    let initialized = false;
+    let currentX = 0;
+    let currentY = 0;
+    let targetX = 0;
+    let targetY = 0;
+    let isFirstMove = true;
 
-    const move = () => {
-      curX += (tgX - curX) / 10;
-      curY += (tgY - curY) / 10;
+    const animateCursor = () => {
+      const deltaX = targetX - currentX;
+      const deltaY = targetY - currentY;
 
-      if (interBubbleRef.current) {
-        interBubbleRef.current.style.transform = `translate(${Math.round(
-          curX,
-        )}px, ${Math.round(curY)}px)`;
+      currentX += deltaX * 0.1;
+      currentY += deltaY * 0.1;
+
+      if (bubbleRef.current) {
+        bubbleRef.current.style.transform = `translate(${Math.round(currentX)}px, ${Math.round(currentY)}px)`;
       }
-      requestAnimationFrame(move);
+
+      animationFrameRef.current = requestAnimationFrame(animateCursor);
     };
 
     const handleMouseMove = (event: MouseEvent) => {
-      tgX = event.clientX;
-      tgY = event.clientY;
+      targetX = event.clientX;
+      targetY = event.clientY;
 
-      if (!initialized) {
-        curX = tgX;
-        curY = tgY;
-        initialized = true;
+      if (isFirstMove) {
+        currentX = targetX;
+        currentY = targetY;
+        isFirstMove = false;
+        if (bubbleRef.current) {
+          bubbleRef.current.style.transform = `translate(${currentX}px, ${currentY}px)`;
+        }
       }
     };
 
     window.addEventListener('mousemove', handleMouseMove);
-    move();
+    animationFrameRef.current = requestAnimationFrame(animateCursor);
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
     };
   }, []);
 
-  const [svgSize, setSvgSize] = useState({ width: 0, height: 0 });
-
   useEffect(() => {
-    const updateSize = () => {
-      setSvgSize({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      });
-    };
+    if (!containerRef.current) return;
 
-    updateSize();
-    window.addEventListener('resize', updateSize);
+    const observer = new ResizeObserver((entries) => {
+      const entry = entries[0];
+      const { width, height } = entry.contentRect;
+      setSvgSize({ width, height });
+    });
 
-    return () => window.removeEventListener('resize', updateSize);
+    observer.observe(containerRef.current);
+
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -107,7 +116,7 @@ const GradientBg = () => {
         <div className={styles.g3}></div>
         <div className={styles.g4}></div>
         <div className={styles.g5}></div>
-        <div className={styles.interactive} ref={interBubbleRef}></div>
+        <div className={styles.interactive} ref={bubbleRef}></div>
       </div>
     </div>
   );

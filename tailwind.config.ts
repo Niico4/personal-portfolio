@@ -25,6 +25,7 @@ const config: Config = {
       },
       screens: {
         xl1440: { raw: '(min-width: 1280px) and (max-width: 1700px)' },
+        '1.5xl': { raw: '(min-width: 1500px)' },
       },
     },
   },
