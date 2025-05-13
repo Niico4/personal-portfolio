@@ -1,44 +1,11 @@
 import {
-  IconMail,
-  IconBrandLinkedin,
-  IconBrandGithub,
   IconDeviceLaptop,
-  IconMapPinFilled,
   IconBook,
   IconCode,
   IconUsersGroup,
 } from '@tabler/icons-react';
 
-import { SocialLinkProps, SoftSkillProps } from '../types/profile';
-
-export const PROFILE_DETAILS = [
-  {
-    label: 'Desarrollador Frontend',
-    icon: IconDeviceLaptop,
-  },
-  {
-    label: 'Bogotá, Colombia',
-    icon: IconMapPinFilled,
-  },
-];
-
-export const SOCIAL_LINKS: SocialLinkProps[] = [
-  {
-    icon: IconMail,
-    label: 'Gmail',
-    href: 'mailto:nicogarzon131@gmail.com',
-  },
-  {
-    icon: IconBrandLinkedin,
-    label: 'LinkedIn',
-    href: 'https://www.linkedin.com/in/nicolasgarzon131/',
-  },
-  {
-    icon: IconBrandGithub,
-    label: 'GitHub',
-    href: 'https://github.com/Niico4',
-  },
-];
+import { SoftSkillProps } from '../types/profile';
 
 export const SOFT_SKILLS: SoftSkillProps[] = [
   {

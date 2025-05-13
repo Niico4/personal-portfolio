@@ -15,7 +15,7 @@ const config: Config = {
         background: 'var(--background-gradient)',
       },
       backgroundColor: {
-        card: 'rgba(255, 255, 255, 0.04)',
+        card: 'rgba(255, 255, 255, 0.03)',
       },
       textColor: {
         title: '#F5F5F6 ',
