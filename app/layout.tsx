@@ -1,4 +1,4 @@
-import { Raleway } from 'next/font/google';
+import { DynaPuff, Poetsen_One, Raleway } from 'next/font/google';
 import { HeroUIProvider } from '@heroui/system';
 
 import NavBar from './layout/components/navbar';
@@ -10,6 +10,19 @@ const raleway = Raleway({
   subsets: ['latin'],
   display: 'swap',
   weight: ['300', '400', '500', '600', '700', '800'],
+});
+
+export const DYNA_PUFF = DynaPuff({
+  subsets: ['latin'],
+  display: 'swap',
+  weight: ['400', '500'],
+});
+
+// Navbar font
+export const POETSEN_ONE = Poetsen_One({
+  subsets: ['latin'],
+  display: 'swap',
+  weight: '400',
 });
 
 export default function RootLayout({
@@ -26,7 +39,7 @@ export default function RootLayout({
         <GradientBg />
 
         <HeroUIProvider>
-          <div className="w-11/12 lg:w-3/5 xl:w-1/2 1.5xl:w-2/5 mx-auto custom-theme">
+          <div className="w-11/12 lg:w-3/4 xl:w-1/2 1.5xl:w-2/5 mx-auto custom-theme">
             <NavBar />
             <main className="my-8">{children}</main>
           </div>

@@ -1,26 +1,20 @@
 import React, { FC } from 'react';
 import { Card } from '@heroui/card';
-import { Grandstander } from 'next/font/google';
 import CountUp from 'react-countup';
 
 import { StatCardProps } from '../types/profile';
 
-const grandstander = Grandstander({
-  display: 'swap',
-  subsets: ['latin'],
-});
+import { DYNA_PUFF } from '@/layout';
 
 const StatCard: FC<StatCardProps> = ({ label, value, duration = 2 }) => {
   return (
-    <Card className="flex-1 flex-col-center card-bg p-4" radius="sm" isBlurred>
+    <Card className="flex-col-center w-full card-bg p-4" radius="sm" isBlurred>
       <span
-        className={`${grandstander.className} text-primary-200 text-4xl font-semibold`}
+        className={`${DYNA_PUFF.className} text-primary-200 text-3xl font-normal`}
       >
         +<CountUp end={value} start={0} duration={duration} />
       </span>
-      <p
-        className={`${grandstander.className} text-xl text-soft/95 tracking-wide`}
-      >
+      <p className="text-sm font-semibold text-soft/95 tracking-wider">
         {label}
       </p>
     </Card>

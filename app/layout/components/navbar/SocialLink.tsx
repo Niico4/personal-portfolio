@@ -1,10 +1,15 @@
-import React, { FC } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import { Tooltip } from '@heroui/tooltip';
+import { Icon } from '@tabler/icons-react';
 
-import { SocialLinkProps } from '../types/profile';
+export interface SocialLinkProps {
+  icon: Icon;
+  label: string;
+  href: string;
+}
 
-const SocialLink: FC<SocialLinkProps> = ({ label, href, icon: Icon }) => (
+const SocialLink = ({ label, href, icon: Icon }: SocialLinkProps) => (
   <Tooltip content={label} color="primary" placement="bottom" showArrow>
     <Link
       href={href}

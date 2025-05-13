@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
-import { Poetsen_One } from 'next/font/google';
 import Link from 'next/link';
 import Image from 'next/image';
 import {
@@ -16,14 +15,8 @@ import NavigationLink from './NavigationLink';
 import ToggleButton from './ToggleButton';
 import MobileMenu from './MobileMenu';
 import { routesInNavbar, scrollAnimations } from './navbar.config';
-
-import SocialLink from '@/(pages)/(home)/components/SocialLink';
-import { SOCIAL_LINKS } from '@/(pages)/(home)/data/profile';
-
-export const PoetsenOne = Poetsen_One({
-  subsets: ['latin'],
-  weight: '400',
-});
+import SocialLink from './SocialLink';
+import { SOCIAL_LINKS } from './data/social-links';
 
 const NavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
