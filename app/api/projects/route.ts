@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-import { db } from '@/utils/prisma';
+import { db } from '@/lib/prisma';
 
 const formatTechnologies = (technologies: string | string[]) => {
   if (
