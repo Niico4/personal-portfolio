@@ -14,15 +14,19 @@ import { structure } from './sanity/studioContentStructure';
 
 import { PublicEnvConfig } from '@/config/public-env.config';
 
+const singletonTypes = new Set(['profile']);
+
 export default defineConfig({
   basePath: '/studio',
   projectId: PublicEnvConfig.sanity.project_id,
   dataset: PublicEnvConfig.sanity.dataset,
-  // Add and edit the content schema in the './sanity/schemaTypes' folder
-  schema,
+  schema: {
+    types: schema.types,
+    templates: (templates) =>
+      templates.filter(({ schemaType }) => !singletonTypes.has(schemaType)), // Filter out singleton types from the "New document" options
+  },
   plugins: [
     structureTool({ structure }),
-    // Vision is for querying with GROQ from inside the Studio
     // https://www.sanity.io/docs/the-vision-plugin
     visionTool({ defaultApiVersion: PublicEnvConfig.sanity.api_version }),
   ],
