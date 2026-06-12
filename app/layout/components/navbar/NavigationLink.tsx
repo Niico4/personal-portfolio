@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { POETSEN_ONE } from '@/layout';
+import { poetsenOne } from '@/fonts';
 
 interface Props {
   label: string;
@@ -14,7 +14,7 @@ const NavigationLink = ({ label, href, currentPathname, onClick }: Props) => {
   return (
     <Link
       onClick={onClick}
-      className={`${POETSEN_ONE.className} text-xl transition-all ${
+      className={`${poetsenOne.className} text-xl transition-all ${
         isActiveItem
           ? 'text-primary-300 underline underline-offset-4'
           : 'text-subtitle/95 hover:text-subtitle/80 hover:scale-105'

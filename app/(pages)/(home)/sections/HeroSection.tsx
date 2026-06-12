@@ -9,7 +9,7 @@ import { IconFileCvFilled } from '@tabler/icons-react';
 
 import StatCard from '../components/StatCard';
 
-import { DYNA_PUFF } from '@/layout';
+import { dynaPuff } from '@/fonts';
 
 const HeroSection = () => {
   const currentYear = new Date().getFullYear();
@@ -66,7 +66,7 @@ const HeroSection = () => {
           <CardBody className="gap-5 p-0">
             <div className="flex flex-col gap-2">
               <h1
-                className={`${DYNA_PUFF.className} text-title text-[40px] text-center font-medium md:text-start`}
+                className={`${dynaPuff.className} text-title text-[40px] text-center font-medium md:text-start`}
               >
                 ¡Hola!, soy <span className="text-animate">Nicolas</span>
               </h1>

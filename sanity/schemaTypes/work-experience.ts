@@ -1,15 +1,34 @@
+import { IconBriefcase } from '@tabler/icons-react';
 import { defineArrayMember, defineField, defineType } from 'sanity';
 
 export const workExperienceType = defineType({
   name: 'workExperience',
   title: 'Work Experience',
   type: 'document',
+  icon: IconBriefcase,
+
+  groups: [
+    {
+      name: 'organization',
+      title: 'Organization',
+      default: true,
+    },
+    {
+      name: 'positions',
+      title: 'Positions',
+    },
+    {
+      name: 'settings',
+      title: 'Settings',
+    },
+  ],
 
   fields: [
     defineField({
       name: 'organizationName',
       title: 'Organization Name',
       type: 'string',
+      group: 'organization',
       description:
         'Company, product or project name shown as the main experience group.',
       validation: (Rule) => Rule.required(),
@@ -19,6 +38,7 @@ export const workExperienceType = defineType({
       name: 'organizationLogo',
       title: 'Organization Logo',
       type: 'image',
+      group: 'organization',
       description:
         'Logo or icon shown next to the organization name in the experience section.',
       options: {
@@ -36,20 +56,12 @@ export const workExperienceType = defineType({
     }),
 
     defineField({
-      name: 'displayOrder',
-      title: 'Display Order',
-      type: 'number',
-      description:
-        'Controls the order of this work experience group. Lower numbers appear first.',
-      initialValue: 0,
-      validation: (Rule) => Rule.required(),
-    }),
-
-    defineField({
       name: 'positions',
       title: 'Positions',
       type: 'array',
-      description: 'Positions or roles held inside this organization.',
+      group: 'positions',
+      description:
+        'Positions held inside this organization. Use multiple positions when the same organization has more than one role.',
       of: [
         defineArrayMember({
           name: 'position',
@@ -62,7 +74,7 @@ export const workExperienceType = defineType({
               title: 'Position Title',
               type: 'string',
               description:
-                'Role or position title shown in the experience item',
+                'Role or position title shown in the experience item.',
               validation: (Rule) => Rule.required(),
             }),
 
@@ -78,11 +90,12 @@ export const workExperienceType = defineType({
               name: 'employmentType',
               title: 'Employment Type',
               type: 'string',
-              description: 'Work relationship shown before the dates',
+              description:
+                'Work relationship shown before the dates. Example: Full-time or Part-time.',
               options: {
                 list: [
-                  { title: 'Tiempo completo', value: 'full-time' },
-                  { title: 'Medio tiempo', value: 'part-time' },
+                  { title: 'Full-time', value: 'full-time' },
+                  { title: 'Part-time', value: 'part-time' },
                 ],
                 layout: 'dropdown',
               },
@@ -179,6 +192,7 @@ export const workExperienceType = defineType({
               startDate: 'startDate',
               endDate: 'endDate',
               isCurrentPosition: 'isCurrentPosition',
+              iconKey: 'positionIconKey',
             },
             prepare({
               title,
@@ -186,18 +200,32 @@ export const workExperienceType = defineType({
               startDate,
               endDate,
               isCurrentPosition,
+              iconKey,
             }) {
               return {
                 title,
                 subtitle: `${employmentType ?? 'No employment type'} · ${
                   startDate ?? 'No start date'
-                } - ${isCurrentPosition ? 'Actualidad' : (endDate ?? 'No end date')}`,
+                } - ${
+                  isCurrentPosition ? 'Present' : (endDate ?? 'No end date')
+                }${iconKey ? ` · Icon: ${iconKey}` : ''}`,
               };
             },
           },
         }),
       ],
       validation: (Rule) => Rule.required().min(1),
+    }),
+
+    defineField({
+      name: 'displayOrder',
+      title: 'Display Order',
+      type: 'number',
+      group: 'settings',
+      description:
+        'Controls the order of this work experience group in the portfolio. Lower numbers appear first.',
+      initialValue: 0,
+      validation: (Rule) => Rule.required(),
     }),
   ],
 
@@ -211,8 +239,8 @@ export const workExperienceType = defineType({
       return {
         title,
         subtitle: firstPositionTitle
-          ? `Primera posición: ${firstPositionTitle}`
-          : 'Sin posiciones',
+          ? `First position: ${firstPositionTitle}`
+          : 'No positions',
         media,
       };
     },

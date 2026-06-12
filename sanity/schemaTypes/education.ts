@@ -1,15 +1,34 @@
+import { IconSchool } from '@tabler/icons-react';
 import { defineField, defineType } from 'sanity';
 
 export const educationType = defineType({
   name: 'education',
   title: 'Education',
   type: 'document',
+  icon: IconSchool,
+
+  groups: [
+    {
+      name: 'program',
+      title: 'Program',
+      default: true,
+    },
+    {
+      name: 'credential',
+      title: 'Credential',
+    },
+    {
+      name: 'settings',
+      title: 'Settings',
+    },
+  ],
 
   fields: [
     defineField({
       name: 'academicTitle',
       title: 'Academic Title',
       type: 'string',
+      group: 'program',
       description: 'Academic title or program name.',
       validation: (Rule) => Rule.required(),
     }),
@@ -18,6 +37,7 @@ export const educationType = defineType({
       name: 'institutionName',
       title: 'Institution Name',
       type: 'string',
+      group: 'program',
       description: 'Name of the institution, academy or platform.',
       validation: (Rule) => Rule.required(),
     }),
@@ -26,6 +46,7 @@ export const educationType = defineType({
       name: 'institutionLogo',
       title: 'Institution Logo',
       type: 'image',
+      group: 'program',
       description: 'Logo or icon shown next to the institution name.',
       options: {
         hotspot: true,
@@ -45,6 +66,7 @@ export const educationType = defineType({
       name: 'startDate',
       title: 'Start Date',
       type: 'date',
+      group: 'program',
       description:
         'Date when this education started. Use the first day of the month if only month/year matters.',
       validation: (Rule) => Rule.required(),
@@ -54,6 +76,7 @@ export const educationType = defineType({
       name: 'endDate',
       title: 'End Date',
       type: 'date',
+      group: 'program',
       description:
         'Date when this education ended. Leave empty only if you are currently studying it.',
       validation: (Rule) =>
@@ -84,6 +107,7 @@ export const educationType = defineType({
       name: 'isCurrentlyStudying',
       title: 'Is Currently Studying?',
       type: 'boolean',
+      group: 'program',
       description:
         'Enable this if you are currently studying this program. The end date can be empty in that case.',
       initialValue: false,
@@ -94,6 +118,7 @@ export const educationType = defineType({
       name: 'credential',
       title: 'Credential',
       type: 'object',
+      group: 'credential',
       description:
         'Optional certificate, diploma or verification reference for this education.',
       fields: [
@@ -102,7 +127,7 @@ export const educationType = defineType({
           title: 'Credential File',
           type: 'file',
           description:
-            'Upload a certificate or diploma file directly to Sanity. Recommended for PDF or image files.',
+            'Upload a certificate or diploma file directly to Sanity. Recommended for PDF files.',
           options: {
             accept: 'application/pdf',
           },
@@ -122,6 +147,7 @@ export const educationType = defineType({
       name: 'displayOrder',
       title: 'Display Order',
       type: 'number',
+      group: 'settings',
       description:
         'Controls the order of this education item in the portfolio. Lower numbers appear first.',
       initialValue: 0,

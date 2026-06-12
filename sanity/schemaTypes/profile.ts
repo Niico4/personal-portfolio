@@ -1,15 +1,46 @@
+import { IconUserCircle } from '@tabler/icons-react';
 import { defineArrayMember, defineField, defineType } from 'sanity';
 
 export const profileType = defineType({
   name: 'profile',
   title: 'Profile',
   type: 'document',
+  icon: IconUserCircle,
+
+  groups: [
+    {
+      name: 'identity',
+      title: 'Identity',
+      default: true,
+    },
+    {
+      name: 'resume',
+      title: 'Resume',
+    },
+    {
+      name: 'contact',
+      title: 'Contact',
+    },
+    {
+      name: 'content',
+      title: 'Content',
+    },
+    {
+      name: 'stats',
+      title: 'Stats',
+    },
+    {
+      name: 'skills',
+      title: 'Skills',
+    },
+  ],
 
   fields: [
     defineField({
       name: 'professionalTitle',
       title: 'Professional Title',
       type: 'string',
+      group: 'identity',
       description: 'Main professional title shown in the portfolio.',
       validation: (Rule) => Rule.required(),
     }),
@@ -18,6 +49,7 @@ export const profileType = defineType({
       name: 'location',
       title: 'Location',
       type: 'string',
+      group: 'identity',
       description: 'Location shown in the portfolio.',
       validation: (Rule) => Rule.required(),
     }),
@@ -26,6 +58,7 @@ export const profileType = defineType({
       name: 'resume',
       title: 'Resume / CV',
       type: 'object',
+      group: 'resume',
       description:
         'Resume reference used by the portfolio download/view button.',
       fields: [
@@ -67,6 +100,7 @@ export const profileType = defineType({
       name: 'contact',
       title: 'Contact and Social Links',
       type: 'object',
+      group: 'contact',
       description:
         'Main contact information and social links shown in the portfolio.',
       fields: [
@@ -106,6 +140,7 @@ export const profileType = defineType({
       name: 'content',
       title: 'Profile Content',
       type: 'object',
+      group: 'content',
       description:
         'Main texts used in the home and about sections of the portfolio.',
       fields: [
@@ -136,8 +171,9 @@ export const profileType = defineType({
       name: 'stats',
       title: 'Profile Stats',
       type: 'array',
+      group: 'stats',
       description:
-        'Small metrics shown in the profile/about section. Example: +10 Proyectos realizados.',
+        'Small metrics shown in the profile/about section. Example: +10 Projects completed.',
       of: [
         defineArrayMember({
           name: 'profileStat',
@@ -199,6 +235,7 @@ export const profileType = defineType({
       name: 'skillsAndTechnologies',
       title: 'Skills and Technologies',
       type: 'array',
+      group: 'skills',
       description:
         'Skills and technologies shown as chips/badges in the profile/about section.',
       of: [
@@ -220,7 +257,7 @@ export const profileType = defineType({
               title: 'Icon Key',
               type: 'string',
               description:
-                'Internal key used by the frontend to render the correct icon. Example: react, nextjs, postgresql.',
+                'Internal key used by the frontend to render the correct icon. Use lowercase without spaces, dots or special characters. Example: Next.js → nextjs.',
               validation: (Rule) =>
                 Rule.required().regex(/^[a-z0-9]+$/, {
                   name: 'lowercase key without spaces, dots or special characters',
@@ -237,7 +274,7 @@ export const profileType = defineType({
             prepare({ title, iconKey }) {
               return {
                 title,
-                subtitle: iconKey ? `Icon: ${iconKey}` : 'No icon key',
+                subtitle: iconKey ? `Icon key: ${iconKey}` : 'No icon key',
               };
             },
           },

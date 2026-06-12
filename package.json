@@ -27,6 +27,7 @@
     "@heroui/tooltip": "^2.2.29",
     "@prisma/client": "^5.22.0",
     "@sanity/image-url": "^2.1.1",
+    "@sanity/ui": "^3.2.0",
     "@sanity/vision": "^5.31.1",
     "@tabler/icons-react": "^3.44.0",
     "axios": "^1.17.0",

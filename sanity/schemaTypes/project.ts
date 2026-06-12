@@ -1,17 +1,44 @@
+import { IconRocket } from '@tabler/icons-react';
 import { defineArrayMember, defineField, defineType } from 'sanity';
 
 export const projectType = defineType({
   name: 'project',
   title: 'Projects',
   type: 'document',
+  icon: IconRocket,
+
+  groups: [
+    {
+      name: 'main',
+      title: 'Main',
+      default: true,
+    },
+    {
+      name: 'preview',
+      title: 'Preview',
+    },
+    {
+      name: 'detail',
+      title: 'Detail',
+    },
+    {
+      name: 'technologies',
+      title: 'Technologies',
+    },
+    {
+      name: 'links',
+      title: 'Links',
+    },
+  ],
 
   fields: [
     defineField({
       name: 'title',
       title: 'Project Title',
       type: 'string',
+      group: 'main',
       description:
-        'The project name is displayed on the project details page and on the project preview card.',
+        'The project name shown in the project detail page and preview card.',
       validation: (Rule) => Rule.required(),
     }),
 
@@ -19,6 +46,7 @@ export const projectType = defineType({
       name: 'slug',
       title: 'Project Slug',
       type: 'slug',
+      group: 'main',
       description: 'URL identifier for the project detail page.',
       options: {
         source: 'title',
@@ -31,7 +59,8 @@ export const projectType = defineType({
       name: 'isInDevelopment',
       title: 'Is In Development',
       type: 'boolean',
-      description: 'Enable this option if the project is under development.',
+      group: 'main',
+      description: 'Enable this if the project is still under development.',
       initialValue: false,
       validation: (Rule) => Rule.required(),
     }),
@@ -40,7 +69,8 @@ export const projectType = defineType({
       name: 'preview',
       title: 'Project Preview',
       type: 'object',
-      description: 'Content used in project cards/previews.',
+      group: 'preview',
+      description: 'Content used in project cards and preview sections.',
       fields: [
         defineField({
           name: 'shortDescription',
@@ -48,7 +78,7 @@ export const projectType = defineType({
           type: 'text',
           rows: 3,
           description:
-            'Short description shown in the project card. It should be a brief summary of the project, ideally no more than 220 characters.',
+            'Short description shown in the project card. Keep it clear and ideally under 220 characters.',
           validation: (Rule) => Rule.required().max(220),
         }),
 
@@ -80,6 +110,7 @@ export const projectType = defineType({
       name: 'detail',
       title: 'Project Detail',
       type: 'object',
+      group: 'detail',
       description: 'Content used inside the project detail page.',
       fields: [
         defineField({
@@ -121,6 +152,7 @@ export const projectType = defineType({
       name: 'technologies',
       title: 'Technologies',
       type: 'array',
+      group: 'technologies',
       description:
         'Technologies shown as chips/badges in the project detail page.',
       of: [
@@ -138,6 +170,7 @@ export const projectType = defineType({
       name: 'links',
       title: 'Project Links',
       type: 'object',
+      group: 'links',
       description: 'External project links used by the action buttons.',
       fields: [
         defineField({
@@ -152,8 +185,10 @@ export const projectType = defineType({
           title: 'Repository URL',
           type: 'url',
           description: 'GitHub repository URL.',
+          validation: (Rule) => Rule.required(),
         }),
       ],
+      validation: (Rule) => Rule.required(),
     }),
   ],
 
@@ -162,11 +197,14 @@ export const projectType = defineType({
       title: 'title',
       shortDescription: 'preview.shortDescription',
       media: 'preview.image',
+      isInDevelopment: 'isInDevelopment',
     },
-    prepare({ title, shortDescription, media }) {
+    prepare({ title, shortDescription, media, isInDevelopment }) {
       return {
         title,
-        subtitle: shortDescription,
+        subtitle: isInDevelopment
+          ? `In development · ${shortDescription}`
+          : shortDescription,
         media,
       };
     },

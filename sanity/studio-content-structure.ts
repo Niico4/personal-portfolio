@@ -1,16 +1,26 @@
 import type { StructureResolver } from 'sanity/structure';
 import {
   IconBriefcase,
+  IconHome2,
   IconRocket,
   IconSchool,
   IconUserCircle,
 } from '@tabler/icons-react';
 
-// https://www.sanity.io/docs/structure-builder-cheat-sheet
+import StudioWelcome from './components/studio-welcome';
+
 export const structure: StructureResolver = (S) =>
   S.list()
-    .title('Portfolio CMS')
+    .title('The Goat 🐐')
     .items([
+      S.listItem()
+        .id('welcome')
+        .title('Welcome')
+        .icon(IconHome2)
+        .child(S.component(StudioWelcome).title('Welcome')),
+
+      S.divider(),
+
       S.listItem()
         .id('profile')
         .title('Profile')
