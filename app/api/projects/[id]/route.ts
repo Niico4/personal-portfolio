@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-import { db } from '@/utils/prisma';
+import { db } from '@/lib/prisma';
 
 const resMessage = (message: string, status: number) => {
   return NextResponse.json({ message }, { status });
