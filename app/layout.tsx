@@ -1,5 +1,3 @@
-import { raleway } from './fonts';
-
 import '@/styles/globals.css';
 
 export default function RootLayout({
@@ -9,11 +7,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <body
-        className={`${raleway.className} flex flex-col min-h-dvh bg-zinc-950/[0.93] sm:bg-zinc-950/95 py-8`}
-      >
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

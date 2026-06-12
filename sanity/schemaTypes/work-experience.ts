@@ -224,8 +224,7 @@ export const workExperienceType = defineType({
       group: 'settings',
       description:
         'Controls the order of this work experience group in the portfolio. Lower numbers appear first.',
-      initialValue: 0,
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) => Rule.required().integer().min(0),
     }),
   ],
 

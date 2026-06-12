@@ -1,6 +1,27 @@
 import { IconRocket } from '@tabler/icons-react';
 import { defineArrayMember, defineField, defineType } from 'sanity';
 
+type SanityAssetField = {
+  asset?: {
+    _ref?: string;
+  };
+};
+
+type ProjectDocument = {
+  isInDevelopment?: boolean;
+};
+
+type ProjectLinks = {
+  liveDemoUrl?: string;
+  repositoryUrl?: string;
+};
+
+const isProjectInDevelopment = (document: unknown) =>
+  (document as ProjectDocument)?.isInDevelopment === true;
+
+const hasAsset = (value: unknown) =>
+  Boolean((value as SanityAssetField | undefined)?.asset?._ref);
+
 export const projectType = defineType({
   name: 'project',
   title: 'Projects',
@@ -28,6 +49,10 @@ export const projectType = defineType({
     {
       name: 'links',
       title: 'Links',
+    },
+    {
+      name: 'settings',
+      title: 'Settings',
     },
   ],
 
@@ -57,10 +82,11 @@ export const projectType = defineType({
 
     defineField({
       name: 'isInDevelopment',
-      title: 'Is In Development',
+      title: 'Is In Development?',
       type: 'boolean',
       group: 'main',
-      description: 'Enable this if the project is still under development.',
+      description:
+        'Enable this if the project is still in progress. Some fields become optional while this is enabled.',
       initialValue: false,
       validation: (Rule) => Rule.required(),
     }),
@@ -87,7 +113,7 @@ export const projectType = defineType({
           title: 'Preview Image',
           type: 'image',
           description:
-            'Image used in the project card. This is different from the demo video.',
+            'Image used in the project card. Required only when the project is not in development.',
           options: {
             hotspot: true,
           },
@@ -97,10 +123,30 @@ export const projectType = defineType({
               title: 'Alt Text',
               type: 'string',
               description: 'Short text describing the image for accessibility.',
-              validation: (Rule) => Rule.required(),
+              validation: (Rule) =>
+                Rule.custom((altText, context) => {
+                  const imageHasAsset = hasAsset(context.parent);
+
+                  if (!imageHasAsset) return true;
+
+                  if (!altText) {
+                    return 'Alt text is required when a preview image is uploaded.';
+                  }
+
+                  return true;
+                }),
             }),
           ],
-          validation: (Rule) => Rule.required(),
+          validation: (Rule) =>
+            Rule.custom((image, context) => {
+              if (isProjectInDevelopment(context.document)) return true;
+
+              if (!hasAsset(image)) {
+                return 'Preview image is required when the project is not in development.';
+              }
+
+              return true;
+            }),
         }),
       ],
       validation: (Rule) => Rule.required(),
@@ -128,11 +174,20 @@ export const projectType = defineType({
           title: 'Demo Video',
           type: 'file',
           description:
-            'Main video shown in the project detail page to demonstrate how the app works.',
+            'Main video shown in the project detail page. Required only when the project is not in development.',
           options: {
             accept: 'video/mp4,video/webm,video/quicktime',
           },
-          validation: (Rule) => Rule.required(),
+          validation: (Rule) =>
+            Rule.custom((video, context) => {
+              if (isProjectInDevelopment(context.document)) return true;
+
+              if (!hasAsset(video)) {
+                return 'Demo video is required when the project is not in development.';
+              }
+
+              return true;
+            }),
         }),
 
         defineField({
@@ -154,7 +209,7 @@ export const projectType = defineType({
       type: 'array',
       group: 'technologies',
       description:
-        'Technologies shown as chips/badges in the project detail page.',
+        'Technologies shown as chips/badges. Required only when the project is not in development.',
       of: [
         defineArrayMember({
           type: 'string',
@@ -163,7 +218,16 @@ export const projectType = defineType({
       options: {
         layout: 'tags',
       },
-      validation: (Rule) => Rule.required().min(1),
+      validation: (Rule) =>
+        Rule.custom((technologies, context) => {
+          if (isProjectInDevelopment(context.document)) return true;
+
+          if (!Array.isArray(technologies) || technologies.length === 0) {
+            return 'Add at least one technology when the project is not in development.';
+          }
+
+          return true;
+        }),
     }),
 
     defineField({
@@ -171,7 +235,8 @@ export const projectType = defineType({
       title: 'Project Links',
       type: 'object',
       group: 'links',
-      description: 'External project links used by the action buttons.',
+      description:
+        'External project links used by the action buttons. Repository URL is required only when the project is not in development.',
       fields: [
         defineField({
           name: 'liveDemoUrl',
@@ -185,10 +250,30 @@ export const projectType = defineType({
           title: 'Repository URL',
           type: 'url',
           description: 'GitHub repository URL.',
-          validation: (Rule) => Rule.required(),
         }),
       ],
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) =>
+        Rule.custom((links, context) => {
+          if (isProjectInDevelopment(context.document)) return true;
+
+          const value = links as ProjectLinks | undefined;
+
+          if (!value?.repositoryUrl) {
+            return 'Repository URL is required when the project is not in development.';
+          }
+
+          return true;
+        }),
+    }),
+
+    defineField({
+      name: 'displayOrder',
+      title: 'Display Order',
+      type: 'number',
+      group: 'settings',
+      description:
+        'Controls the order of this project in the portfolio. Lower numbers appear first.',
+      validation: (Rule) => Rule.required().integer().min(0),
     }),
   ],
 
@@ -198,13 +283,17 @@ export const projectType = defineType({
       shortDescription: 'preview.shortDescription',
       media: 'preview.image',
       isInDevelopment: 'isInDevelopment',
+      displayOrder: 'displayOrder',
     },
-    prepare({ title, shortDescription, media, isInDevelopment }) {
+    prepare({ title, shortDescription, media, isInDevelopment, displayOrder }) {
+      const fallbackDescription = shortDescription ?? 'No short description';
+      const status = isInDevelopment ? 'In development' : 'Completed';
+      const order =
+        typeof displayOrder === 'number' ? `Order ${displayOrder}` : 'No order';
+
       return {
         title,
-        subtitle: isInDevelopment
-          ? `In development · ${shortDescription}`
-          : shortDescription,
+        subtitle: `${order} · ${status} · ${fallbackDescription}`,
         media,
       };
     },
