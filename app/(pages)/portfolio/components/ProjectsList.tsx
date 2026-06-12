@@ -1,7 +1,7 @@
 import React from 'react';
 import { Project } from '@prisma/client';
 
-import { EnvConfig } from '@/config/env.config';
+import { PublicEnvConfig } from '@/config/public-env.config';
 import Heading from '@/components/common/Heading';
 import ProjectCard from '@/components/common/ProjectCard';
 
@@ -26,7 +26,7 @@ const ProjectsList = ({ projects }: { projects: Project[] }) => {
             image={image}
             isDev={isDev}
             webSite={web_site ?? ''}
-            urlEndpoint={EnvConfig.url_endpoint}
+            urlEndpoint={PublicEnvConfig.url_endpoint}
             slug={slug}
           />
         ))}
