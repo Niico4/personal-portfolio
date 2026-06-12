@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { IconArrowNarrowRight } from '@tabler/icons-react';
 import { Button } from '@heroui/button';
 
-import { PublicEnvConfig } from '@/config/public-env.config';
+import { EnvConfig } from '@/config/env.config';
 import useProjects from '@/hooks/useProjects';
 import ProjectCard from '@/components/common/ProjectCard';
 import LoaderGhost from '@/components/common/LoaderGhost';
@@ -60,7 +60,7 @@ const RecentProjectsSection = () => {
               image={image}
               isDev={isDev}
               webSite={web_site ?? ''}
-              urlEndpoint={PublicEnvConfig.url_endpoint}
+              urlEndpoint={EnvConfig.url_endpoint}
               slug={slug}
             />
           ))}
