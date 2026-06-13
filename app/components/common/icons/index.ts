@@ -1,7 +1,7 @@
 import AstroIcon from './Astro';
 import CSSIcon from './CSS';
 import FigmaIcon from './Figma';
-import GithubIcon from './GitHub';
+// import GitHubIcon from './github';
 import GitIcon from './Git';
 import HeroUIIcon from './HeroUI';
 import HTML5Icon from './HTML';
@@ -26,7 +26,6 @@ export {
   AstroIcon,
   CSSIcon,
   FigmaIcon,
-  GithubIcon,
   GitIcon,
   HeroUIIcon,
   HTML5Icon,

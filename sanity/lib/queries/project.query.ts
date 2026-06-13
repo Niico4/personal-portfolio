@@ -1,69 +1,42 @@
 import { groq } from 'next-sanity';
 
 export const PROJECTS_QUERY = groq`
-  *[_type == "project"] | order(displayOrder asc, _createdAt desc) {
-    _id,
-    title,
-    "slug": slug.current,
-    isInDevelopment,
-    displayOrder,
+  *[_type == "project"] | order(displayOrder asc) {
 
-    "shortDescription": preview.shortDescription,
-
-    "previewImage": select(
+  "id": _id,
+  title,
+  "slug": slug.current,
+  "is_in_development": isInDevelopment,
+  "display_order": displayOrder,
+  "technologies": coalesce(technologies, []),
+  
+  "project_information_preview": {
+    "short_description": preview.shortDescription,
+    "image": select(
       defined(preview.image.asset) => {
         "url": preview.image.asset->url,
         "alt": preview.image.alt
       },
       null
-    ),
+    )
+  },
 
-    "technologies": coalesce(technologies, []),
-
-    "links": {
-      "liveDemoUrl": links.liveDemoUrl,
-      "repositoryUrl": links.repositoryUrl
-    }
-  }
-`;
-
-export const PROJECT_BY_SLUG_QUERY = groq`
-  *[_type == "project" && slug.current == $slug][0] {
-    _id,
-    title,
-    "slug": slug.current,
-    isInDevelopment,
-    displayOrder,
-
-    "shortDescription": preview.shortDescription,
-
-    "previewImage": select(
-      defined(preview.image.asset) => {
-        "url": preview.image.asset->url,
-        "alt": preview.image.alt
-      },
-      null
-    ),
-
-    "detail": {
-      "originDescription": detail.originDescription,
-      "description": detail.description,
-
-      "demoVideo": select(
+  "project_detail": {
+    "origin_description": detail.originDescription,
+    "full_description": detail.description,
+    "demo_video": select(
         defined(detail.demoVideo.asset) => {
           "url": detail.demoVideo.asset->url
         },
         null
       )
-    },
+  },
 
-    "technologies": coalesce(technologies, []),
-
-    "links": {
-      "liveDemoUrl": links.liveDemoUrl,
-      "repositoryUrl": links.repositoryUrl
-    }
+  "links": {
+    "live_demo_url": links.liveDemoUrl,
+    "repository_url": links.repositoryUrl
   }
+}
 `;
 
 export const PROJECT_SLUGS_QUERY = groq`

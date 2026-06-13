@@ -1,7 +1,6 @@
-import React from 'react';
 import { Metadata } from 'next';
 
-import HeroSection from './sections/HeroSection';
+import HeroSection from './sections/hero-section';
 import SoftSkills from './sections/SoftSkillsSection';
 import RecentProjectsSection from './sections/RecentProjectsSection';
 import GitHubContribution from './sections/GitHubContributionSection';

@@ -1,3 +1,4 @@
+import GitHubIcon from '@/components/common/icons/github';
 import * as Icon from '@/components/common/icons/index';
 
 export const TECHNOLOGIES_LIST = [
@@ -59,7 +60,7 @@ export const TECHNOLOGIES_LIST = [
   },
   {
     label: 'GitHub',
-    icon: Icon.GithubIcon,
+    icon: GitHubIcon,
   },
   {
     label: 'Git',
