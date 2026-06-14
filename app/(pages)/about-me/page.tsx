@@ -9,7 +9,7 @@ import TechnologiesList from './components/TechnoligiesList';
 import SyntaxCodeCard from './components/SyntaxCodeCard';
 
 import { aboutMeMetadata } from '@/config/metadata/about-me';
-import SubTitle from '@/components/common/Heading';
+import SubTitle from '@/components/common/HeadingOld';
 
 export async function generateMetadata(): Promise<Metadata> {
   return aboutMeMetadata;

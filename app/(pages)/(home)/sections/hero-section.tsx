@@ -1,31 +1,13 @@
 import Image from 'next/image';
-import {
-  IconDownload,
-  IconExternalLink,
-  IconMail,
-  IconMapPin,
-  IconSchool,
-} from '@tabler/icons-react';
+import { IconMapPin, IconSchool } from '@tabler/icons-react';
 import { Divider } from '@heroui/divider';
-import { Card, CardBody } from '@heroui/card';
-import { Button } from '@heroui/button';
-import { Tooltip } from '@heroui/tooltip';
 
 import avatar from '../../../../public/nico-avatar-1.webp';
-import CopyEmailButton from '../components/copy-email-button';
 
-import { poetsenOne } from '@/fonts';
+import HeroContactCards from './hero-contact-cards';
+
+import Heading from '@/components/common/heading';
 import { getProfile } from '@/sanity/lib/fetchers/profile.fetcher';
-import NicolasLogo from '@/components/common/icons/nicolas-logo';
-import LinkedInIcon from '@/components/common/icons/linkedin';
-import GitHubIcon from '@/components/common/icons/github';
-
-const actionTooltips = {
-  downloadResume: 'Descarga mi currículum',
-  copyEmail: 'Copia mi correo',
-  openGithub: 'Mira mi GitHub',
-  openLinkedin: 'Visita mi LinkedIn',
-};
 
 const HeroSection = async () => {
   const profile = await getProfile();
@@ -57,9 +39,7 @@ const HeroSection = async () => {
 
         <div className="flex max-w-[530px] flex-col gap-5">
           <div className="space-y-4">
-            <h1 className={`text-5xl text-ink-50 ${poetsenOne.className}`}>
-              ¡Hola!, soy Nicolás
-            </h1>
+            <Heading>¡Hola!, soy Nicolás</Heading>
 
             <p className="max-w-[500px] text-ink-100">
               {profile.content.introduction}
@@ -88,100 +68,14 @@ const HeroSection = async () => {
 
           <Divider className="my-2 bg-ink-900/70" />
 
-          <article className="grid grid-cols-2 gap-5">
-            <Card className="h-16 border border-ink-900 bg-ink-900/40 shadow-none hover:bg-ink-800/40 ">
-              <CardBody className="flex flex-row items-center justify-between overflow-hidden px-4 py-0">
-                <div className="flex items-center gap-3">
-                  <NicolasLogo className="size-7 shrink-0 text-ink-50" />
-                  <p className="text-lg text-ink-200">Currículum</p>
-                </div>
-
-                <Tooltip
-                  content={actionTooltips.downloadResume}
-                  color="primary"
-                  placement="bottom"
-                  showArrow
-                >
-                  <a
-                    href={resumeHref ?? '#'}
-                    download={
-                      isSanityFile ? 'nicolas-garzon-cv.pdf' : undefined
-                    }
-                    target={isSanityFile ? undefined : '_blank'}
-                    rel={isSanityFile ? undefined : 'noopener noreferrer'}
-                  >
-                    <Button
-                      isIconOnly
-                      isDisabled={!resumeUrl}
-                      variant="light"
-                      className="text-ink-300"
-                      aria-label={actionTooltips.downloadResume}
-                    >
-                      <IconDownload stroke={1.5} size={20} />
-                    </Button>
-                  </a>
-                </Tooltip>
-              </CardBody>
-            </Card>
-
-            <Card className="h-16 border border-ink-900 bg-ink-900/40 shadow-none hover:bg-ink-800/40 ">
-              <CardBody className="flex flex-row items-center justify-between overflow-hidden px-4 py-0">
-                <div className="flex items-center gap-3">
-                  <LinkedInIcon className="size-7 shrink-0" />
-                  <p className="text-lg text-ink-200">LinkedIn</p>
-                </div>
-
-                <Tooltip
-                  content={actionTooltips.openLinkedin}
-                  color="primary"
-                  placement="bottom"
-                  showArrow
-                >
-                  <a href={profile.contact_information.linkedin_url}>
-                    <Button isIconOnly variant="light" className="text-ink-300">
-                      <IconExternalLink stroke={1.5} size={20} />
-                    </Button>
-                  </a>
-                </Tooltip>
-              </CardBody>
-            </Card>
-
-            <Card className="h-16 border border-ink-900 bg-ink-900/40 shadow-none hover:bg-ink-800/40 ">
-              <CardBody className="flex flex-row items-center justify-between overflow-hidden px-4 py-0">
-                <div className="flex items-center gap-3">
-                  <GitHubIcon className="size-7 shrink-0 text-ink-50" />
-                  <p className="text-lg text-ink-200">GitHub</p>
-                </div>
-
-                <Tooltip
-                  content={actionTooltips.openGithub}
-                  color="primary"
-                  placement="bottom"
-                  showArrow
-                >
-                  <a href={profile.contact_information.github_url}>
-                    <Button isIconOnly variant="light" className="text-ink-300">
-                      <IconExternalLink stroke={1.5} size={20} />
-                    </Button>
-                  </a>
-                </Tooltip>
-              </CardBody>
-            </Card>
-
-            <Card className="h-16 border border-ink-900 bg-ink-900/40 shadow-none hover:bg-ink-800/40 ">
-              <CardBody className="flex flex-row items-center justify-between overflow-hidden px-4 py-0">
-                <div className="flex items-center gap-3">
-                  <IconMail stroke={1.5} size={28} className="text-ink-100" />
-                  <p className="text-lg text-ink-200">Correo</p>
-                </div>
-
-                <CopyEmailButton
-                  email={profile.contact_information.email}
-                  content={actionTooltips.copyEmail}
-                />
-              </CardBody>
-            </Card>
-          </article>
+          <HeroContactCards
+            resumeHref={resumeHref ?? null}
+            resumeDisabled={!resumeUrl}
+            isSanityFile={isSanityFile}
+            linkedinUrl={profile.contact_information.linkedin_url}
+            githubUrl={profile.contact_information.github_url}
+            email={profile.contact_information.email}
+          />
         </div>
       </div>
       <Divider className="bg-ink-900/70 mt-2" />

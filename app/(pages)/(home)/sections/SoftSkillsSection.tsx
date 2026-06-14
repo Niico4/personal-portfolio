@@ -3,7 +3,7 @@ import React from 'react';
 import SoftSkillCard from '../components/SoftSkillCard';
 import { SOFT_SKILLS } from '../data/profile';
 
-import SubTitle from '@/components/common/Heading';
+import SubTitle from '@/components/common/HeadingOld';
 
 const SoftSkills = () => {
   return (

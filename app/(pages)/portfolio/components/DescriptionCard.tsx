@@ -6,7 +6,7 @@ import React from 'react';
 import { Project } from '@prisma/client';
 import { useMediaQuery } from 'usehooks-ts';
 
-import Heading from '@/components/common/Heading';
+import Heading from '@/components/common/HeadingOld';
 
 const DescriptionCard = (
   project: Pick<Project, 'title' | 'description' | 'repository' | 'web_site'>,

@@ -1,36 +1,25 @@
-import { Grandstander } from 'next/font/google';
-import React, { FC } from 'react';
+import { FC } from 'react';
 
-export const grandstander = Grandstander({
-  subsets: ['latin'],
-  display: 'swap',
-});
+import { poetsenOne } from '@/fonts';
 
 interface HeadingProps {
-  title: string;
+  as?: 'h1' | 'h2';
+  children: React.ReactNode;
   className?: string;
-  type: 'h1' | 'h2';
 }
 
-const Heading: FC<HeadingProps> = ({ title, className, type }) => {
-  return (
-    <>
-      {type === 'h1' && (
-        <h1
-          className={`${grandstander.className} ${className} text-title text-4xl sm:text-5xl text-center font-medium z-20`}
-        >
-          {title}
-        </h1>
-      )}
+const headingStyles: Record<NonNullable<HeadingProps['as']>, string> = {
+  h1: 'text-5xl text-ink-50',
+  h2: 'text-4xl text-ink-100',
+};
 
-      {type === 'h2' && (
-        <h2
-          className={`${grandstander.className} ${className} text-subtitle/95 text-4xl font-medium z-20`}
-        >
-          {title}
-        </h2>
-      )}
-    </>
+const Heading: FC<HeadingProps> = ({ as: Tag = 'h1', children, className }) => {
+  return (
+    <Tag
+      className={`${poetsenOne.className} ${headingStyles[Tag]} ${className ?? ''} z-20`}
+    >
+      {children}
+    </Tag>
   );
 };
 

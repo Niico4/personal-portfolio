@@ -2,8 +2,7 @@ import { Metadata } from 'next';
 
 import HeroSection from './sections/hero-section';
 import SoftSkills from './sections/SoftSkillsSection';
-import RecentProjectsSection from './sections/RecentProjectsSection';
-import GitHubContribution from './sections/GitHubContributionSection';
+import ProjectsPreview from './sections/projects-preview-section';
 
 import { homeMetadata } from '@/config/metadata/home';
 
@@ -15,8 +14,7 @@ const HomePage = () => {
   return (
     <div className="flex flex-col gap-20 mx-auto">
       <HeroSection />
-      <GitHubContribution />
-      <RecentProjectsSection />
+      <ProjectsPreview />
       <SoftSkills />
     </div>
   );

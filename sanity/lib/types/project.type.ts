@@ -26,11 +26,11 @@ export interface DemoVideo {
 }
 
 export interface ProjectInformationPreview {
-  image: Image | null;
+  image: ImageType | null;
   short_description: string;
 }
 
-export interface Image {
+export interface ImageType {
   alt: string;
   url: string;
 }
