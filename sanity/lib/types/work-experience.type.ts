@@ -1,3 +1,5 @@
+export type EmploymentType = 'full-time' | 'part-time';
+
 export interface WorkExperienceInformationType {
   id: string;
   display_order: number;
@@ -7,7 +9,7 @@ export interface WorkExperienceInformationType {
 
 export interface JobInformation {
   _key: string;
-  employment_type: string;
+  employment_type: EmploymentType;
   is_current_job: boolean;
   job_icon_key: null | string;
   job_title: string;

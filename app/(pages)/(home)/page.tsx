@@ -1,8 +1,8 @@
 import { Metadata } from 'next';
 
-import HeroSection from './sections/hero-section';
-import SoftSkills from './sections/SoftSkillsSection';
+import Hero from './sections/hero-section';
 import ProjectsPreview from './sections/projects-preview-section';
+import WorkExperience from './sections/work-experience-section';
 
 import { homeMetadata } from '@/config/metadata/home';
 
@@ -13,9 +13,9 @@ export async function generateMetadata(): Promise<Metadata> {
 const HomePage = () => {
   return (
     <div className="flex flex-col gap-20 mx-auto">
-      <HeroSection />
+      <Hero />
       <ProjectsPreview />
-      <SoftSkills />
+      <WorkExperience />
     </div>
   );
 };

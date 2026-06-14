@@ -5,7 +5,7 @@ import Heading from '@/components/common/heading';
 import { getProjects } from '@/sanity/lib/fetchers/project.fetcher';
 import ProjectCard from '@/components/common/project-card';
 
-const ProjectsPreview = async () => {
+const ProjectsPreviewSection = async () => {
   const projects = await getProjects();
 
   const visibleProjects = projects?.slice(0, 3);
@@ -43,4 +43,4 @@ const ProjectsPreview = async () => {
   );
 };
 
-export default ProjectsPreview;
+export default ProjectsPreviewSection;
