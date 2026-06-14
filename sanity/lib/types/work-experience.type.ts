@@ -1,13 +1,15 @@
+import { ImageType } from './common.type';
+
 export type EmploymentType = 'full-time' | 'part-time';
 
-export interface WorkExperienceInformationType {
+export type WorkExperienceInformationType = {
   id: string;
   display_order: number;
   organization_information: OrganizationInformation;
   job_information: JobInformation[];
-}
+};
 
-export interface JobInformation {
+export type JobInformation = {
   _key: string;
   employment_type: EmploymentType;
   is_current_job: boolean;
@@ -15,16 +17,11 @@ export interface JobInformation {
   job_title: string;
   highlights: string[];
   skills: string[];
-  start_date: Date;
-  end_date: Date;
-}
+  start_date: string | Date;
+  end_date: string | Date | null;
+};
 
-export interface OrganizationInformation {
-  organization_logo: OrganizationLogo | null;
+export type OrganizationInformation = {
+  organization_logo: ImageType | null;
   organization_name: string;
-}
-
-export interface OrganizationLogo {
-  alt: string;
-  url: string;
-}
+};

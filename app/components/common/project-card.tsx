@@ -32,7 +32,7 @@ const ProjectCard = ({
         fill
         priority
         sizes="(min-width: 1024px) 50vw, 100vw"
-        className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.03]"
+        className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.03] aspect-square"
         alt={preview.image?.alt ?? 'Próximamente disponible'}
         src={preview.image?.url ?? comingSoonWebp}
       />

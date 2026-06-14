@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import { IconArrowNarrowRight } from '@tabler/icons-react';
 
-import Heading from '@/components/common/heading';
 import { getProjects } from '@/sanity/lib/fetchers/project.fetcher';
 import ProjectCard from '@/components/common/project-card';
+import { SectionHeader } from '@/components/common/section-header';
 
 const ProjectsPreviewSection = async () => {
   const projects = await getProjects();
@@ -15,15 +15,13 @@ const ProjectsPreviewSection = async () => {
   return (
     <section className="flex flex-col gap-10">
       <article className="flex items-center justify-between">
-        <div className="flex flex-col gap-4 items-start">
-          <Heading as="h2">Proyectos</Heading>
-          <p className="text-ink-100">
-            Soluciones que construí de principio a fin
-          </p>
-        </div>
+        <SectionHeader
+          title="Proyectos"
+          description="Soluciones que construí de principio a fin"
+        />
         <Link
           href="/portfolio"
-          className="link-underline group text-ink-100 flex items-center gap-3 text-base"
+          className="link-underline group flex items-center gap-3 text-base"
         >
           Ver todos los proyectos
           <IconArrowNarrowRight
@@ -33,7 +31,7 @@ const ProjectsPreviewSection = async () => {
         </Link>
       </article>
 
-      <article className="grid grid-cols-2 grid-rows-[260px_260px] gap-5">
+      <article className="grid grid-cols-[1fr_400px] grid-rows-[260px_260px] gap-5">
         <ProjectCard project={visibleProjects[0]} className="row-span-full" />
 
         <ProjectCard project={visibleProjects[1]} />

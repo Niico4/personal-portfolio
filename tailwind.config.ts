@@ -12,7 +12,8 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: 'var(--background-gradient)',
+        main: '#080A0F',
+
         ink: {
           50: '#EEEEEF',
           100: '#C9C9CC',

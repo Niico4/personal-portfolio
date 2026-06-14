@@ -4,8 +4,8 @@ import { IconBulb, IconCode, IconPacman } from '@tabler/icons-react';
 
 import { TimelineItem } from '../components/timeline/timeline-item';
 
-import Heading from '@/components/common/heading';
 import { CustomChip } from '@/components/common/custom-chip';
+import { SectionHeader } from '@/components/common/section-header';
 import { getWorkExperience } from '@/sanity/lib/fetchers/work-experience.fetcher';
 import { EmploymentType } from '@/sanity/lib/types/work-experience.type';
 import { getJobDateRange } from '@/utils/get-job-date-range';
@@ -42,14 +42,18 @@ const CompanyGroup = ({
   <article className="flex flex-col gap-3">
     <div className="flex items-center gap-3">
       {logo ? (
-        <Image src={logo} alt={alt ?? name} width={32} height={32} />
+        <Image
+          src={logo}
+          alt={alt ?? name}
+          width={32}
+          height={32}
+          className="aspect-square"
+        />
       ) : (
         <IconPacman stroke={1.5} className="text-brand-600" />
       )}
 
-      <h3 className="text-xl font-semibold text-ink-100 tracking-wider">
-        {name}
-      </h3>
+      <h3 className="text-xl font-semibold tracking-wider">{name}</h3>
     </div>
 
     <div className="flex flex-col">{children}</div>
@@ -63,13 +67,10 @@ const WorkExperienceSection = async () => {
 
   return (
     <section className="flex flex-col gap-10">
-      <div className="flex flex-col items-start gap-4">
-        <Heading as="h2">Experiencia</Heading>
-
-        <p className="text-ink-100">
-          Experiencia real entregando, no solo aprendiendo
-        </p>
-      </div>
+      <SectionHeader
+        title="Experiencia"
+        description="Experiencia real entregando, no solo aprendiendo"
+      />
 
       {workExperience.map(
         ({ id, job_information, organization_information }) => (

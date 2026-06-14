@@ -11,7 +11,6 @@ export const getSanityFetchOptions = (tags: string[] = []) =>
   ({
     cache: 'no-store',
     next: {
-      revalidate: false,
       // revalidate: 60 * 60 * 24, -> for production
       tags,
     },

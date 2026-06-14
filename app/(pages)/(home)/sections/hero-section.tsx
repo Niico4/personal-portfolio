@@ -26,24 +26,28 @@ const HeroSection = async () => {
   return (
     <section className="flex flex-col gap-5">
       <div className="mx-auto grid grid-cols-[0.95fr_1.05fr] items-center gap-20">
-        <div className="relative flex justify-center">
+        <div className="relative mx-auto flex w-full h-full justify-center overflow-hidden">
           <Image
             src={avatar}
             alt="Avatar de Nicolás"
             priority
-            className="select-none object-contain max-w-[90%]"
+            draggable={false}
+            fill
+            sizes="(min-width: 1024px) 50vw, 100vw"
+            className="select-none object-contain h-auto w-full aspect-square"
           />
 
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#080A0F] to-transparent" />
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-main via-main/90 to-transparent"
+          />
         </div>
 
         <div className="flex max-w-[530px] flex-col gap-5">
           <div className="space-y-4">
             <Heading>¡Hola!, soy Nicolás</Heading>
 
-            <p className="max-w-[500px] text-ink-100">
-              {profile.content.introduction}
-            </p>
+            <p className="max-w-[500px]">{profile.content.introduction}</p>
           </div>
 
           <article className="flex flex-col gap-3 pt-1">

@@ -1,4 +1,6 @@
-export interface ProjectInformationType {
+import { ImageType } from './common.type';
+
+export type ProjectInformationType = {
   id: string;
   display_order: number;
   is_in_development: boolean;
@@ -8,29 +10,24 @@ export interface ProjectInformationType {
   project_information_preview: ProjectInformationPreview;
   technologies: string[];
   links: Links;
-}
+};
 
-export interface Links {
-  live_demo_url: null | string;
-  repository_url: string;
-}
+export type Links = {
+  live_demo_url: string | null;
+  repository_url: string | null;
+};
 
-export interface ProjectDetail {
+export type ProjectDetail = {
   demo_video: DemoVideo | null;
   full_description: string;
   origin_description: string;
-}
+};
 
-export interface DemoVideo {
+export type DemoVideo = {
   url: string;
-}
+};
 
-export interface ProjectInformationPreview {
+export type ProjectInformationPreview = {
   image: ImageType | null;
   short_description: string;
-}
-
-export interface ImageType {
-  alt: string;
-  url: string;
-}
+};
