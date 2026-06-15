@@ -1,9 +1,15 @@
 import { ImageType } from './common.type';
 
+export type ProjectStatus =
+  | 'published'
+  | 'completed'
+  | 'inDevelopment'
+  | 'concept';
+
 export type ProjectInformationType = {
   id: string;
   display_order: number;
-  is_in_development: boolean;
+  status: ProjectStatus;
   title: string;
   slug: string;
   project_detail: ProjectDetail;

@@ -3,7 +3,7 @@ import { Grandstander } from 'next/font/google';
 
 import GoBackLink from '@/components/common/GoBackLink';
 import Heading from '@/components/common/HeadingOld';
-import LoaderGhost from '@/components/common/LoaderGhost';
+import { LoaderGhost } from '@/components/common/loader-ghost/loader-ghost';
 
 const grandstander = Grandstander({
   subsets: ['latin'],

@@ -6,18 +6,17 @@ import { Card, CardFooter } from '@heroui/card';
 import { Chip } from '@heroui/chip';
 import { IconArrowUpRight } from '@tabler/icons-react';
 
-import comingSoonWebp from '../../../public/coming_soon.webp';
-
 import { ProjectInformationType } from '@/sanity/lib/types/project.type';
+import { ProjectStatusChip } from '@/(pages)/portfolio/components/project-status-chip';
 
-const ProjectCard = ({
+export const ProjectCard = ({
   project,
   className,
 }: {
   project: ProjectInformationType;
   className?: string;
 }) => {
-  const { title, slug, project_information_preview: preview } = project;
+  const { title, slug, status, project_information_preview: preview } = project;
 
   return (
     <Card
@@ -26,30 +25,39 @@ const ProjectCard = ({
       isPressable
       isFooterBlurred
       radius="lg"
-      className={`group relative w-full overflow-hidden border border-ink-500/80 bg-ink-950 transition-transform duration-300 ${className}`}
+      className={`group relative w-full overflow-hidden border border-ink-500/80 bg-ink-950 transition-transform duration-300 ${className ?? ''}`}
     >
       <Image
         fill
         priority
         sizes="(min-width: 1024px) 50vw, 100vw"
-        className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.03] aspect-square"
+        className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.03]"
         alt={preview.image?.alt ?? 'Próximamente disponible'}
-        src={preview.image?.url ?? comingSoonWebp}
+        src={preview.image?.url ?? '/coming_soon.webp'}
       />
 
       <div className="absolute inset-0 z-10 bg-black/0 transition-colors duration-300 group-hover:bg-black/10 group-focus-visible:bg-black/10" />
 
-      <div className="absolute right-4 top-4 z-20 opacity-0 shadow-sm backdrop-blur-xl transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100 translate-y-2">
+      <div className="absolute left-4 top-4 z-20">
+        <ProjectStatusChip status={status} />
+      </div>
+
+      <div className="pointer-events-none absolute right-4 top-4 z-20 translate-y-2 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100">
         <Chip
-          endContent={<IconArrowUpRight size={18} stroke={1.7} />}
-          size="lg"
-          color="primary"
+          size="sm"
+          radius="full"
+          variant="solid"
+          endContent={<IconArrowUpRight size={15} stroke={1.8} />}
+          classNames={{
+            base: 'h-8 border border-white/15 !bg-ink-950/90 px-2 shadow-sm',
+            content: 'px-0 text-xs font-medium !text-white',
+          }}
         >
           Ver proyecto
         </Chip>
       </div>
 
-      <CardFooter className="absolute bottom-0 inset-x-0 z-10 flex-col items-start gap-1.5 border-t border-white/20 bg-ink-50/70 p-5 backdrop-blur-xl">
+      <CardFooter className="absolute inset-x-0 bottom-0 z-10 flex-col items-start gap-1.5 border-t border-white/20 bg-ink-50/75 p-5 backdrop-blur-xl">
         <h3 className="text-xl font-semibold leading-tight text-ink-900">
           {title}
         </h3>
@@ -61,5 +69,3 @@ const ProjectCard = ({
     </Card>
   );
 };
-
-export default ProjectCard;

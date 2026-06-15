@@ -1,6 +1,65 @@
+import { Metadata } from 'next';
+
 import { dmSans } from './fonts';
+import { PublicEnvConfig } from './config/public-env.config';
 
 import '@/styles/globals.css';
+
+export const metadata: Metadata = {
+  metadataBase: new URL(PublicEnvConfig.site_url),
+  title: {
+    default: 'Nicolás Garzón',
+    template: '%s | Nicolás Garzón',
+  },
+  description:
+    'Desarrollador Full Stack con experiencia real entregando productos web. React, Next.js, Node.js y más. Disponible para proyectos freelance y empleo.',
+  applicationName: 'Portfolio de Nicolás Garzón',
+  authors: [{ name: 'Nicolás Garzón' }],
+  creator: 'Nicolás Garzón',
+  publisher: 'Nicolás Garzón',
+
+  keywords: [
+    'Nicolás Garzón',
+    'Desarrollador Full Stack',
+    'Frontend Developer',
+    'Backend Developer',
+    'React',
+    'Next.js',
+    'Node.js',
+    'TypeScript',
+    'PostgreSQL',
+    'Portfolio desarrollador',
+  ],
+
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
+    },
+  },
+
+  openGraph: {
+    type: 'website',
+    locale: 'es_CO',
+    url: '/',
+    siteName: 'Nicolás Garzón',
+    title: 'Nicolás Garzón | Desarrollador Full Stack',
+    description:
+      'Desarrollador Full Stack con experiencia real entregando productos web. React, Next.js, Node.js y más. Disponible para proyectos freelance y empleo.',
+  },
+
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Nicolás Garzón | Desarrollador Full Stack',
+    description:
+      'Desarrollador Full Stack con experiencia real entregando productos web. React, Next.js, Node.js y más. Disponible para proyectos freelance y empleo.',
+  },
+};
 
 export default function RootLayout({
   children,

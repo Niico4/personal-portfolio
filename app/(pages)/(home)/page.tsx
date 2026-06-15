@@ -4,11 +4,38 @@ import Hero from './sections/hero-section';
 import ProjectsPreview from './sections/projects-preview-section';
 import WorkExperience from './sections/work-experience-section';
 
-import { homeMetadata } from '@/config/metadata/home';
-
-export async function generateMetadata(): Promise<Metadata> {
-  return homeMetadata;
-}
+export const metadata: Metadata = {
+  title: {
+    absolute: 'Nicolás Garzón | Desarrollador Full Stack',
+  },
+  description:
+    'Construyo productos web completos con React, Next.js y Node.js: interfaces claras, APIs bien estructuradas y soluciones pensadas desde el problema.',
+  alternates: {
+    canonical: '/',
+  },
+  openGraph: {
+    title: 'Nicolás Garzón | Desarrollador Full Stack',
+    description:
+      'Construyo productos web completos con React, Next.js y Node.js: interfaces claras, APIs bien estructuradas y soluciones pensadas desde el problema.',
+    url: '/',
+    type: 'website',
+    // TODO: images: [
+    //   {
+    //     url: '/seo/og-home.png',
+    //     width: 1200,
+    //     height: 630,
+    //     alt: 'Portfolio de Nicolás Garzón',
+    //   },
+    // ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Nicolás Garzón | Desarrollador Full Stack',
+    description:
+      'Construyo productos web completos con React, Next.js y Node.js: interfaces claras, APIs bien estructuradas y soluciones pensadas desde el problema.',
+    // TODO: images: ['/seo/og-home.png'],
+  },
+};
 
 const HomePage = () => {
   return (

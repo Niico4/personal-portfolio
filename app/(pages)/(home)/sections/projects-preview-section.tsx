@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { IconArrowNarrowRight } from '@tabler/icons-react';
 
 import { getProjects } from '@/sanity/lib/fetchers/project.fetcher';
-import ProjectCard from '@/components/common/project-card';
+import { ProjectCard } from '@/components/common/project-card';
 import { SectionHeader } from '@/components/common/section-header';
 
 const ProjectsPreviewSection = async () => {

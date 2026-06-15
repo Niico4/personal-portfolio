@@ -7,8 +7,10 @@ type SanityAssetField = {
   };
 };
 
+type ProjectStatus = 'published' | 'completed' | 'inDevelopment' | 'concept';
+
 type ProjectDocument = {
-  isInDevelopment?: boolean;
+  status?: ProjectStatus;
 };
 
 type ProjectLinks = {
@@ -16,8 +18,46 @@ type ProjectLinks = {
   repositoryUrl?: string;
 };
 
-const isProjectInDevelopment = (document: unknown) =>
-  (document as ProjectDocument)?.isInDevelopment === true;
+const PROJECT_STATUS_LABELS: Record<ProjectStatus, string> = {
+  published: 'Published',
+  completed: 'Completed',
+  inDevelopment: 'In development',
+  concept: 'Concept',
+};
+
+const PROJECT_STATUSES_WITH_OPTIONAL_CONTENT: ProjectStatus[] = [
+  'inDevelopment',
+  'concept',
+];
+
+const PROJECT_STATUSES_WITH_REQUIRED_MEDIA: ProjectStatus[] = [
+  'published',
+  'completed',
+];
+
+const getProjectStatus = (document: unknown) =>
+  (document as ProjectDocument | undefined)?.status;
+
+const allowsOptionalContent = (document: unknown) => {
+  const status = getProjectStatus(document);
+
+  return (
+    status !== undefined &&
+    PROJECT_STATUSES_WITH_OPTIONAL_CONTENT.includes(status)
+  );
+};
+
+const requiresMediaAndTechnologies = (document: unknown) => {
+  const status = getProjectStatus(document);
+
+  return (
+    status !== undefined &&
+    PROJECT_STATUSES_WITH_REQUIRED_MEDIA.includes(status)
+  );
+};
+
+const isPublishedProject = (document: unknown) =>
+  getProjectStatus(document) === 'published';
 
 const hasAsset = (value: unknown) =>
   Boolean((value as SanityAssetField | undefined)?.asset?._ref);
@@ -81,13 +121,34 @@ export const projectType = defineType({
     }),
 
     defineField({
-      name: 'isInDevelopment',
-      title: 'Is In Development?',
-      type: 'boolean',
+      name: 'status',
+      title: 'Project Status',
+      type: 'string',
       group: 'main',
       description:
-        'Enable this if the project is still in progress. Some fields become optional while this is enabled.',
-      initialValue: false,
+        'Defines the current state of the project. This status is shown in the portfolio and controls which fields are required.',
+      options: {
+        list: [
+          {
+            title: 'Published',
+            value: 'published',
+          },
+          {
+            title: 'Completed',
+            value: 'completed',
+          },
+          {
+            title: 'In Development',
+            value: 'inDevelopment',
+          },
+          {
+            title: 'Concept',
+            value: 'concept',
+          },
+        ],
+        layout: 'dropdown',
+      },
+      initialValue: 'completed',
       validation: (Rule) => Rule.required(),
     }),
 
@@ -139,7 +200,7 @@ export const projectType = defineType({
           ],
           validation: (Rule) =>
             Rule.custom((image, context) => {
-              if (isProjectInDevelopment(context.document)) return true;
+              if (!requiresMediaAndTechnologies(context.document)) return true;
 
               if (!hasAsset(image)) {
                 return 'Preview image is required when the project is not in development.';
@@ -180,7 +241,7 @@ export const projectType = defineType({
           },
           validation: (Rule) =>
             Rule.custom((video, context) => {
-              if (isProjectInDevelopment(context.document)) return true;
+              if (!requiresMediaAndTechnologies(context.document)) return true;
 
               if (!hasAsset(video)) {
                 return 'Demo video is required when the project is not in development.';
@@ -220,10 +281,10 @@ export const projectType = defineType({
       },
       validation: (Rule) =>
         Rule.custom((technologies, context) => {
-          if (isProjectInDevelopment(context.document)) return true;
+          if (!requiresMediaAndTechnologies(context.document)) return true;
 
           if (!Array.isArray(technologies) || technologies.length === 0) {
-            return 'Add at least one technology when the project is not in development.';
+            return 'Add at least one technology for published or completed projects.';
           }
 
           return true;
@@ -254,12 +315,16 @@ export const projectType = defineType({
       ],
       validation: (Rule) =>
         Rule.custom((links, context) => {
-          if (isProjectInDevelopment(context.document)) return true;
+          if (allowsOptionalContent(context.document)) return true;
 
           const value = links as ProjectLinks | undefined;
 
           if (!value?.repositoryUrl) {
-            return 'Repository URL is required when the project is not in development.';
+            return 'Repository URL is required for published or completed projects.';
+          }
+
+          if (isPublishedProject(context.document) && !value?.liveDemoUrl) {
+            return 'Live demo URL is required when the project status is Published.';
           }
 
           return true;
@@ -282,18 +347,22 @@ export const projectType = defineType({
       title: 'title',
       shortDescription: 'preview.shortDescription',
       media: 'preview.image',
-      isInDevelopment: 'isInDevelopment',
+      status: 'status',
       displayOrder: 'displayOrder',
     },
-    prepare({ title, shortDescription, media, isInDevelopment, displayOrder }) {
+    prepare({ title, shortDescription, media, status, displayOrder }) {
+      const fallbackTitle = title ?? 'Untitled project';
       const fallbackDescription = shortDescription ?? 'No short description';
-      const status = isInDevelopment ? 'In development' : 'Completed';
+
+      const statusLabel =
+        PROJECT_STATUS_LABELS[status as ProjectStatus] ?? 'No status';
+
       const order =
         typeof displayOrder === 'number' ? `Order ${displayOrder}` : 'No order';
 
       return {
-        title,
-        subtitle: `${order} · ${status} · ${fallbackDescription}`,
+        title: fallbackTitle,
+        subtitle: `${order} · ${statusLabel} · ${fallbackDescription}`,
         media,
       };
     },

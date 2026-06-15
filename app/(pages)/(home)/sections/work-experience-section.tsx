@@ -4,7 +4,7 @@ import { IconBulb, IconCode, IconPacman } from '@tabler/icons-react';
 
 import { TimelineItem } from '../components/timeline/timeline-item';
 
-import { CustomChip } from '@/components/common/custom-chip';
+import { SkillChip } from '@/components/common/skill-chip';
 import { SectionHeader } from '@/components/common/section-header';
 import { getWorkExperience } from '@/sanity/lib/fetchers/work-experience.fetcher';
 import { EmploymentType } from '@/sanity/lib/types/work-experience.type';
@@ -146,7 +146,7 @@ const WorkExperienceSection = async () => {
                     {skills?.length > 0 && (
                       <div className="flex flex-wrap items-center gap-4">
                         {skills.map((skill) => (
-                          <CustomChip key={skill} label={skill} />
+                          <SkillChip key={skill} label={skill} />
                         ))}
                       </div>
                     )}

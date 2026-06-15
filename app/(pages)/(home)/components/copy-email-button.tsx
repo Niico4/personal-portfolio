@@ -28,7 +28,7 @@ const CopyEmailButton = ({ email, content }: CopyEmailButtonProps) => {
   };
 
   return (
-    <Tooltip content={content} color="primary" placement="bottom" showArrow>
+    <Tooltip content={content} color="primary" placement="top" showArrow>
       <Button
         isIconOnly
         variant="light"

@@ -2,8 +2,6 @@ import Image from 'next/image';
 import { IconMapPin, IconSchool } from '@tabler/icons-react';
 import { Divider } from '@heroui/divider';
 
-import avatar from '../../../../public/nico-avatar-1.webp';
-
 import HeroContactCards from './hero-contact-cards';
 
 import Heading from '@/components/common/heading';
@@ -28,7 +26,7 @@ const HeroSection = async () => {
       <div className="mx-auto grid grid-cols-[0.95fr_1.05fr] items-center gap-20">
         <div className="relative mx-auto flex w-full h-full justify-center overflow-hidden">
           <Image
-            src={avatar}
+            src="/nico-avatar-1.webp"
             alt="Avatar de Nicolás"
             priority
             draggable={false}

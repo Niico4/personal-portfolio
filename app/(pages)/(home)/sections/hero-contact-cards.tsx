@@ -20,12 +20,12 @@ interface ContactCardsProps {
   email: string;
 }
 
-const tooltips = {
+const ACTION_LABELS = {
   downloadResume: 'Descarga mi currículum',
   copyEmail: 'Copia mi correo',
   openGithub: 'Mira mi GitHub',
   openLinkedin: 'Visita mi LinkedIn',
-};
+} as const;
 
 const HeroContactCards = ({
   resumeHref,
@@ -42,9 +42,9 @@ const HeroContactCards = ({
         icon={<NicolasLogo className="size-7 shrink-0 text-ink-50" />}
         action={
           <Tooltip
-            content={tooltips.downloadResume}
+            content={ACTION_LABELS.downloadResume}
             color="primary"
-            placement="bottom"
+            placement="top"
             showArrow
           >
             <Button
@@ -57,7 +57,7 @@ const HeroContactCards = ({
               isDisabled={resumeDisabled}
               variant="light"
               className="text-ink-300"
-              aria-label={tooltips.downloadResume}
+              aria-label={ACTION_LABELS.downloadResume}
             >
               <IconDownload stroke={1.5} size={20} />
             </Button>
@@ -70,9 +70,9 @@ const HeroContactCards = ({
         icon={<LinkedInIcon className="size-7 shrink-0" />}
         action={
           <Tooltip
-            content={tooltips.openLinkedin}
+            content={ACTION_LABELS.openLinkedin}
             color="primary"
-            placement="bottom"
+            placement="top"
             showArrow
           >
             <Button
@@ -83,7 +83,7 @@ const HeroContactCards = ({
               rel="noopener noreferrer"
               variant="light"
               className="text-ink-300"
-              aria-label={tooltips.openLinkedin}
+              aria-label={ACTION_LABELS.openLinkedin}
             >
               <IconExternalLink stroke={1.5} size={20} />
             </Button>
@@ -96,9 +96,9 @@ const HeroContactCards = ({
         icon={<GitHubIcon className="size-7 shrink-0 text-ink-50" />}
         action={
           <Tooltip
-            content={tooltips.openGithub}
+            content={ACTION_LABELS.openGithub}
             color="primary"
-            placement="bottom"
+            placement="top"
             showArrow
           >
             <Button
@@ -109,7 +109,7 @@ const HeroContactCards = ({
               rel="noopener noreferrer"
               variant="light"
               className="text-ink-300"
-              aria-label={tooltips.openGithub}
+              aria-label={ACTION_LABELS.openGithub}
             >
               <IconExternalLink stroke={1.5} size={20} />
             </Button>
@@ -120,7 +120,9 @@ const HeroContactCards = ({
       <ContactCard
         label="Correo"
         icon={<IconMail stroke={1.5} size={28} className="text-ink-100" />}
-        action={<CopyEmailButton email={email} content={tooltips.copyEmail} />}
+        action={
+          <CopyEmailButton email={email} content={ACTION_LABELS.copyEmail} />
+        }
       />
     </article>
   );
