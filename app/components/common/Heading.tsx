@@ -13,7 +13,11 @@ const headingStyles: Record<NonNullable<HeadingProps['as']>, string> = {
   h2: 'text-4xl text-ink-100',
 };
 
-const Heading: FC<HeadingProps> = ({ as: Tag = 'h1', children, className }) => {
+export const Heading: FC<HeadingProps> = ({
+  as: Tag = 'h1',
+  children,
+  className,
+}) => {
   return (
     <Tag
       className={`${poetsenOne.className} ${headingStyles[Tag]} ${className ?? ''} z-20`}
@@ -22,5 +26,3 @@ const Heading: FC<HeadingProps> = ({ as: Tag = 'h1', children, className }) => {
     </Tag>
   );
 };
-
-export default Heading;

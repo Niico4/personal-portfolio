@@ -2,9 +2,9 @@ import React, { FC } from 'react';
 import { Card } from '@heroui/card';
 import CountUp from 'react-countup';
 
-import { StatCardProps } from '../types/profile';
-
 import { dynaPuff } from '@/fonts';
+
+import { StatCardProps } from '../types/profile';
 
 const StatCard: FC<StatCardProps> = ({ label, value, duration = 2 }) => {
   return (

@@ -2,14 +2,14 @@ import React from 'react';
 import { Metadata } from 'next';
 import { Card } from '@heroui/card';
 
+import { aboutMeMetadata } from '@/config/metadata/about-me';
+import SubTitle from '@/components/common/HeadingOld';
+
 import EducationCard from './components/EducationCard';
 import ExperienceCard from './components/ExperienceCard';
 import { EDUCATION_LIST } from './data/user-info';
 import TechnologiesList from './components/TechnoligiesList';
 import SyntaxCodeCard from './components/SyntaxCodeCard';
-
-import { aboutMeMetadata } from '@/config/metadata/about-me';
-import SubTitle from '@/components/common/HeadingOld';
 
 export async function generateMetadata(): Promise<Metadata> {
   return aboutMeMetadata;

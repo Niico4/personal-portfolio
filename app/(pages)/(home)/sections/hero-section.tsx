@@ -2,10 +2,10 @@ import Image from 'next/image';
 import { IconMapPin, IconSchool } from '@tabler/icons-react';
 import { Divider } from '@heroui/divider';
 
-import HeroContactCards from './hero-contact-cards';
-
-import Heading from '@/components/common/heading';
+import { Heading } from '@/components/common/heading';
 import { getProfile } from '@/sanity/lib/fetchers/profile.fetcher';
+
+import HeroContactCards from './hero-contact-cards';
 
 const HeroSection = async () => {
   const profile = await getProfile();

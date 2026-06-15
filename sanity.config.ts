@@ -4,10 +4,10 @@ import { visionTool } from '@sanity/vision';
 import { defineConfig } from 'sanity';
 import { structureTool } from 'sanity/structure';
 
+import { PublicEnvConfig } from '@/config/public-env.config';
+
 import { schema } from './sanity/schemaTypes';
 import { structure } from './sanity/studio-content-structure';
-
-import { PublicEnvConfig } from '@/config/public-env.config';
 
 const singletonTypes = new Set(['profile']);
 

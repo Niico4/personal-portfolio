@@ -4,11 +4,11 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { IconArrowNarrowLeft, IconArrowNarrowRight } from '@tabler/icons-react';
 
+import { ProjectInformationType } from '@/sanity/lib/types/project.type';
+
 import comingSoonWebp from '../../../../public/coming_soon.webp';
 
 import { ProjectStatusChip } from './project-status-chip';
-
-import { ProjectInformationType } from '@/sanity/lib/types/project.type';
 
 type ProjectNavigationItem = Pick<
   ProjectInformationType,

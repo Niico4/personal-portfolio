@@ -12,12 +12,12 @@ import {
   IconPlayerPlay,
 } from '@tabler/icons-react';
 
-import { ProjectStatusChip } from '../components/project-status-chip';
-import { ProjectNavigation } from '../components/project-navigation-card';
-
-import Heading from '@/components/common/heading';
+import { Heading } from '@/components/common/heading';
 import { SkillChip } from '@/components/common/skill-chip';
 import { ProjectInformationType } from '@/sanity/lib/types/project.type';
+
+import { ProjectStatusChip } from '../components/project-status-chip';
+import { ProjectNavigation } from '../components/project-navigation-card';
 
 const ACTION_LABELS = {
   backToPortfolio: 'Volver al portafolio',

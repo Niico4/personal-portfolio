@@ -4,12 +4,12 @@ import { IconDownload, IconExternalLink, IconMail } from '@tabler/icons-react';
 import { Button } from '@heroui/button';
 import { Tooltip } from '@heroui/tooltip';
 
-import CopyEmailButton from '../components/copy-email-button';
-import ContactCard from '../components/contact-card';
-
 import NicolasLogo from '@/components/common/icons/nicolas-logo';
 import LinkedInIcon from '@/components/common/icons/linkedin';
-import GitHubIcon from '@/components/common/icons/github';
+import { GitHubIcon } from '@/components/common/icons/github';
+
+import CopyEmailButton from '../components/copy-email-button';
+import ContactCard from '../components/contact-card';
 
 interface ContactCardsProps {
   resumeHref: string | null;

@@ -2,14 +2,14 @@ import Image from 'next/image';
 import { Divider } from '@heroui/divider';
 import { IconBulb, IconCode, IconPacman } from '@tabler/icons-react';
 
-import { TimelineItem } from '../components/timeline/timeline-item';
-
 import { SkillChip } from '@/components/common/skill-chip';
 import { SectionHeader } from '@/components/common/section-header';
 import { getWorkExperience } from '@/sanity/lib/fetchers/work-experience.fetcher';
 import { EmploymentType } from '@/sanity/lib/types/work-experience.type';
 import { getJobDateRange } from '@/utils/get-job-date-range';
 import { calculateDuration } from '@/utils/calculate-duration';
+
+import { TimelineItem } from '../components/timeline/timeline-item';
 
 const EMPLOYMENT_TYPE_LABELS: Record<EmploymentType, string> = {
   'full-time': 'Tiempo completo',

@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 
-import Heading from '@/components/common/heading';
+import { Heading } from '@/components/common/heading';
 import { getProjects } from '@/sanity/lib/fetchers/project.fetcher';
 import { ProjectCard } from '@/components/common/project-card';
 

@@ -1,13 +1,13 @@
 import { notFound } from 'next/navigation';
 
-import { ProjectDetailSection } from './project-detail';
-
 import {
   getProject,
   getProjects,
   getProjectSlugs,
 } from '@/sanity/lib/fetchers/project.fetcher';
 import { ProjectInformationType } from '@/sanity/lib/types/project.type';
+
+import { ProjectDetailSection } from './project-detail';
 
 type ProjectPageProps = {
   params: Promise<{ slug: ProjectInformationType['slug'] }>;
