@@ -1,6 +1,6 @@
 import { Card, CardBody } from '@heroui/card';
 
-const ContactCard = ({
+export const ContactCard = ({
   label,
   icon,
   action,
@@ -19,5 +19,3 @@ const ContactCard = ({
     </CardBody>
   </Card>
 );
-
-export default ContactCard;

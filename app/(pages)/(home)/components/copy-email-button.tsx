@@ -1,9 +1,8 @@
-'use client';
-
-import { useState } from 'react';
 import { Button } from '@heroui/button';
 import { Tooltip } from '@heroui/tooltip';
 import { IconCheck, IconCopy } from '@tabler/icons-react';
+
+import { useCopyToClipboard } from '@/hooks/use-copy-to-clipboard';
 
 type CopyEmailButtonProps = {
   email: string;
@@ -11,21 +10,9 @@ type CopyEmailButtonProps = {
 };
 
 const CopyEmailButton = ({ email, content }: CopyEmailButtonProps) => {
-  const [wasCopied, setWasCopied] = useState(false);
+  const { copyToClipboard, copiedText } = useCopyToClipboard();
 
-  const copyEmailToClipboard = async () => {
-    try {
-      await navigator.clipboard.writeText(email);
-
-      setWasCopied(true);
-
-      window.setTimeout(() => {
-        setWasCopied(false);
-      }, 2000);
-    } catch (error) {
-      console.error('Could not copy email:', error);
-    }
-  };
+  const wasCopied = copiedText === email;
 
   return (
     <Tooltip content={content} color="primary" placement="top" showArrow>
@@ -35,7 +22,7 @@ const CopyEmailButton = ({ email, content }: CopyEmailButtonProps) => {
         color={wasCopied ? 'success' : 'default'}
         className="h-8 min-w-8 text-ink-400"
         aria-label="Copiar correo"
-        onPress={copyEmailToClipboard}
+        onPress={() => copyToClipboard(email)}
       >
         {wasCopied ? (
           <IconCheck stroke={1.5} size={20} className="text-green-500" />

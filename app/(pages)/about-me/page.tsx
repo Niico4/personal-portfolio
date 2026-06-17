@@ -1,62 +1,45 @@
-import React from 'react';
-import { Metadata } from 'next';
-import { Card } from '@heroui/card';
+import AboutMeHeroSection from './sections/about-me-hero-section';
 
-import { aboutMeMetadata } from '@/config/metadata/about-me';
-import SubTitle from '@/components/common/HeadingOld';
+// TODO
+// export const metadata: Metadata = {
+//   title: {
+//     absolute: 'Nicolás Garzón | Desarrollador Full Stack',
+//   },
+//   description:
+//     'Construyo productos web completos con React, Next.js y Node.js: interfaces claras, APIs bien estructuradas y soluciones pensadas desde el problema.',
+//   alternates: {
+//     canonical: '/',
+//   },
+//   openGraph: {
+//     title: 'Nicolás Garzón | Desarrollador Full Stack',
+//     description:
+//       'Construyo productos web completos con React, Next.js y Node.js: interfaces claras, APIs bien estructuradas y soluciones pensadas desde el problema.',
+//     url: '/',
+//     type: 'website',
+//     // TODO: images: [
+//     //   {
+//     //     url: '/seo/og-home.png',
+//     //     width: 1200,
+//     //     height: 630,
+//     //     alt: 'Portfolio de Nicolás Garzón',
+//     //   },
+//     // ],
+//   },
+//   twitter: {
+//     card: 'summary_large_image',
+//     title: 'Nicolás Garzón | Desarrollador Full Stack',
+//     description:
+//       'Construyo productos web completos con React, Next.js y Node.js: interfaces claras, APIs bien estructuradas y soluciones pensadas desde el problema.',
+//     // TODO: images: ['/seo/og-home.png'],
+//   },
+// };
 
-import EducationCard from './components/EducationCard';
-import ExperienceCard from './components/ExperienceCard';
-import { EDUCATION_LIST } from './data/user-info';
-import TechnologiesList from './components/TechnoligiesList';
-import SyntaxCodeCard from './components/SyntaxCodeCard';
-
-export async function generateMetadata(): Promise<Metadata> {
-  return aboutMeMetadata;
-}
-
-const AboutMePage = () => {
+const HomePage = () => {
   return (
-    <div className="flex flex-col gap-10 mx-auto">
-      <SubTitle
-        title="Un Poco Sobre Mí"
-        className="text-center sm:text-5xl"
-        type="h1"
-      />
-
-      <section className="grid md:grid-cols-[1fr_40%] max-md:gap-14 gap-4 place-content-center">
-        <SyntaxCodeCard />
-
-        <article className="flex flex-col gap-4 justify-center max-md:-order-1">
-          {EDUCATION_LIST.map(
-            ({ title, date, institution, hasCertificate }, index) => (
-              <EducationCard
-                key={index}
-                title={title}
-                date={date}
-                institution={institution}
-                hasCertificate={hasCertificate}
-              />
-            ),
-          )}
-          <Card className="card-bg p-4" radius="sm" isBlurred>
-            <p className="text-default">
-              Me encanta crear cosas para la web. Más que solo verse bien,
-              quiero que cada proyecto se sienta natural, fácil de usar y con su
-              propia esencia. Disfruto cada paso, desde la idea hasta los
-              últimos retoques, siempre buscando que quien lo use tenga la mejor
-              experiencia.
-            </p>
-          </Card>
-        </article>
-      </section>
-
-      <ExperienceCard />
-
-      <section className="w-full overflow-hidden p-4">
-        <TechnologiesList />
-      </section>
+    <div className="flex flex-col gap-20 mx-auto">
+      <AboutMeHeroSection />
     </div>
   );
 };
-export default AboutMePage;
+
+export default HomePage;

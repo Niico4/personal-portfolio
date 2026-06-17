@@ -5,7 +5,11 @@ import { Divider } from '@heroui/divider';
 import { Heading } from '@/components/common/heading';
 import { getProfile } from '@/sanity/lib/fetchers/profile.fetcher';
 
-import HeroContactCards from './hero-contact-cards';
+import { HeroContactCards } from './hero-contact-cards';
+
+const AVATAR = {
+  tumbsUp: '/nico-avatar-tumbs-up.webp',
+} as const;
 
 const HeroSection = async () => {
   const profile = await getProfile();
@@ -23,11 +27,11 @@ const HeroSection = async () => {
 
   return (
     <section className="flex flex-col gap-5">
-      <div className="mx-auto grid grid-cols-[0.95fr_1.05fr] items-center gap-20">
+      <header className="mx-auto grid grid-cols-[0.95fr_1.05fr] items-center gap-20">
         <div className="relative mx-auto flex w-full h-full justify-center overflow-hidden">
           <Image
-            src="/nico-avatar-1.webp"
-            alt="Avatar de Nicolás"
+            src={AVATAR.tumbsUp}
+            alt="Avatar ilustrado de Nicolás"
             priority
             draggable={false}
             fill
@@ -79,7 +83,7 @@ const HeroSection = async () => {
             email={profile.contact_information.email}
           />
         </div>
-      </div>
+      </header>
       <Divider className="bg-ink-900/70 mt-2" />
     </section>
   );

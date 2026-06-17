@@ -33,7 +33,7 @@ export const ProjectCard = ({
         sizes="(min-width: 1024px) 50vw, 100vw"
         className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.03]"
         alt={preview.image?.alt ?? 'Próximamente disponible'}
-        src={preview.image?.url ?? '/coming_soon.webp'}
+        src={preview.image?.url ?? '/coming-soon.webp'}
       />
 
       <div className="absolute inset-0 z-10 bg-black/0 transition-colors duration-300 group-hover:bg-black/10 group-focus-visible:bg-black/10" />

@@ -9,7 +9,7 @@ import LinkedInIcon from '@/components/common/icons/linkedin';
 import { GitHubIcon } from '@/components/common/icons/github';
 
 import CopyEmailButton from '../components/copy-email-button';
-import ContactCard from '../components/contact-card';
+import { ContactCard } from '../components/contact-card';
 
 interface ContactCardsProps {
   resumeHref: string | null;
@@ -27,7 +27,7 @@ const ACTION_LABELS = {
   openLinkedin: 'Visita mi LinkedIn',
 } as const;
 
-const HeroContactCards = ({
+export const HeroContactCards = ({
   resumeHref,
   resumeDisabled,
   isSanityFile,
@@ -127,5 +127,3 @@ const HeroContactCards = ({
     </article>
   );
 };
-
-export default HeroContactCards;

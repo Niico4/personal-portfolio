@@ -6,8 +6,6 @@ import { IconArrowNarrowLeft, IconArrowNarrowRight } from '@tabler/icons-react';
 
 import { ProjectInformationType } from '@/sanity/lib/types/project.type';
 
-import comingSoonWebp from '../../../../public/coming_soon.webp';
-
 import { ProjectStatusChip } from './project-status-chip';
 
 type ProjectNavigationItem = Pick<
@@ -32,7 +30,9 @@ const ProjectNavigationCard = ({
       <Image
         fill
         sizes="(min-width: 1024px) 50vw, 100vw"
-        src={project.project_information_preview.image?.url ?? comingSoonWebp}
+        src={
+          project.project_information_preview.image?.url ?? '/coming-soon.webp'
+        }
         alt={
           project.project_information_preview.image?.alt ??
           `Vista previa de ${project.title}`
