@@ -40,7 +40,7 @@ import SkillsSection from './sections/skills-section';
 
 const HomePage = () => {
   return (
-    <div className="flex flex-col gap-20 mx-auto">
+    <div className="mx-auto flex flex-col gap-14 sm:gap-20">
       <AboutMeHeroSection />
       <EducationSection />
       <WorkExperienceSection />

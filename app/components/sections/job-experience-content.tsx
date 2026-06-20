@@ -34,21 +34,27 @@ export const JobExperienceContent = ({
     <div
       className={`flex w-full flex-col ${showHighlights ? 'gap-4' : 'gap-2'}`}
     >
-      <div className="flex w-full items-center justify-between gap-4">
+      <div className="flex w-full items-start justify-between gap-4 sm:items-center">
         <div className="flex min-w-0 flex-col gap-1">
           <h4 className="text-lg text-ink-200">{jobTitle}</h4>
 
-          <div className="flex h-5 items-center gap-2 text-sm text-ink-300">
-            <p>{employmentTypeLabel}</p>
+          <div className="flex h-auto flex-wrap items-center gap-x-2 gap-y-1 text-sm text-ink-300 sm:h-5">
+            <p className="whitespace-nowrap">{employmentTypeLabel}</p>
 
-            <Divider className="bg-ink-700" orientation="vertical" />
+            <Divider
+              className="hidden bg-ink-700 sm:block"
+              orientation="vertical"
+            />
 
-            <p>{dateRange}</p>
+            <p className="whitespace-nowrap">{dateRange}</p>
 
             {duration && (
               <>
-                <Divider className="bg-ink-700" orientation="vertical" />
-                <p>{duration}</p>
+                <Divider
+                  className="hidden bg-ink-700 sm:block"
+                  orientation="vertical"
+                />
+                <p className="whitespace-nowrap">{duration}</p>
               </>
             )}
           </div>
@@ -62,6 +68,7 @@ export const JobExperienceContent = ({
             aria-label={showHighlights ? 'Ocultar logros' : 'Mostrar logros'}
             aria-expanded={showHighlights}
             aria-controls={highlightsId}
+            className="shrink-0"
             onPress={() => setShowHighlights((currentValue) => !currentValue)}
             startContent={
               <IconChevronsDown

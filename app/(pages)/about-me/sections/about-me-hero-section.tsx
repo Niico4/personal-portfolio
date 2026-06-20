@@ -96,9 +96,9 @@ const AboutMeHeroSection = async () => {
 
   return (
     <section className="flex flex-col gap-8">
-      <header className="mx-auto flex w-full max-w-6xl flex-col items-center gap-10 lg:flex-row lg:justify-between lg:gap-5">
+      <header className="mx-auto flex w-full max-w-2xl flex-col items-center gap-8 sm:gap-10 lg:max-w-6xl lg:flex-row lg:items-start lg:justify-between lg:gap-8">
         <div className="flex w-full justify-center lg:basis-[46%] lg:justify-end">
-          <div className="relative aspect-square w-full max-w-[460px] overflow-hidden">
+          <div className="relative aspect-square w-full max-w-[360px] overflow-hidden">
             <Image
               src={AVATAR.thinking}
               alt="Avatar ilustrado de Nicolás Garzón en pose pensativa"
@@ -123,7 +123,7 @@ const AboutMeHeroSection = async () => {
           <div
             role="group"
             aria-label="Enlaces de contacto"
-            className="flex flex-wrap items-center justify-between"
+            className="grid grid-cols-2 gap-x-5 gap-y-4"
           >
             <ActionLink
               href={profile.contact_information.linkedin_url}
@@ -162,14 +162,14 @@ const AboutMeHeroSection = async () => {
           <Divider className="bg-ink-900" />
 
           {visibleStats.length > 0 && (
-            <div className="flex items-center gap-5">
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:flex lg:items-center lg:gap-5">
               {visibleStats.map((stat, index) => {
                 const Icon = STAT_ICONS[index];
 
                 return (
                   <div
                     key={stat.label}
-                    className="flex items-center gap-4 p-2 border border-ink-900 rounded-xl"
+                    className="flex w-full items-center gap-4 rounded-xl border border-ink-900 p-2 lg:w-auto"
                   >
                     <Icon
                       stroke={1.2}

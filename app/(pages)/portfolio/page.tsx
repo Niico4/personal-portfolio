@@ -44,7 +44,7 @@ const ProjectsPage = async () => {
 
   const [featuredProject, ...secondaryProjects] = projects;
   return (
-    <section className="flex flex-col gap-10">
+    <section className="flex flex-col gap-8 sm:gap-10">
       <div className="flex max-w-2xl flex-col items-start gap-4">
         <Heading as="h1">Proyectos</Heading>
 
@@ -57,7 +57,7 @@ const ProjectsPage = async () => {
         <article className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-12 lg:auto-rows-[minmax(220px,auto)]">
           <ProjectCard
             project={featuredProject}
-            className="min-h-[420px] md:col-span-2 lg:col-span-7 lg:row-span-2"
+            className="min-h-[320px] sm:min-h-[420px] md:col-span-2 lg:col-span-7 lg:row-span-2"
           />
 
           {secondaryProjects.map((project, index) => (
@@ -66,8 +66,8 @@ const ProjectsPage = async () => {
               project={project}
               className={
                 index === 2
-                  ? 'min-h-[280px] md:col-span-2 lg:col-span-12'
-                  : 'min-h-[220px] md:col-span-1 lg:col-span-5'
+                  ? 'min-h-[260px] sm:min-h-[280px] md:col-span-2 lg:col-span-12'
+                  : 'min-h-[240px] sm:min-h-[220px] md:col-span-1 lg:col-span-5'
               }
             />
           ))}

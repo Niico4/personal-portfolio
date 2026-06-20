@@ -58,7 +58,7 @@ export const ProjectCard = ({
         </Chip>
       </div>
 
-      <CardFooter className="absolute inset-x-0 bottom-0 z-10 flex-col items-start gap-1.5 border-t border-white/20 bg-ink-50/75 p-5 backdrop-blur-xl">
+      <CardFooter className="absolute inset-x-0 bottom-0 z-10 flex-col items-start gap-1.5 border-t border-white/20 bg-ink-50/75 p-4 backdrop-blur-xl sm:p-5 lg:p-4">
         <h3 className="text-xl font-semibold leading-tight text-ink-900">
           {title}
         </h3>

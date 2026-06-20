@@ -24,7 +24,7 @@ const EducationSection = async () => {
   if (!educationInfo?.length) return null;
 
   return (
-    <section className="flex flex-col gap-10">
+    <section className="flex flex-col gap-8 sm:gap-10">
       <SectionHeader
         title="Educación"
         description="Base académica + aprendizaje constante por cuenta propia"
@@ -68,7 +68,7 @@ const EducationSection = async () => {
 
             return (
               <li key={id}>
-                <Card className="flex w-full flex-col gap-5 p-4 sm:flex-row sm:items-center sm:justify-between border border-ink-900/70 bg-ink-900/40">
+                <Card className="flex w-full flex-col gap-5 border border-ink-900/70 bg-ink-900/40 p-4 sm:flex-row sm:items-center sm:justify-between">
                   <div className="flex items-center gap-5">
                     <div className="relative flex size-12 shrink-0 items-center justify-center overflow-hidden">
                       <Image
@@ -86,15 +86,15 @@ const EducationSection = async () => {
                     <div className="flex min-w-0 flex-col gap-1">
                       <h3 className="text-lg text-ink-100">{academic_title}</h3>
 
-                      <div className="flex h-5 items-center gap-2 text-sm text-ink-300">
-                        <p>{dateRange}</p>
+                      <div className="flex h-auto flex-wrap items-center gap-x-2 gap-y-1 text-sm text-ink-300 sm:h-5">
+                        <p className="whitespace-nowrap">{dateRange}</p>
 
                         <Divider
-                          className="bg-ink-700"
+                          className="hidden bg-ink-700 sm:block"
                           orientation="vertical"
                         />
 
-                        <p>{duration}</p>
+                        <p className="whitespace-nowrap">{duration}</p>
                       </div>
                     </div>
                   </div>
@@ -108,6 +108,7 @@ const EducationSection = async () => {
                       target={externalUrl ? '_blank' : undefined}
                       rel={externalUrl ? 'noopener noreferrer' : undefined}
                       variant="flat"
+                      className="self-end sm:self-auto"
                       aria-label={
                         fileUrl
                           ? CERTIFICATE_LABELS.download

@@ -22,7 +22,6 @@ export const NavbarItem = ({ item, isActive, activeHref }: NavbarItemProps) => {
         className="
           group relative grid size-11 shrink-0 place-items-center rounded-full
           outline-none transition-transform duration-300 hover:scale-105
-          md:size-12
         "
       >
         {isActive && (

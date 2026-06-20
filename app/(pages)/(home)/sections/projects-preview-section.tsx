@@ -13,8 +13,8 @@ const ProjectsPreviewSection = async () => {
   if (visibleProjects?.length !== 3) return null;
 
   return (
-    <section className="flex flex-col gap-10">
-      <article className="flex items-center justify-between">
+    <section className="flex flex-col gap-8 sm:gap-10">
+      <article className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
         <SectionHeader
           title="Proyectos"
           description="Soluciones que construí de principio a fin"
@@ -31,11 +31,20 @@ const ProjectsPreviewSection = async () => {
         </Link>
       </article>
 
-      <article className="grid grid-cols-[1fr_400px] grid-rows-[260px_260px] gap-5">
-        <ProjectCard project={visibleProjects[0]} className="row-span-full" />
+      <article className="grid auto-rows-[260px] grid-cols-1 gap-5 sm:grid-cols-2 sm:grid-rows-[240px_240px] lg:grid-rows-[220px_220px] lg:gap-4 xl:grid-rows-[230px_230px]">
+        <ProjectCard
+          project={visibleProjects[0]}
+          className="min-h-[260px] sm:min-h-0 sm:row-span-full"
+        />
 
-        <ProjectCard project={visibleProjects[1]} />
-        <ProjectCard project={visibleProjects[2]} />
+        <ProjectCard
+          project={visibleProjects[1]}
+          className="min-h-[260px] sm:min-h-0"
+        />
+        <ProjectCard
+          project={visibleProjects[2]}
+          className="min-h-[260px] sm:min-h-0"
+        />
       </article>
     </section>
   );

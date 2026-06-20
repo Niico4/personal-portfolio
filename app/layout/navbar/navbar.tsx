@@ -26,8 +26,8 @@ export const FloatingNavbar = () => {
       aria-label="Navegación principal"
       className="
         fixed z-50
-        bottom-5 left-1/2 -translate-x-1/2
-        md:bottom-auto md:left-6 md:top-1/2 md:-translate-x-0 md:-translate-y-1/2
+        bottom-3 left-1/2 max-w-[calc(100vw-2rem)] -translate-x-1/2 sm:bottom-5
+        lg:bottom-auto lg:left-5 lg:top-1/2 lg:-translate-x-0 lg:-translate-y-1/2
       "
     >
       <LayoutGroup id="floating-navbar">
@@ -36,7 +36,7 @@ export const FloatingNavbar = () => {
             flex items-center gap-2 rounded-full border border-white/10
             bg-[#15161d]/80 p-2 shadow-[0_20px_70px_rgba(0,0,0,0.45)]
             backdrop-blur-2xl
-            md:flex-col md:gap-3 md:p-2.5
+            lg:flex-col lg:gap-2
           "
         >
           <Link
@@ -46,15 +46,14 @@ export const FloatingNavbar = () => {
               grid size-11 shrink-0 place-items-center rounded-full
               border border-white/10 bg-black
               transition-transform duration-300 hover:scale-105
-              md:size-12
             "
           >
             <NicolasLogo aria-hidden="true" className="size-6" />
           </Link>
 
-          <div className="h-px w-7 bg-white/10 md:w-8" />
+          <div className="h-px w-7 bg-white/10" />
 
-          <div className="flex items-center gap-2 md:flex-col md:gap-3">
+          <div className="flex items-center gap-2 lg:flex-col">
             {NAV_ITEMS.map((item) => (
               <NavbarItem
                 key={item.href}

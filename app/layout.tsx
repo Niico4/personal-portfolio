@@ -69,7 +69,7 @@ export default function RootLayout({
   return (
     <html lang="es" className="bg-main">
       <body
-        className={`${dmSans.className} custom-theme min-h-dvh overscroll-none bg-main text-ink-100 font-light antialiased`}
+        className={`${dmSans.className} custom-theme min-h-dvh overflow-x-hidden overscroll-none bg-main text-ink-100 font-light antialiased`}
       >
         {/* <div
           aria-hidden="true"

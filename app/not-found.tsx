@@ -7,9 +7,9 @@ import { NotFoundActions } from './components/not-found-actions';
 
 const NotFoundPage = () => {
   return (
-    <section className="relative z-10 mx-auto flex min-h-dvh w-full max-w-6xl items-center justify-center gap-16 px-6 py-16">
+    <section className="relative z-10 mx-auto flex min-h-dvh w-full max-w-6xl flex-col items-center justify-center gap-10 px-4 py-12 sm:px-6 sm:py-16 lg:flex-row lg:gap-16">
       <div className="flex justify-center lg:justify-start">
-        <div className="relative flex size-[300px] items-center justify-center rounded-[2rem] border border-white/10 bg-white/[0.03] shadow-2xl backdrop-blur-md sm:size-[360px] lg:size-[400px]">
+        <div className="relative flex aspect-square w-full max-w-[300px] items-center justify-center rounded-[2rem] border border-white/10 bg-white/[0.03] shadow-2xl backdrop-blur-md sm:size-[360px] sm:max-w-none lg:size-[400px]">
           <div
             aria-hidden="true"
             className="absolute inset-5 rounded-[1.5rem] border border-cyan-300/10 bg-cyan-300/[0.025]"
