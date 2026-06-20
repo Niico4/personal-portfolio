@@ -1,16 +1,13 @@
-'use client';
-
-import Link from 'next/link';
-import { Button } from '@heroui/button';
 import { Chip } from '@heroui/chip';
-import { IconCode, IconHome, IconSparkles } from '@tabler/icons-react';
+import { IconSparkles } from '@tabler/icons-react';
 
 import { LoaderGhost } from './components/common/loader-ghost/loader-ghost';
 import { Heading } from './components/common/heading';
+import { NotFoundActions } from './layout/components/not-found/not-found-actions';
 
 const NotFoundPage = () => {
   return (
-    <section className="relative z-10 mx-auto flex items-center justify-center w-full max-w-6xl gap-16">
+    <section className="relative z-10 mx-auto flex min-h-dvh w-full max-w-6xl items-center justify-center gap-16 px-6 py-16">
       <div className="flex justify-center lg:justify-start">
         <div className="relative flex size-[300px] items-center justify-center rounded-[2rem] border border-white/10 bg-white/[0.03] shadow-2xl backdrop-blur-md sm:size-[360px] lg:size-[400px]">
           <div
@@ -58,29 +55,7 @@ const NotFoundPage = () => {
           publicada. Puedes volver al inicio o explorar mis proyectos.
         </p>
 
-        <div className="mt-2 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
-          <Button
-            as={Link}
-            href="/"
-            color="primary"
-            radius="full"
-            size="lg"
-            startContent={<IconHome size={20} />}
-          >
-            Volver al inicio
-          </Button>
-
-          <Button
-            as={Link}
-            href="/portfolio"
-            radius="full"
-            size="lg"
-            startContent={<IconCode size={20} />}
-            variant="bordered"
-          >
-            Ver proyectos
-          </Button>
-        </div>
+        <NotFoundActions />
       </div>
     </section>
   );
