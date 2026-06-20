@@ -5,7 +5,7 @@ import { Divider } from '@heroui/divider';
 import { Heading } from '@/components/common/heading';
 import { getProfile } from '@/sanity/lib/fetchers/profile.fetcher';
 
-import { HeroContactCards } from './hero-contact-cards';
+import { HeroContactCards } from '../components/hero-contact-cards';
 
 const AVATAR = {
   tumbsUp: '/nico-avatar-tumbs-up.webp',

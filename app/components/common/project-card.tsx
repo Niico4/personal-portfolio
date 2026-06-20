@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
+import { Route } from 'next';
 import { Card, CardFooter } from '@heroui/card';
 import { Chip } from '@heroui/chip';
 import { IconArrowUpRight } from '@tabler/icons-react';
@@ -17,11 +18,11 @@ export const ProjectCard = ({
   className?: string;
 }) => {
   const { title, slug, status, project_information_preview: preview } = project;
-
+  const projectHref = `/portfolio/${slug}` as Route;
   return (
     <Card
       as={Link}
-      href={`/portfolio/${slug}`}
+      href={projectHref}
       isPressable
       isFooterBlurred
       radius="lg"

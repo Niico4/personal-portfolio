@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 import { dmSans } from './fonts';
 import { PublicEnvConfig } from './config/public-env.config';
 
-import '@/styles/globals.css';
+import '@/globals.css';
 
 export const metadata: Metadata = {
   metadataBase: new URL(PublicEnvConfig.site_url),

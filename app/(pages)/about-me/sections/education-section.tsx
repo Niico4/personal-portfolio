@@ -68,7 +68,7 @@ const EducationSection = async () => {
 
             return (
               <li key={id}>
-                <Card className="flex w-full flex-col gap-5 p-4 sm:flex-row sm:items-center sm:justify-between border border-ink-900/70">
+                <Card className="flex w-full flex-col gap-5 p-4 sm:flex-row sm:items-center sm:justify-between border border-ink-900/70 bg-ink-900/40">
                   <div className="flex items-center gap-5">
                     <div className="relative flex size-12 shrink-0 items-center justify-center overflow-hidden">
                       <Image

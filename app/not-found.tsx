@@ -3,7 +3,7 @@ import { IconSparkles } from '@tabler/icons-react';
 
 import { LoaderGhost } from './components/common/loader-ghost/loader-ghost';
 import { Heading } from './components/common/heading';
-import { NotFoundActions } from './layout/components/not-found/not-found-actions';
+import { NotFoundActions } from './components/not-found-actions';
 
 const NotFoundPage = () => {
   return (

@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --primary: #34a6f4;
+    --scrollbar-track: #333333;
+    --scrollbar-size: 6px;
+  }
+
+  @supports not selector(::-webkit-scrollbar) {
+    html {
+      scrollbar-width: thin;
+      scrollbar-color: var(--primary) var(--scrollbar-track);
+    }
+  }
+
+  html::-webkit-scrollbar {
+    width: var(--scrollbar-size);
+    height: var(--scrollbar-size);
+  }
+
+  html::-webkit-scrollbar-track {
+    background: var(--scrollbar-track);
+    border-radius: 999px;
+  }
+
+  html::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 999px;
+  }
+}
+
+@layer utilities {
+  .link-underline {
+    position: relative;
+  }
+
+  .link-underline::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 1px;
+    background-color: currentColor;
+    transition:
+      left 300ms ease,
+      width 300ms ease;
+  }
+
+  .link-underline:hover::after,
+  .link-underline:focus-visible::after {
+    left: 0;
+    width: 100%;
+  }
+}

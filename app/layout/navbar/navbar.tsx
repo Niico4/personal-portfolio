@@ -2,32 +2,12 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { IconCode, IconHome, IconUser } from '@tabler/icons-react';
 import { LayoutGroup } from 'framer-motion';
 
 import NicolasLogo from '@/components/common/icons/nicolas-logo';
 
 import { NavbarItem } from './navbar-item';
-
-export const NAV_ITEMS = [
-  {
-    label: 'Inicio',
-    href: '/',
-    icon: IconHome,
-  },
-  {
-    label: 'Proyectos',
-    href: '/portfolio',
-    icon: IconCode,
-  },
-  {
-    label: 'Sobre mí',
-    href: '/about-me',
-    icon: IconUser,
-  },
-] as const;
-
-export type NavItem = (typeof NAV_ITEMS)[number];
+import { NAV_ITEMS } from './navbar.config';
 
 const getActiveHref = (pathname: string) => {
   return NAV_ITEMS.find((item) => {

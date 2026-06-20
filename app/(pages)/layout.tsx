@@ -1,4 +1,4 @@
-import { FloatingNavbar } from '@/layout/components/navbar/navbar';
+import { FloatingNavbar } from '@/layout/navbar/navbar';
 import Providers from '@/providers';
 
 type SiteLayoutProps = {
