@@ -1,4 +1,8 @@
+import WorkExperienceSection from '../../components/sections/work-experience-section';
+
 import AboutMeHeroSection from './sections/about-me-hero-section';
+import EducationSection from './sections/education-section';
+import SkillsSection from './sections/skills-section';
 
 // TODO
 // export const metadata: Metadata = {
@@ -38,6 +42,9 @@ const HomePage = () => {
   return (
     <div className="flex flex-col gap-20 mx-auto">
       <AboutMeHeroSection />
+      <EducationSection />
+      <WorkExperienceSection />
+      <SkillsSection />
     </div>
   );
 };

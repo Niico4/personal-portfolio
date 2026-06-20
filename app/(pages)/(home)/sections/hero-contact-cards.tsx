@@ -6,8 +6,8 @@ import { Tooltip } from '@heroui/tooltip';
 
 import NicolasLogo from '@/components/common/icons/nicolas-logo';
 import LinkedInIcon from '@/components/common/icons/linkedin';
-import { GitHubIcon } from '@/components/common/icons/github';
 
+import GitHubIcon from '../../../../public/icons/tech/github.svg';
 import CopyEmailButton from '../components/copy-email-button';
 import { ContactCard } from '../components/contact-card';
 

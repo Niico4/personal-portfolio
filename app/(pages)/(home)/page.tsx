@@ -1,8 +1,9 @@
 import { Metadata } from 'next';
 
+import WorkExperience from '../../components/sections/work-experience-section';
+
 import Hero from './sections/hero-section';
 import ProjectsPreview from './sections/projects-preview-section';
-import WorkExperience from './sections/work-experience-section';
 
 export const metadata: Metadata = {
   title: {
