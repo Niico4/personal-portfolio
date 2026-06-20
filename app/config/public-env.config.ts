@@ -1,8 +1,6 @@
 import { z } from 'zod';
 
 const publicEnvSchema = z.object({
-  url_endpoint: z.string(),
-  node_env: z.string().default('development'),
   site_url: z.url(),
   sanity: z.object({
     project_id: z.string(),
@@ -12,8 +10,6 @@ const publicEnvSchema = z.object({
 });
 
 export const PublicEnvConfig = publicEnvSchema.parse({
-  url_endpoint: process.env.NEXT_PUBLIC_URL_ENDPOINT,
-  node_env: process.env.NODE_ENV,
   site_url: process.env.NEXT_PUBLIC_SITE_URL,
   sanity: {
     project_id: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,

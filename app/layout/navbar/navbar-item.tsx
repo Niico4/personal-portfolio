@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { Tooltip } from '@heroui/tooltip';
 import { motion } from 'framer-motion';
 
-import type { NavItem } from './navbar';
+import { NavItem } from './navbar.config';
 
 interface NavbarItemProps {
   item: NavItem;
