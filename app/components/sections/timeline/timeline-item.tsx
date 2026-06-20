@@ -31,6 +31,6 @@ export const TimelineItem = ({
       <TimelineConnector isLast={isLast} />
     </div>
 
-    <div className={isLast ? '' : 'pb-6'}>{children}</div>
+    <div className={`min-w-0 flex-1 ${isLast ? '' : 'pb-6'}`}>{children}</div>
   </article>
 );

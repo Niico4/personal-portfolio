@@ -67,7 +67,7 @@ const WorkExperienceSection = async () => {
   if (!workExperience?.length) return null;
 
   return (
-    <section className="flex flex-col gap-8">
+    <section className="flex flex-col gap-8 sm:gap-10">
       <SectionHeader
         title="Experiencia"
         description="Experiencia real entregando, no solo aprendiendo"

@@ -9,8 +9,8 @@ interface HeadingProps {
 }
 
 const headingStyles: Record<NonNullable<HeadingProps['as']>, string> = {
-  h1: 'text-5xl text-ink-50',
-  h2: 'text-4xl text-ink-100',
+  h1: 'text-4xl text-ink-50 sm:text-5xl',
+  h2: 'text-3xl text-ink-100 sm:text-4xl',
 };
 
 export const Heading: FC<HeadingProps> = ({

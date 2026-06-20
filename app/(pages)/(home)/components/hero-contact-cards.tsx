@@ -36,7 +36,7 @@ export const HeroContactCards = ({
   email,
 }: ContactCardsProps) => {
   return (
-    <article className="grid grid-cols-2 gap-5">
+    <article className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-5 lg:gap-3">
       <ContactCard
         label="Currículum"
         icon={<NicolasLogo className="size-7 shrink-0 text-ink-50" />}

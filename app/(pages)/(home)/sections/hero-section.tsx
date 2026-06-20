@@ -26,33 +26,35 @@ const HeroSection = async () => {
   if (!profile) return null;
 
   return (
-    <section className="flex flex-col gap-5">
-      <header className="mx-auto grid grid-cols-[0.95fr_1.05fr] items-center gap-20">
-        <div className="relative mx-auto flex w-full h-full justify-center overflow-hidden">
-          <Image
-            src={AVATAR.tumbsUp}
-            alt="Avatar ilustrado de Nicolás"
-            priority
-            draggable={false}
-            fill
-            sizes="(min-width: 1024px) 50vw, 100vw"
-            className="select-none object-contain h-auto w-full aspect-square"
-          />
+    <section className="flex flex-col gap-8">
+      <header className="mx-auto flex w-full max-w-2xl flex-col items-center gap-8 sm:gap-10 lg:max-w-6xl lg:flex-row lg:items-start lg:justify-between lg:gap-8">
+        <div className="flex w-full justify-center lg:basis-[46%] lg:justify-end">
+          <div className="relative aspect-square w-full max-w-[360px] overflow-hidden">
+            <Image
+              src={AVATAR.tumbsUp}
+              alt="Avatar ilustrado de Nicolás"
+              priority
+              draggable={false}
+              fill
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              className="select-none object-contain"
+            />
 
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-main via-main/90 to-transparent"
-          />
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-main via-main/90 to-transparent"
+            />
+          </div>
         </div>
 
-        <div className="flex max-w-[530px] flex-col gap-5">
+        <div className="flex w-full max-w-[600px] flex-col gap-5 lg:basis-[54%]">
           <div className="space-y-4">
             <Heading>¡Hola!, soy Nicolás</Heading>
 
-            <p className="max-w-[500px]">{profile.content.introduction}</p>
+            <p>{profile.content.introduction}</p>
           </div>
 
-          <article className="flex flex-col gap-3 pt-1">
+          <article className="flex flex-col gap-3 pt-1 md:items-start">
             <div className="flex items-center gap-3">
               <div className="flex size-8 items-center justify-center rounded-lg bg-ink-900 text-ink-300">
                 <IconSchool stroke={1.5} size={20} />

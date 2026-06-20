@@ -7,7 +7,7 @@ const SkillsSection = async () => {
   const { skills } = await getProfile();
 
   return (
-    <section className="flex flex-col gap-10">
+    <section className="flex flex-col gap-8 sm:gap-10">
       <SectionHeader
         title="Tecnologías"
         description="Lo que domino hoy y sigo expandiendo mañana"
