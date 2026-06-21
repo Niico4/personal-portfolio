@@ -20,21 +20,21 @@ export const metadata: Metadata = {
       'Construyo productos web completos con React, Next.js y Node.js: interfaces claras, APIs bien estructuradas y soluciones pensadas desde el problema.',
     url: '/',
     type: 'website',
-    // TODO: images: [
-    //   {
-    //     url: '/seo/og-home.png',
-    //     width: 1200,
-    //     height: 630,
-    //     alt: 'Portfolio de Nicolás Garzón',
-    //   },
-    // ],
+    images: [
+      {
+        url: '/seo/og-default-mockup.webp',
+        width: 1200,
+        height: 630,
+        alt: 'Portfolio de Nicolás Garzón',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Nicolás Garzón | Desarrollador Full Stack',
     description:
       'Construyo productos web completos con React, Next.js y Node.js: interfaces claras, APIs bien estructuradas y soluciones pensadas desde el problema.',
-    // TODO: images: ['/seo/og-home.png'],
+    images: ['/seo/og-default-mockup.webp'],
   },
 };
 
