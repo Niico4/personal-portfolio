@@ -1,27 +1,25 @@
-import { defineConfig } from 'eslint/config';
-import globals from 'globals';
-import js from '@eslint/js';
-import tseslint from 'typescript-eslint';
-import pluginReact from 'eslint-plugin-react';
-import pluginNext from '@next/eslint-plugin-next';
-import importOrder from 'eslint-plugin-import';
-import prettier from 'eslint-plugin-prettier';
+import { defineConfig, globalIgnores } from 'eslint/config';
+import nextVitals from 'eslint-config-next/core-web-vitals';
+import nextTs from 'eslint-config-next/typescript';
+import importPlugin from 'eslint-plugin-import';
+import prettierPlugin from 'eslint-plugin-prettier';
+import prettierConfig from 'eslint-config-prettier/flat';
 
-export default defineConfig([
+const eslintConfig = defineConfig([
+  ...nextVitals,
+  ...nextTs,
+
+  prettierConfig,
+
   {
     files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'],
-    languageOptions: { globals: globals.browser },
     plugins: {
-      import: importOrder,
-      react: pluginReact.configs.recommended,
-      prettier,
-      js,
-      '@next/next': pluginNext,
+      import: importPlugin,
+      prettier: prettierPlugin,
     },
-    extends: ['js/recommended'],
-
     rules: {
       'prettier/prettier': 'error',
+
       'import/order': [
         'error',
         {
@@ -33,12 +31,25 @@ export default defineConfig([
             'index',
           ],
           'newlines-between': 'always',
+          alphabetize: {
+            caseInsensitive: true,
+          },
         },
       ],
-      'react/react-in-jsx-scope': 'off',
-      'react/jsx-uses-react': 'off',
+
       'no-console': ['error', { allow: ['error'] }],
     },
   },
-  tseslint.configs.recommended,
+
+  globalIgnores([
+    '.next/**',
+    'node_modules/**',
+    'out/**',
+    'build/**',
+    'dist/**',
+    'coverage/**',
+    'next-env.d.ts',
+  ]),
 ]);
+
+export default eslintConfig;

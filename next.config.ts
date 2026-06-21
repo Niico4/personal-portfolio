@@ -1,6 +1,7 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
+  typedRoutes: true,
   images: {
     remotePatterns: [
       {
@@ -8,7 +9,26 @@ const nextConfig: NextConfig = {
         hostname: 'ik.imagekit.io',
         port: '',
       },
+      {
+        protocol: 'https',
+        hostname: 'cdn.sanity.io',
+      },
     ],
+  },
+  turbopack: {
+    rules: {
+      '*.svg': {
+        loaders: [
+          {
+            loader: '@svgr/webpack',
+            options: {
+              icon: true,
+            },
+          },
+        ],
+        as: '*.js',
+      },
+    },
   },
 };
 
