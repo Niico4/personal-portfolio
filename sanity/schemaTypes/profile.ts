@@ -147,8 +147,7 @@ export const profileType = defineType({
         defineField({
           name: 'homeIntroduction',
           title: 'Home Introduction',
-          type: 'text',
-          rows: 4,
+          type: 'portableText',
           description:
             'Short introduction used in the home page. It should be direct, human and focused on what you build.',
           validation: (Rule) => Rule.required(),
@@ -157,8 +156,7 @@ export const profileType = defineType({
         defineField({
           name: 'aboutDescription',
           title: 'About Description',
-          type: 'text',
-          rows: 7,
+          type: 'portableText',
           description:
             'Longer description used in the about section. It can explain your focus, stack, product mindset and way of working.',
           validation: (Rule) => Rule.required(),

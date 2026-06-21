@@ -1,3 +1,5 @@
+import { PortableTextBlock } from '@portabletext/types';
+
 export type ProfileInformationType = {
   id: string;
   contact_information: ContactInformation;
@@ -19,8 +21,8 @@ export type Resume = {
 };
 
 export type Content = {
-  introduction: string;
-  description: string;
+  introduction: PortableTextBlock[] | null;
+  description: PortableTextBlock[] | null;
   professional_title: string;
   current_location: string;
 };

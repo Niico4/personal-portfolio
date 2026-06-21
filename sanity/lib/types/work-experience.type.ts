@@ -1,3 +1,5 @@
+import { PortableTextBlock } from '@portabletext/types';
+
 import { ImageType } from './common.type';
 
 export type EmploymentType = 'full-time' | 'part-time';
@@ -15,7 +17,7 @@ export type JobInformation = {
   is_current_job: boolean;
   job_icon_key: null | string;
   job_title: string;
-  highlights: string[];
+  highlights: PortableTextBlock[] | null;
   skills: string[];
   start_date: string | Date;
   end_date: string | Date | null;
