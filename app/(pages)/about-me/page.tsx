@@ -1,42 +1,41 @@
+import { Metadata } from 'next';
+
 import WorkExperienceSection from '../../components/sections/work-experience-section';
 
 import AboutMeHeroSection from './sections/about-me-hero-section';
 import EducationSection from './sections/education-section';
 import SkillsSection from './sections/skills-section';
 
-// TODO
-// export const metadata: Metadata = {
-//   title: {
-//     absolute: 'Nicolás Garzón | Desarrollador Full Stack',
-//   },
-//   description:
-//     'Construyo productos web completos con React, Next.js y Node.js: interfaces claras, APIs bien estructuradas y soluciones pensadas desde el problema.',
-//   alternates: {
-//     canonical: '/',
-//   },
-//   openGraph: {
-//     title: 'Nicolás Garzón | Desarrollador Full Stack',
-//     description:
-//       'Construyo productos web completos con React, Next.js y Node.js: interfaces claras, APIs bien estructuradas y soluciones pensadas desde el problema.',
-//     url: '/',
-//     type: 'website',
-//     // TODO: images: [
-//     //   {
-//     //     url: '/seo/og-home.png',
-//     //     width: 1200,
-//     //     height: 630,
-//     //     alt: 'Portfolio de Nicolás Garzón',
-//     //   },
-//     // ],
-//   },
-//   twitter: {
-//     card: 'summary_large_image',
-//     title: 'Nicolás Garzón | Desarrollador Full Stack',
-//     description:
-//       'Construyo productos web completos con React, Next.js y Node.js: interfaces claras, APIs bien estructuradas y soluciones pensadas desde el problema.',
-//     // TODO: images: ['/seo/og-home.png'],
-//   },
-// };
+export const metadata: Metadata = {
+  title: 'Sobre mí',
+  description:
+    'Conoce a Nicolás Garzón, desarrollador Full Stack enfocado en crear productos web completos con React, Next.js, TypeScript, Node.js y bases de datos.',
+  alternates: {
+    canonical: '/about-me',
+  },
+  openGraph: {
+    title: 'Sobre mí | Nicolás Garzón',
+    description:
+      'Desarrollador Full Stack con enfoque en frontend, backend, producto, interfaces claras y soluciones web bien estructuradas.',
+    url: '/about-me',
+    type: 'profile',
+    images: [
+      {
+        url: '/seo/og-about-me-default-mockup.webp',
+        width: 1200,
+        height: 630,
+        alt: 'Sobre Nicolás Garzón, Desarrollador Full Stack',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Sobre mí | Nicolás Garzón',
+    description:
+      'Desarrollador Full Stack con enfoque en frontend, backend, producto, interfaces claras y soluciones web bien estructuradas.',
+    images: ['/seo/og-about-me-default-mockup.webp'],
+  },
+};
 
 const HomePage = () => {
   return (

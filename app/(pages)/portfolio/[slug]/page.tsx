@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation';
+import { Metadata } from 'next';
 
 import {
   getProject,
@@ -19,13 +20,33 @@ export const generateStaticParams = async () => {
   return slugs.map(({ slug }) => ({ slug }));
 };
 
-export const generateMetadata = async ({ params }: ProjectPageProps) => {
+const PROJECT_OG_FALLBACK_IMAGE = '/coming-soon.webp';
+
+const getSeoDescription = (description?: string | null) => {
+  const fallback =
+    'Proyecto desarrollado por Nicolás Garzón, Desarrollador Full Stack.';
+
+  if (!description) return fallback;
+
+  const cleanDescription = description.trim();
+
+  if (cleanDescription.length <= 155) {
+    return cleanDescription;
+  }
+
+  return `${cleanDescription.slice(0, 152).trim()}...`;
+};
+
+export const generateMetadata = async ({
+  params,
+}: ProjectPageProps): Promise<Metadata> => {
   const { slug } = await params;
   const project: ProjectInformationType | null = await getProject(slug);
 
   if (!project) {
     return {
-      title: 'Proyecto no encontrado | Nicolás Garzón',
+      title: 'Proyecto no encontrado',
+      description: 'El proyecto solicitado no está disponible.',
       robots: {
         index: false,
         follow: false,
@@ -33,14 +54,18 @@ export const generateMetadata = async ({ params }: ProjectPageProps) => {
     };
   }
 
-  const title = `${project.title} | Proyecto de Nicolás Garzón`;
-
-  const description =
+  const title = `${project.title} | Proyecto`;
+  const description = getSeoDescription(
     project.project_information_preview.short_description ??
-    project.project_detail.origin_description ??
-    'Proyecto desarrollado por Nicolás Garzón.';
+      project.project_detail.origin_description,
+  );
 
-  const imageUrl = project.project_information_preview.image?.url ?? undefined;
+  const imageUrl =
+    project.project_information_preview.image?.url ?? PROJECT_OG_FALLBACK_IMAGE;
+
+  const imageAlt =
+    project.project_information_preview.image?.alt ??
+    `Vista previa del proyecto ${project.title}`;
 
   const url = `/portfolio/${project.slug}`;
 
@@ -51,26 +76,24 @@ export const generateMetadata = async ({ params }: ProjectPageProps) => {
       canonical: url,
     },
     openGraph: {
-      title,
+      title: `${project.title} | Proyecto de Nicolás Garzón`,
       description,
       url,
       type: 'article',
-      images: imageUrl
-        ? [
-            {
-              url: imageUrl,
-              alt:
-                project.project_information_preview.image?.alt ??
-                `Vista previa de ${project.title}`,
-            },
-          ]
-        : undefined,
+      images: [
+        {
+          url: imageUrl,
+          width: 1200,
+          height: 630,
+          alt: imageAlt,
+        },
+      ],
     },
     twitter: {
       card: 'summary_large_image',
-      title,
+      title: `${project.title} | Proyecto de Nicolás Garzón`,
       description,
-      images: imageUrl ? [imageUrl] : undefined,
+      images: [imageUrl],
     },
   };
 };

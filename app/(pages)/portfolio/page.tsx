@@ -7,31 +7,31 @@ import { ProjectCard } from '@/components/common/project-card';
 export const metadata: Metadata = {
   title: 'Proyectos',
   description:
-    'Proyectos web de Nicolás Garzón: soluciones construidas de principio a fin con enfoque en producto, frontend, backend y experiencia de usuario.',
+    'Explora proyectos web de Nicolás Garzón: aplicaciones full stack con React, Next.js, Node.js y enfoque en producto, UI y experiencia de usuario.',
   alternates: {
     canonical: '/portfolio',
   },
   openGraph: {
-    title: 'Proyectos | Nicolás Garzón',
+    title: 'Proyectos web | Nicolás Garzón',
     description:
-      'Proyectos web de Nicolás Garzón: soluciones construidas de principio a fin con enfoque en producto, frontend, backend y experiencia de usuario.',
+      'Aplicaciones web construidas de principio a fin con enfoque en producto, frontend, backend, UI y experiencia de usuario.',
     url: '/portfolio',
     type: 'website',
-    // TODO: images: [
-    //   {
-    //     url: '/seo/og-portfolio.png',
-    //     width: 1200,
-    //     height: 630,
-    //     alt: 'Proyectos de Nicolás Garzón',
-    //   },
-    // ],
+    images: [
+      {
+        url: '/seo/og-projects-default-mockup.webp',
+        width: 1200,
+        height: 630,
+        alt: 'Proyectos web de Nicolás Garzón',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Proyectos | Nicolás Garzón',
+    title: 'Proyectos web | Nicolás Garzón',
     description:
-      'Proyectos web de Nicolás Garzón: soluciones construidas de principio a fin con enfoque en producto, frontend, backend y experiencia de usuario.',
-    // TODO: images: ['/seo/og-portfolio.png'],
+      'Aplicaciones web construidas de principio a fin con enfoque en producto, frontend, backend, UI y experiencia de usuario.',
+    images: ['/seo/og-projects-default-mockup.webp'],
   },
 };
 

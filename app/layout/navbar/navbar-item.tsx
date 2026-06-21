@@ -17,13 +17,13 @@ export const NavbarItem = ({ item, isActive, activeHref }: NavbarItemProps) => {
     <Tooltip content={item.label} placement="right" showArrow delay={300}>
       <Link
         href={item.href}
-        aria-label={item.label}
         aria-current={isActive ? 'page' : undefined}
         className="
           group relative grid size-11 shrink-0 place-items-center rounded-full
           outline-none transition-transform duration-300 hover:scale-105
         "
       >
+        <span className="sr-only">{item.label}</span>
         {isActive && (
           <motion.span
             layoutId="floating-navbar-active"
