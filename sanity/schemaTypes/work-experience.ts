@@ -155,16 +155,10 @@ export const workExperienceType = defineType({
             defineField({
               name: 'highlights',
               title: 'Position Highlights',
-              type: 'array',
+              type: 'portableText',
               description:
                 'Main bullets shown under this position. Use this for responsibilities, achievements or important work done.',
-              of: [
-                defineArrayMember({
-                  type: 'text',
-                  rows: 2,
-                }),
-              ],
-              validation: (Rule) => Rule.required().min(1),
+              validation: (Rule) => Rule.required(),
             }),
 
             defineField({

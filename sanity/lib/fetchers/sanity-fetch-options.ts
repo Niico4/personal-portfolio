@@ -9,9 +9,9 @@ export const SANITY_TAGS = {
 
 export const getSanityFetchOptions = (tags: string[] = []) =>
   ({
-    cache: 'force-cache',
+    cache: 'no-store',
     next: {
-      revalidate: false,
+      // revalidate: 60 * 60 * 24, -> for production
       tags,
     },
   }) as const;
