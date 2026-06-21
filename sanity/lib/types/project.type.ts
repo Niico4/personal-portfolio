@@ -1,3 +1,5 @@
+import { PortableTextBlock } from '@portabletext/types';
+
 import { ImageType } from './common.type';
 
 export type ProjectStatus =
@@ -25,8 +27,8 @@ export type Links = {
 
 export type ProjectDetail = {
   demo_video: DemoVideo | null;
-  full_description: string;
-  origin_description: string;
+  full_description: PortableTextBlock[] | null;
+  origin_description: PortableTextBlock[] | null;
 };
 
 export type DemoVideo = {

@@ -4,6 +4,7 @@ import { Divider } from '@heroui/divider';
 
 import { Heading } from '@/components/common/heading';
 import { getProfile } from '@/sanity/lib/fetchers/profile.fetcher';
+import { PortableTextContent } from '@/components/common/portable-text-content';
 
 import { HeroContactCards } from '../components/hero-contact-cards';
 
@@ -51,7 +52,10 @@ const HeroSection = async () => {
           <div className="space-y-4">
             <Heading>¡Hola!, soy Nicolás</Heading>
 
-            <p>{profile.content.introduction}</p>
+            <PortableTextContent
+              value={profile.content.introduction}
+              className="[&_p]:inline"
+            />
           </div>
 
           <article className="flex flex-col gap-3 pt-1 md:items-start">

@@ -4,15 +4,17 @@ import { useId, useState } from 'react';
 import { Button } from '@heroui/button';
 import { Divider } from '@heroui/divider';
 import { IconChevronsDown } from '@tabler/icons-react';
+import { PortableTextBlock } from '@portabletext/types';
 
 import { SkillChip } from '@/components/common/skill-chip';
 
+import { PortableTextContent } from '../common/portable-text-content';
 interface JobExperienceContentProps {
   jobTitle: string;
   employmentTypeLabel: string;
   dateRange: string;
   duration?: string | null;
-  highlights?: string[] | null;
+  highlights?: PortableTextBlock[] | null;
   skills?: string[] | null;
 }
 
@@ -92,9 +94,7 @@ export const JobExperienceContent = ({
           }`}
         >
           <ul className="flex min-h-0 flex-col gap-1 overflow-hidden text-ink-200">
-            {highlights?.map((highlight) => (
-              <li key={highlight}>• {highlight}</li>
-            ))}
+            <PortableTextContent value={highlights} className="[&_p]:inline" />
           </ul>
         </div>
       )}

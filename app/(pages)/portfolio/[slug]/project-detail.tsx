@@ -15,6 +15,7 @@ import {
 import { Heading } from '@/components/common/heading';
 import { SkillChip } from '@/components/common/skill-chip';
 import { ProjectInformationType } from '@/sanity/lib/types/project.type';
+import { PortableTextContent } from '@/components/common/portable-text-content';
 
 import { ProjectStatusChip } from '../components/project-status-chip';
 import { ProjectNavigation } from '../components/project-navigation-card';
@@ -103,9 +104,12 @@ export const ProjectDetailSection = ({
           </div>
         </div>
 
-        <p className="text-base leading-relaxed text-ink-100">
-          {project.project_detail.origin_description}
-        </p>
+        <div className="text-base leading-relaxed text-ink-100">
+          <PortableTextContent
+            value={project.project_detail.origin_description}
+            className="[&_p]:inline"
+          />
+        </div>
       </header>
 
       <Card className="border border-ink-500/70 bg-ink-950">
@@ -116,7 +120,7 @@ export const ProjectDetailSection = ({
         </CardHeader>
 
         <CardBody className="p-0">
-          <div className="mx-auto w-full max-w-2xl">
+          <div className="mx-auto w-full max-w-none">
             {demoVideoUrl ? (
               <video
                 src={demoVideoUrl}
@@ -125,7 +129,7 @@ export const ProjectDetailSection = ({
                 muted
                 preload="metadata"
                 poster={previewImageUrl}
-                className="block aspect-video w-full bg-ink-950 object-contain"
+                className="block aspect-video w-full bg-ink-950 object-contain lg:object-cover"
               >
                 Tu navegador no soporta la reproducción de video.
               </video>
@@ -157,9 +161,12 @@ export const ProjectDetailSection = ({
         </CardBody>
       </Card>
 
-      <p className="text-base leading-relaxed">
-        {project.project_detail.full_description}
-      </p>
+      <div className="text-base leading-relaxed">
+        <PortableTextContent
+          value={project.project_detail.full_description}
+          className="[&_p]:inline"
+        />
+      </div>
 
       <div className="flex flex-wrap gap-3">
         {project.technologies.map((technology) => (

@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import type { ComponentType } from 'react';
 import {
   IconBrandGithub,
@@ -12,12 +11,13 @@ import { Divider } from '@heroui/divider';
 import { getProfile } from '@/sanity/lib/fetchers/profile.fetcher';
 import { poetsenOne } from '@/fonts';
 import { Heading } from '@/components/common/heading';
+import { PortableTextContent } from '@/components/common/portable-text-content';
 
 import { CopyEmailButton } from '../components/copy-email-button';
 
-const AVATAR = {
-  thinking: '/nico-avatar-thinking.webp',
-} as const;
+// const AVATAR = {
+//   thinking: '/nico-avatar-thinking.webp',
+// } as const;
 
 const ACTION_LABELS = {
   downloadResume: 'Descarga mi currículum',
@@ -96,8 +96,9 @@ const AboutMeHeroSection = async () => {
 
   return (
     <section className="flex flex-col gap-8">
-      <header className="mx-auto flex w-full max-w-2xl flex-col items-center gap-8 sm:gap-10 lg:max-w-6xl lg:flex-row lg:items-start lg:justify-between lg:gap-8">
-        <div className="flex w-full justify-center lg:basis-[46%] lg:justify-end">
+      <header className="mx-auto flex w-full flex-col gap-8 sm:gap-10">
+        {/*
+        <div className="flex w-full justify-center lg:basis-[38%] lg:justify-end">
           <div className="relative aspect-square w-full max-w-[360px] overflow-hidden">
             <Image
               src={AVATAR.thinking}
@@ -115,15 +116,19 @@ const AboutMeHeroSection = async () => {
             />
           </div>
         </div>
+        */}
 
-        <div className="flex w-full max-w-[600px] flex-col gap-5 lg:basis-[54%]">
+        <div className="flex w-full max-w-none flex-col gap-5">
           <Heading>Sobre mi</Heading>
-          <p>{profile.content.description}</p>
+          <PortableTextContent
+            value={profile.content.description}
+            className="[&_p]:inline"
+          />
 
           <div
             role="group"
             aria-label="Enlaces de contacto"
-            className="grid grid-cols-2 gap-x-5 gap-y-4"
+            className="grid grid-cols-2 sm:flex sm:items-center sm:gap-5 gap-x-5 gap-y-4"
           >
             <ActionLink
               href={profile.contact_information.linkedin_url}

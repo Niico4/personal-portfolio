@@ -223,8 +223,7 @@ export const projectType = defineType({
         defineField({
           name: 'originDescription',
           title: 'Origin Description',
-          type: 'text',
-          rows: 4,
+          type: 'portableText',
           description:
             'Short text explaining the problem or context where the project was born.',
           validation: (Rule) => Rule.required(),
@@ -254,8 +253,7 @@ export const projectType = defineType({
         defineField({
           name: 'description',
           title: 'Project Description',
-          type: 'text',
-          rows: 7,
+          type: 'portableText',
           description:
             'Main project description: how it was designed, built, and what technologies or architecture were used.',
           validation: (Rule) => Rule.required(),
