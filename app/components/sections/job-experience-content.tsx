@@ -3,8 +3,9 @@
 import { useId, useState } from 'react';
 import { Button } from '@heroui/button';
 import { Divider } from '@heroui/divider';
-import { IconChevronsDown } from '@tabler/icons-react';
+import { IconCaretDown } from '@tabler/icons-react';
 import { PortableTextBlock } from '@portabletext/types';
+import { AnimatePresence, motion } from 'framer-motion';
 
 import { SkillChip } from '@/components/common/skill-chip';
 
@@ -26,16 +27,14 @@ export const JobExperienceContent = ({
   highlights,
   skills,
 }: JobExperienceContentProps) => {
-  const [showHighlights, setShowHighlights] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const highlightsId = useId();
 
   const hasHighlights = Boolean(highlights?.length);
   const hasSkills = Boolean(skills?.length);
 
   return (
-    <div
-      className={`flex w-full flex-col ${showHighlights ? 'gap-4' : 'gap-2'}`}
-    >
+    <div className={`flex w-full flex-col ${isOpen ? 'gap-4' : 'gap-2'}`}>
       <div className="flex w-full items-start justify-between gap-4 sm:items-center">
         <div className="flex min-w-0 flex-col gap-1">
           <h4 className="text-lg text-ink-200">{jobTitle}</h4>
@@ -67,16 +66,16 @@ export const JobExperienceContent = ({
             isIconOnly
             size="sm"
             variant="flat"
-            aria-label={showHighlights ? 'Ocultar logros' : 'Mostrar logros'}
-            aria-expanded={showHighlights}
+            aria-label={isOpen ? 'Ocultar logros' : 'Mostrar logros'}
+            aria-expanded={isOpen}
             aria-controls={highlightsId}
             className="shrink-0"
-            onPress={() => setShowHighlights((currentValue) => !currentValue)}
+            onPress={() => setIsOpen((currentValue) => !currentValue)}
             startContent={
-              <IconChevronsDown
-                stroke={1.8}
+              <IconCaretDown
+                stroke={1.5}
                 className={`transition-transform duration-300 ${
-                  showHighlights ? 'rotate-180' : 'rotate-0'
+                  isOpen ? 'rotate-180' : 'rotate-0'
                 }`}
               />
             }
@@ -84,20 +83,24 @@ export const JobExperienceContent = ({
         )}
       </div>
 
-      {hasHighlights && (
-        <div
-          id={highlightsId}
-          className={`grid transition-all duration-300 ease-in-out ${
-            showHighlights
-              ? 'grid-rows-[1fr] opacity-100'
-              : 'grid-rows-[0fr] opacity-0'
-          }`}
-        >
-          <ul className="flex min-h-0 flex-col gap-1 overflow-hidden text-ink-200">
-            <PortableTextContent value={highlights} className="[&_p]:inline" />
-          </ul>
-        </div>
-      )}
+      <AnimatePresence initial={false}>
+        {hasHighlights && isOpen && (
+          <motion.div
+            id={highlightsId}
+            key="highlights"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.25, ease: 'easeInOut' }}
+            className="overflow-hidden"
+          >
+            <PortableTextContent
+              value={highlights}
+              className="flex flex-col gap-1 text-ink-200 [&_p]:inline"
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {hasSkills && (
         <div className="flex flex-wrap items-center gap-4">

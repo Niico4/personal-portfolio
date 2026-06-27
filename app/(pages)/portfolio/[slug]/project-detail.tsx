@@ -120,19 +120,27 @@ export const ProjectDetailSection = ({
         </CardHeader>
 
         <CardBody className="p-0">
-          <div className="mx-auto w-full max-w-none">
+          <figure className="mx-auto w-full max-w-none">
             {demoVideoUrl ? (
-              <video
-                src={demoVideoUrl}
-                controls
-                playsInline
-                muted
-                preload="metadata"
-                poster={previewImageUrl}
-                className="block aspect-video w-full bg-ink-950 object-contain lg:object-cover"
-              >
-                Tu navegador no soporta la reproducción de video.
-              </video>
+              <>
+                <video
+                  controls
+                  playsInline
+                  muted
+                  preload="metadata"
+                  poster={previewImageUrl}
+                  aria-label={`Video demostrativo sin audio de ${project.title}`}
+                  className="block aspect-video w-full bg-ink-950 object-contain lg:object-cover"
+                >
+                  <source src={demoVideoUrl} type="video/mp4" />
+                  Tu navegador no soporta la reproducción de video.
+                </video>
+
+                <figcaption className="sr-only">
+                  Video demostrativo sin audio de {project.title}. Muestra las
+                  principales pantallas e interacciones del proyecto.
+                </figcaption>
+              </>
             ) : (
               <div className="relative aspect-video w-full overflow-hidden bg-ink-900">
                 {previewImageUrl && (
@@ -157,7 +165,7 @@ export const ProjectDetailSection = ({
                 </div>
               </div>
             )}
-          </div>
+          </figure>
         </CardBody>
       </Card>
 

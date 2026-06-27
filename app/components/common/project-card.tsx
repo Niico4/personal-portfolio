@@ -22,6 +22,7 @@ export const ProjectCard = ({
   return (
     <Card
       as={Link}
+      aria-label={`Ir al proyecto ${title}`}
       href={projectHref}
       isPressable
       isFooterBlurred
