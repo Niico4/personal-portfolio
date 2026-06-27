@@ -53,16 +53,17 @@ export const FloatingNavbar = () => {
 
           <div className="h-px w-7 bg-white/10" />
 
-          <div className="flex items-center gap-2 lg:flex-col">
+          <ul className="flex items-center gap-2 lg:flex-col">
             {NAV_ITEMS.map((item) => (
-              <NavbarItem
-                key={item.href}
-                item={item}
-                isActive={item.href === activeHref}
-                activeHref={activeHref}
-              />
+              <li key={item.href}>
+                <NavbarItem
+                  item={item}
+                  isActive={item.href === activeHref}
+                  activeHref={activeHref}
+                />
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </LayoutGroup>
     </nav>

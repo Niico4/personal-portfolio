@@ -31,21 +31,19 @@ const ProjectsPreviewSection = async () => {
         </Link>
       </article>
 
-      <article className="grid auto-rows-[260px] grid-cols-1 gap-5 sm:grid-cols-2 sm:grid-rows-[240px_240px] lg:grid-rows-[220px_220px] lg:gap-4 xl:grid-rows-[230px_230px]">
-        <ProjectCard
-          project={visibleProjects[0]}
-          className="min-h-[260px] sm:min-h-0 sm:row-span-full"
-        />
+      <ul className="grid auto-rows-[260px] grid-cols-1 gap-5 sm:grid-cols-2 sm:grid-rows-[240px_240px] lg:grid-rows-[220px_220px] lg:gap-4 xl:grid-rows-[230px_230px]">
+        <li className="min-h-[260px] sm:min-h-0 sm:row-span-full">
+          <ProjectCard project={visibleProjects[0]} className="h-full" />
+        </li>
 
-        <ProjectCard
-          project={visibleProjects[1]}
-          className="min-h-[260px] sm:min-h-0"
-        />
-        <ProjectCard
-          project={visibleProjects[2]}
-          className="min-h-[260px] sm:min-h-0"
-        />
-      </article>
+        <li className="min-h-[260px] sm:min-h-0">
+          <ProjectCard project={visibleProjects[1]} className="h-full" />
+        </li>
+
+        <li className="min-h-[260px] sm:min-h-0">
+          <ProjectCard project={visibleProjects[2]} className="h-full" />
+        </li>
+      </ul>
     </section>
   );
 };

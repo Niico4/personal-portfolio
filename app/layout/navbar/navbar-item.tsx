@@ -18,6 +18,7 @@ export const NavbarItem = ({ item, isActive, activeHref }: NavbarItemProps) => {
       <Link
         href={item.href}
         aria-current={isActive ? 'page' : undefined}
+        aria-label={item.label}
         className="
           group relative grid size-11 shrink-0 place-items-center rounded-full
           outline-none transition-transform duration-300 hover:scale-105

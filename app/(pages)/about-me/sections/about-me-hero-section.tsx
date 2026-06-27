@@ -125,45 +125,53 @@ const AboutMeHeroSection = async () => {
             className="[&_p]:inline"
           />
 
-          <div
-            role="group"
+          <ul
+            // role="group"
             aria-label="Enlaces de contacto"
             className="grid grid-cols-2 sm:flex sm:items-center sm:gap-5 gap-x-5 gap-y-4"
           >
-            <ActionLink
-              href={profile.contact_information.linkedin_url}
-              label="LinkedIn"
-              ariaLabel={ACTION_LABELS.openLinkedin}
-              icon={IconBrandLinkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline"
-            />
+            <li>
+              <ActionLink
+                href={profile.contact_information.linkedin_url}
+                label="LinkedIn"
+                ariaLabel={ACTION_LABELS.openLinkedin}
+                icon={IconBrandLinkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline"
+              />
+            </li>
 
-            <ActionLink
-              href={profile.contact_information.github_url}
-              label="GitHub"
-              ariaLabel={ACTION_LABELS.openGithub}
-              icon={IconBrandGithub}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline"
-            />
+            <li>
+              <ActionLink
+                href={profile.contact_information.github_url}
+                label="GitHub"
+                ariaLabel={ACTION_LABELS.openGithub}
+                icon={IconBrandGithub}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline"
+              />
+            </li>
 
             {resumeLink && (
-              <ActionLink
-                href={resumeLink.href}
-                label="Currículum"
-                ariaLabel={ACTION_LABELS.downloadResume}
-                icon={IconDownload}
-                download={resumeLink.download}
-                target={resumeLink.target}
-                rel={resumeLink.rel}
-              />
+              <li>
+                <ActionLink
+                  href={resumeLink.href}
+                  label="Currículum"
+                  ariaLabel={ACTION_LABELS.downloadResume}
+                  icon={IconDownload}
+                  download={resumeLink.download}
+                  target={resumeLink.target}
+                  rel={resumeLink.rel}
+                />
+              </li>
             )}
 
-            <CopyEmailButton email={profile.contact_information.email} />
-          </div>
+            <li>
+              <CopyEmailButton email={profile.contact_information.email} />
+            </li>
+          </ul>
           <Divider className="bg-ink-900" />
 
           {visibleStats.length > 0 && (

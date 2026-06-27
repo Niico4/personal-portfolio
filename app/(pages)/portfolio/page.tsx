@@ -54,24 +54,24 @@ const ProjectsPage = async () => {
       </div>
 
       {featuredProject && (
-        <article className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-12 lg:auto-rows-[minmax(220px,auto)]">
-          <ProjectCard
-            project={featuredProject}
-            className="min-h-[320px] sm:min-h-[420px] md:col-span-2 lg:col-span-7 lg:row-span-2"
-          />
+        <ul className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-12 lg:auto-rows-[minmax(220px,auto)]">
+          <li className="min-h-[320px] sm:min-h-[420px] md:col-span-2 lg:col-span-7 lg:row-span-2">
+            <ProjectCard project={featuredProject} className="h-full" />
+          </li>
 
           {secondaryProjects.map((project, index) => (
-            <ProjectCard
+            <li
               key={project.id}
-              project={project}
               className={
                 index === 2
                   ? 'min-h-[260px] sm:min-h-[280px] md:col-span-2 lg:col-span-12'
                   : 'min-h-[240px] sm:min-h-[220px] md:col-span-1 lg:col-span-5'
               }
-            />
+            >
+              <ProjectCard project={project} className="h-full" />
+            </li>
           ))}
-        </article>
+        </ul>
       )}
     </section>
   );
