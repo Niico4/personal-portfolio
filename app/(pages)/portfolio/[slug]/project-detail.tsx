@@ -60,7 +60,7 @@ export const ProjectDetailSection = ({
               {project.title}
             </Heading>
 
-            <ProjectStatusChip status={project.status} className="shrink-0" />
+            <ProjectStatusChip status={project.status} />
           </div>
 
           <div className="flex self-end items-center gap-3 lg:self-auto">

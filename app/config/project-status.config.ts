@@ -1,4 +1,10 @@
-// src/config/project-status.config.ts
+import {
+  Icon,
+  IconProgress,
+  IconProgressBolt,
+  IconProgressCheck,
+  IconProgressHelp,
+} from '@tabler/icons-react';
 
 import { ProjectStatus } from '@/sanity/lib/types/project.type';
 
@@ -7,27 +13,27 @@ export const PROJECT_STATUS_CONFIG: Record<
   {
     label: string;
     className: string;
-    dotClassName: string;
+    icon: Icon;
   }
 > = {
   published: {
     label: 'Publicado',
-    className: 'border-emerald-400/20 bg-emerald-400/10 text-emerald-100',
-    dotClassName: 'bg-emerald-300',
+    className: 'border-[#0AD2F5]/50 bg-[#0BD2F5]/20 text-[#0AD2F5]',
+    icon: IconProgressBolt,
   },
   completed: {
-    label: 'Finalizado',
-    className: 'border-sky-400/20 bg-sky-400/10 text-sky-100',
-    dotClassName: 'bg-sky-300',
+    label: 'Completado',
+    className: 'border-[#069381] bg-[#2DD4BF]/20 text-[#2DD4BF]',
+    icon: IconProgressCheck,
   },
   inDevelopment: {
     label: 'En desarrollo',
-    className: 'border-amber-400/20 bg-amber-400/10 text-amber-100',
-    dotClassName: 'bg-amber-300',
+    className: 'border-[#F59F0B]/50 bg-[#F59F0B]/20 text-[#F59F0B]',
+    icon: IconProgress,
   },
   concept: {
     label: 'En diseño',
-    className: 'border-violet-400/20 bg-violet-400/10 text-violet-100',
-    dotClassName: 'bg-violet-300',
+    className: 'border-[#B59DFB]/50 bg-[#460BF5]/20 text-[#B59DFB]',
+    icon: IconProgressHelp,
   },
 };

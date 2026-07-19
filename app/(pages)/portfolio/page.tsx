@@ -56,7 +56,7 @@ const ProjectsPage = async () => {
       {featuredProject && (
         <ul className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-12 lg:auto-rows-[minmax(220px,auto)]">
           <li className="min-h-[320px] sm:min-h-[420px] md:col-span-2 lg:col-span-7 lg:row-span-2">
-            <ProjectCard project={featuredProject} className="h-full" />
+            <ProjectCard project={featuredProject} index={0} />
           </li>
 
           {secondaryProjects.map((project, index) => (
@@ -68,7 +68,7 @@ const ProjectsPage = async () => {
                   : 'min-h-[240px] sm:min-h-[220px] md:col-span-1 lg:col-span-5'
               }
             >
-              <ProjectCard project={project} className="h-full" />
+              <ProjectCard project={project} index={1} />
             </li>
           ))}
         </ul>
