@@ -14,28 +14,26 @@ export const profileType = defineType({
       default: true,
     },
     {
-      name: 'resume',
-      title: 'Resume',
-    },
-    {
       name: 'contact',
       title: 'Contact',
     },
     {
-      name: 'content',
-      title: 'Content',
-    },
-    {
-      name: 'stats',
-      title: 'Stats',
-    },
-    {
-      name: 'skills',
-      title: 'Skills',
+      name: 'techSkills',
+      title: 'Technical Skills',
     },
   ],
 
   fields: [
+    defineField({
+      name: 'aboutMeDescription',
+      title: 'About Me Description',
+      type: 'portableText',
+      group: 'identity',
+      description:
+        'Longer description used in the hero section. It should be human, focused on your experience and skills, and highlight your personality.',
+      validation: (Rule) => Rule.required(),
+    }),
+
     defineField({
       name: 'professionalTitle',
       title: 'Professional Title',
@@ -58,7 +56,7 @@ export const profileType = defineType({
       name: 'resume',
       title: 'Resume / CV',
       type: 'object',
-      group: 'resume',
+      group: 'identity',
       description:
         'Resume reference used by the portfolio download/view button.',
       fields: [
@@ -137,105 +135,12 @@ export const profileType = defineType({
     }),
 
     defineField({
-      name: 'content',
-      title: 'Profile Content',
-      type: 'object',
-      group: 'content',
-      description:
-        'Main texts used in the home and about sections of the portfolio.',
-      fields: [
-        defineField({
-          name: 'homeIntroduction',
-          title: 'Home Introduction',
-          type: 'portableText',
-          description:
-            'Short introduction used in the home page. It should be direct, human and focused on what you build.',
-          validation: (Rule) => Rule.required(),
-        }),
-
-        defineField({
-          name: 'aboutDescription',
-          title: 'About Description',
-          type: 'portableText',
-          description:
-            'Longer description used in the about section. It can explain your focus, stack, product mindset and way of working.',
-          validation: (Rule) => Rule.required(),
-        }),
-      ],
-      validation: (Rule) => Rule.required(),
-    }),
-
-    defineField({
-      name: 'stats',
-      title: 'Profile Stats',
+      name: 'techSkills',
+      title: 'Technical Skills',
       type: 'array',
-      group: 'stats',
+      group: 'techSkills',
       description:
-        'Small metrics shown in the profile/about section. Example: +10 Projects completed.',
-      of: [
-        defineArrayMember({
-          name: 'profileStat',
-          title: 'Profile Stat',
-          type: 'object',
-          fields: [
-            defineField({
-              name: 'label',
-              title: 'Label',
-              type: 'string',
-              description: 'Text shown below or next to the stat.',
-              validation: (Rule) => Rule.required(),
-            }),
-
-            defineField({
-              name: 'value',
-              title: 'Value',
-              type: 'number',
-              description: 'Numeric value of the stat.',
-              validation: (Rule) => Rule.required(),
-            }),
-
-            defineField({
-              name: 'prefix',
-              title: 'Prefix',
-              type: 'string',
-              description: 'Optional text before the value. Example: +',
-              initialValue: '+',
-            }),
-
-            defineField({
-              name: 'suffix',
-              title: 'Suffix',
-              type: 'string',
-              description: 'Optional text after the value. Example: years.',
-            }),
-          ],
-
-          preview: {
-            select: {
-              label: 'label',
-              value: 'value',
-              prefix: 'prefix',
-              suffix: 'suffix',
-            },
-            prepare({ label, value, prefix, suffix }) {
-              return {
-                title: `${prefix ?? ''}${value ?? ''}${suffix ?? ''}`,
-                subtitle: label,
-              };
-            },
-          },
-        }),
-      ],
-      validation: (Rule) => Rule.required().min(1),
-    }),
-
-    defineField({
-      name: 'skillsAndTechnologies',
-      title: 'Skills and Technologies',
-      type: 'array',
-      group: 'skills',
-      description:
-        'Skills and technologies shown as chips/badges in the profile/about section.',
+        'Technical skills and technologies shown as chips/badges in the profile/about section.',
       of: [
         defineArrayMember({
           name: 'skill',

@@ -14,8 +14,8 @@ const SkillsSection = async () => {
       />
 
       <ul className="flex flex-wrap items-center gap-3">
-        {skills.map(({ _key, icon_key, name }) => {
-          const iconSrc = `/icons/tech/${icon_key}.svg`;
+        {skills.map(({ _key, iconKey, name }) => {
+          const iconSrc = `/icons/tech/${iconKey}.svg`;
 
           return (
             <li

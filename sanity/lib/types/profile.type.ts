@@ -1,42 +1,31 @@
 import { PortableTextBlock } from '@portabletext/types';
 
 export type ProfileInformationType = {
-  id: string;
-  contact_information: ContactInformation;
+  contactInformation: ContactInformation;
   content: Content;
   skills: Skill[];
-  stats: Stat[];
 };
 
 export type ContactInformation = {
   email: string;
-  github_url: string;
-  linkedin_url: string;
+  githubUrl: string;
+  linkedinUrl: string;
   resume: Resume;
 };
 
 export type Resume = {
-  external_url: string | null;
-  file_url: string | null;
+  externalUrl: string | null;
+  fileUrl: string | null;
 };
 
 export type Content = {
-  introduction: PortableTextBlock[] | null;
-  description: PortableTextBlock[] | null;
-  professional_title: string;
-  current_location: string;
+  aboutMeDescription: PortableTextBlock[] | null;
+  professionalTitle: string;
+  currentLocation: string;
 };
 
 export type Skill = {
   _key: string;
-  icon_key: string;
+  iconKey: string;
   name: string;
-};
-
-export type Stat = {
-  _key: string;
-  label: string;
-  prefix: string;
-  suffix: null;
-  value: number;
 };

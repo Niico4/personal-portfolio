@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 
 import WorkExperienceSection from '../../components/sections/work-experience-section';
 
-import AboutMeHeroSection from './sections/about-me-hero-section';
+// import AboutMeHeroSection from './sections/about-me-hero-section';
 import EducationSection from './sections/education-section';
 import SkillsSection from './sections/skills-section';
 
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
 const HomePage = () => {
   return (
     <div className="mx-auto flex flex-col gap-14 sm:gap-20">
-      <AboutMeHeroSection />
+      {/* <AboutMeHeroSection /> */}
       <EducationSection />
       <WorkExperienceSection />
       <SkillsSection />
