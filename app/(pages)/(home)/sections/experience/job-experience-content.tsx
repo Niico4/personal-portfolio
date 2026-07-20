@@ -44,7 +44,7 @@ export const JobExperienceContent = ({
           gap-x-4
         "
       >
-        <div className="relative flex justify-center pt-0.5">
+        <div className="relative flex justify-center pt-[1px] sm:pt-0.5">
           <span
             aria-hidden
             className={`
@@ -66,7 +66,7 @@ export const JobExperienceContent = ({
             aria-hidden
             className={`
               pointer-events-none absolute
-              left-1/2 top-3.5
+              left-1/2 top-3 sm:top-3.5
               h-px w-[calc(50%+1rem)]
               transition-colors
               duration-300 ease-out
@@ -111,7 +111,7 @@ export const JobExperienceContent = ({
           <div className="flex flex-col">
             <h4
               className={`
-                text-lg font-medium leading-7
+                font-medium leading-7 sm:text-lg
                 transition-colors duration-200
                 ${isOpen ? 'text-ink-100' : 'text-ink-200'}
               `}
@@ -207,19 +207,14 @@ export const JobExperienceContent = ({
               className="
                 grid
                 grid-cols-[2.5rem_minmax(0,1fr)]
-                gap-x-4
+                sm:gap-x-4
               "
             >
               <div aria-hidden />
 
               <PortableTextContent
                 value={highlights!}
-                className="
-                  mt-4 flex flex-col gap-2
-                  text-ink-200
-                  [&_li]:leading-relaxed
-                  [&_p]:inline
-                "
+                className="mt-4 max-sm:text-sm flex flex-col gap-2 text-ink-200 [&_ul]:flex [&_ul]:flex-col [&_ul]:gap-2 [&_li]:relative [&_li]:list-none [&_li]:pl-4 [&_li :leading-relaxed [&_li]:before:absolute [&_li]:before:left-0 [&_li]:before:top-[0.72em] [&_li]:before:size-1 [&_li]:before:rotate-45 [&_li]:before:rounded-[1px] [&_li]:before:bg-brand-400/70 [&_p]:inline"
               />
             </div>
           </motion.div>

@@ -7,7 +7,26 @@ type SanityAssetField = {
   };
 };
 
-type ProjectStatus = 'published' | 'completed' | 'inDevelopment' | 'concept';
+const PROJECT_STATUS_OPTIONS = [
+  {
+    title: 'Published',
+    value: 'published',
+  },
+  {
+    title: 'Completed',
+    value: 'completed',
+  },
+  {
+    title: 'In Development',
+    value: 'inDevelopment',
+  },
+  {
+    title: 'Concept',
+    value: 'concept',
+  },
+] as const;
+
+type ProjectStatus = (typeof PROJECT_STATUS_OPTIONS)[number]['value'];
 
 type ProjectDocument = {
   status?: ProjectStatus;
@@ -15,45 +34,34 @@ type ProjectDocument = {
 
 type ProjectLinks = {
   liveDemoUrl?: string;
-  repositoryUrl?: string;
 };
 
-const PROJECT_STATUS_LABELS: Record<ProjectStatus, string> = {
-  published: 'Published',
-  completed: 'Completed',
-  inDevelopment: 'In development',
-  concept: 'Concept',
-};
-
-const PROJECT_STATUSES_WITH_OPTIONAL_CONTENT: ProjectStatus[] = [
-  'inDevelopment',
-  'concept',
-];
-
-const PROJECT_STATUSES_WITH_REQUIRED_MEDIA: ProjectStatus[] = [
+const PROJECT_STATUSES_REQUIRING_IMAGE: readonly ProjectStatus[] = [
   'published',
   'completed',
 ];
 
-const getProjectStatus = (document: unknown) =>
+const PROJECT_STATUSES_REQUIRING_TECHNOLOGIES: readonly ProjectStatus[] = [
+  'published',
+  'completed',
+  'inDevelopment',
+];
+
+const getProjectStatus = (document: unknown): ProjectStatus | undefined =>
   (document as ProjectDocument | undefined)?.status;
 
-const allowsOptionalContent = (document: unknown) => {
+const requiresPreviewImage = (document: unknown) => {
   const status = getProjectStatus(document);
 
-  return (
-    status !== undefined &&
-    PROJECT_STATUSES_WITH_OPTIONAL_CONTENT.includes(status)
-  );
+  return status ? PROJECT_STATUSES_REQUIRING_IMAGE.includes(status) : false;
 };
 
-const requiresMediaAndTechnologies = (document: unknown) => {
+const requiresTechnologies = (document: unknown) => {
   const status = getProjectStatus(document);
 
-  return (
-    status !== undefined &&
-    PROJECT_STATUSES_WITH_REQUIRED_MEDIA.includes(status)
-  );
+  return status
+    ? PROJECT_STATUSES_REQUIRING_TECHNOLOGIES.includes(status)
+    : false;
 };
 
 const isPublishedProject = (document: unknown) =>
@@ -62,102 +70,106 @@ const isPublishedProject = (document: unknown) =>
 const hasAsset = (value: unknown) =>
   Boolean((value as SanityAssetField | undefined)?.asset?._ref);
 
+const getProjectStatusLabel = (status: unknown) =>
+  PROJECT_STATUS_OPTIONS.find((option) => option.value === status)?.title ??
+  'No status';
+
+const truncatePreviewText = (value: string, maximumLength = 90): string => {
+  if (value.length <= maximumLength) return value;
+
+  return `${value.slice(0, maximumLength).trimEnd()}…`;
+};
+
 export const projectType = defineType({
   name: 'project',
-  title: 'Projects',
+  title: 'Project',
   type: 'document',
   icon: IconRocket,
 
   groups: [
     {
-      name: 'main',
-      title: 'Main',
+      name: 'overview',
+      title: 'Project Overview',
       default: true,
     },
     {
       name: 'preview',
-      title: 'Preview',
+      title: 'Card Preview',
     },
     {
       name: 'detail',
-      title: 'Detail',
+      title: 'Project Story',
     },
     {
       name: 'technologies',
-      title: 'Technologies',
+      title: 'Technology Stack',
     },
     {
       name: 'links',
-      title: 'Links',
+      title: 'Project Links',
     },
     {
       name: 'settings',
-      title: 'Settings',
+      title: 'Display Settings',
     },
   ],
 
   fields: [
     defineField({
       name: 'title',
-      title: 'Project Title',
+      title: 'Project Name',
       type: 'string',
-      group: 'main',
+      group: 'overview',
       description:
-        'The project name shown in the project detail page and preview card.',
-      validation: (Rule) => Rule.required(),
+        'Required. Public project name shown in cards, headings and the project detail page.',
+      validation: (Rule) =>
+        Rule.required()
+          .min(2)
+          .max(100)
+          .error('Add a project name between 2 and 100 characters.'),
     }),
 
     defineField({
       name: 'slug',
-      title: 'Project Slug',
+      title: 'Project URL Slug',
       type: 'slug',
-      group: 'main',
-      description: 'URL identifier for the project detail page.',
+      group: 'overview',
+      description:
+        'Required. Unique identifier used in the project detail page URL. Generate it from the project name and edit it only when necessary.',
       options: {
         source: 'title',
         maxLength: 96,
       },
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) =>
+        Rule.required().error('Generate a URL slug for this project.'),
     }),
 
     defineField({
       name: 'status',
-      title: 'Project Status',
+      title: 'Current Project Status',
       type: 'string',
-      group: 'main',
+      group: 'overview',
       description:
-        'Defines the current state of the project. This status is shown in the portfolio and controls which fields are required.',
+        'Required. Published means the project is finished and publicly available. Completed means it is finished but may not be deployed. In Development means it is actively being built. Concept means it is still in research or design.',
       options: {
-        list: [
-          {
-            title: 'Published',
-            value: 'published',
-          },
-          {
-            title: 'Completed',
-            value: 'completed',
-          },
-          {
-            title: 'In Development',
-            value: 'inDevelopment',
-          },
-          {
-            title: 'Concept',
-            value: 'concept',
-          },
-        ],
+        list: PROJECT_STATUS_OPTIONS.map(({ title, value }) => ({
+          title,
+          value,
+        })),
         layout: 'dropdown',
       },
-      initialValue: 'completed',
-      validation: (Rule) => Rule.required(),
+      initialValue: 'inDevelopment',
+      validation: (Rule) =>
+        Rule.required().error('Select the current project status.'),
     }),
 
     defineField({
       name: 'preview',
-      title: 'Project Preview',
+      title: 'Card Preview Content',
       type: 'object',
       group: 'preview',
-      description: 'Content used in project cards and preview sections.',
+      description:
+        'Required. Summary and visual used wherever the project appears as a card or featured item.',
       fields: [
         defineField({
           name: 'shortDescription',
@@ -165,33 +177,43 @@ export const projectType = defineType({
           type: 'text',
           rows: 3,
           description:
-            'Short description shown in the project card. Keep it clear and ideally under 220 characters.',
-          validation: (Rule) => Rule.required().max(220),
+            'Required. Explain what the project is or what it helps the user do. Keep it concrete and under 220 characters.',
+          validation: (Rule) =>
+            Rule.required()
+              .max(220)
+              .error(
+                'Add a short project description using no more than 220 characters.',
+              ),
         }),
 
         defineField({
           name: 'image',
-          title: 'Preview Image',
+          title: 'Project Preview Image',
           type: 'image',
           description:
-            'Image used in the project card. Required only when the project is not in development.',
+            'Main project visual used in cards and as the video poster. Required for Published and Completed projects. Optional while the project is still a concept or in development.',
           options: {
             hotspot: true,
           },
           fields: [
             defineField({
               name: 'alt',
-              title: 'Alt Text',
+              title: 'Alternative Text',
               type: 'string',
-              description: 'Short text describing the image for accessibility.',
+              description:
+                'Required when an image is uploaded. Describe the relevant interface or content visible in the image, not the project name alone.',
               validation: (Rule) =>
                 Rule.custom((altText, context) => {
-                  const imageHasAsset = hasAsset(context.parent);
+                  if (!hasAsset(context.parent)) {
+                    return true;
+                  }
 
-                  if (!imageHasAsset) return true;
+                  if (typeof altText !== 'string' || !altText.trim()) {
+                    return 'Add alternative text for the uploaded preview image.';
+                  }
 
-                  if (!altText) {
-                    return 'Alt text is required when a preview image is uploaded.';
+                  if (altText.trim().length > 160) {
+                    return 'Keep the alternative text under 160 characters.';
                   }
 
                   return true;
@@ -200,75 +222,110 @@ export const projectType = defineType({
           ],
           validation: (Rule) =>
             Rule.custom((image, context) => {
-              if (!requiresMediaAndTechnologies(context.document)) return true;
+              if (!requiresPreviewImage(context.document)) {
+                return true;
+              }
 
               if (!hasAsset(image)) {
-                return 'Preview image is required when the project is not in development.';
+                return 'Add a preview image for Published and Completed projects.';
               }
 
               return true;
             }),
         }),
       ],
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) =>
+        Rule.required().error('Add the project card preview content.'),
     }),
 
     defineField({
       name: 'detail',
-      title: 'Project Detail',
+      title: 'Project Detail Content',
       type: 'object',
       group: 'detail',
-      description: 'Content used inside the project detail page.',
+      description:
+        'Required. Detailed content used to explain the project beyond its card preview.',
       fields: [
-        defineField({
-          name: 'originDescription',
-          title: 'Origin Description',
-          type: 'portableText',
-          description:
-            'Short text explaining the problem or context where the project was born.',
-          validation: (Rule) => Rule.required(),
-        }),
-
         defineField({
           name: 'demoVideo',
           title: 'Demo Video',
           type: 'file',
           description:
-            'Main video shown in the project detail page. Required only when the project is not in development.',
+            'Optional. Upload a short video that demonstrates the main project flow. Leave it empty when the project is better explained with images, text or a live demo.',
           options: {
             accept: 'video/mp4,video/webm,video/quicktime',
           },
-          validation: (Rule) =>
-            Rule.custom((video, context) => {
-              if (!requiresMediaAndTechnologies(context.document)) return true;
-
-              if (!hasAsset(video)) {
-                return 'Demo video is required when the project is not in development.';
-              }
-
-              return true;
-            }),
         }),
 
         defineField({
-          name: 'description',
-          title: 'Project Description',
-          type: 'portableText',
+          name: 'contentSections',
+          title: 'Project Story Sections',
+          type: 'array',
           description:
-            'Main project description: how it was designed, built, and what technologies or architecture were used.',
-          validation: (Rule) => Rule.required(),
+            'Required. Build the project story using independent sections. Drag them to control their order. The frontend generates the section numbers automatically.',
+          of: [
+            defineArrayMember({
+              name: 'contentSection',
+              title: 'Story Section',
+              type: 'object',
+              fields: [
+                defineField({
+                  name: 'title',
+                  title: 'Section Title',
+                  type: 'string',
+                  description:
+                    'Required. Name that clearly introduces the section. Examples: De dónde nació, Cómo funciona, Construcción, Seguridad or Próximos pasos.',
+                  validation: (Rule) =>
+                    Rule.required()
+                      .min(2)
+                      .max(80)
+                      .error(
+                        'Add a section title between 2 and 80 characters.',
+                      ),
+                }),
+
+                defineField({
+                  name: 'content',
+                  title: 'Section Content',
+                  type: 'portableText',
+                  description:
+                    'Required. Explain this part of the project using paragraphs, lists, headings or links when they improve readability.',
+                  validation: (Rule) =>
+                    Rule.required().error(
+                      'Add the content for this project section.',
+                    ),
+                }),
+              ],
+
+              preview: {
+                select: {
+                  title: 'title',
+                },
+                prepare({ title }) {
+                  return {
+                    title: title ?? 'Untitled section',
+                  };
+                },
+              },
+            }),
+          ],
+          validation: (Rule) =>
+            Rule.required()
+              .min(1)
+              .error('Add at least one project story section.'),
         }),
       ],
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) =>
+        Rule.required().error('Add the detailed content for this project.'),
     }),
 
     defineField({
       name: 'technologies',
-      title: 'Technologies',
+      title: 'Tools and Technologies',
       type: 'array',
       group: 'technologies',
       description:
-        'Technologies shown as chips/badges. Required only when the project is not in development.',
+        'Technologies, platforms and tools used to build the project. Required for Published, Completed and In Development projects. Optional for concepts without a defined stack.',
       of: [
         defineArrayMember({
           type: 'string',
@@ -278,11 +335,22 @@ export const projectType = defineType({
         layout: 'tags',
       },
       validation: (Rule) =>
-        Rule.custom((technologies, context) => {
-          if (!requiresMediaAndTechnologies(context.document)) return true;
+        Rule.unique().custom((technologies, context) => {
+          if (!requiresTechnologies(context.document)) {
+            return true;
+          }
 
           if (!Array.isArray(technologies) || technologies.length === 0) {
-            return 'Add at least one technology for published or completed projects.';
+            return 'Add at least one technology for Published, Completed and In Development projects.';
+          }
+
+          const hasEmptyTechnology = technologies.some(
+            (technology) =>
+              typeof technology !== 'string' || !technology.trim(),
+          );
+
+          if (hasEmptyTechnology) {
+            return 'Remove empty technology values.';
           }
 
           return true;
@@ -295,34 +363,34 @@ export const projectType = defineType({
       type: 'object',
       group: 'links',
       description:
-        'External project links used by the action buttons. Repository URL is required only when the project is not in development.',
+        'Optional external links displayed as project actions. Only add links that visitors are allowed to access.',
       fields: [
         defineField({
           name: 'liveDemoUrl',
-          title: 'Live Demo URL',
+          title: 'Live Project URL',
           type: 'url',
-          description: 'Public demo or deployed project URL.',
+          description:
+            'Required when the status is Published. Public URL where visitors can open, test or view the project.',
         }),
 
         defineField({
           name: 'repositoryUrl',
-          title: 'Repository URL',
+          title: 'Public Repository URL',
           type: 'url',
-          description: 'GitHub repository URL.',
+          description:
+            'Optional. Public source-code repository. Leave empty for private, client or company repositories.',
         }),
       ],
       validation: (Rule) =>
         Rule.custom((links, context) => {
-          if (allowsOptionalContent(context.document)) return true;
+          if (!isPublishedProject(context.document)) {
+            return true;
+          }
 
           const value = links as ProjectLinks | undefined;
 
-          if (!value?.repositoryUrl) {
-            return 'Repository URL is required for published or completed projects.';
-          }
-
-          if (isPublishedProject(context.document) && !value?.liveDemoUrl) {
-            return 'Live demo URL is required when the project status is Published.';
+          if (!value?.liveDemoUrl) {
+            return 'Add a live project URL when the status is Published.';
           }
 
           return true;
@@ -331,12 +399,17 @@ export const projectType = defineType({
 
     defineField({
       name: 'displayOrder',
-      title: 'Display Order',
+      title: 'Portfolio Display Order',
       type: 'number',
       group: 'settings',
       description:
-        'Controls the order of this project in the portfolio. Lower numbers appear first.',
-      validation: (Rule) => Rule.required().integer().min(0),
+        'Required. Controls the project position in the portfolio. Lower numbers appear first. Projects with the same number can be ordered by their last update date.',
+      initialValue: 0,
+      validation: (Rule) =>
+        Rule.required()
+          .integer()
+          .min(0)
+          .error('Use a whole number equal to or greater than 0.'),
     }),
   ],
 
@@ -348,19 +421,22 @@ export const projectType = defineType({
       status: 'status',
       displayOrder: 'displayOrder',
     },
+
     prepare({ title, shortDescription, media, status, displayOrder }) {
-      const fallbackTitle = title ?? 'Untitled project';
-      const fallbackDescription = shortDescription ?? 'No short description';
+      const projectTitle = title ?? 'Untitled project';
 
-      const statusLabel =
-        PROJECT_STATUS_LABELS[status as ProjectStatus] ?? 'No status';
+      const description = truncatePreviewText(
+        shortDescription ?? 'No short description',
+      );
 
-      const order =
+      const statusLabel = getProjectStatusLabel(status);
+
+      const orderLabel =
         typeof displayOrder === 'number' ? `Order ${displayOrder}` : 'No order';
 
       return {
-        title: fallbackTitle,
-        subtitle: `${order} · ${statusLabel} · ${fallbackDescription}`,
+        title: projectTitle,
+        subtitle: `${orderLabel} · ${statusLabel} · ${description}`,
         media,
       };
     },

@@ -6,12 +6,12 @@ import {
   getProjects,
   getProjectSlugs,
 } from '@/sanity/lib/fetchers/project.fetcher';
-import { ProjectInformationType } from '@/sanity/lib/types/project.type';
+import { Project } from '@/sanity/lib/types/project.type';
 
 import { ProjectDetailSection } from './project-detail';
 
 type ProjectPageProps = {
-  params: Promise<{ slug: ProjectInformationType['slug'] }>;
+  params: Promise<{ slug: Project['slug'] }>;
 };
 
 export const generateStaticParams = async () => {
@@ -41,7 +41,7 @@ export const generateMetadata = async ({
   params,
 }: ProjectPageProps): Promise<Metadata> => {
   const { slug } = await params;
-  const project: ProjectInformationType | null = await getProject(slug);
+  const project: Project | null = await getProject(slug);
 
   if (!project) {
     return {
@@ -56,16 +56,13 @@ export const generateMetadata = async ({
 
   const title = `${project.title} | Proyecto`;
   const description = getSeoDescription(
-    project.project_information_preview.short_description ??
-      project.project_detail.origin_description,
+    project.preview.shortDescription ?? project.detail.contentSections,
   );
 
-  const imageUrl =
-    project.project_information_preview.image?.url ?? PROJECT_OG_FALLBACK_IMAGE;
+  const imageUrl = project.preview.image?.url ?? PROJECT_OG_FALLBACK_IMAGE;
 
   const imageAlt =
-    project.project_information_preview.image?.alt ??
-    `Vista previa del proyecto ${project.title}`;
+    project.preview.image?.alt ?? `Vista previa del proyecto ${project.title}`;
 
   const url = `/portfolio/${project.slug}`;
 
@@ -113,7 +110,7 @@ const ProjectDetailPage = async ({
   if (!project) return notFound();
 
   const currentProjectIndex = projects.findIndex(
-    (currentProject: ProjectInformationType) => currentProject.slug === slug,
+    (currentProject: Project) => currentProject.slug === slug,
   );
 
   const previousProject =

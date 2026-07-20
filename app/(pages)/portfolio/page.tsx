@@ -43,34 +43,42 @@ const ProjectsPage = async () => {
   }
 
   const [featuredProject, ...secondaryProjects] = projects;
+  const hasOddSecondaryProjects = secondaryProjects.length % 2 !== 0;
   return (
-    <section className="flex flex-col gap-8 sm:gap-10">
-      <div className="flex max-w-2xl flex-col items-start gap-4">
+    <section className="flex flex-col gap-10 sm:gap-12">
+      <header className="flex max-w-2xl flex-col gap-3">
         <Heading as="h1">Proyectos</Heading>
 
-        <p className="text-ink-100">
-          Soluciones reales que diseñé, construí y llevé de principio a fin.
+        <p className="max-w-xl text-pretty leading-relaxed text-ink-200">
+          Productos que he diseñado y construido desde la idea, conectando
+          decisiones de producto, interfaz y desarrollo.
         </p>
-      </div>
+      </header>
 
       {featuredProject && (
-        <ul className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-12 lg:auto-rows-[minmax(220px,auto)]">
-          <li className="min-h-[320px] sm:min-h-[420px] md:col-span-2 lg:col-span-7 lg:row-span-2">
+        <ul className="grid grid-cols-1 gap-5 md:grid-cols-2">
+          <li className="min-h-[400px] md:col-span-2 lg:min-h-[460px]">
             <ProjectCard project={featuredProject} index={0} />
           </li>
 
-          {secondaryProjects.map((project, index) => (
-            <li
-              key={project.id}
-              className={
-                index === 2
-                  ? 'min-h-[260px] sm:min-h-[280px] md:col-span-2 lg:col-span-12'
-                  : 'min-h-[240px] sm:min-h-[220px] md:col-span-1 lg:col-span-5'
-              }
-            >
-              <ProjectCard project={project} index={1} />
-            </li>
-          ))}
+          {secondaryProjects.map((project, index) => {
+            const isLastProject = index === secondaryProjects.length - 1;
+
+            const shouldBeWide = hasOddSecondaryProjects && isLastProject;
+
+            return (
+              <li
+                key={project.id}
+                className={
+                  shouldBeWide
+                    ? 'min-h-[320px] md:col-span-2'
+                    : 'min-h-[360px] md:col-span-1'
+                }
+              >
+                <ProjectCard project={project} index={index + 1} />
+              </li>
+            );
+          })}
         </ul>
       )}
     </section>

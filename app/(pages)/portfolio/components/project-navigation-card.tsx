@@ -1,73 +1,107 @@
 'use client';
 
-import Link from 'next/link';
 import Image from 'next/image';
+import Link from 'next/link';
 import { IconArrowNarrowLeft, IconArrowNarrowRight } from '@tabler/icons-react';
 
-import { ProjectInformationType } from '@/sanity/lib/types/project.type';
+import { Project } from '@/sanity/lib/types/project.type';
 
-import { ProjectStatusChip } from './project-status-chip';
+type ProjectNavigationItem = Pick<Project, 'title' | 'slug' | 'preview'>;
 
-type ProjectNavigationItem = Pick<
-  ProjectInformationType,
-  'title' | 'slug' | 'status' | 'project_information_preview'
->;
+type ProjectNavigationDirection = 'previous' | 'next';
+
+type ProjectNavigationCardProps = {
+  project: ProjectNavigationItem;
+  direction: ProjectNavigationDirection;
+};
+
+const NAVIGATION_CONTENT = {
+  previous: {
+    label: 'Proyecto anterior',
+    accessibleLabel: 'Ir al proyecto anterior',
+    Icon: IconArrowNarrowLeft,
+  },
+  next: {
+    label: 'Siguiente proyecto',
+    accessibleLabel: 'Ir al siguiente proyecto',
+    Icon: IconArrowNarrowRight,
+  },
+} as const;
 
 const ProjectNavigationCard = ({
   project,
   direction,
-}: {
-  project: ProjectNavigationItem;
-  direction: 'previous' | 'next';
-}) => {
+}: ProjectNavigationCardProps) => {
   const isPrevious = direction === 'previous';
+
+  const { label, accessibleLabel, Icon } = NAVIGATION_CONTENT[direction];
+
+  const previewImage = project.preview.image;
 
   return (
     <Link
       href={`/portfolio/${project.slug}`}
-      className="group relative min-h-[180px] overflow-hidden rounded-[2rem] border border-ink-500/70 bg-ink-950 transition duration-300 hover:-translate-y-1 hover:border-ink-400"
+      aria-label={`${accessibleLabel}: ${project.title}`}
+      className={[
+        'group flex min-h-36 overflow-hidden rounded-[1.5rem] border border-ink-800 bg-ink-950/50 outline-none transition duration-300',
+        'hover:-translate-y-0.5 hover:border-ink-600 hover:bg-ink-950',
+        'focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-4 focus-visible:ring-offset-main',
+        'motion-reduce:transform-none',
+        isPrevious ? 'flex-row' : 'flex-row-reverse',
+      ].join(' ')}
     >
-      <Image
-        fill
-        sizes="(min-width: 1024px) 50vw, 100vw"
-        src={
-          project.project_information_preview.image?.url ?? '/coming-soon.webp'
-        }
-        alt={
-          project.project_information_preview.image?.alt ??
-          `Vista previa de ${project.title}`
-        }
-        className="object-cover object-center transition duration-500 group-hover:scale-[1.04]"
-      />
+      <div className="relative hidden w-32 shrink-0 overflow-hidden bg-ink-900 sm:block lg:w-36">
+        {previewImage ? (
+          <>
+            <Image
+              fill
+              src={previewImage.url}
+              alt=""
+              sizes="144px"
+              className="object-cover object-center opacity-75 transition duration-500 group-hover:scale-[1.04] group-hover:opacity-100 motion-reduce:transform-none"
+            />
 
-      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-black/10" />
+            <div className="absolute inset-0 bg-main/10 transition-colors duration-300 group-hover:bg-transparent" />
+          </>
+        ) : (
+          <div className="absolute inset-0 bg-gradient-to-br from-brand-500/10 via-ink-950 to-ink-900" />
+        )}
+      </div>
 
-      <div className="absolute inset-0 flex flex-col justify-between p-5">
-        <div className="flex items-center justify-between gap-3">
-          <ProjectStatusChip status={project.status} />
-
-          <span className="grid size-9 place-items-center rounded-full border border-white/15 bg-white/10 text-white backdrop-blur-md transition group-hover:bg-white/15">
-            {isPrevious ? (
-              <IconArrowNarrowLeft size={20} stroke={1.6} />
-            ) : (
-              <IconArrowNarrowRight size={20} stroke={1.6} />
-            )}
-          </span>
-        </div>
-
+      <div
+        className={[
+          'flex min-w-0 flex-1 flex-col justify-between gap-7 p-5 sm:p-6',
+          isPrevious ? 'items-start text-left' : 'items-end text-right',
+        ].join(' ')}
+      >
         <div
-          className={`flex flex-col gap-1 ${
-            isPrevious ? 'items-start text-left' : 'items-end text-right'
-          }`}
+          className={[
+            'flex items-center gap-3 text-ink-400 transition-colors duration-300 group-hover:text-brand-300',
+            isPrevious ? 'flex-row' : 'flex-row-reverse',
+          ].join(' ')}
         >
-          <span className="text-xs font-medium uppercase tracking-[0.2em] text-white/55">
-            {isPrevious ? 'Proyecto anterior' : 'Siguiente proyecto'}
+          <span className="grid size-9 shrink-0 place-items-center rounded-full border border-ink-700 bg-main/50 text-ink-200 transition duration-300 group-hover:border-brand-400/50 group-hover:bg-brand-400/10 group-hover:text-brand-300">
+            <Icon
+              aria-hidden="true"
+              size={19}
+              stroke={1.7}
+              className={[
+                'transition-transform duration-300 motion-reduce:transform-none',
+                isPrevious
+                  ? 'group-hover:-translate-x-0.5'
+                  : 'group-hover:translate-x-0.5',
+              ].join(' ')}
+            />
           </span>
 
-          <h3 className="text-xl font-semibold leading-tight text-white">
-            {project.title}
-          </h3>
+          <span className="font-mono text-[0.7rem] font-medium uppercase tracking-[0.16em]">
+            {label}
+          </span>
         </div>
+
+        <h3 className="max-w-[18ch] text-balance text-xl font-bold leading-tight tracking-[-0.025em] text-ink-50 transition-colors duration-300 group-hover:text-brand-300 sm:text-2xl">
+          {project.title}
+        </h3>
       </div>
     </Link>
   );
@@ -83,28 +117,36 @@ export const ProjectNavigation = ({
   if (!previousProject && !nextProject) return null;
 
   return (
-    <footer className="flex flex-col gap-5 border-t border-ink-500/70 pt-8">
-      <div>
-        <h2 className="text-lg font-semibold text-ink-50">Sigue explorando</h2>
-        <p className="mt-1 text-sm text-ink-200">
-          Otros proyectos que también muestran cómo pienso, diseño y construyo.
-        </p>
+    <footer className="border-t border-ink-800 pt-10 sm:pt-12">
+      <div className="mb-6 flex items-end justify-between gap-6">
+        <h2 className="text-xl font-bold tracking-[-0.025em] text-ink-50 sm:text-2xl">
+          Más proyectos
+        </h2>
+
+        <span className="hidden font-mono text-xs uppercase tracking-[0.16em] text-ink-500 sm:block">
+          Continúa explorando
+        </span>
       </div>
 
-      <div className="grid gap-5 md:grid-cols-2">
-        {previousProject ? (
-          <ProjectNavigationCard
-            project={previousProject}
-            direction="previous"
-          />
-        ) : (
-          <div />
+      <nav
+        aria-label="Navegación entre proyectos"
+        className="grid gap-4 md:grid-cols-2"
+      >
+        {previousProject && (
+          <div>
+            <ProjectNavigationCard
+              project={previousProject}
+              direction="previous"
+            />
+          </div>
         )}
 
         {nextProject && (
-          <ProjectNavigationCard project={nextProject} direction="next" />
+          <div className={!previousProject ? 'md:col-start-2' : undefined}>
+            <ProjectNavigationCard project={nextProject} direction="next" />
+          </div>
         )}
-      </div>
+      </nav>
     </footer>
   );
 };
