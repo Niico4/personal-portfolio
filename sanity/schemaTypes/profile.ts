@@ -21,6 +21,10 @@ export const profileType = defineType({
       name: 'techSkills',
       title: 'Technical Skills',
     },
+    {
+      name: 'education',
+      title: 'Education',
+    },
   ],
 
   fields: [
@@ -31,6 +35,27 @@ export const profileType = defineType({
       group: 'identity',
       description:
         'Longer description used in the hero section. It should be human, focused on your experience and skills, and highlight your personality.',
+      validation: (Rule) => Rule.required(),
+    }),
+
+    defineField({
+      name: 'rightNowIAm',
+      title: 'Right Now I Am',
+      type: 'portableText',
+      group: 'identity',
+      description:
+        'Short description of what I am encountering or focusing on right now.',
+      validation: (Rule) => Rule.required(),
+    }),
+
+    defineField({
+      name: 'isAvailable',
+      title: 'Is Available?',
+      type: 'boolean',
+      group: 'identity',
+      description:
+        'Deactivate when you are not available for opportunities or jobs',
+      initialValue: true,
       validation: (Rule) => Rule.required(),
     }),
 
@@ -162,7 +187,7 @@ export const profileType = defineType({
               description:
                 'Internal key used by the frontend to render the correct icon. Use lowercase without spaces, dots or special characters. Example: Next.js → nextjs.',
               validation: (Rule) =>
-                Rule.required().regex(/^[a-z0-9]+$/, {
+                Rule.regex(/^[a-z0-9]+$/, {
                   name: 'lowercase key without spaces, dots or special characters',
                   invert: false,
                 }),
@@ -178,6 +203,111 @@ export const profileType = defineType({
               return {
                 title,
                 subtitle: iconKey ? `Icon key: ${iconKey}` : 'No icon key',
+              };
+            },
+          },
+        }),
+      ],
+      validation: (Rule) => Rule.required().min(1),
+    }),
+
+    defineField({
+      name: 'education',
+      title: 'Education',
+      type: 'array',
+      group: 'education',
+      description: 'Education information',
+      of: [
+        defineArrayMember({
+          name: 'institution',
+          title: 'Institution',
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'institutionName',
+              title: 'Institution Name',
+              type: 'string',
+              description: 'Name of the institution, academy or platform.',
+              validation: (Rule) => Rule.required(),
+            }),
+
+            defineField({
+              name: 'academicTitle',
+              title: 'Academic Title',
+              type: 'string',
+              description: 'Academic title or program name.',
+              validation: (Rule) => Rule.required(),
+            }),
+
+            defineField({
+              name: 'startDate',
+              title: 'Start Date',
+              type: 'date',
+              description:
+                'Date when this education started. Use the first day of the month if only month/year matters.',
+              validation: (Rule) => Rule.required(),
+            }),
+
+            defineField({
+              name: 'endDate',
+              title: 'End Date',
+              type: 'date',
+              description:
+                'Date when this education ended. Leave empty only if you are currently studying it.',
+              validation: (Rule) =>
+                Rule.custom((endDate, context) => {
+                  const parent = context.parent as {
+                    startDate?: string;
+                    isCurrentlyStudying?: boolean;
+                  };
+
+                  if (parent?.isCurrentlyStudying) return true;
+
+                  if (!endDate) {
+                    return 'End date is required when this education is not currently active.';
+                  }
+
+                  if (
+                    parent?.startDate &&
+                    new Date(endDate) < new Date(parent.startDate)
+                  ) {
+                    return 'End date must be after the start date.';
+                  }
+
+                  return true;
+                }),
+            }),
+
+            defineField({
+              name: 'isCurrentlyStudying',
+              title: 'Is Currently Studying?',
+              type: 'boolean',
+              description:
+                'Enable this if you are currently studying this program. The end date can be empty in that case.',
+              initialValue: false,
+              validation: (Rule) => Rule.required(),
+            }),
+
+            defineField({
+              name: 'displayOrder',
+              title: 'Display Order',
+              type: 'number',
+              description:
+                'Controls the order of this education item in the portfolio. Lower numbers appear first.',
+              initialValue: 0,
+              validation: (Rule) => Rule.required(),
+            }),
+          ],
+
+          preview: {
+            select: {
+              academicTitle: 'academicTitle',
+              institutionName: 'institutionName',
+            },
+            prepare({ academicTitle, institutionName }) {
+              return {
+                title: academicTitle,
+                subtitle: institutionName,
               };
             },
           },

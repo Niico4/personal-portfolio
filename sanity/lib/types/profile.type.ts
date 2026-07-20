@@ -3,7 +3,8 @@ import { PortableTextBlock } from '@portabletext/types';
 export type ProfileInformationType = {
   contactInformation: ContactInformation;
   content: Content;
-  skills: Skill[];
+  techSkills: Skill[];
+  education: EducationInformation[];
 };
 
 export type ContactInformation = {
@@ -20,6 +21,8 @@ export type Resume = {
 
 export type Content = {
   aboutMeDescription: PortableTextBlock[] | null;
+  rightNowIAm: PortableTextBlock[] | null;
+  isAvailable: boolean;
   professionalTitle: string;
   currentLocation: string;
 };
@@ -28,4 +31,14 @@ export type Skill = {
   _key: string;
   iconKey: string;
   name: string;
+};
+
+export type EducationInformation = {
+  id: string;
+  displayOrder: number;
+  isCurrentlyStudying: boolean;
+  academicTitle: string;
+  institutionName: string;
+  startDate: Date;
+  endDate: Date;
 };

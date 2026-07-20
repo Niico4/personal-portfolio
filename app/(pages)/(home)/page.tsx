@@ -1,10 +1,13 @@
 import { Metadata } from 'next';
 import { Divider } from '@heroui/divider';
 
-import WorkExperience from '../../components/sections/work-experience-section';
+import { FooterCard } from '@/layout/footer-card/footer-card';
 
 import Hero from './sections/hero-section';
 import ProjectsPreview from './sections/projects-preview-section';
+import EducationSection from './sections/education-section';
+import SkillsSection from './sections/skills-section';
+import WorkExperienceSection from './sections/experience/work-experience-section';
 
 export const metadata: Metadata = {
   title: {
@@ -41,13 +44,24 @@ export const metadata: Metadata = {
 
 const HomePage = () => {
   return (
-    <div className="mx-auto flex flex-col gap-6 sm:gap-7">
+    <main className="mx-auto flex flex-col gap-6 sm:gap-7">
       <Hero />
       <Divider aria-hidden="true" className="bg-ink-400/10" />
       <ProjectsPreview />
       <Divider aria-hidden="true" className="bg-ink-400/10" />
-      <WorkExperience />
-    </div>
+      <WorkExperienceSection />
+      <Divider aria-hidden="true" className="bg-ink-400/10" />
+
+      <div className="grid gap-6 sm:grid-cols-2 sm:gap-7">
+        <EducationSection />
+        <Divider aria-hidden="true" className="bg-ink-400/10 sm:hidden" />
+        <SkillsSection />
+      </div>
+
+      <Divider aria-hidden="true" className="bg-ink-400/10" />
+
+      <FooterCard />
+    </main>
   );
 };
 

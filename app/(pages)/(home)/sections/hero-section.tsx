@@ -47,7 +47,10 @@ const HeroSection = async () => {
   `;
 
   return (
-    <section className="flex flex-col gap-5 items-center justify-center">
+    <section
+      className="flex flex-col gap-5 items-center justify-center scroll-mt-24"
+      id="hero-section"
+    >
       <header className="flex w-full flex-col gap-5 pb-2 sm:flex-row sm:items-end">
         <div
           aria-hidden="true"
@@ -157,7 +160,7 @@ const HeroSection = async () => {
       <Divider aria-hidden="true" className="bg-ink-400/10" />
 
       <PortableTextContent
-        className=" [&_a]:underline [&_a]:decoration-dotted [&_a]:decoration-1 [&_a]:underline-offset-4 [&_a]:transition-colors [&_a:hover]:text-ink-50"
+        className=" [&_a]:underline [&_a]:decoration-dotted [&_a]:decoration-1 [&_a]:transition-colors [&_a:hover]:text-ink-50"
         value={aboutMeDescription}
       />
     </section>
