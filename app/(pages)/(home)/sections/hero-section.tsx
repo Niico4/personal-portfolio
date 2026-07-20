@@ -1,96 +1,175 @@
 import Image from 'next/image';
-import { IconMapPin, IconSchool } from '@tabler/icons-react';
+import { FC } from 'react';
+import {
+  IconBrandGithub,
+  IconBrandLinkedin,
+  IconMailShare,
+  IconPaperclip,
+} from '@tabler/icons-react';
 import { Divider } from '@heroui/divider';
 
 import { Heading } from '@/components/common/heading';
-import { getProfile } from '@/sanity/lib/fetchers/profile.fetcher';
 import { PortableTextContent } from '@/components/common/portable-text-content';
+import { SocialChip } from '@/components/common/social-chip';
+import {
+  ProfileContact,
+  ProfileOverview,
+} from '@/sanity/lib/types/profile.type';
 
-import { HeroContactCards } from '../components/hero-contact-cards';
+const RESUME_FILE_NAME = 'nicolas-garzon-cv.pdf';
 
-const AVATAR = {
-  tumbsUp: '/nico-avatar-tumbs-up.webp',
-} as const;
+interface Props {
+  contact: ProfileContact;
+  overview: ProfileOverview;
+}
 
-const HeroSection = async () => {
-  const profile = await getProfile();
-  const resumeUrl =
-    profile.contact_information.resume.file_url ??
-    profile.contact_information.resume.external_url;
+const HeroSection: FC<Props> = async ({ contact, overview }) => {
+  const {
+    email,
+    githubUrl,
+    linkedinUrl,
+    resume: { fileUrl, externalUrl },
+  } = contact;
 
-  const isSanityFile = Boolean(profile.contact_information.resume.file_url);
+  const { about, professionalTitle, isAvailableForOpportunities } = overview;
 
-  const resumeHref = profile.contact_information.resume.file_url
-    ? `${profile.contact_information.resume.file_url}?dl=nicolas-garzon-cv.pdf`
-    : profile.contact_information.resume.external_url;
+  const hasSanityResume = Boolean(fileUrl);
 
-  if (!profile) return null;
+  const resumeHref = fileUrl
+    ? `${fileUrl}?dl=${RESUME_FILE_NAME}`
+    : externalUrl;
 
   return (
-    <section className="flex flex-col gap-8">
-      <header className="mx-auto flex w-full max-w-2xl flex-col items-center gap-8 sm:gap-10 lg:max-w-6xl lg:flex-row lg:items-start lg:justify-between lg:gap-8">
-        <div className="flex w-full justify-center lg:basis-[46%] lg:justify-end">
-          <div className="relative aspect-square w-full max-w-[360px] overflow-hidden">
-            <Image
-              src={AVATAR.tumbsUp}
-              alt="Avatar ilustrado de Nicolás"
-              priority
-              draggable={false}
-              fill
-              sizes="(min-width: 1024px) 50vw, 100vw"
-              className="select-none object-contain"
-            />
-
-            <div
-              aria-hidden="true"
-              className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-main via-main/90 to-transparent"
-            />
-          </div>
-        </div>
-
-        <div className="flex w-full max-w-[600px] flex-col gap-5 lg:basis-[54%]">
-          <div className="space-y-4">
-            <Heading>¡Hola!, soy Nicolás</Heading>
-
-            <PortableTextContent
-              value={profile.content.introduction}
-              className="[&_p]:inline"
-            />
-          </div>
-
-          <article className="flex flex-col gap-3 pt-1 md:items-start">
-            <div className="flex items-center gap-3">
-              <div className="flex size-8 items-center justify-center rounded-lg bg-ink-900 text-ink-300">
-                <IconSchool stroke={1.5} size={20} />
-              </div>
-
-              <p className="text-ink-200">
-                {profile.content.professional_title}
-              </p>
-            </div>
-
-            <div className="flex items-center gap-3">
-              <div className="flex size-8 items-center justify-center rounded-lg bg-ink-900 text-ink-300">
-                <IconMapPin stroke={1.5} size={20} />
-              </div>
-
-              <p className="text-ink-200">{profile.content.current_location}</p>
-            </div>
-          </article>
-
-          <Divider className="my-2 bg-ink-900/70" />
-
-          <HeroContactCards
-            resumeHref={resumeHref ?? null}
-            resumeDisabled={!resumeUrl}
-            isSanityFile={isSanityFile}
-            linkedinUrl={profile.contact_information.linkedin_url}
-            githubUrl={profile.contact_information.github_url}
-            email={profile.contact_information.email}
+    <section
+      id="hero-section"
+      className="
+        flex scroll-mt-24
+        flex-col items-center
+        justify-center gap-5
+      "
+    >
+      <header className="flex w-full flex-col gap-5 pb-2 sm:flex-row sm:items-end">
+        <div
+          aria-hidden
+          className="
+            relative size-32 shrink-0
+            overflow-hidden rounded-full
+            border border-ink-800/70
+            bg-[#4c4c4c33]
+            backdrop-blur-sm
+            sm:size-48
+          "
+        >
+          <Image
+            src="/nico-avatar-tumbs-up.webp"
+            alt=""
+            fill
+            preload
+            draggable={false}
+            className="
+              translate-y-6 scale-[1.35]
+              select-none object-cover object-top
+              sm:translate-y-8
+            "
           />
         </div>
+
+        <div className="min-w-0 flex-1 pb-1">
+          <div>
+            <Heading>Nicolás Garzón</Heading>
+
+            <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm sm:text-base">
+              <p className="text-ink-100">{professionalTitle}</p>
+
+              {isAvailableForOpportunities && (
+                <span className="inline-flex items-center gap-1.5 text-xs font-medium text-green-500 sm:text-sm">
+                  <span
+                    aria-hidden
+                    className="size-1.5 rounded-full bg-current"
+                  />
+                  Disponible
+                </span>
+              )}
+            </div>
+          </div>
+
+          <ul
+            aria-label="Enlaces personales y de contacto"
+            className="mt-5 flex flex-wrap items-center gap-2.5"
+          >
+            {resumeHref && (
+              <li>
+                <SocialChip
+                  href={resumeHref}
+                  icon={IconPaperclip}
+                  label="Currículum"
+                  variant="resume"
+                  isExternal={!hasSanityResume}
+                />
+              </li>
+            )}
+
+            {githubUrl && (
+              <li>
+                <SocialChip
+                  href={githubUrl}
+                  icon={IconBrandGithub}
+                  label="GitHub"
+                  variant="github"
+                  isExternal
+                />
+              </li>
+            )}
+
+            {linkedinUrl && (
+              <li>
+                <SocialChip
+                  href={linkedinUrl}
+                  icon={IconBrandLinkedin}
+                  label="LinkedIn"
+                  variant="linkedin"
+                  isExternal
+                />
+              </li>
+            )}
+
+            {email && (
+              <>
+                <li
+                  aria-hidden
+                  className="
+                    mx-1 hidden h-5
+                    w-px bg-ink-800
+                    sm:block
+                  "
+                />
+
+                <li>
+                  <SocialChip
+                    href={`mailto:${email}`}
+                    icon={IconMailShare}
+                    label="Escríbeme"
+                    variant="email"
+                  />
+                </li>
+              </>
+            )}
+          </ul>
+        </div>
       </header>
-      <Divider className="bg-ink-900/70 mt-2" />
+
+      <Divider aria-hidden className="bg-ink-400/10" />
+
+      <PortableTextContent
+        value={about}
+        className="
+          [&_a]:underline
+          [&_a]:decoration-dotted
+          [&_a]:decoration-1
+          [&_a]:transition-colors
+          [&_a:hover]:text-ink-50
+        "
+      />
     </section>
   );
 };

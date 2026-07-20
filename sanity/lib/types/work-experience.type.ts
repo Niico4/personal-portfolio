@@ -1,29 +1,26 @@
-import { PortableTextBlock } from '@portabletext/types';
+import type { PortableTextBlock } from '@portabletext/types';
 
-import { ImageType } from './common.type';
+import type { ImageType } from './common.type';
 
-export type EmploymentType = 'full-time' | 'part-time';
-
-export type WorkExperienceInformationType = {
+type PortableTextValue = PortableTextBlock[] | null;
+export interface WorkExperience {
   id: string;
-  display_order: number;
-  organization_information: OrganizationInformation;
-  job_information: JobInformation[];
-};
+  displayOrder: number;
+  organization: WorkExperienceOrganization;
+  positions: WorkExperiencePosition[];
+}
 
-export type JobInformation = {
-  _key: string;
-  employment_type: EmploymentType;
-  is_current_job: boolean;
-  job_icon_key: null | string;
-  job_title: string;
-  highlights: PortableTextBlock[] | null;
-  skills: string[];
-  start_date: string | Date;
-  end_date: string | Date | null;
-};
+export interface WorkExperienceOrganization {
+  name: string;
+  logo: ImageType | null;
+}
 
-export type OrganizationInformation = {
-  organization_logo: ImageType | null;
-  organization_name: string;
-};
+export interface WorkExperiencePosition {
+  id: string;
+  title: string;
+  startDate: string;
+  endDate: string | null;
+  isCurrent: boolean;
+  highlights: PortableTextValue;
+  toolsAndTechnologies: string[];
+}

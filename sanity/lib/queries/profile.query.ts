@@ -2,37 +2,38 @@ import { groq } from 'next-sanity';
 
 export const PROFILE_QUERY = groq`
   *[_type == "profile"] | order(_updatedAt desc)[0] {
-    "id": _id,
-
-    "content": {
-      "introduction": content.homeIntroduction,
-      "description": content.aboutDescription,
-      "professional_title": professionalTitle,
-      "current_location": location,
+    "overview": {
+      "about": aboutMeDescription,
+      professionalTitle,
+      "location": location,
+      "currentFocus": rightNowIAm,
+      "isAvailableForOpportunities": isAvailable
     },
 
-    "contact_information": {
+    "contact": {
       "email": contact.email,
-      "github_url": contact.githubUrl,
-      "linkedin_url": contact.linkedinUrl,
+      "githubUrl": contact.githubUrl,
+      "linkedinUrl": contact.linkedinUrl,
+
       "resume": {
-        "file_url": resume.file.asset->url,
-        "external_url": resume.externalUrl
+        "fileUrl": resume.file.asset->url,
+        "externalUrl": resume.externalUrl
       }
     },
 
-    "skills": skillsAndTechnologies[] {
-      _key,
+    "skills": techSkills[] {
+      "id": _key,
       name,
-      "icon_key": iconKey
+      iconKey
     },
 
-    "stats": stats[] {
-      _key,
-      label,
-      value,
-      prefix,
-      suffix
+    "education": education[] {
+      "id": _key,
+      "programName": academicTitle,
+      institutionName,
+      startDate,
+      endDate,
+      "isInProgress": isCurrentlyStudying
     }
   }
 `;

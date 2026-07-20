@@ -1,18 +1,16 @@
 import { formatMonthYear } from './format-month-year';
 
-export const getJobDateRange = ({
+export const getDateRange = ({
   startDate,
   endDate,
-  isCurrentJob,
+  isCurrent,
 }: {
   startDate?: string | Date | null;
   endDate?: string | Date | null;
-  isCurrentJob?: boolean;
+  isCurrent?: boolean;
 }) => {
   const formattedStartDate = formatMonthYear(startDate);
-  const formattedEndDate = isCurrentJob
-    ? 'Actualmente'
-    : formatMonthYear(endDate);
+  const formattedEndDate = isCurrent ? 'Actualmente' : formatMonthYear(endDate);
 
   return `${formattedStartDate} - ${formattedEndDate}`;
 };

@@ -1,186 +1,357 @@
 'use client';
 
+import type { ReactNode } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { Button } from '@heroui/button';
-import { Tooltip } from '@heroui/tooltip';
-import { Card, CardBody, CardHeader } from '@heroui/card';
 import {
   IconArrowNarrowLeft,
   IconBrandGithub,
   IconExternalLink,
-  IconPlayerPlay,
 } from '@tabler/icons-react';
 
 import { Heading } from '@/components/common/heading';
 import { SkillChip } from '@/components/common/skill-chip';
-import { ProjectInformationType } from '@/sanity/lib/types/project.type';
 import { PortableTextContent } from '@/components/common/portable-text-content';
+import { Project } from '@/sanity/lib/types/project.type';
 
 import { ProjectStatusChip } from '../components/project-status-chip';
 import { ProjectNavigation } from '../components/project-navigation-card';
 
-const ACTION_LABELS = {
-  backToPortfolio: 'Volver al portafolio',
-  openProjectRepository: 'Ver código en GitHub',
-  openLiveProject: 'Abrir proyecto en vivo',
-} as const;
+type ProjectDetailSectionProps = {
+  project: Project;
+  previousProject?: Project;
+  nextProject?: Project;
+};
+
+type ProjectSectionHeadingProps = {
+  id: string;
+  number: number;
+  title: string;
+  metadata?: ReactNode;
+};
+
+type ProjectSectionProps = {
+  id: string;
+  number: number;
+  title: string;
+  children: ReactNode;
+};
+
+const PROJECT_INTRO_STYLES = `
+  space-y-4
+  text-pretty
+  text-base
+  leading-7
+  text-ink-200
+
+  [&_p]:m-0
+
+  [&_strong]:font-semibold
+  [&_strong]:text-ink-50
+
+`;
+
+const PROJECT_CONTENT_STYLES = `
+  space-y-6
+  text-base
+  leading-8
+  text-ink-200
+
+  [&_p]:m-0
+
+  [&_strong]:font-semibold
+  [&_strong]:text-ink-50
+
+  [&_h2]:mt-10
+  [&_h2]:text-2xl
+  [&_h2]:font-bold
+  [&_h2]:tracking-[-0.025em]
+  [&_h2]:text-ink-50
+
+  [&_h3]:mt-8
+  [&_h3]:text-xl
+  [&_h3]:font-semibold
+  [&_h3]:tracking-[-0.02em]
+  [&_h3]:text-ink-50
+
+  [&_ul]:my-6
+  [&_ul]:space-y-3
+  [&_ul]:pl-5
+
+  [&_ol]:my-6
+  [&_ol]:space-y-3
+  [&_ol]:pl-5
+
+  [&_li]:pl-1
+  [&_li]:marker:text-brand-400
+
+  [&_a]:font-medium
+  [&_a]:text-brand-300
+  [&_a]:underline
+  [&_a]:underline-offset-4
+
+  sm:text-[1.0625rem]
+`;
+
+const formatSectionNumber = (number: number) => String(number).padStart(2, '0');
+
+const ProjectSectionHeading = ({
+  id,
+  number,
+  title,
+  metadata,
+}: ProjectSectionHeadingProps) => {
+  return (
+    <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
+      <div className="flex items-center gap-4">
+        <span
+          aria-hidden="true"
+          className="inline-flex h-8 min-w-12 shrink-0 items-center justify-center rounded-lg border border-brand-400/30 bg-brand-400/10 px-2 font-mono text-xs font-semibold tracking-[0.14em] text-brand-300"
+        >
+          {formatSectionNumber(number)}
+        </span>
+
+        <h3
+          id={id}
+          className="text-balance text-2xl font-bold leading-tight tracking-[-0.025em] text-ink-50 sm:text-3xl"
+        >
+          {title}
+        </h3>
+      </div>
+
+      {metadata && (
+        <div className="pl-16 text-xs text-ink-300 sm:pl-0">{metadata}</div>
+      )}
+    </div>
+  );
+};
+
+const ProjectSection = ({
+  id,
+  number,
+  title,
+  children,
+}: ProjectSectionProps) => {
+  return (
+    <section aria-labelledby={id} className="py-12 sm:py-16">
+      <ProjectSectionHeading id={id} number={number} title={title} />
+
+      <div className="mt-7 max-w-[68ch] sm:ml-16">{children}</div>
+    </section>
+  );
+};
 
 export const ProjectDetailSection = ({
   project,
   nextProject,
   previousProject,
-}: {
-  project: ProjectInformationType;
-  previousProject?: ProjectInformationType;
-  nextProject?: ProjectInformationType;
-}) => {
-  const liveDemoUrl = project.links?.live_demo_url ?? undefined;
-  const repositoryUrl = project.links?.repository_url ?? undefined;
-  const demoVideoUrl = project.project_detail.demo_video?.url ?? undefined;
-  const previewImageUrl =
-    project.project_information_preview.image?.url ?? undefined;
+}: ProjectDetailSectionProps) => {
+  const preview = project.preview;
+  const detail = project.detail;
+
+  const liveDemoUrl = project.links.liveDemoUrl;
+  const repositoryUrl = project.links.repositoryUrl;
+
+  const demoVideoUrl = detail.demoVideoUrl;
+  const previewImageUrl = preview.image?.url;
+
+  const [originSection, ...contentSections] = detail.contentSections;
+
+  const hasDemoVideo = Boolean(demoVideoUrl);
+  const hasTechnologies = project.technologies.length > 0;
+
+  const primaryTechnologies = project.technologies.slice(0, 4);
+
+  const firstContentSectionNumber = hasDemoVideo ? 2 : 1;
+
+  const technologiesSectionNumber =
+    firstContentSectionNumber + contentSections.length;
+
+  const hasProjectContent = contentSections.length > 0 || hasTechnologies;
 
   return (
-    <section className="flex flex-col gap-8 sm:gap-10">
-      <header className="flex flex-col justify-center gap-5">
-        <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between lg:gap-6">
-          <div className="flex min-w-0 flex-wrap items-center gap-3 sm:gap-6">
-            <Button
-              as={Link}
-              href="/portfolio"
-              isIconOnly
-              variant="flat"
-              aria-label={ACTION_LABELS.backToPortfolio}
-            >
-              <IconArrowNarrowLeft stroke={1.5} />
-            </Button>
+    <section className="flex flex-col gap-14 sm:gap-16">
+      <header>
+        <Link
+          href="/portfolio"
+          className="group inline-flex h-10 w-fit items-center gap-2 rounded-full border border-ink-800 bg-ink-950/60 px-4 text-sm font-medium text-ink-200 transition duration-300 hover:border-ink-600 hover:bg-ink-900 hover:text-ink-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-4 focus-visible:ring-offset-main"
+        >
+          <IconArrowNarrowLeft
+            aria-hidden="true"
+            size={18}
+            stroke={1.8}
+            className="transition-transform duration-300 group-hover:-translate-x-1 motion-reduce:transform-none"
+          />
+          Volver a proyectos
+        </Link>
 
-            <Heading as="h1" className="min-w-0 break-words">
+        <div className="mt-10 grid gap-10 lg:grid-cols-[minmax(0,1fr)_17rem] lg:items-start lg:gap-16">
+          <div className="min-w-0">
+            <Heading
+              as="h1"
+              className="max-w-[15ch] break-normal text-balance text-[clamp(2.5rem,7vw,5.5rem)] leading-[0.95] tracking-[-0.045em]"
+            >
               {project.title}
             </Heading>
 
-            <ProjectStatusChip status={project.status} className="shrink-0" />
+            {originSection && (
+              <div className="mt-6 max-w-2xl">
+                <span className="mb-3 block font-mono text-xs font-semibold uppercase tracking-[0.16em] text-brand-300">
+                  {originSection.title}
+                </span>
+
+                <PortableTextContent
+                  value={originSection.content}
+                  className={PROJECT_INTRO_STYLES}
+                />
+              </div>
+            )}
+
+            {(liveDemoUrl || repositoryUrl) && (
+              <div className="mt-8 flex flex-wrap gap-3">
+                {liveDemoUrl && (
+                  <Button
+                    as="a"
+                    href={liveDemoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    color="primary"
+                    endContent={
+                      <IconExternalLink
+                        aria-hidden="true"
+                        size={17}
+                        stroke={1.7}
+                      />
+                    }
+                  >
+                    Ver proyecto
+                  </Button>
+                )}
+
+                {repositoryUrl && (
+                  <Button
+                    as="a"
+                    href={repositoryUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    variant="bordered"
+                    endContent={
+                      <IconBrandGithub
+                        aria-hidden="true"
+                        size={17}
+                        stroke={1.7}
+                      />
+                    }
+                  >
+                    Ver código
+                  </Button>
+                )}
+              </div>
+            )}
           </div>
 
-          <div className="flex self-end items-center gap-3 lg:self-auto">
-            <Tooltip
-              content={ACTION_LABELS.openLiveProject}
-              placement="top"
-              showArrow
-            >
-              <Button
-                as="a"
-                href={liveDemoUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                variant="bordered"
-                isDisabled={!liveDemoUrl}
-                isIconOnly
-                aria-label={ACTION_LABELS.openLiveProject}
-              >
-                <IconExternalLink stroke={1.5} />
-              </Button>
-            </Tooltip>
+          <dl className="grid gap-7 border-t border-ink-800 pt-7 sm:grid-cols-2 lg:grid-cols-1 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">
+            <div>
+              <dt className="text-xs font-medium uppercase tracking-[0.14em] text-ink-500">
+                Estado
+              </dt>
 
-            <Tooltip
-              content={ACTION_LABELS.openProjectRepository}
-              placement="top"
-              showArrow
-            >
-              <Button
-                as="a"
-                href={repositoryUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                variant="bordered"
-                isDisabled={!repositoryUrl}
-                isIconOnly
-                aria-label={ACTION_LABELS.openProjectRepository}
-              >
-                <IconBrandGithub stroke={1.5} />
-              </Button>
-            </Tooltip>
-          </div>
-        </div>
+              <dd className="mt-3">
+                <ProjectStatusChip status={project.status} />
+              </dd>
+            </div>
 
-        <div className="text-base leading-relaxed text-ink-100">
-          <PortableTextContent
-            value={project.project_detail.origin_description}
-            className="[&_p]:inline"
-          />
+            {primaryTechnologies.length > 0 && (
+              <div>
+                <dt className="text-xs font-medium uppercase tracking-[0.14em] text-ink-500">
+                  Stack principal
+                </dt>
+
+                <dd className="mt-3 text-sm leading-6 text-ink-200">
+                  {primaryTechnologies.join(' · ')}
+                </dd>
+              </div>
+            )}
+          </dl>
         </div>
       </header>
 
-      <Card className="border border-ink-500/70 bg-ink-950">
-        <CardHeader className="flex-wrap justify-between gap-2 border-b border-ink-500/70 px-4 py-4 sm:px-5">
-          <h2 className="text-sm font-medium">Demo del proyecto</h2>
+      {demoVideoUrl && (
+        <section aria-labelledby="project-demo-title">
+          <ProjectSectionHeading
+            id="project-demo-title"
+            number={1}
+            title="Así funciona"
+            metadata="Video demostrativo sin audio"
+          />
 
-          <span className="text-xs text-ink-200">Video demostrativo</span>
-        </CardHeader>
+          <div className="mt-6 overflow-hidden rounded-[1.75rem] border border-ink-800 bg-ink-950">
+            <figure>
+              <video
+                controls
+                playsInline
+                muted
+                preload="metadata"
+                poster={previewImageUrl}
+                aria-label={`Video demostrativo sin audio de ${project.title}`}
+                className="block aspect-video w-full object-cover"
+              >
+                <source src={demoVideoUrl} />
+                Tu navegador no soporta la reproducción de video.
+              </video>
 
-        <CardBody className="p-0">
-          <figure className="mx-auto w-full max-w-none">
-            {demoVideoUrl ? (
-              <>
-                <video
-                  controls
-                  playsInline
-                  muted
-                  preload="metadata"
-                  poster={previewImageUrl}
-                  aria-label={`Video demostrativo sin audio de ${project.title}`}
-                  className="block aspect-video w-full bg-ink-950 object-contain lg:object-cover"
-                >
-                  <source src={demoVideoUrl} type="video/mp4" />
-                  Tu navegador no soporta la reproducción de video.
-                </video>
+              <figcaption className="sr-only">
+                Video demostrativo sin audio de {project.title}. Muestra sus
+                principales pantallas e interacciones.
+              </figcaption>
+            </figure>
+          </div>
+        </section>
+      )}
 
-                <figcaption className="sr-only">
-                  Video demostrativo sin audio de {project.title}. Muestra las
-                  principales pantallas e interacciones del proyecto.
-                </figcaption>
-              </>
-            ) : (
-              <div className="relative aspect-video w-full overflow-hidden bg-ink-900">
-                {previewImageUrl && (
-                  <Image
-                    src={previewImageUrl}
-                    alt={`Vista previa de ${project.title}`}
-                    fill
-                    sizes="(min-width: 1024px) 50vw, 100vw"
-                    className="object-cover opacity-70"
-                  />
-                )}
+      {hasProjectContent && (
+        <article>
+          {contentSections.map((section, index) => {
+            const sectionNumber = firstContentSectionNumber + index;
 
-                <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 bg-black/45 p-4 text-center sm:p-6">
-                  <div className="grid size-14 place-items-center rounded-full border border-white/15 bg-white/10 text-white backdrop-blur-md">
-                    <IconPlayerPlay stroke={1.5} />
-                  </div>
+            const sectionId = `project-section-${section.id}`;
 
-                  <p className="max-w-md text-sm leading-relaxed text-white/80">
-                    El video demostrativo todavía no está disponible para este
-                    proyecto.
-                  </p>
-                </div>
-              </div>
-            )}
-          </figure>
-        </CardBody>
-      </Card>
+            return (
+              <ProjectSection
+                key={section.id}
+                id={sectionId}
+                number={sectionNumber}
+                title={section.title}
+              >
+                <PortableTextContent
+                  value={section.content}
+                  className={PROJECT_CONTENT_STYLES}
+                />
+              </ProjectSection>
+            );
+          })}
 
-      <div className="text-base leading-relaxed">
-        <PortableTextContent
-          value={project.project_detail.full_description}
-          className="[&_p]:inline"
-        />
-      </div>
+          {hasTechnologies && (
+            <ProjectSection
+              id="project-technologies"
+              number={technologiesSectionNumber}
+              title="Tecnologías y herramientas"
+            >
+              <ul
+                aria-label={`Tecnologías utilizadas en ${project.title}`}
+                className="flex flex-wrap gap-3"
+              >
+                {project.technologies.map((technology) => (
+                  <li key={technology}>
+                    <SkillChip label={technology} />
+                  </li>
+                ))}
+              </ul>
+            </ProjectSection>
+          )}
+        </article>
+      )}
 
-      <div className="flex flex-wrap gap-3">
-        {project.technologies.map((technology) => (
-          <SkillChip key={technology} label={technology} />
-        ))}
-      </div>
       <ProjectNavigation
         previousProject={previousProject}
         nextProject={nextProject}

@@ -6,30 +6,22 @@ import {
   PROJECT_QUERY,
   PROJECT_SLUGS_QUERY,
 } from '../queries/project.query';
-import { ProjectInformationType } from '../types/project.type';
+import { Project } from '../types/project.type';
 
-import { getSanityFetchOptions, SANITY_TAGS } from './sanity-fetch-options';
+import { getSanityFetchOptions } from './sanity-fetch-options';
 
-export const getProjects = (): Promise<ProjectInformationType[]> => {
-  return client.fetch(
-    PROJECTS_QUERY,
-    {},
-    getSanityFetchOptions([SANITY_TAGS.projects]),
-  );
+export const getProjects = (): Promise<Project[]> => {
+  return client.fetch(PROJECTS_QUERY, {}, getSanityFetchOptions());
 };
 
 export const getProjectSlugs = () => {
-  return client.fetch<{ slug: ProjectInformationType['slug'] }[]>(
+  return client.fetch<{ slug: Project['slug'] }[]>(
     PROJECT_SLUGS_QUERY,
     {},
-    getSanityFetchOptions([SANITY_TAGS.projects]),
+    getSanityFetchOptions(),
   );
 };
 
-export const getProject = async (slug: ProjectInformationType['slug']) => {
-  return client.fetch(
-    PROJECT_QUERY,
-    { slug },
-    getSanityFetchOptions([SANITY_TAGS.project]),
-  );
+export const getProject = async (slug: Project['slug']) => {
+  return client.fetch(PROJECT_QUERY, { slug }, getSanityFetchOptions());
 };

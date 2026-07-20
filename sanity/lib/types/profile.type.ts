@@ -1,42 +1,45 @@
-import { PortableTextBlock } from '@portabletext/types';
+import type { PortableTextBlock } from '@portabletext/types';
 
-export type ProfileInformationType = {
-  id: string;
-  contact_information: ContactInformation;
-  content: Content;
-  skills: Skill[];
-  stats: Stat[];
-};
+type PortableTextValue = PortableTextBlock[] | null;
 
-export type ContactInformation = {
+export interface ProfileInformation {
+  overview: ProfileOverview;
+  contact: ProfileContact;
+  skills: ProfileSkill[];
+  education: EducationItem[];
+}
+
+export interface ProfileOverview {
+  about: PortableTextValue;
+  professionalTitle: string;
+  location: string | null;
+  currentFocus: PortableTextValue;
+  isAvailableForOpportunities: boolean;
+}
+
+export interface ProfileContact {
   email: string;
-  github_url: string;
-  linkedin_url: string;
+  githubUrl: string | null;
+  linkedinUrl: string | null;
   resume: Resume;
-};
+}
 
-export type Resume = {
-  external_url: string | null;
-  file_url: string | null;
-};
+export interface Resume {
+  fileUrl: string | null;
+  externalUrl: string | null;
+}
 
-export type Content = {
-  introduction: PortableTextBlock[] | null;
-  description: PortableTextBlock[] | null;
-  professional_title: string;
-  current_location: string;
-};
-
-export type Skill = {
-  _key: string;
-  icon_key: string;
+export interface ProfileSkill {
+  id: string;
   name: string;
-};
+  iconKey: string | null;
+}
 
-export type Stat = {
-  _key: string;
-  label: string;
-  prefix: string;
-  suffix: null;
-  value: number;
-};
+export interface EducationItem {
+  id: string;
+  programName: string;
+  institutionName: string;
+  startDate: string;
+  endDate: string | null;
+  isInProgress: boolean;
+}

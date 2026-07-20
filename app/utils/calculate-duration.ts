@@ -1,11 +1,11 @@
 export const calculateDuration = ({
   startDate,
   endDate,
-  isCurrentJob,
+  isCurrent,
 }: {
   startDate?: string | Date | null;
   endDate?: string | Date | null;
-  isCurrentJob?: boolean;
+  isCurrent?: boolean;
 }) => {
   if (!startDate) return null;
 
@@ -24,7 +24,7 @@ export const calculateDuration = ({
 
   const start = parseDate(startDate);
   const end =
-    isCurrentJob || !endDate ? parseDate(new Date()) : parseDate(endDate);
+    isCurrent || !endDate ? parseDate(new Date()) : parseDate(endDate);
 
   const totalMonths =
     (end.year - start.year) * 12 + (end.month - start.month) + 1;
@@ -34,8 +34,16 @@ export const calculateDuration = ({
   const years = Math.floor(totalMonths / 12);
   const months = totalMonths % 12;
 
-  if (years > 0 && months > 0) return `${years} a ${months} m`;
-  if (years > 0) return `${years} a`;
+  const yearLabel = years === 1 ? 'año' : 'años';
+  const monthLabel = months === 1 ? 'mes' : 'meses';
 
-  return `${months} m`;
+  if (years > 0 && months > 0) {
+    return `${years} ${yearLabel} y ${months} ${monthLabel}`;
+  }
+
+  if (years > 0) {
+    return `${years} ${yearLabel}`;
+  }
+
+  return `${months} ${monthLabel}`;
 };

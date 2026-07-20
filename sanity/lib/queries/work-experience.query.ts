@@ -1,31 +1,34 @@
 import { groq } from 'next-sanity';
 
 export const WORK_EXPERIENCE_QUERY = groq`
-  *[_type == "workExperience"] |order(displayOrder asc, _updatedAt desc) {
-  "id": _id,
-  "display_order": displayOrder,
+  *[_type == "workExperience"] | order(displayOrder asc, _updatedAt desc) {
+    "id": _id,
 
-  "organization_information": {
-    "organization_name": organizationName,
-    "organization_logo": select(
-      defined(organizationLogo.asset) => {
-        "url": organizationLogo.asset->url,
-        "alt": organizationLogo.alt
-      },
-      null
-    ),
-  },
+    "organization": {
+      "name": organizationName,
 
-  "job_information": positions[] {
-    _key,
-    "job_title": positionTitle,
-    "employment_type": employmentType,
-    "start_date": startDate,
-    "end_date": endDate,
-    "is_current_job": isCurrentPosition,
-    "job_icon_key": positionIconKey,
-    "highlights": coalesce(highlights, []),
-    "skills": coalesce(toolsAndTechnologies, [])
+      "logo": select(
+        defined(organizationLogo.asset) => {
+          "url": organizationLogo.asset->url,
+          "alt": organizationLogo.alt
+        },
+        null
+      )
+    },
+
+    "positions": positions[] {
+      "id": _key,
+      "title": positionTitle,
+      startDate,
+
+      "endDate": select(
+        isCurrentPosition == true => null,
+        endDate
+      ),
+
+      "isCurrent": isCurrentPosition,
+      "highlights": highlights,
+      "toolsAndTechnologies": toolsAndTechnologies
+    },
   }
-}
 `;
