@@ -75,7 +75,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang={SEO_CONFIG.locale} className="bg-main">
+    <html lang={SEO_CONFIG.language} className="bg-main">
       <body
         className={`${dmSans.className} custom-theme min-h-dvh overflow-x-hidden overscroll-none bg-main text-ink-200 font-light antialiased`}
       >
