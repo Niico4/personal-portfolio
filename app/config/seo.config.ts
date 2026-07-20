@@ -13,6 +13,7 @@ export const SEO_CONFIG = {
     'Desarrollador web con más de 3 años creando productos con React, Next.js y TypeScript, principalmente desde el frontend y con apoyo backend en Node.js.',
 
   locale: 'es_CO',
+  language: 'es',
 
   siteUrl: new URL(PublicEnvConfig.site_url),
 
