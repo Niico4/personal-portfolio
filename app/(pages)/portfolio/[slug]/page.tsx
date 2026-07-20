@@ -1,113 +1,83 @@
+import { cache } from 'react';
+import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { Metadata } from 'next';
 
+import { SEO_CONFIG } from '@/config/seo.config';
 import {
   getProject,
   getProjects,
   getProjectSlugs,
 } from '@/sanity/lib/fetchers/project.fetcher';
-import { Project } from '@/sanity/lib/types/project.type';
+import type { Project } from '@/sanity/lib/types/project.type';
+import { createPageMetadata } from '@/utils/seo/create-page-metadata';
 
 import { ProjectDetailSection } from './project-detail';
 
 type ProjectPageProps = {
-  params: Promise<{ slug: Project['slug'] }>;
+  params: Promise<{
+    slug: Project['slug'];
+  }>;
 };
+
+const getCachedProject = cache(getProject);
 
 export const generateStaticParams = async () => {
   const slugs = await getProjectSlugs();
 
-  return slugs.map(({ slug }) => ({ slug }));
+  return slugs.map(({ slug }) => ({
+    slug,
+  }));
 };
 
-const PROJECT_OG_FALLBACK_IMAGE = '/coming-soon.webp';
+const getProjectSeoDescription = (project: Project): string => {
+  const shortDescription = project.preview.shortDescription?.trim();
 
-const getSeoDescription = (description?: string | null) => {
-  const fallback =
-    'Proyecto desarrollado por Nicolás Garzón, Desarrollador Full Stack.';
-
-  if (!description) return fallback;
-
-  const cleanDescription = description.trim();
-
-  if (cleanDescription.length <= 155) {
-    return cleanDescription;
+  if (shortDescription) {
+    return shortDescription;
   }
 
-  return `${cleanDescription.slice(0, 152).trim()}...`;
+  return `Conoce ${project.title}, un proyecto web de Nicolás Garzón, junto con su origen, funcionamiento, decisiones de diseño y proceso de desarrollo.`;
 };
 
 export const generateMetadata = async ({
   params,
 }: ProjectPageProps): Promise<Metadata> => {
   const { slug } = await params;
-  const project: Project | null = await getProject(slug);
+  const project = await getCachedProject(slug);
 
   if (!project) {
-    return {
-      title: 'Proyecto no encontrado',
-      description: 'El proyecto solicitado no está disponible.',
-      robots: {
-        index: false,
-        follow: false,
-      },
-    };
+    notFound();
   }
 
-  const title = `${project.title} | Proyecto`;
-  const description = getSeoDescription(
-    project.preview.shortDescription ?? project.detail.contentSections,
-  );
+  const image = project.preview.image?.url
+    ? {
+        url: project.preview.image.url,
+        alt:
+          project.preview.image.alt?.trim() ||
+          `Vista previa del proyecto ${project.title}`,
+      }
+    : SEO_CONFIG.defaultImage;
 
-  const imageUrl = project.preview.image?.url ?? PROJECT_OG_FALLBACK_IMAGE;
-
-  const imageAlt =
-    project.preview.image?.alt ?? `Vista previa del proyecto ${project.title}`;
-
-  const url = `/portfolio/${project.slug}`;
-
-  return {
-    title,
-    description,
-    alternates: {
-      canonical: url,
-    },
-    openGraph: {
-      title: `${project.title} | Proyecto de Nicolás Garzón`,
-      description,
-      url,
-      type: 'article',
-      images: [
-        {
-          url: imageUrl,
-          width: 1200,
-          height: 630,
-          alt: imageAlt,
-        },
-      ],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: `${project.title} | Proyecto de Nicolás Garzón`,
-      description,
-      images: [imageUrl],
-    },
-  };
+  return createPageMetadata({
+    title: `${project.title} — Proyecto web`,
+    socialTitle: `${project.title}, proyecto de Nicolás Garzón`,
+    description: getProjectSeoDescription(project),
+    path: `/portfolio/${project.slug}`,
+    image,
+  });
 };
 
-const ProjectDetailPage = async ({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) => {
+const ProjectDetailPage = async ({ params }: ProjectPageProps) => {
   const { slug } = await params;
 
   const [project, projects] = await Promise.all([
-    getProject(slug),
+    getCachedProject(slug),
     getProjects(),
   ]);
 
-  if (!project) return notFound();
+  if (!project) {
+    notFound();
+  }
 
   const currentProjectIndex = projects.findIndex(
     (currentProject: Project) => currentProject.slug === slug,

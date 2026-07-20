@@ -3,6 +3,8 @@ import { Divider } from '@heroui/divider';
 
 import { FooterCard } from '@/layout/footer-card/footer-card';
 import { getProfile } from '@/sanity/lib/fetchers/profile.fetcher';
+import { createPageMetadata } from '@/utils/seo/create-page-metadata';
+import { SEO_CONFIG } from '@/config/seo.config';
 
 import Hero from './sections/hero-section';
 import ProjectsPreview from './sections/projects-preview-section';
@@ -10,38 +12,12 @@ import EducationSection from './sections/education-section';
 import SkillsSection from './sections/skills-section';
 import WorkExperienceSection from './sections/experience/work-experience-section';
 
-export const metadata: Metadata = {
-  title: {
-    absolute: 'Nicolás Garzón | Desarrollador Full Stack',
-  },
-  description:
-    'Construyo productos web completos con React, Next.js y Node.js: interfaces claras, APIs bien estructuradas y soluciones pensadas desde el problema.',
-  alternates: {
-    canonical: '/',
-  },
-  openGraph: {
-    title: 'Nicolás Garzón | Desarrollador Full Stack',
-    description:
-      'Construyo productos web completos con React, Next.js y Node.js: interfaces claras, APIs bien estructuradas y soluciones pensadas desde el problema.',
-    url: '/',
-    type: 'website',
-    images: [
-      {
-        url: '/seo/og-default-mockup.webp',
-        width: 1200,
-        height: 630,
-        alt: 'Portfolio de Nicolás Garzón',
-      },
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Nicolás Garzón | Desarrollador Full Stack',
-    description:
-      'Construyo productos web completos con React, Next.js y Node.js: interfaces claras, APIs bien estructuradas y soluciones pensadas desde el problema.',
-    images: ['/seo/og-default-mockup.webp'],
-  },
-};
+export const metadata: Metadata = createPageMetadata({
+  title: SEO_CONFIG.defaultTitle,
+  description: SEO_CONFIG.defaultDescription,
+  path: '/',
+  absoluteTitle: true,
+});
 
 const HomePage = async () => {
   const { contact, overview, skills, education } = await getProfile();

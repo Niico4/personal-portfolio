@@ -1,80 +1,71 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 
 import { dmSans } from './fonts';
-import { PublicEnvConfig } from './config/public-env.config';
+import { SEO_CONFIG } from './config/seo.config';
 
 import '@/globals.css';
 
 export const metadata: Metadata = {
-  metadataBase: new URL(PublicEnvConfig.site_url),
+  metadataBase: SEO_CONFIG.siteUrl,
 
   title: {
-    default: 'Nicolás Garzón | Desarrollador Full Stack',
-    template: '%s | Nicolás Garzón',
+    default: SEO_CONFIG.defaultTitle,
+    template: SEO_CONFIG.titleTemplate,
   },
 
-  description:
-    'Desarrollador Full Stack con experiencia real entregando productos web. React, Next.js, Node.js y más. Disponible para proyectos freelance y empleo.',
+  description: SEO_CONFIG.defaultDescription,
 
-  applicationName: 'Portfolio de Nicolás Garzón',
-  authors: [{ name: 'Nicolás Garzón' }],
-  creator: 'Nicolás Garzón',
-  publisher: 'Nicolás Garzón',
+  applicationName: SEO_CONFIG.applicationName,
 
-  alternates: {
-    canonical: '/',
-  },
-
-  keywords: [
-    'Nicolás Garzón',
-    'Desarrollador Full Stack',
-    'Frontend Developer',
-    'Backend Developer',
-    'React',
-    'Next.js',
-    'Node.js',
-    'TypeScript',
-    'PostgreSQL',
-    'MongoDB',
-    'Portfolio desarrollador',
+  authors: [
+    {
+      name: SEO_CONFIG.siteName,
+    },
   ],
 
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-      'max-video-preview': -1,
-    },
-  },
+  creator: SEO_CONFIG.siteName,
+  publisher: SEO_CONFIG.siteName,
+
+  robots: SEO_CONFIG.indexingEnabled
+    ? {
+        index: true,
+        follow: true,
+        googleBot: {
+          index: true,
+          follow: true,
+          'max-image-preview': 'large',
+          'max-snippet': -1,
+          'max-video-preview': -1,
+        },
+      }
+    : {
+        index: false,
+        follow: false,
+        googleBot: {
+          index: false,
+          follow: false,
+        },
+      },
 
   openGraph: {
     type: 'website',
-    locale: 'es_CO',
-    url: '/',
-    siteName: 'Nicolás Garzón',
-    title: 'Nicolás Garzón | Desarrollador Full Stack',
-    description:
-      'Desarrollador Full Stack con experiencia real entregando productos web. React, Next.js, Node.js y más. Disponible para proyectos freelance y empleo.',
-    images: [
-      {
-        url: '/seo/og-default-mockup.webp',
-        width: 1200,
-        height: 630,
-        alt: 'Portfolio de Nicolás Garzón, Desarrollador Full Stack',
-      },
-    ],
+    locale: SEO_CONFIG.locale,
+    siteName: SEO_CONFIG.siteName,
+    title: SEO_CONFIG.defaultTitle,
+    description: SEO_CONFIG.defaultDescription,
+    images: [SEO_CONFIG.defaultImage],
   },
 
   twitter: {
     card: 'summary_large_image',
-    title: 'Nicolás Garzón | Desarrollador Full Stack',
-    description:
-      'Desarrollador Full Stack con experiencia real entregando productos web. React, Next.js, Node.js y más. Disponible para proyectos freelance y empleo.',
-    images: ['/seo/og-default-mockup.webp'],
+    title: SEO_CONFIG.defaultTitle,
+    description: SEO_CONFIG.defaultDescription,
+    images: [
+      {
+        url: SEO_CONFIG.defaultImage.url,
+        alt: SEO_CONFIG.defaultImage.alt,
+      },
+    ],
   },
 };
 
@@ -84,7 +75,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className="bg-main">
+    <html lang={SEO_CONFIG.locale} className="bg-main">
       <body
         className={`${dmSans.className} custom-theme min-h-dvh overflow-x-hidden overscroll-none bg-main text-ink-200 font-light antialiased`}
       >
