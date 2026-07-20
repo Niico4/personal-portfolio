@@ -30,6 +30,8 @@ export const createPageMetadata = ({
   absoluteTitle = false,
   noIndex = false,
 }: CreatePageMetadataParams): Metadata => {
+  const shouldIndex = SEO_CONFIG.indexingEnabled && !noIndex;
+
   return {
     title: absoluteTitle
       ? {
@@ -43,16 +45,26 @@ export const createPageMetadata = ({
       canonical: path,
     },
 
-    robots: noIndex
+    robots: shouldIndex
       ? {
+          index: true,
+          follow: true,
+          googleBot: {
+            index: true,
+            follow: true,
+            'max-image-preview': 'large',
+            'max-snippet': -1,
+            'max-video-preview': -1,
+          },
+        }
+      : {
           index: false,
           follow: false,
           googleBot: {
             index: false,
             follow: false,
           },
-        }
-      : undefined,
+        },
 
     openGraph: {
       type: 'website',
