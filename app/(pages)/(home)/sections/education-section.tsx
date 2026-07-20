@@ -2,11 +2,13 @@ import { Card } from '@heroui/card';
 
 import { SectionHeader } from '@/components/common/section-header';
 import { getDateRange } from '@/utils/get-date-range';
-import { getProfile } from '@/sanity/lib/fetchers/profile.fetcher';
+import { EducationItem } from '@/sanity/lib/types/profile.type';
 
-const EducationSection = async () => {
-  const { education } = await getProfile();
-
+const EducationSection = async ({
+  education,
+}: {
+  education: EducationItem[];
+}) => {
   return (
     <section className="flex flex-col gap-5">
       <SectionHeader
@@ -18,16 +20,16 @@ const EducationSection = async () => {
         {education.map(
           ({
             id,
-            academicTitle,
             endDate,
             institutionName,
-            isCurrentlyStudying,
+            isInProgress,
+            programName,
             startDate,
           }) => {
             const dateRange = getDateRange({
               startDate,
               endDate,
-              isCurrent: isCurrentlyStudying,
+              isCurrent: isInProgress,
             });
 
             return (
@@ -41,7 +43,7 @@ const EducationSection = async () => {
                     <p className="text-ink-100/90 text-xs">{dateRange}</p>
                   </div>
 
-                  <p className="text-sm text-ink-100">{academicTitle}</p>
+                  <p className="text-sm text-ink-100">{programName}</p>
                 </Card>
               </li>
             );

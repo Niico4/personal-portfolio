@@ -107,54 +107,52 @@ const WorkExperienceSection = async () => {
       />
 
       <div>
-        {workExperience.map(
-          ({ id, jobInformation, organizationInformation }) => (
-            <CompanyGroup
-              key={id}
-              logo={organizationInformation.organizationLogo?.url}
-              name={organizationInformation.organizationName}
-            >
-              {jobInformation.map(
-                ({
-                  _key,
-                  endDate,
-                  highlights,
-                  isCurrentJob,
-                  jobTitle,
-                  skills,
+        {workExperience.map(({ id, organization, positions }) => (
+          <CompanyGroup
+            key={id}
+            logo={organization.logo?.url}
+            name={organization.name}
+          >
+            {positions.map(
+              ({
+                id,
+                endDate,
+                highlights,
+                isCurrent,
+                startDate,
+                title,
+                toolsAndTechnologies,
+              }) => {
+                const dateRange = getDateRange({
                   startDate,
-                }) => {
-                  const dateRange = getDateRange({
-                    startDate,
-                    endDate,
-                    isCurrent: isCurrentJob,
-                  });
+                  endDate,
+                  isCurrent,
+                });
 
-                  const duration = calculateDuration({
-                    startDate,
-                    endDate,
-                    isCurrent: isCurrentJob,
-                  });
+                const duration = calculateDuration({
+                  startDate,
+                  endDate,
+                  isCurrent,
+                });
 
-                  return (
-                    <JobExperienceContent
-                      key={_key}
-                      jobTitle={jobTitle}
-                      dateRange={dateRange}
-                      duration={duration}
-                      highlights={highlights}
-                      skills={skills}
-                      // defaultOpen={
-                      //   Boolean(is_current_job) ||
-                      //   (companyIndex === 0 && jobIndex === 0)
-                      // }
-                    />
-                  );
-                },
-              )}
-            </CompanyGroup>
-          ),
-        )}
+                return (
+                  <JobExperienceContent
+                    key={id}
+                    jobTitle={title}
+                    dateRange={dateRange}
+                    duration={duration}
+                    highlights={highlights}
+                    skills={toolsAndTechnologies}
+                    // defaultOpen={
+                    //   Boolean(is_current_job) ||
+                    //   (companyIndex === 0 && jobIndex === 0)
+                    // }
+                  />
+                );
+              },
+            )}
+          </CompanyGroup>
+        ))}
       </div>
     </section>
   );

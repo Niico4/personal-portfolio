@@ -1,25 +1,26 @@
-import { PortableTextBlock } from '@portabletext/types';
+import type { PortableTextBlock } from '@portabletext/types';
 
-import { ImageType } from './common.type';
+import type { ImageType } from './common.type';
 
-export type WorkExperienceInformationType = {
+type PortableTextValue = PortableTextBlock[] | null;
+export interface WorkExperience {
   id: string;
   displayOrder: number;
-  organizationInformation: OrganizationInformation;
-  jobInformation: JobInformation[];
-};
+  organization: WorkExperienceOrganization;
+  positions: WorkExperiencePosition[];
+}
 
-export type JobInformation = {
-  _key: string;
-  isCurrentJob: boolean;
-  jobTitle: string;
-  highlights: PortableTextBlock[] | null;
-  skills: string[];
-  startDate: string | Date;
-  endDate: string | Date | null;
-};
+export interface WorkExperienceOrganization {
+  name: string;
+  logo: ImageType | null;
+}
 
-export type OrganizationInformation = {
-  organizationLogo: ImageType | null;
-  organizationName: string;
-};
+export interface WorkExperiencePosition {
+  id: string;
+  title: string;
+  startDate: string;
+  endDate: string | null;
+  isCurrent: boolean;
+  highlights: PortableTextValue;
+  toolsAndTechnologies: string[];
+}
