@@ -1,6 +1,22 @@
 import { IconBriefcase } from '@tabler/icons-react';
 import { defineArrayMember, defineField, defineType } from 'sanity';
 
+const formatPreviewDate = (date?: string) => {
+  if (!date) return null;
+
+  const parsedDate = new Date(`${date}T00:00:00Z`);
+
+  if (Number.isNaN(parsedDate.getTime())) {
+    return date;
+  }
+
+  return new Intl.DateTimeFormat('en', {
+    month: 'short',
+    year: 'numeric',
+    timeZone: 'UTC',
+  }).format(parsedDate);
+};
+
 export const workExperienceType = defineType({
   name: 'workExperience',
   title: 'Work Experience',
@@ -10,28 +26,34 @@ export const workExperienceType = defineType({
   groups: [
     {
       name: 'organization',
-      title: 'Organization',
+      title: 'Organization / Project',
       default: true,
     },
     {
       name: 'positions',
-      title: 'Positions',
+      title: 'Roles & Positions',
     },
     {
       name: 'settings',
-      title: 'Settings',
+      title: 'Display Settings',
     },
   ],
 
   fields: [
     defineField({
       name: 'organizationName',
-      title: 'Organization Name',
+      title: 'Organization or Project Name',
       type: 'string',
       group: 'organization',
       description:
-        'Company, product or project name shown as the main experience group.',
-      validation: (Rule) => Rule.required(),
+        'Required. Name of the company, client, product or independent project shown as the main experience group.',
+      validation: (Rule) =>
+        Rule.required()
+          .min(2)
+          .max(100)
+          .error(
+            'Add an organization or project name between 2 and 100 characters.',
+          ),
     }),
 
     defineField({
@@ -40,28 +62,32 @@ export const workExperienceType = defineType({
       type: 'image',
       group: 'organization',
       description:
-        'Logo or icon shown next to the organization name in the experience section.',
+        'Optional. Logo or visual identifier shown next to the organization name. Leave empty when no suitable logo is available.',
       options: {
         hotspot: true,
       },
       fields: [
         defineField({
           name: 'alt',
-          title: 'Alt Text',
+          title: 'Alternative Text',
           type: 'string',
-          description: 'Short description of the logo for accessibility.',
-          validation: (Rule) => Rule.required(),
+          description:
+            'Optional. Add only when the image communicates information not already provided by the organization name. Otherwise, leave it empty.',
+          validation: (Rule) =>
+            Rule.max(120).warning(
+              'Keep the alternative text under 120 characters.',
+            ),
         }),
       ],
     }),
 
     defineField({
       name: 'positions',
-      title: 'Positions',
+      title: 'Roles and Positions',
       type: 'array',
       group: 'positions',
       description:
-        'Positions held inside this organization. Use multiple positions when the same organization has more than one role.',
+        'Required. Add every role held within this organization. Drag the items to control the order in which they appear.',
       of: [
         defineArrayMember({
           name: 'position',
@@ -74,8 +100,12 @@ export const workExperienceType = defineType({
               title: 'Position Title',
               type: 'string',
               description:
-                'Role or position title shown in the experience item.',
-              validation: (Rule) => Rule.required(),
+                'Required. Role or position name shown in the experience section. Example: Software Developer.',
+              validation: (Rule) =>
+                Rule.required()
+                  .min(2)
+                  .max(120)
+                  .error('Add a position title between 2 and 120 characters.'),
             }),
 
             defineField({
@@ -83,8 +113,22 @@ export const workExperienceType = defineType({
               title: 'Start Date',
               type: 'date',
               description:
-                'Date when this position started. Use the first day of the month if only month/year matters.',
-              validation: (Rule) => Rule.required(),
+                'Required. Date when this position started. Use the first day of the month when only the month and year are relevant.',
+              validation: (Rule) =>
+                Rule.required().error('Add the position start date.'),
+            }),
+
+            defineField({
+              name: 'isCurrentPosition',
+              title: 'Currently Active',
+              type: 'boolean',
+              description:
+                'Required. Enable this when you are still working in this position. The end date will not be required.',
+              initialValue: false,
+              validation: (Rule) =>
+                Rule.required().error(
+                  'Specify whether this position is currently active.',
+                ),
             }),
 
             defineField({
@@ -92,7 +136,8 @@ export const workExperienceType = defineType({
               title: 'End Date',
               type: 'date',
               description:
-                'Date when this position ended. Leave empty only if this position is currently active.',
+                'Required only for completed positions. Use the first day of the month when only the month and year are relevant.',
+              hidden: ({ parent }) => Boolean(parent?.isCurrentPosition),
               validation: (Rule) =>
                 Rule.custom((endDate, context) => {
                   const parent = context.parent as {
@@ -100,17 +145,19 @@ export const workExperienceType = defineType({
                     isCurrentPosition?: boolean;
                   };
 
-                  if (parent?.isCurrentPosition) return true;
+                  if (parent?.isCurrentPosition) {
+                    return true;
+                  }
 
                   if (!endDate) {
-                    return 'End date is required when the position is not current.';
+                    return 'Add an end date or mark this position as currently active.';
                   }
 
                   if (
                     parent?.startDate &&
                     new Date(endDate) < new Date(parent.startDate)
                   ) {
-                    return 'End date must be after the start date.';
+                    return 'The end date cannot be earlier than the start date.';
                   }
 
                   return true;
@@ -118,22 +165,13 @@ export const workExperienceType = defineType({
             }),
 
             defineField({
-              name: 'isCurrentPosition',
-              title: 'Is Current Position?',
-              type: 'boolean',
-              description:
-                'Enable this if this position is currently active. The end date can be empty in that case.',
-              initialValue: false,
-              validation: (Rule) => Rule.required(),
-            }),
-
-            defineField({
               name: 'highlights',
-              title: 'Position Highlights',
+              title: 'Experience Details',
               type: 'portableText',
               description:
-                'Main bullets shown under this position. Use this for responsibilities, achievements or important work done.',
-              validation: (Rule) => Rule.required(),
+                'Required. Explain your main responsibilities, contributions, achievements and relevant work in this position. Focus on concrete actions and results.',
+              validation: (Rule) =>
+                Rule.required().error('Add the main details of this position.'),
             }),
 
             defineField({
@@ -141,7 +179,7 @@ export const workExperienceType = defineType({
               title: 'Tools and Technologies',
               type: 'array',
               description:
-                'Technologies, tools or skills shown as chips/badges for this position.',
+                'Optional. Technologies, platforms and tools shown as chips for this position. Leave empty when they are not relevant.',
               of: [
                 defineArrayMember({
                   type: 'string',
@@ -150,40 +188,42 @@ export const workExperienceType = defineType({
               options: {
                 layout: 'tags',
               },
-              validation: (Rule) => Rule.required().min(1),
+              validation: (Rule) =>
+                Rule.unique().error(
+                  'Each tool or technology should appear only once.',
+                ),
             }),
           ],
 
           preview: {
             select: {
-              title: 'positionTitle',
+              positionTitle: 'positionTitle',
               employmentType: 'employmentType',
               startDate: 'startDate',
               endDate: 'endDate',
               isCurrentPosition: 'isCurrentPosition',
-              iconKey: 'positionIconKey',
             },
-            prepare({
-              title,
-              employmentType,
-              startDate,
-              endDate,
-              isCurrentPosition,
-              iconKey,
-            }) {
+
+            prepare({ positionTitle, startDate, endDate, isCurrentPosition }) {
+              const formattedStartDate =
+                formatPreviewDate(startDate) ?? 'No start date';
+
+              const formattedEndDate = isCurrentPosition
+                ? 'Present'
+                : (formatPreviewDate(endDate) ?? 'No end date');
+
               return {
-                title,
-                subtitle: `${employmentType ?? 'No employment type'} · ${
-                  startDate ?? 'No start date'
-                } - ${
-                  isCurrentPosition ? 'Present' : (endDate ?? 'No end date')
-                }${iconKey ? ` · Icon: ${iconKey}` : ''}`,
+                title: positionTitle ?? 'Untitled position',
+                subtitle: `${formattedStartDate} – ${formattedEndDate}`,
               };
             },
           },
         }),
       ],
-      validation: (Rule) => Rule.required().min(1),
+      validation: (Rule) =>
+        Rule.required()
+          .min(1)
+          .error('Add at least one position for this organization.'),
     }),
 
     defineField({
@@ -192,24 +232,33 @@ export const workExperienceType = defineType({
       type: 'number',
       group: 'settings',
       description:
-        'Controls the order of this work experience group in the portfolio. Lower numbers appear first.',
-      validation: (Rule) => Rule.required().integer().min(0),
+        'Required. Controls the order of this organization in the portfolio. Lower numbers appear first.',
+      initialValue: 0,
+      validation: (Rule) =>
+        Rule.required()
+          .integer()
+          .min(0)
+          .error('Use a whole number equal to or greater than 0.'),
     }),
   ],
 
   preview: {
     select: {
-      title: 'organizationName',
-      media: 'organizationLogo',
-      firstPositionTitle: 'positions.0.positionTitle',
+      organizationName: 'organizationName',
+      organizationLogo: 'organizationLogo',
+      positions: 'positions',
     },
-    prepare({ title, media, firstPositionTitle }) {
+
+    prepare({ organizationName, organizationLogo, positions }) {
+      const positionList = Array.isArray(positions) ? positions : [];
+
+      const positionCount = positionList.length;
+
       return {
-        title,
-        subtitle: firstPositionTitle
-          ? `First position: ${firstPositionTitle}`
-          : 'No positions',
-        media,
+        title: organizationName ?? 'Unnamed organization',
+        subtitle:
+          positionCount === 1 ? '1 position' : `${positionCount} positions`,
+        media: organizationLogo,
       };
     },
   },

@@ -10,12 +10,12 @@ export const profileType = defineType({
   groups: [
     {
       name: 'identity',
-      title: 'Identity',
+      title: 'Profile Overview',
       default: true,
     },
     {
       name: 'contact',
-      title: 'Contact',
+      title: 'Contact & Links',
     },
     {
       name: 'techSkills',
@@ -29,68 +29,76 @@ export const profileType = defineType({
 
   fields: [
     defineField({
-      name: 'aboutMeDescription',
-      title: 'About Me Description',
-      type: 'portableText',
-      group: 'identity',
-      description:
-        'Longer description used in the hero section. It should be human, focused on your experience and skills, and highlight your personality.',
-      validation: (Rule) => Rule.required(),
-    }),
-
-    defineField({
-      name: 'rightNowIAm',
-      title: 'Right Now I Am',
-      type: 'portableText',
-      group: 'identity',
-      description:
-        'Short description of what I am encountering or focusing on right now.',
-      validation: (Rule) => Rule.required(),
-    }),
-
-    defineField({
-      name: 'isAvailable',
-      title: 'Is Available?',
-      type: 'boolean',
-      group: 'identity',
-      description:
-        'Deactivate when you are not available for opportunities or jobs',
-      initialValue: true,
-      validation: (Rule) => Rule.required(),
-    }),
-
-    defineField({
       name: 'professionalTitle',
       title: 'Professional Title',
       type: 'string',
       group: 'identity',
-      description: 'Main professional title shown in the portfolio.',
-      validation: (Rule) => Rule.required(),
+      description:
+        'Required. Main professional role shown near your name. Example: Full Stack Developer.',
+      validation: (Rule) =>
+        Rule.required()
+          .min(2)
+          .max(80)
+          .error('Add a professional title between 2 and 80 characters.'),
+    }),
+
+    defineField({
+      name: 'aboutMeDescription',
+      title: 'About Me',
+      type: 'portableText',
+      group: 'identity',
+      description:
+        'Required. Main introduction shown in the hero. Explain your experience, professional focus and the kind of products you build.',
+      validation: (Rule) =>
+        Rule.required().error('Add the main profile introduction.'),
+    }),
+
+    defineField({
+      name: 'rightNowIAm',
+      title: 'Current Focus',
+      type: 'portableText',
+      group: 'identity',
+      description:
+        'Optional. Short update about what you are currently building, learning or focusing on. Leave empty when there is nothing relevant to show.',
+    }),
+
+    defineField({
+      name: 'isAvailable',
+      title: 'Available for Opportunities',
+      type: 'boolean',
+      group: 'identity',
+      description:
+        'Required. Controls whether the portfolio shows that you are currently open to work or new professional opportunities.',
+      initialValue: true,
+      validation: (Rule) =>
+        Rule.required().error('Specify your current availability.'),
     }),
 
     defineField({
       name: 'location',
-      title: 'Location',
+      title: 'Current Location',
       type: 'string',
       group: 'identity',
-      description: 'Location shown in the portfolio.',
-      validation: (Rule) => Rule.required(),
+      description:
+        'Optional. City and country shown in the portfolio. Leave empty if you prefer not to publish your location. Example: Bogotá D.C., Colombia.',
+      validation: (Rule) =>
+        Rule.max(100).warning('Keep the location under 100 characters.'),
     }),
 
     defineField({
       name: 'resume',
       title: 'Resume / CV',
       type: 'object',
-      group: 'identity',
+      group: 'contact',
       description:
-        'Resume reference used by the portfolio download/view button.',
+        'Optional. Add a PDF file or an external URL to display the resume action in the portfolio.',
       fields: [
         defineField({
           name: 'file',
-          title: 'Resume File',
+          title: 'PDF File',
           type: 'file',
           description:
-            'Upload your resume directly to Sanity. Recommended for a PDF controlled from the CMS.',
+            'Optional. Upload the resume directly to Sanity. Use a PDF file intended for public access.',
           options: {
             accept: 'application/pdf',
           },
@@ -98,21 +106,23 @@ export const profileType = defineType({
 
         defineField({
           name: 'externalUrl',
-          title: 'External Resume URL',
+          title: 'External URL',
           type: 'url',
           description:
-            'External resume URL. Example: Google Drive, Notion, portfolio asset URL, etc.',
+            'Optional. Public link to the resume hosted elsewhere, such as Google Drive or Notion.',
         }),
       ],
       validation: (Rule) =>
         Rule.custom((resume) => {
+          if (!resume) return true;
+
           const value = resume as {
             file?: unknown;
             externalUrl?: string;
           };
 
-          if (!value?.file && !value?.externalUrl) {
-            return 'Add either a resume file or an external resume URL.';
+          if (!value.file && !value.externalUrl) {
+            return 'Add a PDF file or an external URL, or remove the empty resume field.';
           }
 
           return true;
@@ -121,42 +131,45 @@ export const profileType = defineType({
 
     defineField({
       name: 'contact',
-      title: 'Contact and Social Links',
+      title: 'Contact Information',
       type: 'object',
       group: 'contact',
       description:
-        'Main contact information and social links shown in the portfolio.',
+        'Required. Main contact channel and optional professional profiles shown in the portfolio.',
       fields: [
         defineField({
           name: 'email',
-          title: 'Email',
+          title: 'Contact Email',
           type: 'string',
           description:
-            'Email shown in the portfolio. The frontend can convert it into a mailto link.',
+            'Required. Public email visitors and recruiters can use to contact you.',
           validation: (Rule) =>
-            Rule.required().regex(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, {
-              name: 'email',
-              invert: false,
-            }),
+            Rule.required()
+              .regex(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, {
+                name: 'valid email address',
+                invert: false,
+              })
+              .error('Add a valid contact email address.'),
         }),
 
         defineField({
           name: 'githubUrl',
-          title: 'GitHub URL',
+          title: 'GitHub Profile URL',
           type: 'url',
-          description: 'Your GitHub profile URL.',
-          validation: (Rule) => Rule.required(),
+          description:
+            'Optional. Public GitHub profile. Leave empty if GitHub should not appear in the portfolio.',
         }),
 
         defineField({
           name: 'linkedinUrl',
-          title: 'LinkedIn URL',
+          title: 'LinkedIn Profile URL',
           type: 'url',
-          description: 'Your LinkedIn profile URL.',
-          validation: (Rule) => Rule.required(),
+          description:
+            'Optional. Public LinkedIn profile. Leave empty if LinkedIn should not appear in the portfolio.',
         }),
       ],
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) =>
+        Rule.required().error('Add the profile contact information.'),
     }),
 
     defineField({
@@ -165,19 +178,25 @@ export const profileType = defineType({
       type: 'array',
       group: 'techSkills',
       description:
-        'Technical skills and technologies shown as chips/badges in the profile/about section.',
+        'Required. Core technologies shown in the skills section. Drag the items to control the order in which they appear.',
       of: [
         defineArrayMember({
           name: 'skill',
-          title: 'Skill',
+          title: 'Technical Skill',
           type: 'object',
+
           fields: [
             defineField({
               name: 'name',
-              title: 'Skill Name',
+              title: 'Display Name',
               type: 'string',
-              description: 'Visible name shown in the UI. Example: React.',
-              validation: (Rule) => Rule.required(),
+              description:
+                'Required. Technology name displayed in the portfolio. Example: React, Next.js or PostgreSQL.',
+              validation: (Rule) =>
+                Rule.required()
+                  .min(1)
+                  .max(50)
+                  .error('Add a skill name under 50 characters.'),
             }),
 
             defineField({
@@ -185,30 +204,35 @@ export const profileType = defineType({
               title: 'Icon Key',
               type: 'string',
               description:
-                'Internal key used by the frontend to render the correct icon. Use lowercase without spaces, dots or special characters. Example: Next.js → nextjs.',
+                'Optional. Internal key used by the frontend to find a matching icon. Use lowercase letters and numbers without spaces or symbols. Example: Next.js → nextjs. Leave empty to use the default icon.',
               validation: (Rule) =>
                 Rule.regex(/^[a-z0-9]+$/, {
-                  name: 'lowercase key without spaces, dots or special characters',
+                  name: 'lowercase key without spaces or symbols',
                   invert: false,
-                }),
+                }).error(
+                  'Use only lowercase letters and numbers, without spaces or symbols.',
+                ),
             }),
           ],
 
           preview: {
             select: {
-              title: 'name',
+              name: 'name',
               iconKey: 'iconKey',
             },
-            prepare({ title, iconKey }) {
+            prepare({ name, iconKey }) {
               return {
-                title,
-                subtitle: iconKey ? `Icon key: ${iconKey}` : 'No icon key',
+                title: name ?? 'Unnamed skill',
+                subtitle: iconKey
+                  ? `Icon key: ${iconKey}`
+                  : 'Uses the default icon',
               };
             },
           },
         }),
       ],
-      validation: (Rule) => Rule.required().min(1),
+      validation: (Rule) =>
+        Rule.required().min(1).error('Add at least one technical skill.'),
     }),
 
     defineField({
@@ -216,27 +240,41 @@ export const profileType = defineType({
       title: 'Education',
       type: 'array',
       group: 'education',
-      description: 'Education information',
+      description:
+        'Optional. Formal education, courses or professional training shown in the portfolio. Drag the items to control their display order.',
       of: [
         defineArrayMember({
           name: 'institution',
-          title: 'Institution',
+          title: 'Education Item',
           type: 'object',
+
           fields: [
+            defineField({
+              name: 'academicTitle',
+              title: 'Program or Academic Title',
+              type: 'string',
+              description:
+                'Required. Name of the degree, program, course or certification. Example: Technology in Software Analysis and Development.',
+              validation: (Rule) =>
+                Rule.required()
+                  .min(2)
+                  .max(150)
+                  .error(
+                    'Add the program or academic title under 150 characters.',
+                  ),
+            }),
+
             defineField({
               name: 'institutionName',
               title: 'Institution Name',
               type: 'string',
-              description: 'Name of the institution, academy or platform.',
-              validation: (Rule) => Rule.required(),
-            }),
-
-            defineField({
-              name: 'academicTitle',
-              title: 'Academic Title',
-              type: 'string',
-              description: 'Academic title or program name.',
-              validation: (Rule) => Rule.required(),
+              description:
+                'Required. Name of the university, institution, academy or learning platform. Example: SENA.',
+              validation: (Rule) =>
+                Rule.required()
+                  .min(2)
+                  .max(100)
+                  .error('Add the institution name under 100 characters.'),
             }),
 
             defineField({
@@ -244,8 +282,22 @@ export const profileType = defineType({
               title: 'Start Date',
               type: 'date',
               description:
-                'Date when this education started. Use the first day of the month if only month/year matters.',
-              validation: (Rule) => Rule.required(),
+                'Required. Date when the program started. Use the first day of the month when only the month and year are relevant.',
+              validation: (Rule) =>
+                Rule.required().error('Add the education start date.'),
+            }),
+
+            defineField({
+              name: 'isCurrentlyStudying',
+              title: 'Currently Studying',
+              type: 'boolean',
+              description:
+                'Required. Enable this while the program is still in progress. The end date will not be required.',
+              initialValue: false,
+              validation: (Rule) =>
+                Rule.required().error(
+                  'Specify whether this education is still in progress.',
+                ),
             }),
 
             defineField({
@@ -253,7 +305,8 @@ export const profileType = defineType({
               title: 'End Date',
               type: 'date',
               description:
-                'Date when this education ended. Leave empty only if you are currently studying it.',
+                'Required only for completed education. Use the first day of the month when only the month and year are relevant.',
+              hidden: ({ parent }) => Boolean(parent?.isCurrentlyStudying),
               validation: (Rule) =>
                 Rule.custom((endDate, context) => {
                   const parent = context.parent as {
@@ -261,41 +314,23 @@ export const profileType = defineType({
                     isCurrentlyStudying?: boolean;
                   };
 
-                  if (parent?.isCurrentlyStudying) return true;
+                  if (parent?.isCurrentlyStudying) {
+                    return true;
+                  }
 
                   if (!endDate) {
-                    return 'End date is required when this education is not currently active.';
+                    return 'Add an end date or mark this education as currently in progress.';
                   }
 
                   if (
                     parent?.startDate &&
                     new Date(endDate) < new Date(parent.startDate)
                   ) {
-                    return 'End date must be after the start date.';
+                    return 'The end date cannot be earlier than the start date.';
                   }
 
                   return true;
                 }),
-            }),
-
-            defineField({
-              name: 'isCurrentlyStudying',
-              title: 'Is Currently Studying?',
-              type: 'boolean',
-              description:
-                'Enable this if you are currently studying this program. The end date can be empty in that case.',
-              initialValue: false,
-              validation: (Rule) => Rule.required(),
-            }),
-
-            defineField({
-              name: 'displayOrder',
-              title: 'Display Order',
-              type: 'number',
-              description:
-                'Controls the order of this education item in the portfolio. Lower numbers appear first.',
-              initialValue: 0,
-              validation: (Rule) => Rule.required(),
             }),
           ],
 
@@ -303,29 +338,35 @@ export const profileType = defineType({
             select: {
               academicTitle: 'academicTitle',
               institutionName: 'institutionName',
+              isCurrentlyStudying: 'isCurrentlyStudying',
             },
-            prepare({ academicTitle, institutionName }) {
+            prepare({ academicTitle, institutionName, isCurrentlyStudying }) {
+              const institution = institutionName ?? 'No institution';
+
               return {
-                title: academicTitle,
-                subtitle: institutionName,
+                title: academicTitle ?? 'Untitled education',
+                subtitle: isCurrentlyStudying
+                  ? `${institution} · In progress`
+                  : institution,
               };
             },
           },
         }),
       ],
-      validation: (Rule) => Rule.required().min(1),
     }),
   ],
 
   preview: {
     select: {
-      title: 'professionalTitle',
+      professionalTitle: 'professionalTitle',
       location: 'location',
     },
-    prepare({ title, location }) {
+    prepare({ professionalTitle, location }) {
+      const details = [professionalTitle, location].filter(Boolean).join(' · ');
+
       return {
         title: 'Profile',
-        subtitle: `${title ?? 'No title'} · ${location ?? 'No location'}`,
+        subtitle: details || 'Profile information',
       };
     },
   },

@@ -1,30 +1,34 @@
 import { groq } from 'next-sanity';
 
 export const WORK_EXPERIENCE_QUERY = groq`
-  *[_type == "workExperience"] |order(displayOrder asc, _updatedAt desc) {
-  "id": _id,
-  displayOrder,
+  *[_type == "workExperience"] | order(displayOrder asc, _updatedAt desc) {
+    "id": _id,
 
-  "organizationInformation": {
-    organizationName,
-    "organizationLogo": select(
-      defined(organizationLogo.asset) => {
-        "url": organizationLogo.asset->url,
-        "alt": organizationLogo.alt
-      },
-      null
-    ),
-  },
+    "organization": {
+      "name": organizationName,
 
-  "jobInformation": positions[] {
-    _key,
-    "jobTitle": positionTitle,
-    employmentType,
-    startDate,
-    endDate,
-    "isCurrentJob": isCurrentPosition,
-    "highlights": coalesce(highlights, []),
-    "skills": coalesce(toolsAndTechnologies, [])
+      "logo": select(
+        defined(organizationLogo.asset) => {
+          "url": organizationLogo.asset->url,
+          "alt": organizationLogo.alt
+        },
+        null
+      )
+    },
+
+    "positions": positions[] {
+      "id": _key,
+      "title": positionTitle,
+      startDate,
+
+      "endDate": select(
+        isCurrentPosition == true => null,
+        endDate
+      ),
+
+      "isCurrent": isCurrentPosition,
+      "highlights": highlights,
+      "toolsAndTechnologies": toolsAndTechnologies
+    },
   }
-}
 `;

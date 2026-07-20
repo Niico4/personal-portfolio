@@ -1,6 +1,6 @@
-import { PortableTextBlock } from '@portabletext/types';
+import type { PortableTextBlock } from '@portabletext/types';
 
-import { ImageType } from './common.type';
+import type { ImageType } from './common.type';
 
 export type ProjectStatus =
   | 'published'
@@ -8,34 +8,34 @@ export type ProjectStatus =
   | 'inDevelopment'
   | 'concept';
 
-export type ProjectInformationType = {
+export interface Project {
   id: string;
-  display_order: number;
-  status: ProjectStatus;
   title: string;
   slug: string;
-  project_detail: ProjectDetail;
-  project_information_preview: ProjectInformationPreview;
+  status: ProjectStatus;
+  preview: ProjectPreview;
+  detail: ProjectDetail;
   technologies: string[];
-  links: Links;
-};
+  links: ProjectLinks;
+}
 
-export type Links = {
-  live_demo_url: string | null;
-  repository_url: string | null;
-};
-
-export type ProjectDetail = {
-  demo_video: DemoVideo | null;
-  full_description: PortableTextBlock[] | null;
-  origin_description: PortableTextBlock[] | null;
-};
-
-export type DemoVideo = {
-  url: string;
-};
-
-export type ProjectInformationPreview = {
+export interface ProjectPreview {
+  shortDescription: string;
   image: ImageType | null;
-  short_description: string;
-};
+}
+
+export interface ProjectDetail {
+  demoVideoUrl: string | null;
+  contentSections: ProjectContentSection[];
+}
+
+export interface ProjectContentSection {
+  id: string;
+  title: string;
+  content: PortableTextBlock[];
+}
+
+export interface ProjectLinks {
+  liveDemoUrl: string | null;
+  repositoryUrl: string | null;
+}

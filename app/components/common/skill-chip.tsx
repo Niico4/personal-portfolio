@@ -11,7 +11,7 @@ export const SkillChip = ({
 }) => {
   return (
     <Chip
-      className="bg-ink-900 border-1 border-ink-700 text-ink-200"
+      className="select-none bg-ink-900 border-1 border-ink-700 text-ink-200"
       radius={radius}
       size={size}
     >

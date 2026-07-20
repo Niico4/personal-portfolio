@@ -6,15 +6,15 @@ import type { Route } from 'next';
 import { IconArrowUpRight } from '@tabler/icons-react';
 
 import { ProjectStatusChip } from '@/(pages)/portfolio/components/project-status-chip';
-import { ProjectInformationType } from '@/sanity/lib/types/project.type';
+import { Project } from '@/sanity/lib/types/project.type';
 
 type ProjectCardProps = {
-  project: ProjectInformationType;
+  project: Project;
   index: number;
 };
 
 export const ProjectCard = ({ project, index }: ProjectCardProps) => {
-  const { title, slug, status, project_information_preview: preview } = project;
+  const { title, slug, status, preview } = project;
 
   const href = `/portfolio/${slug}` as Route;
   const projectNumber = String(index + 1).padStart(2, '0');
@@ -43,7 +43,7 @@ export const ProjectCard = ({ project, index }: ProjectCardProps) => {
             </h3>
 
             <p className="mt-2 line-clamp-3 text-sm leading-5 text-ink-200">
-              {preview.short_description}
+              {preview.shortDescription}
             </p>
           </div>
         </div>

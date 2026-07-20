@@ -1,20 +1,15 @@
-import { IconHome, IconCode, IconUser } from '@tabler/icons-react';
+import { IconCode, IconUser } from '@tabler/icons-react';
 
 export const NAV_ITEMS = [
   {
     label: 'Inicio',
     href: '/',
-    icon: IconHome,
+    icon: IconUser,
   },
   {
     label: 'Proyectos',
     href: '/portfolio',
     icon: IconCode,
-  },
-  {
-    label: 'Sobre mí',
-    href: '/about-me',
-    icon: IconUser,
   },
 ] as const;
 
