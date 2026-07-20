@@ -2,7 +2,7 @@ import { Heading } from './heading';
 
 type SectionHeaderProps = {
   title: string;
-  description: string;
+  description?: string;
 };
 
 export const SectionHeader = ({ title, description }: SectionHeaderProps) => {

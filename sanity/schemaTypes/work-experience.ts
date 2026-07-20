@@ -79,31 +79,6 @@ export const workExperienceType = defineType({
             }),
 
             defineField({
-              name: 'positionIconKey',
-              title: 'Position Icon Key',
-              type: 'string',
-              description:
-                'Optional icon key used by the frontend for this position. If empty or not supported, the default code icon will be used.',
-            }),
-
-            defineField({
-              name: 'employmentType',
-              title: 'Employment Type',
-              type: 'string',
-              description:
-                'Work relationship shown before the dates. Example: Full-time or Part-time.',
-              options: {
-                list: [
-                  { title: 'Full-time', value: 'full-time' },
-                  { title: 'Part-time', value: 'part-time' },
-                ],
-                layout: 'dropdown',
-              },
-              initialValue: 'full-time',
-              validation: (Rule) => Rule.required(),
-            }),
-
-            defineField({
               name: 'startDate',
               title: 'Start Date',
               type: 'date',

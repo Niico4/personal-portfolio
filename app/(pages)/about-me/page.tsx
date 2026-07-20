@@ -1,10 +1,9 @@
 import { Metadata } from 'next';
 
-import WorkExperienceSection from '../../components/sections/work-experience-section';
-
+import WorkExperienceSection from '../(home)/sections/experience/work-experience-section';
 // import AboutMeHeroSection from './sections/about-me-hero-section';
-import EducationSection from './sections/education-section';
-import SkillsSection from './sections/skills-section';
+import EducationSection from '../(home)/sections/education-section';
+import SkillsSection from '../(home)/sections/skills-section';
 
 export const metadata: Metadata = {
   title: 'Sobre mí',

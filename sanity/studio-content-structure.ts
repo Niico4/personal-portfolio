@@ -3,7 +3,6 @@ import {
   IconBriefcase,
   IconHome2,
   IconRocket,
-  IconSchool,
   IconUserCircle,
 } from '@tabler/icons-react';
 
@@ -41,6 +40,4 @@ export const structure: StructureResolver = (S) =>
       S.documentTypeListItem('workExperience')
         .title('Work Experience')
         .icon(IconBriefcase),
-
-      S.documentTypeListItem('education').title('Education').icon(IconSchool),
     ]);

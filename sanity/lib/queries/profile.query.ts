@@ -6,6 +6,8 @@ export const PROFILE_QUERY = groq`
       aboutMeDescription,
       professionalTitle,
       "currentLocation": location,
+      rightNowIAm,
+      isAvailable
     },
 
     "contactInformation": {
@@ -23,5 +25,15 @@ export const PROFILE_QUERY = groq`
       name,
       iconKey
     },
+
+    "education": education[] | order(displayOrder asc) {
+      "id": _key,
+      academicTitle,
+      institutionName,
+      startDate,
+      endDate,
+      isCurrentlyStudying,
+      displayOrder
+    }
   }
 `;
