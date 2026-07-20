@@ -3,12 +3,8 @@ import { client } from '../client';
 import { PROFILE_QUERY } from '../queries/profile.query';
 import { ProfileInformation } from '../types/profile.type';
 
-import { getSanityFetchOptions, SANITY_TAGS } from './sanity-fetch-options';
+import { getSanityFetchOptions } from './sanity-fetch-options';
 
 export const getProfile = (): Promise<ProfileInformation> => {
-  return client.fetch(
-    PROFILE_QUERY,
-    {},
-    getSanityFetchOptions([SANITY_TAGS.profile]),
-  );
+  return client.fetch(PROFILE_QUERY, {}, getSanityFetchOptions());
 };
