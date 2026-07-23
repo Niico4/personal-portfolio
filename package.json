@@ -4,8 +4,8 @@
     "name": "portfolio"
   },
   "version": "3.0.0",
-  "description": "Personal portfolio of Nicolas Garzón - Software Developer",
-  "author": "Nicolas Garzón (https://github.com/niico4)",
+  "description": "Personal portfolio of Nicolás Garzón - Software Developer",
+  "author": "Nicolás Garzón (https://github.com/niico4)",
   "private": true,
   "license": "MIT",
   "scripts": {

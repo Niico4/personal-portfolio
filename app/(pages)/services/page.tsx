@@ -17,7 +17,7 @@ export const metadata: Metadata = createPageMetadata({
   title: 'Desarrollo de aplicaciones web a medida',
   socialTitle: 'Desarrollo de aplicaciones web y sistemas a medida',
   description: SERVICES_DESCRIPTION,
-  path: '/servicios',
+  path: '/services',
   image: {
     url: '/seo/og-services-mockup.png',
     width: 1200,
