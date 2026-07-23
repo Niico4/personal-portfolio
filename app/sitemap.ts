@@ -19,6 +19,9 @@ const sitemap = async (): Promise<MetadataRoute.Sitemap> => {
     {
       url: getAbsoluteUrl('/portfolio'),
     },
+    {
+      url: getAbsoluteUrl('/services'),
+    },
   ];
 
   const projectPages: MetadataRoute.Sitemap = projects.map(({ slug }) => ({

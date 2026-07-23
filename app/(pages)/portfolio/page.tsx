@@ -31,7 +31,7 @@ const ProjectsPage = async () => {
   const [featuredProject, ...secondaryProjects] = projects;
   const hasOddSecondaryProjects = secondaryProjects.length % 2 !== 0;
   return (
-    <section className="flex flex-col gap-10 sm:gap-12">
+    <main className="flex flex-col gap-10 sm:gap-12">
       <header className="flex max-w-2xl flex-col gap-3">
         <Heading as="h1">Proyectos</Heading>
 
@@ -67,7 +67,7 @@ const ProjectsPage = async () => {
           })}
         </ul>
       )}
-    </section>
+    </main>
   );
 };
 export default ProjectsPage;
