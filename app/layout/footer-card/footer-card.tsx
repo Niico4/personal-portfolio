@@ -4,12 +4,12 @@ import {
   IconArrowNarrowUp,
   IconBrandGithub,
   IconBrandLinkedin,
-  IconBriefcase,
   IconMailShare,
   IconPaperclip,
 } from '@tabler/icons-react';
 import { Divider } from '@heroui/divider';
 import { Button } from '@heroui/button';
+import Link from 'next/link';
 
 import { poetsenOne } from '@/fonts';
 import { PortableTextContent } from '@/components/common/portable-text-content';
@@ -18,13 +18,7 @@ import {
   ProfileContact,
   ProfileOverview,
 } from '@/sanity/lib/types/profile.type';
-
-const socialLinkBaseClassName = `
-    flex items-center rounded-full px-2 py-1 gap-1
-    text-xs border-1
-    transition-[color,background-color,border-color,transform,box-shadow]
-    duration-300 ease-out
-  `;
+import { BadgeShine } from '@/components/common/badge-shine';
 
 const date = new Date();
 const currentYear = date.getFullYear();
@@ -59,12 +53,12 @@ export const FooterCard: FC<Props> = async ({ contact, overview }) => {
         </h3>
 
         {overview.isAvailableForOpportunities && (
-          <div
-            className={`${socialLinkBaseClassName} select-none border-green-800 bg-green-900/15 text-green-300 hover:border-green-700 hover:bg-green-900/25 focus-visible:ring-green-400`}
-          >
-            <IconBriefcase aria-hidden="true" stroke={1.8} size={16} />
-            Abierto a oportunidades
-          </div>
+          <Link href="/services">
+            <BadgeShine
+              label="Abierto a oportunidades"
+              className="w-max select-none border-green-800 text-green-300"
+            />
+          </Link>
         )}
       </CardHeader>
       <CardBody className="p-0">
@@ -138,7 +132,7 @@ export const FooterCard: FC<Props> = async ({ contact, overview }) => {
       <Divider aria-hidden="true" className="bg-ink-200/10" />
       <CardFooter className="justify-between p-0">
         <div className="flex flex-col text-ink-300 items-start text-xs">
-          <p>Nicolás Garzón • {overview.location}.</p>
+          <p>Creado por Nicolás 🐐</p>
           <p>© {currentYear}</p>
         </div>
 
