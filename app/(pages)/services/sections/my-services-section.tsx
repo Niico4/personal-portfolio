@@ -54,6 +54,7 @@ const SERVICES: Service[] = [
     features: [
       'Definición del alcance inicial',
       'Organización de requerimientos',
+      'Definición de flujos principales',
       'Desarrollo frontend y backend',
       'Despliegue y preparación inicial',
     ],

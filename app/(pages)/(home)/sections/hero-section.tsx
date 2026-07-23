@@ -146,7 +146,9 @@ const HeroSection: FC<Props> = async ({ contact, overview }) => {
 
                 <li>
                   <SocialChip
-                    href={`mailto:${email}`}
+                    href={`mailto:${contact.email}?subject=${encodeURIComponent(
+                      'Oportunidad laboral',
+                    )}`}
                     icon={IconMailShare}
                     label="Escríbeme"
                     variant="email"
