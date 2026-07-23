@@ -36,7 +36,9 @@ const HeroSection = ({ email }: { email: string }) => {
       <Button
         as="a"
         radius="full"
-        href={`mailto:${email}`}
+        href={`mailto:${email}?subject=${encodeURIComponent(
+          'Consulta sobre desarrollo web',
+        )}`}
         variant="flat"
         className="border border-ink-700 mb-7 md:w-max"
         endContent={

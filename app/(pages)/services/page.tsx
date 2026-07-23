@@ -11,7 +11,7 @@ import MyServicesSection from './sections/my-services-section';
 import { WorkProcess } from './sections/work-process-section';
 
 const SERVICES_DESCRIPTION =
-  'Desarrollo aplicaciones web a medida, sistemas de gestión y MVPs con React, Next.js y Node.js para negocios que necesitan digitalizar procesos o lanzar un producto.';
+  'Desarrollo aplicaciones web a medida, sistemas de gestión y MVPs con React, Next.js y Node.js para digitalizar procesos o lanzar productos.';
 
 export const metadata: Metadata = createPageMetadata({
   title: 'Desarrollo de aplicaciones web a medida',
@@ -64,7 +64,9 @@ const ServicesPage = async () => {
 
               <Button
                 as="a"
-                href={`mailto:${contact.email}`}
+                href={`mailto:${contact.email}?subject=${encodeURIComponent(
+                  'Consulta sobre desarrollo web',
+                )}`}
                 radius="full"
                 endContent={
                   <IconArrowUpRight aria-hidden="true" size={18} stroke={1.8} />
