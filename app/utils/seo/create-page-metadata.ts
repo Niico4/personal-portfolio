@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 
 import { SEO_CONFIG } from '@/config/seo.config';
 
+import { getAbsoluteUrl } from './get-absolute-url';
+
 type SeoPath = '/' | `/${string}`;
 
 export type SeoImage = {
@@ -19,6 +21,7 @@ type CreatePageMetadataParams = {
   image?: SeoImage;
   absoluteTitle?: boolean;
   noIndex?: boolean;
+  openGraphType?: 'article' | 'website';
 };
 
 export const createPageMetadata = ({
@@ -29,8 +32,14 @@ export const createPageMetadata = ({
   image = SEO_CONFIG.defaultImage,
   absoluteTitle = false,
   noIndex = false,
+  openGraphType = 'website',
 }: CreatePageMetadataParams): Metadata => {
   const shouldIndex = SEO_CONFIG.indexingEnabled && !noIndex;
+  const canonicalUrl = getAbsoluteUrl(path);
+  const socialImage = {
+    ...image,
+    url: getAbsoluteUrl(image.url),
+  };
 
   return {
     title: absoluteTitle
@@ -42,7 +51,7 @@ export const createPageMetadata = ({
     description,
 
     alternates: {
-      canonical: path,
+      canonical: canonicalUrl,
     },
 
     robots: shouldIndex
@@ -67,13 +76,13 @@ export const createPageMetadata = ({
         },
 
     openGraph: {
-      type: 'website',
+      type: openGraphType,
       locale: SEO_CONFIG.locale,
       siteName: SEO_CONFIG.siteName,
-      url: path,
+      url: canonicalUrl,
       title: socialTitle,
       description,
-      images: [image],
+      images: [socialImage],
     },
 
     twitter: {
@@ -82,8 +91,8 @@ export const createPageMetadata = ({
       description,
       images: [
         {
-          url: image.url,
-          alt: image.alt,
+          url: socialImage.url,
+          alt: socialImage.alt,
         },
       ],
     },
