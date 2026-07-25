@@ -3,11 +3,7 @@ import type {
   RichTextItemResponse,
 } from '@notionhq/client';
 
-import {
-  WIKI_NOTE_LEVELS,
-  WIKI_PROPERTIES,
-  WIKI_SEO_DEFAULTS,
-} from './wiki-contract';
+import { WIKI_NOTE_LEVELS, WIKI_PROPERTIES } from './wiki-contract';
 import { WikiError } from './wiki-errors';
 import type {
   WikiMedia,
@@ -88,63 +84,6 @@ const getSlug = (page: PageObjectResponse, propertyName: string): string => {
   }
 
   return slug;
-};
-
-const getUrl = (
-  page: PageObjectResponse,
-  propertyName: string,
-): string | null => {
-  const property = getProperty(page, propertyName);
-
-  if (property.type !== 'url') {
-    throw schemaError(propertyName, 'a URL');
-  }
-
-  if (!property.url) {
-    return null;
-  }
-
-  try {
-    const url = new URL(property.url);
-
-    if (url.protocol !== 'https:') {
-      throw new Error('Unsupported protocol');
-    }
-  } catch {
-    throw new WikiError(
-      'schema',
-      `Notion property "${propertyName}" must contain a valid HTTPS URL.`,
-    );
-  }
-
-  return property.url;
-};
-
-const isStableSocialImageUrl = (value: string): boolean => {
-  try {
-    const url = new URL(value);
-    const signedQueryParameters = new Set([
-      'expires',
-      'key-pair-id',
-      'signature',
-      'x-amz-algorithm',
-      'x-amz-credential',
-      'x-amz-date',
-      'x-amz-expires',
-      'x-amz-security-token',
-      'x-amz-signature',
-    ]);
-    const hasSignedQuery = [...url.searchParams.keys()].some((key) =>
-      signedQueryParameters.has(key.toLowerCase()),
-    );
-    const isNotionFileHost =
-      url.hostname === 'secure.notion-static.com' ||
-      url.hostname.startsWith('prod-files-secure.');
-
-    return url.protocol === 'https:' && !hasSignedQuery && !isNotionFileHost;
-  } catch {
-    return false;
-  }
 };
 
 const getRelationIds = (
@@ -249,14 +188,6 @@ export const mapWikiNotebook = (page: PageObjectResponse): WikiNotebook => {
     getRichText(page, WIKI_PROPERTIES.notebooks.description) ??
     `Notas técnicas de ${title} en la Wiki de Nicolás Garzón.`;
   const cover = getCover(page, WIKI_PROPERTIES.notebooks.cover);
-  const configuredSeoImageUrl = getUrl(
-    page,
-    WIKI_PROPERTIES.notebooks.seoImageUrl,
-  );
-  const seoImageUrl =
-    (configuredSeoImageUrl && isStableSocialImageUrl(configuredSeoImageUrl)
-      ? configuredSeoImageUrl
-      : null) ?? WIKI_SEO_DEFAULTS.image.url;
 
   return {
     id: page.id,
@@ -271,16 +202,9 @@ export const mapWikiNotebook = (page: PageObjectResponse): WikiNotebook => {
       description:
         getRichText(page, WIKI_PROPERTIES.notebooks.seoDescription) ??
         description,
-      image: {
-        url: seoImageUrl,
-        alt:
-          seoImageUrl === WIKI_SEO_DEFAULTS.image.url
-            ? WIKI_SEO_DEFAULTS.image.alt
-            : (getRichText(page, WIKI_PROPERTIES.notebooks.seoImageAlt) ??
-              `Imagen social del notebook ${title}`),
-        width: WIKI_SEO_DEFAULTS.image.width,
-        height: WIKI_SEO_DEFAULTS.image.height,
-      },
+      imageAlt:
+        getRichText(page, WIKI_PROPERTIES.notebooks.seoImageAlt) ??
+        `Imagen social del notebook ${title}`,
     },
   };
 };

@@ -74,11 +74,16 @@ La UI no debe consumir respuestas crudas del SDK.
 Los datos se transforman en modelos públicos mínimos:
 
 ```ts
-type WikiMedia = {
+interface WikiMedia {
   url: string;
-};
+}
 
-type WikiNotebook = {
+interface WikiSeo {
+  title: string;
+  description: string;
+}
+
+interface WikiNotebook {
   id: string;
   slug: string;
   title: string;
@@ -86,19 +91,12 @@ type WikiNotebook = {
   cover: WikiMedia | null;
   noteCount: number | null;
   updatedAt: string | null;
-  seo: {
-    title: string;
-    description: string;
-    image: {
-      url: string;
-      alt: string;
-      width: number;
-      height: number;
-    };
+  seo: WikiSeo & {
+    imageAlt: string;
   };
-};
+}
 
-type WikiNote = {
+interface WikiNote {
   id: string;
   slug: string;
   notebookId: string;
@@ -108,16 +106,13 @@ type WikiNote = {
   topics: WikiTopic[];
   createdAt: string;
   updatedAt: string;
-  seo: {
-    title: string;
-    description: string;
-  };
-};
+  seo: WikiSeo;
+}
 
-type WikiTopic = {
+interface WikiTopic {
   id: string;
   name: string;
-};
+}
 ```
 
 Las respuestas completas del SDK no cruzan este límite.
@@ -163,11 +158,12 @@ La validación se integra con la configuración Zod existente. Los valores son
 opcionales en el parse global para no derribar páginas ajenas y obligatorios al
 entrar en la capa Wiki.
 
-### Schema confirmado el 24 de julio de 2026
+### Schema confirmado el 25 de julio de 2026
 
 - Notebooks: `Name` title, `Slug`, `Description`, `SEO Title`,
-  `SEO Description` y `SEO Image Alt` rich text, `SEO Image URL` URL, `Cover`
-  files, `Notes` relation, `Edited` rollup, `Publicada` y `Archive` checkbox.
+  `SEO Description` y `SEO Image Alt` rich text, `Cover` files, `Notes`
+  relation, `Edited` rollup, `Publicada` y `Archive` checkbox. La imagen social
+  no necesita una propiedad en Notion: su path se deriva del `Slug`.
 - Notes: `Name` title, `Slug`, `Description`, `SEO Title` y `SEO Description`
   rich text, `Estado` status, `Nivel` select, `Notebook` y `Topics` relation,
   `Orden` number, `Created`, `Edited`, `Última revisión`, `Attachments` y
@@ -269,12 +265,11 @@ La capa de datos debe separar:
 Los nombres de propiedades de Notion no deben dispersarse por componentes o
 pages.
 
-Las consultas usan los IDs estables de las propiedades confirmadas para
-aplicar `filter_properties` sin consultar el schema en runtime. La portada
-solicita únicamente resúmenes de notebooks. La lista de un notebook solicita
-solo sus notas, y una nota reutiliza esa lista para navegación y enlaces
-internos del mismo notebook; no carga el índice global. El sitemap usa una
-proyección mínima de slugs, relaciones y fechas.
+Notebooks, Notes, Topics y el sitemap usan los IDs estables de las propiedades
+confirmadas para aplicar `filter_properties` sin consultar el schema en runtime.
+La lista de un notebook solicita solo sus notas, y una nota reutiliza esa lista
+para navegación y enlaces internos del mismo notebook; no carga el índice
+global. El sitemap usa una proyección mínima de slugs, relaciones y fechas.
 
 Los mappers deben:
 
@@ -742,15 +737,16 @@ JSON-LD incluye, cuando hay datos reales:
 - image pública válida;
 - canonical.
 
-Los fallbacks de title, description e imagen se resuelven una sola vez en los
-mappers. Las notas heredan la imagen SEO del notebook. Si `SEO Image URL` no
-está disponible se usa el asset estático del sitio; una URL firmada y temporal
-de Notion nunca se publica como OG.
+Los fallbacks de title, description y alt se resuelven una sola vez en los
+mappers. Las notas heredan la imagen SEO del notebook. Una URL firmada y
+temporal de Notion nunca se publica como OG.
 
 Las imágenes sociales estáticas de notebooks viven en
-`public/seo/wiki/{slug-de-imagen}.png`. `SEO Image URL` conserva la URL
-editorial completa y es la fuente de verdad; `Cover` se reserva para la UI y no
-se usa como fallback social.
+`public/seo/wiki/{slug}.png`. El `Slug` de cada notebook es la fuente de verdad
+compartida por la ruta pública y el nombre del asset; `Cover` se reserva para
+la UI y no se usa como fallback social. La aplicación resuelve el dominio del
+asset según el entorno sin cambiar el canonical: localhost en desarrollo, el
+deployment actual en Preview y `nicoo.dev` en producción.
 
 No debe prometerse indexación garantizada.
 
@@ -921,17 +917,13 @@ QA mínimo:
 
 - Las entradas públicas sin `Slug` válido quedan fuera de rutas, contadores y
   sitemap hasta completar el dato editorial en Notion.
-- Mientras un notebook no tenga `SEO Image URL`, sus páginas y notas usan la
-  imagen OG estática del sitio.
 - Los archivos internos de Notion usan URLs firmadas. La caché de cinco minutos
   reduce el riesgo de expiración para imágenes visibles, pero esas URLs no se
   reutilizan en metadata social.
 - Enhanced Markdown puede reportar contenido truncado o bloques desconocidos.
   La capa muestra un aviso discreto y no inventa contenido cuando no puede
   representarlos.
-- Hay una comprobación enfocada con fixtures para los límites de listas del
-  renderer, pero no una suite automatizada, axe, Lighthouse o snapshots
-  visuales.
+- No existe una suite automatizada, axe, Lighthouse o snapshots visuales.
 
 ## Recomendaciones futuras
 

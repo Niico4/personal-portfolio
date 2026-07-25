@@ -310,7 +310,7 @@ export const WikiMarkdownContent = ({
         className={
           className
             ? className
-            : 'box-decoration-clone break-words rounded-[0.3rem] border border-ink-700/70 bg-ink-900/70 px-1 py-0 font-mono text-[0.88em] leading-[inherit] text-brand-100 [overflow-wrap:anywhere]'
+            : 'box-decoration-clone break-words rounded-[0.3rem] border border-ink-700/70 bg-ink-900/70 px-1 py-0 font-mono text-[0.88em] leading-[inherit] text-brand-100'
         }
       >
         {children}

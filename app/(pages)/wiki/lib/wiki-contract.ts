@@ -11,7 +11,6 @@ export const WIKI_PROPERTIES = {
     published: 'Publicada',
     seoDescription: 'SEO Description',
     seoImageAlt: 'SEO Image Alt',
-    seoImageUrl: 'SEO Image URL',
     seoTitle: 'SEO Title',
     slug: 'Slug',
   },
@@ -43,7 +42,6 @@ export const WIKI_PROPERTY_IDS = {
     name: 'title',
     seoDescription: 'v~Lf',
     seoImageAlt: '%5EzES',
-    seoImageUrl: 'BLox',
     seoTitle: 'xsao',
     slug: '~%7DM%5D',
   },
@@ -76,7 +74,7 @@ export const WIKI_SEO_DEFAULTS = {
   description:
     'Notas técnicas de Nicolás Garzón sobre frontend, backend, arquitectura, bases de datos y herramientas para construir productos web.',
   image: {
-    url: '/seo/og-wiki-mockup.png',
+    path: '/seo/og-wiki-mockup.png',
     width: 1200,
     height: 630,
     alt: 'Wiki técnica de Nicolás Garzón sobre desarrollo web',

@@ -46,7 +46,6 @@ export const WikiImage = ({
       preload={priority}
       onError={() => setHasError(true)}
       className={className}
-      loading="eager"
     />
   );
 };

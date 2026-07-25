@@ -27,16 +27,6 @@ Para documentación:
 pnpm exec prettier --check AGENTS.md docs app/\(pages\)/wiki/AGENTS.md
 ```
 
-Wiki añade una comprobación enfocada de regresión para los límites semánticos
-de listas recibidas desde Enhanced Markdown:
-
-```bash
-node --no-warnings --experimental-strip-types scripts/verify-wiki-markdown.mjs
-```
-
-No es una suite de tests ni introduce un test runner; valida fixtures mínimas
-contra el mismo pipeline MDAST usado por el renderer.
-
 ## Orden recomendado
 
 1. `pnpm exec prettier --check` sobre archivos modificados.

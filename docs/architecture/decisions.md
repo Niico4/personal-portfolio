@@ -51,7 +51,8 @@ desalineación que debe comprobarse manualmente.
 proyecto añade metadata dinámica y `sitemap.ts` añade slugs de Sanity. Los
 helpers normalizan canonical e imágenes sociales como URLs absolutas. La
 indexación exige flag, build de producción, dominio final y deployment de
-producción.
+producción. Wiki deriva cada asset social del slug editorial y lo resuelve
+contra el host del entorno sin modificar el dominio canónico.
 
 ## Decisiones específicas de feature
 
@@ -63,9 +64,9 @@ producción.
 - Wiki usa la API oficial, modelos propios y React para portada, navegación,
   índices, metadata, estados y contenido. Enhanced Markdown se transforma y
   sanitiza antes de renderizarse.
-- Wiki usa slugs editoriales como URL pública; los IDs quedan en servidor para
-  relaciones y redirects legacy. Sus fallbacks SEO se resuelven en los
-  mappers.
+- Wiki usa slugs editoriales como URL pública y nombre del asset social; los
+  IDs quedan en servidor para relaciones y redirects legacy. Sus fallbacks SEO
+  se resuelven en los mappers.
 - Sanity Studio está embebido en `/studio`. No hay decisión implementada de
   migrarlo a un Studio separado.
 

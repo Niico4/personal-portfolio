@@ -104,11 +104,12 @@ independientes los párrafos ubicados entre listas.
 notas, y `Publicada === true` a topics. La consulta de un notebook añade el
 filtro de relación en Notion.
 
-Las queries usan `filter_properties` con los IDs estables confirmados del
-schema. La portada obtiene únicamente notebooks; un notebook obtiene sus notas
-y topics públicos; una nota reutiliza ese subconjunto para navegación y enlaces
-internos, y solicita Enhanced Markdown solo para la entrada abierta. El sitemap
-usa una proyección propia limitada a IDs de relación, slugs y fechas.
+Notebooks, Notes, Topics y el sitemap usan `filter_properties` con los IDs
+estables confirmados del schema. La portada obtiene únicamente notebooks; un
+notebook obtiene sus notas y topics públicos; una nota reutiliza ese subconjunto
+para navegación y enlaces internos, y solicita Enhanced Markdown solo para la
+entrada abierta. El sitemap usa una proyección propia limitada a IDs de
+relación, slugs y fechas.
 
 Los segmentos dinámicos usan `Slug` validado en Notion. Los IDs permanecen
 server-only para relaciones, resolución de enlaces internos de Enhanced
@@ -143,7 +144,9 @@ placeholders exclusivos de servidor.
 Las transformaciones que no requieren UI viven en `app/utils`:
 
 - `formatMonthYear`, `getDateRange` y `calculateDuration`;
-- `getAbsoluteUrl` y `createPageMetadata`.
+- `getAbsoluteUrl` para canonicals;
+- `getInternalAssetUrl` para assets locales servidos desde el entorno actual;
+- `createPageMetadata`.
 
 Mantén estas funciones sin estado y sin acceso al cliente. La transformación
 de campos editoriales debe preferirse en la proyección GROQ cuando define el

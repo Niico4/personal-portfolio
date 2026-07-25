@@ -1,24 +1,18 @@
 import type { WikiNoteLevel } from './wiki-contract';
 
-export type WikiMedia = {
+export interface WikiMedia {
   url: string;
-};
+}
 
-export type WikiSeoImage = WikiMedia & {
-  alt: string;
-  width: number;
-  height: number;
-};
-
-export type WikiSeo = {
+export interface WikiSeo {
   title: string;
   description: string;
-};
+}
 
-export type WikiTopic = {
+export interface WikiTopic {
   id: string;
   name: string;
-};
+}
 
 export interface WikiNotebook {
   id: string;
@@ -29,7 +23,7 @@ export interface WikiNotebook {
   updatedAt: string | null;
   noteCount: number | null;
   seo: WikiSeo & {
-    image: WikiSeoImage;
+    imageAlt: string;
   };
 }
 

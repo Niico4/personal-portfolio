@@ -12,6 +12,7 @@ import { NoteExplorer } from '../components/note-explorer';
 import { WikiBreadcrumbs } from '../components/wiki-breadcrumbs';
 import { WikiImage } from '../components/wiki-image';
 import { WikiJsonLd } from '../components/wiki-json-ld';
+import { WIKI_SEO_DEFAULTS } from '../lib/wiki-contract';
 import {
   getNotebookNotes,
   getPublicNotebook,
@@ -49,7 +50,12 @@ export const generateMetadata = async ({
     title: notebook.seo.title,
     description: notebook.seo.description,
     path: `/wiki/${notebook.slug}`,
-    image: notebook.seo.image,
+    image: {
+      url: `/seo/wiki/${notebook.slug}.png`,
+      alt: notebook.seo.imageAlt,
+      width: WIKI_SEO_DEFAULTS.image.width,
+      height: WIKI_SEO_DEFAULTS.image.height,
+    },
   });
 };
 
@@ -80,7 +86,7 @@ const NotebookPage = async ({ params }: NotebookPageProps) => {
         description: notebook.seo.description,
         url: canonicalUrl,
         inLanguage: 'es-CO',
-        image: getAbsoluteUrl(notebook.seo.image.url),
+        image: `/seo/wiki/${notebook.slug}.png`,
         ...(notebook.updatedAt ? { dateModified: notebook.updatedAt } : {}),
         author: {
           '@type': 'Person',

@@ -41,10 +41,12 @@ después de validar publicación, relación y canonical. Una entrada no publicab
 termina en 404 sin exponer metadata editorial.
 
 Los helpers emiten canonical e imágenes sociales absolutos. Los notebooks
-consumen `SEO Title`, `SEO Description`, `SEO Image URL` y `SEO Image Alt`, con
-fallbacks centralizados en el mapper. Las notas consumen sus campos SEO y
-heredan la imagen social estable del notebook. Las URLs firmadas de archivos de
-Notion no se usan como imagen OG.
+consumen `SEO Title`, `SEO Description` y `SEO Image Alt`, con fallbacks
+centralizados en el mapper. El path de la imagen social se deriva como
+`/seo/wiki/{slug}.png` y `getInternalAssetUrl` lo resuelve contra localhost, el
+deployment actual de Preview o el dominio de producción. Las notas consumen sus
+campos SEO y heredan la imagen social estable del notebook. Las URLs firmadas
+de archivos de Notion no se usan como imagen OG.
 
 Las rutas públicas de Wiki usan slugs. Una URL legacy por ID redirige
 con HTTP 308 desde `proxy.ts` cuando la entrada conserva un canonical público;
@@ -70,10 +72,14 @@ deshabilitada devuelve `disallow: '/'` y la metadata usa `noindex, nofollow`.
 Los OG estáticos viven en `public/seo`. El detalle usa la URL Sanity de preview
 o el fallback. `next.config.ts` permite `cdn.sanity.io`.
 
-Las imágenes sociales de Wiki viven en `public/seo/wiki` y sus nombres
-coinciden con las URLs permanentes almacenadas en `SEO Image URL`. `Cover` no
-participa en la cadena de fallback SEO. Cada nota reutiliza imagen y alt de su
-notebook padre.
+Las imágenes sociales de Wiki viven en `public/seo/wiki` y cada archivo se
+llama `{slug}.png`, usando el mismo `Slug` que la ruta pública del notebook.
+`Cover` no participa en la cadena de fallback SEO. Cada nota reutiliza imagen y
+alt de su notebook padre.
+
+Los canonicals siguen usando `getAbsoluteUrl` y siempre apuntan a `nicoo.dev`.
+Los assets internos usan `getInternalAssetUrl`: localhost en desarrollo, el
+host actual de Vercel en Preview y `nicoo.dev` en producción.
 
 El schema de proyecto exige alt cuando hay imagen; `generateMetadata` usa ese
 alt o uno derivado del título.

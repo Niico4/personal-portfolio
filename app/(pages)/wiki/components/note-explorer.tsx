@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useId, useRef, useState } from 'react';
 import Link from 'next/link';
 import type { Route } from 'next';
 import { Button } from '@heroui/button';
@@ -26,6 +26,7 @@ export const NoteExplorer = ({ notes }: { notes: NotePreview[] }) => {
   const [query, setQuery] = useState('');
   const [level, setLevel] = useState<LevelFilter>(ALL_FILTER);
   const searchInput = useRef<HTMLInputElement>(null);
+  const searchId = useId();
 
   const normalizedQuery = query.trim().toLocaleLowerCase('es');
   const visibleNotes = notes.filter((note) => {
@@ -50,14 +51,17 @@ export const NoteExplorer = ({ notes }: { notes: NotePreview[] }) => {
     <div>
       <div className="border-y border-ink-800 py-4">
         <div className="flex flex-col gap-3 xl:flex-row xl:items-center">
-          <label className="relative block min-w-0 flex-1">
-            <span className="sr-only">Buscar notas</span>
+          <div className="relative block min-w-0 flex-1">
+            <label htmlFor={searchId} className="sr-only">
+              Buscar notas
+            </label>
             <IconSearch
               aria-hidden="true"
               className="pointer-events-none absolute left-3.5 top-1/2 z-10 size-[1.125rem] -translate-y-1/2 text-ink-300"
             />
             <input
               ref={searchInput}
+              id={searchId}
               type="search"
               value={query}
               onChange={(event) => setQuery(event.target.value)}
@@ -87,7 +91,7 @@ export const NoteExplorer = ({ notes }: { notes: NotePreview[] }) => {
                 <IconX aria-hidden="true" size={16} />
               </Button>
             )}
-          </label>
+          </div>
 
           <div
             aria-label="Filtrar notas por nivel"

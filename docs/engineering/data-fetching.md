@@ -68,11 +68,12 @@ limitados. El SDK respeta `Retry-After` y usa backoff.
 servidor, transforma con mappers estrictos y conserva los resultados durante
 300 segundos mediante `unstable_cache`; `React.cache` deduplica el render.
 
-Cada flujo solicita únicamente las propiedades que consume mediante
-`filter_properties`. `/wiki` no carga notas para calcular contadores; la página
-de nota no construye un índice global y limita la lista auxiliar al notebook
-actual. El sitemap mantiene una consulta mínima separada porque necesita todas
-las rutas públicas, pero no descripciones, topics, SEO ni archivos.
+Notebooks, Notes, Topics y el sitemap solicitan únicamente las propiedades que
+consumen mediante `filter_properties`. `/wiki` no carga notas para calcular
+contadores; la página de nota no construye un índice global y limita la lista
+auxiliar al notebook actual. El sitemap mantiene una consulta mínima separada
+porque necesita todas las rutas públicas, pero no descripciones, topics, SEO ni
+archivos.
 
 Un segmento parseable que no aparece en ese universo devuelve `notFound()`
 antes de solicitar `pages.retrieveMarkdown`. Las respuestas crudas del SDK no

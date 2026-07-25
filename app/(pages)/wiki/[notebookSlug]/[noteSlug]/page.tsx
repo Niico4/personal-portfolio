@@ -14,6 +14,7 @@ import { WikiJsonLd } from '../../components/wiki-json-ld';
 import { WikiLevelChip } from '../../components/wiki-level-chip';
 import { WikiMarkdownContent } from '../../components/wiki-markdown-content';
 import { WikiTableOfContents } from '../../components/wiki-table-of-contents';
+import { WIKI_SEO_DEFAULTS } from '../../lib/wiki-contract';
 import {
   getNotebookNotes,
   getNoteMarkdown,
@@ -50,7 +51,12 @@ export const generateMetadata = async ({
     title: note.seo.title,
     description: note.seo.description,
     path: getWikiNotePath(notebook.slug, note.slug),
-    image: notebook.seo.image,
+    image: {
+      url: `/seo/wiki/${notebook.slug}.png`,
+      alt: notebook.seo.imageAlt,
+      width: WIKI_SEO_DEFAULTS.image.width,
+      height: WIKI_SEO_DEFAULTS.image.height,
+    },
     openGraphType: 'article',
   });
 };
@@ -109,7 +115,7 @@ const NotePage = async ({ params }: NotePageProps) => {
         inLanguage: 'es-CO',
         mainEntityOfPage: canonicalUrl,
         url: canonicalUrl,
-        image: getAbsoluteUrl(notebook.seo.image.url),
+        image: `/seo/wiki/${notebook.slug}.png`,
         isPartOf: {
           '@type': 'CollectionPage',
           name: notebook.title,

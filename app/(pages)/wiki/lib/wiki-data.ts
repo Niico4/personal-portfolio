@@ -164,7 +164,7 @@ const getPersistentPublicNotebooks = unstable_cache(
       throw getWikiError(error);
     }
   },
-  ['notion-wiki-notebooks-v3'],
+  ['notion-wiki-notebooks-v5'],
   {
     revalidate: WIKI_REVALIDATE_SECONDS,
     tags: ['notion-wiki'],

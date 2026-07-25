@@ -14,11 +14,18 @@ import { getPublicNotebooks } from './lib/wiki-data';
 export const runtime = 'nodejs';
 export const revalidate = 300;
 
+const wikiSocialImage = {
+  url: WIKI_SEO_DEFAULTS.image.path,
+  alt: WIKI_SEO_DEFAULTS.image.alt,
+  width: WIKI_SEO_DEFAULTS.image.width,
+  height: WIKI_SEO_DEFAULTS.image.height,
+};
+
 export const metadata: Metadata = createPageMetadata({
   title: WIKI_SEO_DEFAULTS.title,
   description: WIKI_SEO_DEFAULTS.description,
   path: '/wiki',
-  image: WIKI_SEO_DEFAULTS.image,
+  image: wikiSocialImage,
 });
 
 const WikiPage = async () => {
@@ -33,7 +40,7 @@ const WikiPage = async () => {
         description: WIKI_SEO_DEFAULTS.description,
         url: wikiUrl,
         inLanguage: 'es-CO',
-        image: getAbsoluteUrl(WIKI_SEO_DEFAULTS.image.url),
+        image: wikiSocialImage.url,
         author: {
           '@type': 'Person',
           name: SEO_CONFIG.siteName,
@@ -78,6 +85,7 @@ const WikiPage = async () => {
         <p className="font-mono text-xs font-medium uppercase tracking-[0.16em] text-brand-300">
           Documentación personal
         </p>
+
         <Heading className="mt-3">Wiki</Heading>
         <p className="mt-5 max-w-2xl text-pretty text-base leading-8 text-ink-200 sm:text-lg">
           {WIKI_SEO_DEFAULTS.description}
