@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { LayoutGroup } from 'framer-motion';
 
-import NicolasLogo from '@/components/common/icons/nicolas-logo';
+import NicolasLogo from '@/components/atoms/common/nicolas-logo';
 
 import { NavbarItem } from './navbar-item';
 import { NAV_ITEMS } from './navbar.config';

@@ -1,8 +1,8 @@
 import { Button } from '@heroui/button';
 import { IconArrowUpRight } from '@tabler/icons-react';
 
-import { Heading } from '@/components/common/heading';
-import { BadgeShine } from '@/components/common/badge-shine';
+import { Heading } from '@/components/atoms/common/heading';
+import { BadgeShine } from '@/(pages)/services/components/badge-shine';
 
 const HeroSection = ({ email }: { email: string }) => {
   return (

@@ -3,14 +3,14 @@ import { ServerEnvConfig } from './server-env.config';
 
 export const SEO_CONFIG = {
   siteName: 'Nicolás Garzón',
-  applicationName: 'Portfolio de Nicolás Garzón',
+  applicationName: 'Nicolás Garzón',
 
-  defaultTitle: 'Nicolás Garzón | Desarrollador Full Stack',
+  defaultTitle: 'Nicolás Garzón | Desarrollador Web',
 
   titleTemplate: '%s | Nicolás Garzón',
 
   defaultDescription:
-    'Desarrollador web con más de 3 años creando productos con React, Next.js y TypeScript, principalmente desde el frontend y con apoyo backend en Node.js.',
+    'Desarrollo aplicaciones web, principalmente en frontend, y también trabajo en backend cuando el proyecto lo necesita.',
 
   locale: 'es_CO',
   language: 'es',
@@ -20,9 +20,9 @@ export const SEO_CONFIG = {
   indexingEnabled: ServerEnvConfig.seo_indexing_enabled,
 
   defaultImage: {
-    url: '/seo/og-default-mockup.png',
+    url: '/seo/og-default-image.png',
     width: 1200,
     height: 630,
-    alt: 'Portfolio de Nicolás Garzón, desarrollador frontend y full stack',
+    alt: 'Nicolás Garzón, desarrollador web',
   },
 } as const;

@@ -1,6 +1,6 @@
 import { IconArrowUpRight } from '@tabler/icons-react';
 
-import { SectionHeader } from '@/components/common/section-header';
+import { SectionIntro } from '@/components/molecules/common/section-intro';
 
 type ProcessStep = {
   number: string;
@@ -43,7 +43,7 @@ const PROCESS_STEPS: ProcessStep[] = [
 export const WorkProcess = () => {
   return (
     <section className="flex flex-col gap-10">
-      <SectionHeader
+      <SectionIntro
         title="Cómo trabajo en un proyecto"
         description="Cada proyecto avanza por etapas. Primero aclaro qué debe resolver, después organizo el alcance y construyo una base que pueda probarse, ajustarse y seguir creciendo."
       />
