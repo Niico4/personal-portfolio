@@ -1,4 +1,4 @@
-import { SectionHeader } from '@/components/common/section-header';
+import { SectionIntro } from '@/components/molecules/common/section-intro';
 
 import { ServiceCard } from '../components/service-card';
 
@@ -66,7 +66,7 @@ const SERVICES: Service[] = [
 const MyServicesSection = () => {
   return (
     <section className="flex flex-col gap-10">
-      <SectionHeader
+      <SectionIntro
         title="Servicios de Desarrollo web"
         description="Cada producto parte de una necesidad diferente, pero estas son las áreas en las que puedo aportar con mayor solidez."
       />

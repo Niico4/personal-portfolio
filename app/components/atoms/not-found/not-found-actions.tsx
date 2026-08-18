@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { Button } from '@heroui/button';
-import { IconCode, IconHome } from '@tabler/icons-react';
+import { IconHome } from '@tabler/icons-react';
 
 export const NotFoundActions = () => {
   return (
@@ -18,16 +18,16 @@ export const NotFoundActions = () => {
         Volver al inicio
       </Button>
 
-      <Button
+      {/* <Button
         as={Link}
-        href="/portfolio"
+        href="/services"
         radius="full"
         size="lg"
         startContent={<IconCode size={20} />}
         variant="bordered"
       >
-        Ver proyectos
-      </Button>
+        Ver mis servicios
+      </Button> */}
     </div>
   );
 };

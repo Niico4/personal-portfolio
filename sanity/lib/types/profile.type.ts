@@ -1,45 +1,32 @@
 import type { PortableTextBlock } from '@portabletext/types';
 
-type PortableTextValue = PortableTextBlock[] | null;
+import { EducationStatusType } from '@/sanity/schemaTypes/profile';
 
-export interface ProfileInformation {
-  overview: ProfileOverview;
-  contact: ProfileContact;
-  skills: ProfileSkill[];
-  education: EducationItem[];
-}
-
-export interface ProfileOverview {
-  about: PortableTextValue;
+export interface ProfileType {
+  aboutMe: PortableTextBlock[] | null;
   professionalTitle: string;
-  location: string | null;
-  currentFocus: PortableTextValue;
-  isAvailableForOpportunities: boolean;
+  contact: Contact;
+  education: EducationItemType[];
 }
 
-export interface ProfileContact {
+interface Contact {
   email: string;
-  githubUrl: string | null;
-  linkedinUrl: string | null;
+  githubURL: string | null;
+  linkedinURL: string | null;
   resume: Resume;
 }
 
-export interface Resume {
+interface Resume {
   fileUrl: string | null;
   externalUrl: string | null;
 }
 
-export interface ProfileSkill {
+interface EducationItemType {
   id: string;
-  name: string;
-  iconKey: string | null;
-}
-
-export interface EducationItem {
-  id: string;
-  programName: string;
-  institutionName: string;
+  academicTitle: string;
+  institutionName: null | string;
+  status: EducationStatusType;
   startDate: string;
   endDate: string | null;
-  isInProgress: boolean;
+  details: string;
 }

@@ -1,71 +1,48 @@
 import { groq } from 'next-sanity';
 
-const PROJECT_FIELDS = groq`
+const PROJECT_FIELDS = `
   "id": _id,
   title,
   "slug": slug.current,
-  status,
-  displayOrder,
-  "technologies": coalesce(technologies, []),
+  shortDescription,
+  description,
 
-  "preview": {
-    "shortDescription": preview.shortDescription,
+  "features": features[],
+  
+  "status": status->{
+    "id": _id,
+    name,
+    "value": value.current
+  },
 
-    "image": select(
-      defined(preview.image.asset) => {
-        "url": preview.image.asset->url,
-        "alt": preview.image.alt
-      },
-      null
-    )
-    },
+  "links": {
+    "demoVideo": links.demoVideo.asset->url,
+    "liveURL": links.liveDemoUrl,
+    "repositoryURL": links.repositoryUrl
+  },
 
-    "detail": {
-      "demoVideoUrl": detail.demoVideo.asset->url,
-
-      "contentSections": coalesce(
-        detail.contentSections[] {
-          "id": _key,
-          title,
-          content
-        },
-        []
-      )
-    },
-
-    "technologies": coalesce(technologies, []),
-
-    "links": {
-      "liveDemoUrl": links.liveDemoUrl,
-      "repositoryUrl": links.repositoryUrl
-    }
+  "technologies": technologies[]->{
+    "id": _id,
+    name
+  }
 `;
 
-export const PROJECTS_QUERY = groq`
+export const PROJECT_LIST_QUERY = groq`
   *[
-    _type == "project" &&
-    defined(slug.current)
-  ]
-  | order(displayOrder asc, _updatedAt desc) {
+    _type == "project" && 
+    defined(slug.current) &&
+    isVisible == true
+  ] | order(displayOrder asc) {
     ${PROJECT_FIELDS}
   }
 `;
 
-export const PROJECT_QUERY = groq`
+export const PROJECT_BY_SLUG_QUERY = groq`
   *[
     _type == "project" &&
-    slug.current == $slug
+    slug.current == $slug &&
+    isVisible == true
   ][0] {
     ${PROJECT_FIELDS}
-  }
-`;
-
-export const PROJECT_SLUGS_QUERY = groq`
-  *[
-    _type == "project" &&
-    defined(slug.current)
-  ]
-  | order(displayOrder asc) {
-    "slug": slug.current
   }
 `;

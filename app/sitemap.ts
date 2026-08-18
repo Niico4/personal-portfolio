@@ -1,6 +1,5 @@
 import type { MetadataRoute } from 'next';
 
-import { getProjectSlugs } from '@/sanity/lib/fetchers/project.fetcher';
 import { getWikiSitemap } from '@/(pages)/wiki/lib/wiki-data';
 import { getWikiNotePath } from '@/(pages)/wiki/lib/wiki-format';
 
@@ -12,14 +11,9 @@ const sitemap = async (): Promise<MetadataRoute.Sitemap> => {
     return [];
   }
 
-  const projects = await getProjectSlugs();
-
   const staticPages: MetadataRoute.Sitemap = [
     {
       url: getAbsoluteUrl('/'),
-    },
-    {
-      url: getAbsoluteUrl('/portfolio'),
     },
     {
       url: getAbsoluteUrl('/services'),
@@ -28,10 +22,6 @@ const sitemap = async (): Promise<MetadataRoute.Sitemap> => {
       url: getAbsoluteUrl('/wiki'),
     },
   ];
-
-  const projectPages: MetadataRoute.Sitemap = projects.map(({ slug }) => ({
-    url: getAbsoluteUrl(`/portfolio/${slug}`),
-  }));
 
   let wikiPages: MetadataRoute.Sitemap = [];
 
@@ -67,7 +57,7 @@ const sitemap = async (): Promise<MetadataRoute.Sitemap> => {
     // Keep the rest of the portfolio discoverable during a Notion outage.
   }
 
-  return [...staticPages, ...projectPages, ...wikiPages];
+  return [...staticPages, ...wikiPages];
 };
 
 export default sitemap;

@@ -1,9 +1,9 @@
 import { Chip } from '@heroui/chip';
 import { IconSparkles } from '@tabler/icons-react';
 
-import { LoaderGhost } from './components/common/loader-ghost/loader-ghost';
-import { Heading } from './components/common/heading';
-import { NotFoundActions } from './components/not-found-actions';
+import { LoaderGhost } from './components/atoms/not-found/loader-ghost/loader-ghost';
+import { Heading } from './components/atoms/common/heading';
+import { NotFoundActions } from './components/atoms/not-found/not-found-actions';
 
 const NotFoundPage = () => {
   return (

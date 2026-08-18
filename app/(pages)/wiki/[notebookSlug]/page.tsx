@@ -3,7 +3,7 @@ import { notFound, permanentRedirect } from 'next/navigation';
 import { IconArrowLeft, IconNotes } from '@tabler/icons-react';
 import Link from 'next/link';
 
-import { Heading } from '@/components/common/heading';
+import { Heading } from '@/components/atoms/common/heading';
 import { SEO_CONFIG } from '@/config/seo.config';
 import { createPageMetadata } from '@/utils/seo/create-page-metadata';
 import { getAbsoluteUrl } from '@/utils/seo/get-absolute-url';
