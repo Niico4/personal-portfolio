@@ -10,6 +10,7 @@ import {
 
 import { Heading } from '@/components/atoms/common/heading';
 import { ProfileType } from '@/sanity/lib/types/profile.type';
+import { poetsenOne } from '@/fonts';
 
 const HERO_IMAGE = '/hero.webp';
 const AVATAR_IMAGE = '/avatar-profile.webp';
@@ -78,8 +79,16 @@ export const Header = ({
         </div>
 
         <div className="flex flex-col gap-2">
-          <article className="flex flex-col gap-0 sm:gap-1">
-            <Heading>Nicolás Garzón</Heading>
+          <article className="flex flex-col gap-0 ssm:gap-1">
+            {isServicesPage ? (
+              <h2
+                className={`text-3xl sm:text-4xl text-zinc-100 ${poetsenOne.className}`}
+              >
+                Nicolás Garzón
+              </h2>
+            ) : (
+              <Heading>Nicolás Garzón</Heading>
+            )}
             <p className="text-sm text-zinc-200 sm:text-base">
               {professionalTitle}
             </p>
