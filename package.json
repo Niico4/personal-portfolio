@@ -3,7 +3,7 @@
   "portless": {
     "name": "portfolio"
   },
-  "version": "3.0.0",
+  "version": "4.0.0",
   "description": "Personal portfolio of Nicolás Garzón - Software Developer",
   "author": "Nicolás Garzón (https://github.com/niico4)",
   "private": true,
