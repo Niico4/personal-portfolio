@@ -78,25 +78,25 @@ const WikiPage = async () => {
   };
 
   return (
-    <main className="mx-auto flex w-full flex-col gap-10 sm:gap-12 xl:relative xl:left-1/2 xl:w-[62rem] xl:-translate-x-1/2 2xl:w-[68rem]">
+    <main className="mx-auto flex w-full flex-col gap-10 sm:gap-12 xl:relative xl:left-1/2 xl:w-[62rem] xl:-translate-x-1/2 2xl:w-[68rem] mt-5">
       <WikiJsonLd value={jsonLd} />
 
-      <header className="max-w-3xl">
+      <header className="max-w-3xl" id="header">
         <p className="font-mono text-xs font-medium uppercase tracking-[0.16em] text-brand-300">
           Documentación personal
         </p>
 
         <Heading className="mt-3">Wiki</Heading>
-        <p className="mt-5 max-w-2xl text-pretty text-base leading-8 text-ink-200 sm:text-lg">
+        <p className="mt-5 max-w-2xl text-pretty text-base leading-8 text-zinc-200 sm:text-lg">
           {WIKI_SEO_DEFAULTS.description}
         </p>
 
-        <dl className="mt-8 flex flex-wrap gap-x-10 gap-y-4 border-t border-ink-800 pt-5">
+        <dl className="mt-8 flex flex-wrap gap-x-10 gap-y-4 border-t border-zinc-800 pt-5">
           <div className="min-w-24">
-            <dt className="text-[0.7rem] font-medium uppercase tracking-[0.14em] text-ink-300">
+            <dt className="text-[0.7rem] font-medium uppercase tracking-[0.14em] text-zinc-300">
               Notebooks
             </dt>
-            <dd className="mt-1 font-mono text-base font-medium text-ink-50">
+            <dd className="mt-1 font-mono text-base font-medium text-zinc-50">
               {notebooks.length}
             </dd>
           </div>
@@ -108,11 +108,11 @@ const WikiPage = async () => {
           <div>
             <h2
               id="wiki-notebooks-title"
-              className="text-2xl font-bold tracking-[-0.025em] text-ink-50 sm:text-3xl"
+              className="text-2xl font-bold tracking-[-0.025em] text-zinc-50 sm:text-3xl"
             >
               Notebooks
             </h2>
-            <p className="mt-2 text-sm leading-6 text-ink-300">
+            <p className="mt-2 text-sm leading-6 text-zinc-300">
               Colecciones de notas organizadas por área de estudio.
             </p>
           </div>
@@ -127,16 +127,16 @@ const WikiPage = async () => {
             ))}
           </ul>
         ) : (
-          <div className="rounded-[1.5rem] border border-dashed border-ink-700 bg-ink-900/20 px-6 py-12 text-center">
+          <div className="rounded-[1.5rem] border border-dashed border-zinc-700 bg-zinc-900/20 px-6 py-12 text-center">
             <IconNotebookOff
               aria-hidden="true"
-              className="mx-auto size-8 text-ink-400"
+              className="mx-auto size-8 text-zinc-400"
               stroke={1.5}
             />
-            <h2 className="mt-4 text-lg font-semibold text-ink-100">
+            <h2 className="mt-4 text-lg font-semibold text-zinc-100">
               Todavía no hay notebooks públicos
             </h2>
-            <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-ink-300">
+            <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-zinc-300">
               Cuando haya una colección lista para compartir, aparecerá aquí.
             </p>
           </div>

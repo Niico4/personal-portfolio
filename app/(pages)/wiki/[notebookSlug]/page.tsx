@@ -145,7 +145,7 @@ const NotebookPage = async ({ params }: NotebookPageProps) => {
       <header>
         <Link
           href="/wiki"
-          className="group mb-8 inline-flex min-h-11 items-center gap-2 rounded-full border border-ink-700/80 bg-ink-900/20 px-4 text-sm font-medium text-ink-200 outline-none transition-colors hover:border-ink-500 hover:bg-ink-900/60 hover:text-ink-50 focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-4 focus-visible:ring-offset-main motion-reduce:transition-none"
+          className="group mb-8 inline-flex min-h-11 items-center gap-2 rounded-full border border-zinc-700/80 bg-zinc-900/20 px-4 text-sm font-medium text-zinc-200 outline-none transition-colors hover:border-zinc-500 hover:bg-zinc-900/60 hover:text-zinc-50 focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-4 focus-visible:ring-offset-main motion-reduce:transition-none"
         >
           <IconArrowLeft
             aria-hidden="true"
@@ -163,16 +163,16 @@ const NotebookPage = async ({ params }: NotebookPageProps) => {
             <Heading className="mt-3 max-w-[16ch] text-balance">
               {notebook.title}
             </Heading>
-            <p className="mt-5 max-w-2xl text-pretty leading-8 text-ink-200 sm:text-lg">
+            <p className="mt-5 max-w-2xl text-pretty leading-8 text-zinc-200 sm:text-lg">
               {notebook.description}
             </p>
 
-            <dl className="mt-6 flex flex-wrap gap-x-7 gap-y-3 border-t border-ink-800 pt-4 text-xs">
+            <dl className="mt-6 flex flex-wrap gap-x-7 gap-y-3 border-t border-zinc-800 pt-4 text-xs">
               <div>
-                <dt className="font-medium uppercase tracking-[0.12em] text-ink-300">
+                <dt className="font-medium uppercase tracking-[0.12em] text-zinc-300">
                   Contenido
                 </dt>
-                <dd className="mt-1 text-ink-200">
+                <dd className="mt-1 text-zinc-200">
                   {notes.length === 1
                     ? '1 nota pública'
                     : `${notes.length} notas públicas`}
@@ -181,10 +181,10 @@ const NotebookPage = async ({ params }: NotebookPageProps) => {
 
               {updatedAt && (
                 <div>
-                  <dt className="font-medium uppercase tracking-[0.12em] text-ink-300">
+                  <dt className="font-medium uppercase tracking-[0.12em] text-zinc-300">
                     Actualización
                   </dt>
-                  <dd className="mt-1 text-ink-200">
+                  <dd className="mt-1 text-zinc-200">
                     <time dateTime={notebook.updatedAt ?? undefined}>
                       {updatedAt}
                     </time>
@@ -194,7 +194,7 @@ const NotebookPage = async ({ params }: NotebookPageProps) => {
             </dl>
           </div>
 
-          <div className="relative aspect-[16/10] overflow-hidden rounded-[1.25rem] border border-ink-700/80 bg-ink-900 shadow-sm lg:aspect-auto lg:min-h-56">
+          <div className="relative aspect-[16/10] overflow-hidden rounded-[1.25rem] border border-zinc-700/80 bg-zinc-900 shadow-sm lg:aspect-auto lg:min-h-56">
             {notebook.cover ? (
               <WikiImage
                 src={notebook.cover.url}
@@ -206,7 +206,7 @@ const NotebookPage = async ({ params }: NotebookPageProps) => {
             ) : (
               <IconNotes
                 aria-hidden="true"
-                className="absolute left-1/2 top-1/2 size-12 -translate-x-1/2 -translate-y-1/2 text-ink-700"
+                className="absolute left-1/2 top-1/2 size-12 -translate-x-1/2 -translate-y-1/2 text-zinc-700"
                 stroke={1.2}
               />
             )}
@@ -217,7 +217,7 @@ const NotebookPage = async ({ params }: NotebookPageProps) => {
       <section aria-labelledby="notebook-notes-title">
         <h2
           id="notebook-notes-title"
-          className="mb-5 text-2xl font-bold tracking-[-0.025em] text-ink-50 sm:text-3xl"
+          className="mb-5 text-2xl font-bold tracking-[-0.025em] text-zinc-50 sm:text-3xl"
         >
           Notas
         </h2>

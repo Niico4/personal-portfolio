@@ -42,7 +42,7 @@ export const CodeCopyButton = ({ code }: { code: string }) => {
       variant="light"
       onPress={copyCode}
       aria-label={isCopied ? 'Código copiado' : 'Copiar código'}
-      className="min-h-9 min-w-[6.25rem] gap-2 px-2.5 text-xs font-medium text-ink-300 transition-colors hover:bg-ink-800 hover:text-ink-50 focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-ink-900 motion-reduce:transition-none"
+      className="min-h-9 min-w-[6.25rem] gap-2 px-2.5 text-xs font-medium text-zinc-300 transition-colors hover:bg-zinc-800 hover:text-zinc-50 focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-900 motion-reduce:transition-none"
     >
       {isCopied ? (
         <IconCheck aria-hidden="true" size={15} stroke={1.8} />

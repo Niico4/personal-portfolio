@@ -171,10 +171,10 @@ const NotePage = async ({ params }: NotePageProps) => {
       />
 
       <article className="mt-8">
-        <header className="max-w-[76ch] border-b border-ink-800 pb-10">
+        <header className="max-w-[76ch] border-b border-zinc-800 pb-10">
           <Link
             href={`/wiki/${notebook.slug}`}
-            className="group inline-flex min-h-11 items-center gap-2 rounded-full border border-ink-700/80 bg-ink-900/20 px-4 text-sm font-medium text-ink-200 outline-none transition-colors hover:border-ink-500 hover:bg-ink-900/60 hover:text-ink-50 focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-4 focus-visible:ring-offset-main motion-reduce:transition-none"
+            className="group inline-flex min-h-11 items-center gap-2 rounded-full border border-zinc-700/80 bg-zinc-900/20 px-4 text-sm font-medium text-zinc-200 outline-none transition-colors hover:border-zinc-500 hover:bg-zinc-900/60 hover:text-zinc-50 focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-4 focus-visible:ring-offset-main motion-reduce:transition-none"
           >
             <IconArrowLeft
               aria-hidden="true"
@@ -190,17 +190,17 @@ const NotePage = async ({ params }: NotePageProps) => {
           <Heading className="mt-3 max-w-[18ch] break-normal text-balance text-[clamp(2.4rem,7vw,4.8rem)] leading-[0.98] tracking-[-0.04em]">
             {note.title}
           </Heading>
-          <p className="mt-6 max-w-2xl text-pretty text-base leading-8 text-ink-200 sm:text-lg">
+          <p className="mt-6 max-w-2xl text-pretty text-base leading-8 text-zinc-200 sm:text-lg">
             {note.description}
           </p>
 
-          <div className="mt-7 flex flex-wrap items-center gap-x-3 gap-y-2 border-t border-ink-800 pt-5">
-            <dl className="flex flex-wrap items-center gap-x-3 gap-y-2 text-xs text-ink-300">
+          <div className="mt-7 flex flex-wrap items-center gap-x-3 gap-y-2 border-t border-zinc-800 pt-5">
+            <dl className="flex flex-wrap items-center gap-x-3 gap-y-2 text-xs text-zinc-300">
               <div className="inline-flex items-center gap-1.5">
                 <dt className="sr-only">Última actualización</dt>
                 <IconClock
                   aria-hidden="true"
-                  className="text-ink-400"
+                  className="text-zinc-400"
                   size={15}
                 />
                 <dd>
@@ -224,7 +224,7 @@ const NotePage = async ({ params }: NotePageProps) => {
             {note.level && note.topics.length > 0 && (
               <span
                 aria-hidden="true"
-                className="hidden h-4 w-px bg-ink-700 sm:block"
+                className="hidden h-4 w-px bg-zinc-700 sm:block"
               />
             )}
 
@@ -236,9 +236,9 @@ const NotePage = async ({ params }: NotePageProps) => {
                 {note.topics.map((topic) => (
                   <li
                     key={topic.id}
-                    className="inline-flex items-center gap-1 text-xs text-ink-300"
+                    className="inline-flex items-center gap-1 text-xs text-zinc-300"
                   >
-                    <span aria-hidden="true" className="text-ink-500">
+                    <span aria-hidden="true" className="text-zinc-500">
                       #
                     </span>
                     {topic.name}
@@ -268,7 +268,7 @@ const NotePage = async ({ params }: NotePageProps) => {
       {(previousNote || nextNote) && (
         <nav
           aria-label="Navegación entre notas"
-          className="mt-14 grid gap-4 border-t border-ink-800 pt-8 sm:grid-cols-2"
+          className="mt-14 grid gap-4 border-t border-zinc-800 pt-8 sm:grid-cols-2"
         >
           {previousNote && (
             <NoteNavigationLink
@@ -306,20 +306,20 @@ const NoteNavigationLink = ({
   <Link
     href={href as Route}
     className={[
-      'group flex min-h-28 flex-col justify-between rounded-2xl border border-ink-800 bg-ink-900/10 p-5 outline-none transition-colors hover:border-ink-600 hover:bg-ink-900/40 focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-4 focus-visible:ring-offset-main motion-reduce:transition-none',
+      'group flex min-h-28 flex-col justify-between rounded-2xl border border-zinc-800 bg-zinc-900/10 p-5 outline-none transition-colors hover:border-zinc-600 hover:bg-zinc-900/40 focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-4 focus-visible:ring-offset-main motion-reduce:transition-none',
       direction === 'next'
         ? 'items-end text-right sm:col-start-2'
         : 'items-start',
     ].join(' ')}
   >
-    <span className="flex items-center gap-2 font-mono text-[0.68rem] uppercase tracking-[0.14em] text-ink-300">
+    <span className="flex items-center gap-2 font-mono text-[0.68rem] uppercase tracking-[0.14em] text-zinc-300">
       {direction === 'previous' && (
         <IconArrowLeft aria-hidden="true" size={15} />
       )}
       {label}
       {direction === 'next' && <IconArrowRight aria-hidden="true" size={15} />}
     </span>
-    <span className="mt-4 line-clamp-2 font-semibold text-ink-100 transition-colors group-hover:text-brand-300">
+    <span className="mt-4 line-clamp-2 font-semibold text-zinc-100 transition-colors group-hover:text-brand-300">
       {title}
     </span>
   </Link>

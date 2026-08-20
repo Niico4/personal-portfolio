@@ -9,7 +9,7 @@ type Breadcrumb = {
 
 export const WikiBreadcrumbs = ({ items }: { items: Breadcrumb[] }) => (
   <nav aria-label="Migas de pan">
-    <ol className="flex min-w-0 flex-wrap items-center gap-1 text-xs text-ink-300 sm:gap-1.5 sm:text-sm">
+    <ol className="flex min-w-0 flex-wrap items-center gap-1 text-xs text-zinc-300 sm:gap-1.5 sm:text-sm">
       {items.map((item, index) => {
         const isCurrent = index === items.length - 1;
 
@@ -21,7 +21,7 @@ export const WikiBreadcrumbs = ({ items }: { items: Breadcrumb[] }) => (
             {index > 0 && (
               <IconChevronRight
                 aria-hidden="true"
-                className="size-3.5 shrink-0 text-ink-500"
+                className="size-3.5 shrink-0 text-zinc-500"
               />
             )}
 
@@ -35,7 +35,7 @@ export const WikiBreadcrumbs = ({ items }: { items: Breadcrumb[] }) => (
             ) : (
               <span
                 aria-current={isCurrent ? 'page' : undefined}
-                className="max-w-[15rem] truncate px-1 font-medium text-ink-200 sm:max-w-[22rem]"
+                className="max-w-[15rem] truncate px-1 font-medium text-zinc-200 sm:max-w-[22rem]"
               >
                 {item.label}
               </span>

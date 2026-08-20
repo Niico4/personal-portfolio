@@ -121,18 +121,18 @@ export const WikiCodeBlock = ({
     : 'Código';
 
   return (
-    <figure className="my-8 min-w-0 overflow-hidden rounded-2xl border border-ink-700/80 bg-ink-900/80">
-      <figcaption className="flex min-h-12 items-center justify-between gap-3 border-b border-ink-800 bg-main/40 px-2 pl-4">
+    <figure className="my-8 min-w-0 overflow-hidden rounded-2xl border border-zinc-700/80 bg-zinc-900/80">
+      <figcaption className="flex min-h-12 items-center justify-between gap-3 border-b border-zinc-800 bg-main/40 px-2 pl-4">
         <div className="flex min-w-0 items-center gap-2.5">
           <span
             aria-hidden="true"
             className="size-1.5 shrink-0 rounded-full bg-brand-400"
           />
-          <span className="truncate font-mono text-[0.7rem] font-medium uppercase tracking-[0.12em] text-ink-300">
+          <span className="truncate font-mono text-[0.7rem] font-medium uppercase tracking-[0.12em] text-zinc-300">
             {filename ?? languageLabel}
           </span>
           {filename && language && (
-            <span className="shrink-0 font-mono text-[0.68rem] text-ink-500">
+            <span className="shrink-0 font-mono text-[0.68rem] text-zinc-500">
               {languageLabel}
             </span>
           )}
@@ -141,19 +141,19 @@ export const WikiCodeBlock = ({
         <CodeCopyButton code={code} />
       </figcaption>
 
-      <pre className="max-w-full overflow-x-auto overscroll-x-contain p-4 font-mono text-[0.8125rem] leading-6 text-ink-100 [tab-size:2] selection:bg-brand-400/25 selection:text-ink-50 sm:p-5 sm:text-sm">
+      <pre className="max-w-full overflow-x-auto overscroll-x-contain p-4 font-mono text-[0.8125rem] leading-6 text-zinc-100 [tab-size:2] selection:bg-brand-400/25 selection:text-zinc-50 sm:p-5 sm:text-sm">
         <code
           className="
             [&_.token.boolean]:text-yellow-300
             [&_.token.class-name]:text-brand-100
             [&_.token.comment]:italic
-            [&_.token.comment]:text-ink-300
+            [&_.token.comment]:text-zinc-300
             [&_.token.function]:text-brand-200
             [&_.token.keyword]:text-purple-300
             [&_.token.number]:text-yellow-300
-            [&_.token.operator]:text-ink-200
+            [&_.token.operator]:text-zinc-200
             [&_.token.property]:text-brand-200
-            [&_.token.punctuation]:text-ink-400
+            [&_.token.punctuation]:text-zinc-400
             [&_.token.string]:text-green-300
           "
         >

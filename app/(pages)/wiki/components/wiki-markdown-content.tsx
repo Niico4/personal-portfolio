@@ -183,7 +183,7 @@ export const WikiMarkdownContent = ({
       <HeadingAnchor
         as="h2"
         id={getNodeId(node)}
-        className="mb-4 mt-14 text-balance text-2xl font-bold leading-tight tracking-[-0.03em] text-ink-50 sm:text-3xl"
+        className="mb-4 mt-14 text-balance text-2xl font-bold leading-tight tracking-[-0.03em] text-zinc-50 sm:text-3xl"
       >
         {children}
       </HeadingAnchor>
@@ -192,7 +192,7 @@ export const WikiMarkdownContent = ({
       <HeadingAnchor
         as="h2"
         id={getNodeId(node)}
-        className="mb-4 mt-14 text-balance text-2xl font-bold leading-tight tracking-[-0.03em] text-ink-50 sm:text-3xl"
+        className="mb-4 mt-14 text-balance text-2xl font-bold leading-tight tracking-[-0.03em] text-zinc-50 sm:text-3xl"
       >
         {children}
       </HeadingAnchor>
@@ -201,7 +201,7 @@ export const WikiMarkdownContent = ({
       <HeadingAnchor
         as="h3"
         id={getNodeId(node)}
-        className="mb-3 mt-11 text-balance text-xl font-semibold leading-snug tracking-[-0.025em] text-ink-50 sm:text-2xl"
+        className="mb-3 mt-11 text-balance text-xl font-semibold leading-snug tracking-[-0.025em] text-zinc-50 sm:text-2xl"
       >
         {children}
       </HeadingAnchor>
@@ -210,7 +210,7 @@ export const WikiMarkdownContent = ({
       <HeadingAnchor
         as="h4"
         id={getNodeId(node)}
-        className="mb-3 mt-9 text-lg font-semibold leading-snug text-ink-100 sm:text-xl"
+        className="mb-3 mt-9 text-lg font-semibold leading-snug text-zinc-100 sm:text-xl"
       >
         {children}
       </HeadingAnchor>
@@ -223,7 +223,7 @@ export const WikiMarkdownContent = ({
           <figure className="my-8">
             {children}
             {image.alt && (
-              <figcaption className="mt-2.5 text-sm leading-6 text-ink-300">
+              <figcaption className="mt-2.5 text-sm leading-6 text-zinc-300">
                 {image.alt}
               </figcaption>
             )}
@@ -278,7 +278,7 @@ export const WikiMarkdownContent = ({
       }
 
       return (
-        <span className="relative block aspect-video overflow-hidden rounded-2xl border border-ink-700/80 bg-ink-900">
+        <span className="relative block aspect-video overflow-hidden rounded-2xl border border-zinc-700/80 bg-zinc-900">
           <WikiImage
             src={src}
             alt={alt ?? ''}
@@ -310,7 +310,7 @@ export const WikiMarkdownContent = ({
         className={
           className
             ? className
-            : 'box-decoration-clone break-words rounded-[0.3rem] border border-ink-700/70 bg-ink-900/70 px-1 py-0 font-mono text-[0.88em] leading-[inherit] text-brand-100'
+            : 'box-decoration-clone break-words rounded-[0.3rem] border border-zinc-700/70 bg-zinc-900/70 px-1 py-0 font-mono text-[0.88em] leading-[inherit] text-brand-100'
         }
       >
         {children}
@@ -319,7 +319,7 @@ export const WikiMarkdownContent = ({
     ul: ({ children, className }) => (
       <ul
         className={[
-          'my-5 list-outside list-disc space-y-1.5 pl-5 marker:text-[0.72em] marker:text-brand-400 [&_ul]:my-2 [&_ul]:list-[circle] [&_ul]:space-y-1 [&_ul]:pl-5 [&_ul]:marker:text-ink-400',
+          'my-5 list-outside list-disc space-y-1.5 pl-5 marker:text-[0.72em] marker:text-brand-400 [&_ul]:my-2 [&_ul]:list-[circle] [&_ul]:space-y-1 [&_ul]:pl-5 [&_ul]:marker:text-zinc-400',
           className?.includes('contains-task-list') ? 'list-none pl-0' : '',
         ].join(' ')}
       >
@@ -327,14 +327,14 @@ export const WikiMarkdownContent = ({
       </ul>
     ),
     ol: ({ children }) => (
-      <ol className="my-5 list-outside list-decimal space-y-1.5 pl-6 marker:font-mono marker:text-[0.78em] marker:font-medium marker:text-brand-300 [&_ol]:my-2 [&_ol]:space-y-1 [&_ol]:pl-6 [&_ol]:marker:text-ink-300">
+      <ol className="my-5 list-outside list-decimal space-y-1.5 pl-6 marker:font-mono marker:text-[0.78em] marker:font-medium marker:text-brand-300 [&_ol]:my-2 [&_ol]:space-y-1 [&_ol]:pl-6 [&_ol]:marker:text-zinc-300">
         {children}
       </ol>
     ),
     li: ({ children, className }) => (
       <li
         className={[
-          'pl-1.5 leading-7 text-ink-200 [&>ol]:mt-2 [&>p]:my-0 [&>ul]:mt-2',
+          'pl-1.5 leading-7 text-zinc-200 [&>ol]:mt-2 [&>p]:my-0 [&>ul]:mt-2',
           className?.includes('task-list-item') ? 'pl-0' : '',
         ].join(' ')}
       >
@@ -348,20 +348,20 @@ export const WikiMarkdownContent = ({
           checked={checked}
           disabled
           aria-label={checked ? 'Tarea completada' : 'Tarea pendiente'}
-          className="mr-2 size-4 translate-y-0.5 rounded border-ink-600 bg-ink-900 accent-brand-400"
+          className="mr-2 size-4 translate-y-0.5 rounded border-zinc-600 bg-zinc-900 accent-brand-400"
         />
       ) : null,
     blockquote: ({ children }) => (
-      <blockquote className="my-7 border-l-2 border-brand-400/70 pl-5 text-[1.02em] leading-8 text-ink-100 [&>p]:my-0">
+      <blockquote className="my-7 border-l-2 border-brand-400/70 pl-5 text-[1.02em] leading-8 text-zinc-100 [&>p]:my-0">
         {children}
       </blockquote>
     ),
     aside: ({ children, className }) => (
       <aside
         className={[
-          'my-7 flex gap-3 rounded-2xl border p-4 text-ink-200 sm:p-5 [&_.wiki-callout-content]:min-w-0 [&_.wiki-callout-content>p:first-child]:mt-0 [&_.wiki-callout-content>p:last-child]:mb-0 [&_.wiki-callout-icon]:mt-0.5 [&_.wiki-callout-icon]:shrink-0 [&_.wiki-callout-icon]:text-lg',
+          'my-7 flex gap-3 rounded-2xl border p-4 text-zinc-200 sm:p-5 [&_.wiki-callout-content]:min-w-0 [&_.wiki-callout-content>p:first-child]:mt-0 [&_.wiki-callout-content>p:last-child]:mb-0 [&_.wiki-callout-icon]:mt-0.5 [&_.wiki-callout-icon]:shrink-0 [&_.wiki-callout-icon]:text-lg',
           className?.includes('wiki-unsupported-block')
-            ? 'border-ink-700/80 bg-ink-900/30 text-sm'
+            ? 'border-zinc-700/80 bg-zinc-900/30 text-sm'
             : 'border-brand-400/25 bg-brand-500/[0.07]',
           className ?? '',
         ].join(' ')}
@@ -370,15 +370,15 @@ export const WikiMarkdownContent = ({
       </aside>
     ),
     details: ({ children }) => (
-      <details className="group my-7 rounded-2xl border border-ink-700/80 bg-ink-900/30 p-1 open:bg-ink-900/50">
+      <details className="group my-7 rounded-2xl border border-zinc-700/80 bg-zinc-900/30 p-1 open:bg-zinc-900/50">
         {children}
       </details>
     ),
     summary: ({ children }) => (
-      <summary className="flex min-h-11 cursor-pointer list-none items-center gap-2 rounded-xl px-3 font-medium text-ink-100 outline-none transition-colors hover:bg-ink-800/70 focus-visible:ring-2 focus-visible:ring-brand-400 motion-reduce:transition-none [&::-webkit-details-marker]:hidden">
+      <summary className="flex min-h-11 cursor-pointer list-none items-center gap-2 rounded-xl px-3 font-medium text-zinc-100 outline-none transition-colors hover:bg-zinc-800/70 focus-visible:ring-2 focus-visible:ring-brand-400 motion-reduce:transition-none [&::-webkit-details-marker]:hidden">
         <IconChevronRight
           aria-hidden="true"
-          className="size-4 shrink-0 text-ink-300 transition-transform group-open:rotate-90 motion-reduce:transition-none"
+          className="size-4 shrink-0 text-zinc-300 transition-transform group-open:rotate-90 motion-reduce:transition-none"
           stroke={1.8}
         />
         <span>{children}</span>
@@ -389,7 +389,7 @@ export const WikiMarkdownContent = ({
         role="region"
         aria-label="Tabla con desplazamiento horizontal"
         tabIndex={0}
-        className="my-8 max-w-full overflow-x-auto overscroll-x-contain rounded-xl border border-ink-700/80 bg-main outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-main"
+        className="my-8 max-w-full overflow-x-auto overscroll-x-contain rounded-xl border border-zinc-700/80 bg-main outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-main"
       >
         <table className="w-full min-w-[42rem] table-auto border-separate border-spacing-0 text-left text-sm leading-6">
           {children}
@@ -397,19 +397,19 @@ export const WikiMarkdownContent = ({
       </div>
     ),
     thead: ({ children }) => (
-      <thead className="bg-ink-900/90">{children}</thead>
+      <thead className="bg-zinc-900/90">{children}</thead>
     ),
     tbody: ({ children }) => <tbody>{children}</tbody>,
     th: ({ children, scope }) => (
       <th
         scope={scope}
-        className="border-b border-r border-ink-700 px-4 py-3.5 align-bottom font-semibold text-ink-50 last:border-r-0"
+        className="border-b border-r border-zinc-700 px-4 py-3.5 align-bottom font-semibold text-zinc-50 last:border-r-0"
       >
         {children}
       </th>
     ),
     td: ({ children }) => (
-      <td className="break-words border-b border-r border-ink-800 px-4 py-3.5 align-top text-ink-200 last:border-r-0">
+      <td className="break-words border-b border-r border-zinc-800 px-4 py-3.5 align-top text-zinc-200 last:border-r-0">
         {children}
       </td>
     ),
@@ -419,16 +419,16 @@ export const WikiMarkdownContent = ({
       </tr>
     ),
     caption: ({ children }) => (
-      <caption className="border-b border-ink-800 bg-main px-4 py-3 text-left text-sm text-ink-300">
+      <caption className="border-b border-zinc-800 bg-main px-4 py-3 text-left text-sm text-zinc-300">
         {children}
       </caption>
     ),
-    hr: () => <hr className="my-12 border-ink-800" />,
+    hr: () => <hr className="my-12 border-zinc-800" />,
   };
 
   return (
     <div className="min-w-0 max-w-full">
-      <div className="wiki-prose max-w-[74ch] text-base leading-8 text-ink-200 selection:bg-brand-400/25 selection:text-ink-50 sm:text-[1.0625rem] [&_em]:text-ink-100 [&_strong]:font-semibold [&_strong]:text-ink-50">
+      <div className="wiki-prose max-w-[74ch] text-base leading-8 text-zinc-200 selection:bg-brand-400/25 selection:text-zinc-50 sm:text-[1.0625rem] [&_em]:text-zinc-100 [&_strong]:font-semibold [&_strong]:text-zinc-50">
         <ReactMarkdown
           remarkPlugins={[
             remarkGfm,
@@ -460,10 +460,10 @@ export const WikiMarkdownContent = ({
       )}
 
       {!content.markdown.trim() && (
-        <div className="rounded-2xl border border-dashed border-ink-700 p-8 text-center text-sm text-ink-300">
+        <div className="rounded-2xl border border-dashed border-zinc-700 p-8 text-center text-sm text-zinc-300">
           <IconFile
             aria-hidden="true"
-            className="mx-auto mb-3 size-7 text-ink-500"
+            className="mx-auto mb-3 size-7 text-zinc-500"
           />
           Esta nota todavía no tiene contenido público.
         </div>

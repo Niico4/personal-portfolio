@@ -15,10 +15,9 @@ export const ScrollToTopButton = () => {
       type="button"
       aria-label="Volver arriba"
       onClick={scrollToTop}
-      className="flex items-center gap-1 rounded-full border border-zinc-300/10 bg-zinc-300/5 py-0.5 pl-2.5 pr-2 text-xs font-medium text-zinc-500"
+      className="flex items-center justify-center rounded-full border border-zinc-300/[0.05] bg-zinc-300/[0.06] text-zinc-400 p-2 backdrop-blur-md"
     >
-      Ir arriba
-      <IconArrowNarrowUp size={14} stroke={1.5} aria-hidden="true" />
+      <IconArrowNarrowUp size={28} stroke={1} aria-hidden="true" />
     </button>
   );
 };
