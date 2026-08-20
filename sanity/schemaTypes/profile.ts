@@ -36,10 +36,6 @@ export const profileType = defineType({
       title: 'Contact & Links',
     },
     {
-      name: 'techSkills',
-      title: 'Technologies',
-    },
-    {
       name: 'education',
       title: 'Education',
     },

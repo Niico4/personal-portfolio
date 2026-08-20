@@ -8,12 +8,12 @@ import { getProjectList } from '@/sanity/lib/fetchers/project.fetcher';
 import { SectionIntro } from '@/components/molecules/common/section-intro';
 import { ProjectCard } from '@/(pages)/(home)/components/molecules/project-card';
 import { getWorkExperience } from '@/sanity/lib/fetchers/work-experience.fetcher';
+import { SectionLabel } from '@/components/atoms/common/section-label';
+import { Header } from '@/components/layout/header';
 
-import { Header } from './components/molecules/header';
 import { WorkExperienceTimeline } from './components/molecules/work-experience-timeline';
 import { TechnologiesContent } from './sections/technologies-content-section';
 import { EducationContent } from './sections/education-content-section';
-import { ScrollToTopButton } from './components/atoms/scroll-to-top-button';
 
 export const metadata: Metadata = createPageMetadata({
   title: SEO_CONFIG.defaultTitle,
@@ -32,17 +32,7 @@ const HomePage = async () => {
       <Header contact={contact} professionalTitle={professionalTitle} />
 
       <section className="flex flex-col gap-3">
-        <div className="flex items-center gap-1">
-          <div className="flex items-center gap-0">
-            {/* Círculo */}
-            <div className="size-1.5 rounded-full bg-zinc-500" />
-
-            {/* Línea */}
-            <div className="w-6 h-[1px] rounded-full bg-zinc-500" />
-          </div>
-
-          <p className="text-zinc-400 italic text-sm">Un poco sobre mí</p>
-        </div>
+        <SectionLabel label="Un poco sobre mí" />
 
         <PortableTextContent
           value={aboutMe}
@@ -112,9 +102,11 @@ const HomePage = async () => {
           <p className="text-xs text-zinc-500 sm:text-sm">
             Bogotá D.C., Colombia
           </p>
-          <p className="text-xs text-zinc-500 sm:text-sm">© 2026</p>
+          <p className="text-xs text-zinc-500 sm:text-sm">
+            © {new Date().getFullYear()}
+          </p>
 
-          <ScrollToTopButton />
+          {/* <ScrollToTopButton /> */}
         </div>
       </footer>
     </main>

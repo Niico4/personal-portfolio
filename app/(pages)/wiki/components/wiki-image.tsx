@@ -26,11 +26,11 @@ export const WikiImage = ({
       <span
         aria-label={alt ? 'Imagen no disponible' : undefined}
         aria-hidden={alt ? undefined : 'true'}
-        className="absolute inset-0 grid place-items-center bg-ink-900"
+        className="absolute inset-0 grid place-items-center bg-zinc-900"
       >
         <IconPhotoOff
           aria-hidden="true"
-          className="size-8 text-ink-600"
+          className="size-8 text-zinc-600"
           stroke={1.4}
         />
       </span>

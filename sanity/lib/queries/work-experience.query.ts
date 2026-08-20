@@ -3,7 +3,7 @@ import { groq } from 'next-sanity';
 export const WORK_EXPERIENCE_LIST_QUERY = groq`
   *[
     _type == "workExperience"
-  ] | order(startDate desc) {
+  ] | order(startDate desc, endDate desc) {
     "id": _id,
     "name": organizationName,
     role,

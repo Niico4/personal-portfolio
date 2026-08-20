@@ -37,8 +37,8 @@ const TocLinks = ({
             className={[
               'block rounded-r-lg border-l-2 px-3 py-2 outline-none transition-colors focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-brand-400 motion-reduce:transition-none',
               isActive
-                ? 'border-brand-400 bg-brand-400/[0.08] font-medium text-ink-100'
-                : 'border-transparent text-ink-300 hover:border-ink-600 hover:bg-ink-900/40 hover:text-ink-100',
+                ? 'border-brand-400 bg-brand-400/[0.08] font-medium text-zinc-100'
+                : 'border-transparent text-zinc-300 hover:border-zinc-600 hover:bg-zinc-900/40 hover:text-zinc-100',
             ].join(' ')}
           >
             {heading.title}
@@ -93,7 +93,7 @@ export const WikiTableOfContents = ({
 
   return (
     <aside className="order-first xl:order-last xl:sticky xl:top-8">
-      <div className="rounded-2xl border border-ink-700/80 bg-ink-900/30 p-1 xl:hidden">
+      <div className="rounded-2xl border border-zinc-700/80 bg-zinc-900/30 p-1 xl:hidden">
         <Button
           type="button"
           disableRipple
@@ -102,7 +102,7 @@ export const WikiTableOfContents = ({
           aria-expanded={isMobileOpen}
           aria-controls={mobileContentId}
           onPress={() => setIsMobileOpen((current) => !current)}
-          className="min-h-12 w-full justify-between gap-4 px-3 text-left text-sm font-medium text-ink-100 transition-colors hover:bg-ink-900 focus-visible:ring-2 focus-visible:ring-brand-400 motion-reduce:transition-none"
+          className="min-h-12 w-full justify-between gap-4 px-3 text-left text-sm font-medium text-zinc-100 transition-colors hover:bg-zinc-900 focus-visible:ring-2 focus-visible:ring-brand-400 motion-reduce:transition-none"
         >
           <span className="inline-flex items-center gap-2">
             <IconList
@@ -115,7 +115,7 @@ export const WikiTableOfContents = ({
           <IconChevronDown
             aria-hidden="true"
             className={[
-              'size-4 text-ink-300 transition-transform motion-reduce:transition-none',
+              'size-4 text-zinc-300 transition-transform motion-reduce:transition-none',
               isMobileOpen ? 'rotate-180' : '',
             ].join(' ')}
             stroke={1.8}
@@ -138,9 +138,9 @@ export const WikiTableOfContents = ({
 
       <nav
         aria-label="Tabla de contenidos"
-        className="hidden max-h-[calc(100vh-4rem)] overflow-y-auto overscroll-contain border-l border-ink-800 pr-2 xl:block"
+        className="hidden max-h-[calc(100vh-4rem)] overflow-y-auto overscroll-contain border-l border-zinc-800 pr-2 xl:block"
       >
-        <p className="flex items-center gap-2 px-3 font-mono text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-ink-300">
+        <p className="flex items-center gap-2 px-3 font-mono text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-zinc-300">
           <IconList
             aria-hidden="true"
             className="size-3.5 text-brand-300"

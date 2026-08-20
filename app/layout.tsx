@@ -77,7 +77,7 @@ export default function RootLayout({
   return (
     <html lang={SEO_CONFIG.language} className="bg-main">
       <body
-        className={`${dmSans.className} custom-theme min-h-dvh overflow-x-hidden overscroll-none bg-main text-ink-20 font-light antialiased`}
+        className={`${dmSans.className} custom-theme min-h-dvh overflow-x-hidden overscroll-none bg-main text-zinc-20 font-light antialiased`}
       >
         <div className="relative z-10">{children}</div>
       </body>

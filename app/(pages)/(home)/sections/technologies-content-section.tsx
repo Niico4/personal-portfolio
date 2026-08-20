@@ -24,7 +24,7 @@ export const TechnologiesContent = () => (
       <div className="flex flex-col gap-2 border-l border-brand-400/30 pl-4 sm:gap-1">
         <h3 className="text-xs text-zinc-500 sm:text-sm">BACKEND & DATA</h3>
         <p className="text-zinc-300 text-lg">
-          Node.js · Express PostgreSQL · MongoDB
+          Node.js · Express · PostgreSQL · MongoDB
         </p>
 
         <p className="text-xs text-zinc-400 sm:text-sm">
