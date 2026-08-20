@@ -10,10 +10,12 @@ import { ProjectCard } from '@/(pages)/(home)/components/molecules/project-card'
 import { getWorkExperience } from '@/sanity/lib/fetchers/work-experience.fetcher';
 import { SectionLabel } from '@/components/atoms/common/section-label';
 import { Header } from '@/components/layout/header';
+import { happyMonkey } from '@/fonts';
 
 import { WorkExperienceTimeline } from './components/molecules/work-experience-timeline';
 import { TechnologiesContent } from './sections/technologies-content-section';
 import { EducationContent } from './sections/education-content-section';
+import Signature from '@/components/atoms/common/signature';
 
 export const metadata: Metadata = createPageMetadata({
   title: SEO_CONFIG.defaultTitle,
@@ -93,7 +95,7 @@ const HomePage = async () => {
 
         <p className="text-xs sm:text-sm">
           <span className="text-zinc-500">Sí, otra vez :)</span> <br />
-          <span className="text-zinc-400">— nicoo 🐐</span>
+          <Signature className="text-zinc-400" />
         </p>
 
         <hr className="shrink-0 bg-zinc-900 border-none w-full h-[1px] my-2" />

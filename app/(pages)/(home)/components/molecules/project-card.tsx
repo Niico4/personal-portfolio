@@ -30,9 +30,7 @@ export const ProjectCard = ({ project }: { project: ProjectType }) => {
     <div className="flex flex-col gap-1 py-3">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-1">
-          <h3 className="text-xl font-semibold text-zinc-300 sm:text-2xl">
-            {title}
-          </h3>
+          <h3 className="text-xl text-zinc-300 sm:text-2xl">{title}</h3>
           <span className="text-zinc-500 text-sm sm:text-base">/</span>
           <p className="text-zinc-500 text-xs sm:text-sm">{status.name}</p>
         </div>
