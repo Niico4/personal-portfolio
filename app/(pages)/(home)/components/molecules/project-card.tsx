@@ -6,10 +6,11 @@ import {
   IconChevronDown,
   IconArrowUpRight,
   IconBrandGithub,
-  IconPlayerPlay,
 } from '@tabler/icons-react';
 
 import { ProjectType } from '@/sanity/lib/types/project.type';
+
+import { ProjectDemoViewer } from './project-demo-viewer';
 
 export const ProjectCard = ({ project }: { project: ProjectType }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -68,15 +69,7 @@ export const ProjectCard = ({ project }: { project: ProjectType }) => {
 
         <div className="flex items-center gap-3">
           {demoVideo && (
-            <a
-              href={demoVideo}
-              rel="noopener noreferrer"
-              target="_blank"
-              className="flex items-center gap-1 bg-indigo-300/10 border-1 border-indigo-300/10 text-xs text-indigo-400 font- px-2 py-1 rounded-full"
-            >
-              <span>Ver demo</span>
-              <IconPlayerPlay stroke={1.2} size={14} aria-hidden="true" />
-            </a>
+            <ProjectDemoViewer title={title} videoSource={demoVideo} />
           )}
 
           {liveURL && (
