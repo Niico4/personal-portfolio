@@ -57,7 +57,7 @@ export const FloatingNavbar = () => {
       <LayoutGroup id="floating-navbar">
         <motion.div
           layout
-          className="flex items-center gap-3"
+          className="flex items-center gap-1"
           transition={{
             layout: {
               type: 'spring',
@@ -89,10 +89,38 @@ export const FloatingNavbar = () => {
                   />
                 </li>
               ))}
+              <AnimatePresence mode="popLayout">
+                {showScrollToTop && (
+                  <motion.li
+                    layout
+                    initial={{
+                      opacity: 0,
+                      scale: 0.8,
+                      x: -8,
+                    }}
+                    animate={{
+                      opacity: 1,
+                      scale: 1,
+                      x: 0,
+                    }}
+                    exit={{
+                      opacity: 0,
+                      scale: 0.8,
+                      x: -8,
+                    }}
+                    transition={{
+                      duration: 0.2,
+                      ease: [0.22, 1, 0.36, 1],
+                    }}
+                  >
+                    <ScrollToTopButton />
+                  </motion.li>
+                )}
+              </AnimatePresence>
             </ul>
           </div>
 
-          <AnimatePresence mode="popLayout">
+          {/* <AnimatePresence mode="popLayout">
             {showScrollToTop && (
               <motion.div
                 layout
@@ -119,7 +147,7 @@ export const FloatingNavbar = () => {
                 <ScrollToTopButton />
               </motion.div>
             )}
-          </AnimatePresence>
+          </AnimatePresence> */}
         </motion.div>
       </LayoutGroup>
     </motion.nav>

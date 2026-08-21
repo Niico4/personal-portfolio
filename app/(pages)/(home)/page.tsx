@@ -10,12 +10,11 @@ import { ProjectCard } from '@/(pages)/(home)/components/molecules/project-card'
 import { getWorkExperience } from '@/sanity/lib/fetchers/work-experience.fetcher';
 import { SectionLabel } from '@/components/atoms/common/section-label';
 import { Header } from '@/components/layout/header';
-import { happyMonkey } from '@/fonts';
+import Signature from '@/components/atoms/common/signature';
 
 import { WorkExperienceTimeline } from './components/molecules/work-experience-timeline';
 import { TechnologiesContent } from './sections/technologies-content-section';
 import { EducationContent } from './sections/education-content-section';
-import Signature from '@/components/atoms/common/signature';
 
 export const metadata: Metadata = createPageMetadata({
   title: SEO_CONFIG.defaultTitle,
