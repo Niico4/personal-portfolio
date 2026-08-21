@@ -1,116 +1,42 @@
-import { IconRocket } from '@tabler/icons-react';
+import { IconCode } from '@tabler/icons-react';
 import { defineArrayMember, defineField, defineType } from 'sanity';
-
-type SanityAssetField = {
-  asset?: {
-    _ref?: string;
-  };
-};
-
-const PROJECT_STATUS_OPTIONS = [
-  {
-    title: 'Published',
-    value: 'published',
-  },
-  {
-    title: 'Completed',
-    value: 'completed',
-  },
-  {
-    title: 'In Development',
-    value: 'inDevelopment',
-  },
-  {
-    title: 'Concept',
-    value: 'concept',
-  },
-] as const;
-
-type ProjectStatus = (typeof PROJECT_STATUS_OPTIONS)[number]['value'];
-
-type ProjectDocument = {
-  status?: ProjectStatus;
-};
-
-type ProjectLinks = {
-  liveDemoUrl?: string;
-};
-
-const PROJECT_STATUSES_REQUIRING_IMAGE: readonly ProjectStatus[] = [
-  'published',
-  'completed',
-];
-
-const PROJECT_STATUSES_REQUIRING_TECHNOLOGIES: readonly ProjectStatus[] = [
-  'published',
-  'completed',
-  'inDevelopment',
-];
-
-const getProjectStatus = (document: unknown): ProjectStatus | undefined =>
-  (document as ProjectDocument | undefined)?.status;
-
-const requiresPreviewImage = (document: unknown) => {
-  const status = getProjectStatus(document);
-
-  return status ? PROJECT_STATUSES_REQUIRING_IMAGE.includes(status) : false;
-};
-
-const requiresTechnologies = (document: unknown) => {
-  const status = getProjectStatus(document);
-
-  return status
-    ? PROJECT_STATUSES_REQUIRING_TECHNOLOGIES.includes(status)
-    : false;
-};
-
-const isPublishedProject = (document: unknown) =>
-  getProjectStatus(document) === 'published';
-
-const hasAsset = (value: unknown) =>
-  Boolean((value as SanityAssetField | undefined)?.asset?._ref);
-
-const getProjectStatusLabel = (status: unknown) =>
-  PROJECT_STATUS_OPTIONS.find((option) => option.value === status)?.title ??
-  'No status';
-
-const truncatePreviewText = (value: string, maximumLength = 90): string => {
-  if (value.length <= maximumLength) return value;
-
-  return `${value.slice(0, maximumLength).trimEnd()}…`;
-};
 
 export const projectType = defineType({
   name: 'project',
   title: 'Project',
   type: 'document',
-  icon: IconRocket,
+  icon: IconCode,
 
   groups: [
     {
       name: 'overview',
-      title: 'Project Overview',
+      title: 'Overview',
       default: true,
     },
     {
-      name: 'preview',
-      title: 'Card Preview',
-    },
-    {
-      name: 'detail',
-      title: 'Project Story',
-    },
-    {
       name: 'technologies',
-      title: 'Technology Stack',
+      title: 'Technologies & Tools',
     },
     {
       name: 'links',
-      title: 'Project Links',
+      title: 'Links & Media',
     },
     {
       name: 'settings',
-      title: 'Display Settings',
+      title: 'Display',
+    },
+  ],
+
+  orderings: [
+    {
+      title: 'Display Order',
+      name: 'displayOrderAsc',
+      by: [
+        {
+          field: 'displayOrder',
+          direction: 'asc',
+        },
+      ],
     },
   ],
 
@@ -121,21 +47,21 @@ export const projectType = defineType({
       type: 'string',
       group: 'overview',
       description:
-        'Required. Public project name shown in cards, headings and the project detail page.',
+        'The public name of the project. Used in cards, headings and the project page.',
       validation: (Rule) =>
         Rule.required()
           .min(2)
           .max(100)
-          .error('Add a project name between 2 and 100 characters.'),
+          .error('Enter a project name between 2 and 100 characters long.'),
     }),
 
     defineField({
       name: 'slug',
-      title: 'Project URL Slug',
+      title: 'URL Slug',
       type: 'slug',
       group: 'overview',
       description:
-        'Required. Unique identifier used in the project detail page URL. Generate it from the project name and edit it only when necessary.',
+        'Used in the project URL. Generate it from the project name and only change it when needed.',
       options: {
         source: 'title',
         maxLength: 96,
@@ -146,298 +72,154 @@ export const projectType = defineType({
 
     defineField({
       name: 'status',
-      title: 'Current Project Status',
-      type: 'string',
+      title: 'Status',
+      type: 'reference',
       group: 'overview',
-      description:
-        'Required. Published means the project is finished and publicly available. Completed means it is finished but may not be deployed. In Development means it is actively being built. Concept means it is still in research or design.',
-      options: {
-        list: PROJECT_STATUS_OPTIONS.map(({ title, value }) => ({
-          title,
-          value,
-        })),
-        layout: 'dropdown',
-      },
-      initialValue: 'inDevelopment',
-      validation: (Rule) =>
-        Rule.required().error('Select the current project status.'),
+      to: [{ type: 'projectStatus' }],
+      validation: (Rule) => Rule.required(),
     }),
 
     defineField({
-      name: 'preview',
-      title: 'Card Preview Content',
-      type: 'object',
-      group: 'preview',
+      name: 'shortDescription',
+      title: 'Short Description',
+      type: 'text',
+      group: 'overview',
+      rows: 3,
       description:
-        'Required. Summary and visual used wherever the project appears as a card or featured item.',
-      fields: [
-        defineField({
-          name: 'shortDescription',
-          title: 'Short Description',
-          type: 'text',
-          rows: 3,
-          description:
-            'Required. Explain what the project is or what it helps the user do. Keep it concrete and under 220 characters.',
-          validation: (Rule) =>
-            Rule.required()
-              .max(220)
-              .error(
-                'Add a short project description using no more than 220 characters.',
-              ),
-        }),
+        'A quick explanation of what the project does. This is shown before opening the full project details.',
+      validation: (Rule) =>
+        Rule.required()
+          .max(220)
+          .error('Keep the short description under 220 characters.'),
+    }),
 
-        defineField({
-          name: 'image',
-          title: 'Project Preview Image',
-          type: 'image',
-          description:
-            'Main project visual used in cards and as the video poster. Required for Published and Completed projects. Optional while the project is still a concept or in development.',
-          options: {
-            hotspot: true,
-          },
-          fields: [
-            defineField({
-              name: 'alt',
-              title: 'Alternative Text',
-              type: 'string',
-              description:
-                'Required when an image is uploaded. Describe the relevant interface or content visible in the image, not the project name alone.',
-              validation: (Rule) =>
-                Rule.custom((altText, context) => {
-                  if (!hasAsset(context.parent)) {
-                    return true;
-                  }
+    defineField({
+      name: 'description',
+      title: 'Project Description',
+      type: 'text',
+      group: 'overview',
+      description:
+        'Briefly explain what the project does, why it exist or the context needed to understand it.',
+      validation: (Rule) =>
+        Rule.required().error('Add a description of this project.'),
+    }),
 
-                  if (typeof altText !== 'string' || !altText.trim()) {
-                    return 'Add alternative text for the uploaded preview image.';
-                  }
-
-                  if (altText.trim().length > 160) {
-                    return 'Keep the alternative text under 160 characters.';
-                  }
-
-                  return true;
-                }),
-            }),
-          ],
-          validation: (Rule) =>
-            Rule.custom((image, context) => {
-              if (!requiresPreviewImage(context.document)) {
-                return true;
-              }
-
-              if (!hasAsset(image)) {
-                return 'Add a preview image for Published and Completed projects.';
-              }
-
-              return true;
-            }),
+    defineField({
+      name: 'features',
+      title: 'Key Highlights',
+      type: 'array',
+      group: 'overview',
+      description:
+        'Add the most relevant details about the project. Focus on things that help explain what makes it useful or interesting.',
+      of: [
+        defineArrayMember({
+          type: 'string',
         }),
       ],
       validation: (Rule) =>
-        Rule.required().error('Add the project card preview content.'),
+        Rule.required()
+          .min(1)
+          .max(6)
+          .error('Add between 1 and 6 project highlights.'),
     }),
 
     defineField({
-      name: 'detail',
-      title: 'Project Detail Content',
-      type: 'object',
-      group: 'detail',
+      name: 'technologies',
+      title: 'Technologies & Tools',
+      type: 'array',
+      group: 'technologies',
       description:
-        'Required. Detailed content used to explain the project beyond its card preview.',
+        'Technologies, tools and platforms used in the project. Optional when the project is still a concept and the stack has not been decided.',
+      of: [
+        defineArrayMember({
+          type: 'reference',
+          to: [{ type: 'technology' }],
+        }),
+      ],
+
+      validation: (Rule) => Rule.unique(),
+    }),
+
+    defineField({
+      name: 'links',
+      title: 'Links & Media',
+      type: 'object',
+      group: 'links',
+      description:
+        'Add only the links or media that visitors are allowed to access.',
       fields: [
         defineField({
           name: 'demoVideo',
           title: 'Demo Video',
           type: 'file',
           description:
-            'Optional. Upload a short video that demonstrates the main project flow. Leave it empty when the project is better explained with images, text or a live demo.',
+            'Optional. Upload a short video showing the project in use.',
           options: {
             accept: 'video/mp4,video/webm,video/quicktime',
           },
         }),
 
         defineField({
-          name: 'contentSections',
-          title: 'Project Story Sections',
-          type: 'array',
-          description:
-            'Required. Build the project story using independent sections. Drag them to control their order. The frontend generates the section numbers automatically.',
-          of: [
-            defineArrayMember({
-              name: 'contentSection',
-              title: 'Story Section',
-              type: 'object',
-              fields: [
-                defineField({
-                  name: 'title',
-                  title: 'Section Title',
-                  type: 'string',
-                  description:
-                    'Required. Name that clearly introduces the section. Examples: De dónde nació, Cómo funciona, Construcción, Seguridad or Próximos pasos.',
-                  validation: (Rule) =>
-                    Rule.required()
-                      .min(2)
-                      .max(80)
-                      .error(
-                        'Add a section title between 2 and 80 characters.',
-                      ),
-                }),
-
-                defineField({
-                  name: 'content',
-                  title: 'Section Content',
-                  type: 'portableText',
-                  description:
-                    'Required. Explain this part of the project using paragraphs, lists, headings or links when they improve readability.',
-                  validation: (Rule) =>
-                    Rule.required().error(
-                      'Add the content for this project section.',
-                    ),
-                }),
-              ],
-
-              preview: {
-                select: {
-                  title: 'title',
-                },
-                prepare({ title }) {
-                  return {
-                    title: title ?? 'Untitled section',
-                  };
-                },
-              },
-            }),
-          ],
-          validation: (Rule) =>
-            Rule.required()
-              .min(1)
-              .error('Add at least one project story section.'),
-        }),
-      ],
-      validation: (Rule) =>
-        Rule.required().error('Add the detailed content for this project.'),
-    }),
-
-    defineField({
-      name: 'technologies',
-      title: 'Tools and Technologies',
-      type: 'array',
-      group: 'technologies',
-      description:
-        'Technologies, platforms and tools used to build the project. Required for Published, Completed and In Development projects. Optional for concepts without a defined stack.',
-      of: [
-        defineArrayMember({
-          type: 'string',
-        }),
-      ],
-      options: {
-        layout: 'tags',
-      },
-      validation: (Rule) =>
-        Rule.unique().custom((technologies, context) => {
-          if (!requiresTechnologies(context.document)) {
-            return true;
-          }
-
-          if (!Array.isArray(technologies) || technologies.length === 0) {
-            return 'Add at least one technology for Published, Completed and In Development projects.';
-          }
-
-          const hasEmptyTechnology = technologies.some(
-            (technology) =>
-              typeof technology !== 'string' || !technology.trim(),
-          );
-
-          if (hasEmptyTechnology) {
-            return 'Remove empty technology values.';
-          }
-
-          return true;
-        }),
-    }),
-
-    defineField({
-      name: 'links',
-      title: 'Project Links',
-      type: 'object',
-      group: 'links',
-      description:
-        'Optional external links displayed as project actions. Only add links that visitors are allowed to access.',
-      fields: [
-        defineField({
           name: 'liveDemoUrl',
-          title: 'Live Project URL',
+          title: 'Live URL',
           type: 'url',
           description:
-            'Required when the status is Published. Public URL where visitors can open, test or view the project.',
+            'Public URL where visitors can open or test the project. Required when the project is published.',
         }),
 
         defineField({
           name: 'repositoryUrl',
-          title: 'Public Repository URL',
+          title: 'Repository URL',
           type: 'url',
           description:
-            'Optional. Public source-code repository. Leave empty for private, client or company repositories.',
+            'Optional. Add it only when the source code is publicly available.',
         }),
       ],
-      validation: (Rule) =>
-        Rule.custom((links, context) => {
-          if (!isPublishedProject(context.document)) {
-            return true;
-          }
-
-          const value = links as ProjectLinks | undefined;
-
-          if (!value?.liveDemoUrl) {
-            return 'Add a live project URL when the status is Published.';
-          }
-
-          return true;
-        }),
     }),
 
     defineField({
       name: 'displayOrder',
-      title: 'Portfolio Display Order',
+      title: 'Display Order',
       type: 'number',
       group: 'settings',
       description:
-        'Required. Controls the project position in the portfolio. Lower numbers appear first. Projects with the same number can be ordered by their last update date.',
-      initialValue: 0,
+        'Controls where the project appears in the portfolio. Lower numbers appear first.',
+      initialValue: 1,
       validation: (Rule) =>
         Rule.required()
           .integer()
-          .min(0)
-          .error('Use a whole number equal to or greater than 0.'),
+          .min(1)
+          .error('Enter a whole number of 1 or higher'),
+    }),
+
+    defineField({
+      name: 'isVisible',
+      title: 'Show in Portfolio',
+      type: 'boolean',
+      group: 'settings',
+      description:
+        'Turn this off to keep the project in the CMS without making it visible on the website.',
+      initialValue: true,
+      validation: (Rule) =>
+        Rule.required().error(
+          'Choose whether to show this project in the portfolio.',
+        ),
     }),
   ],
 
   preview: {
     select: {
       title: 'title',
-      shortDescription: 'preview.shortDescription',
-      media: 'preview.image',
-      status: 'status',
-      displayOrder: 'displayOrder',
+      status: 'status.name',
+      isVisible: 'isVisible',
     },
 
-    prepare({ title, shortDescription, media, status, displayOrder }) {
+    prepare({ title, status, isVisible }) {
       const projectTitle = title ?? 'Untitled project';
-
-      const description = truncatePreviewText(
-        shortDescription ?? 'No short description',
-      );
-
-      const statusLabel = getProjectStatusLabel(status);
-
-      const orderLabel =
-        typeof displayOrder === 'number' ? `Order ${displayOrder}` : 'No order';
 
       return {
         title: projectTitle,
-        subtitle: `${orderLabel} · ${statusLabel} · ${description}`,
-        media,
+        subtitle: `${status} · ${isVisible ? 'Visible' : 'Hidden'}`,
       };
     },
   },

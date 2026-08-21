@@ -1,29 +1,21 @@
 import type { StructureResolver } from 'sanity/structure';
 import {
   IconBriefcase,
-  IconHome2,
-  IconRocket,
-  IconUserCircle,
+  IconCode,
+  IconList,
+  IconMoodUnamused,
+  IconProgress,
+  IconUser,
 } from '@tabler/icons-react';
-
-import StudioWelcome from './components/studio-welcome';
 
 export const structure: StructureResolver = (S) =>
   S.list()
-    .title('The Goat 🐐')
+    .title('nicoo 🐐')
     .items([
-      S.listItem()
-        .id('welcome')
-        .title('Welcome')
-        .icon(IconHome2)
-        .child(S.component(StudioWelcome).title('Welcome')),
-
-      S.divider(),
-
       S.listItem()
         .id('profile')
         .title('Profile')
-        .icon(IconUserCircle)
+        .icon(IconUser)
         .schemaType('profile')
         .child(
           S.document()
@@ -33,9 +25,27 @@ export const structure: StructureResolver = (S) =>
             .documentId('profile'),
         ),
 
-      S.divider(),
+      S.listItem()
+        .id('projects')
+        .title('Projects')
+        .icon(IconCode)
+        .child(
+          S.list()
+            .title('Projects')
+            .items([
+              S.documentTypeListItem('project')
+                .title('All Projects')
+                .icon(IconList),
 
-      S.documentTypeListItem('project').title('Projects').icon(IconRocket),
+              S.documentTypeListItem('projectStatus')
+                .title('Statuses')
+                .icon(IconProgress),
+
+              S.documentTypeListItem('technology')
+                .title('My Technologies')
+                .icon(IconMoodUnamused),
+            ]),
+        ),
 
       S.documentTypeListItem('workExperience')
         .title('Work Experience')
