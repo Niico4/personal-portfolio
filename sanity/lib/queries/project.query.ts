@@ -36,13 +36,3 @@ export const PROJECT_LIST_QUERY = groq`
     ${PROJECT_FIELDS}
   }
 `;
-
-export const PROJECT_BY_SLUG_QUERY = groq`
-  *[
-    _type == "project" &&
-    slug.current == $slug &&
-    isVisible == true
-  ][0] {
-    ${PROJECT_FIELDS}
-  }
-`;
