@@ -8,5 +8,7 @@
 // } as const;
 
 export const getSanityFetchOptions = () => ({
-  cache: 'no-store' as const,
+  next: {
+    revalidate: 300,
+  },
 });

@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { poetsenOne } from '@/fonts';
+import { happyMonkey } from '@/fonts';
 
 interface HeadingProps {
   as?: 'h1' | 'h2';
@@ -9,8 +9,8 @@ interface HeadingProps {
 }
 
 const headingStyles: Record<NonNullable<HeadingProps['as']>, string> = {
-  h1: 'text-3xl sm:text-4xl text-zinc-100',
-  h2: 'text-2xl sm:text-3xl text-zinc-200',
+  h1: 'text-3xl sm:text-4xl text-zinc-50',
+  h2: 'text-2xl sm:text-3xl text-zinc-100',
 };
 
 export const Heading: FC<HeadingProps> = ({
@@ -20,7 +20,7 @@ export const Heading: FC<HeadingProps> = ({
 }) => {
   return (
     <Tag
-      className={`${poetsenOne.className} ${headingStyles[Tag]} ${className ?? ''} z-20`}
+      className={`${happyMonkey.className} ${headingStyles[Tag]} ${className ?? ''} z-20`}
     >
       {children}
     </Tag>

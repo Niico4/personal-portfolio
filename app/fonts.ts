@@ -1,4 +1,4 @@
-import { DM_Sans, Poetsen_One } from 'next/font/google';
+import { DM_Sans, Happy_Monkey, Poetsen_One } from 'next/font/google';
 
 export const dmSans = DM_Sans({
   subsets: ['latin'],
@@ -7,6 +7,12 @@ export const dmSans = DM_Sans({
 });
 
 export const poetsenOne = Poetsen_One({
+  subsets: ['latin'],
+  display: 'swap',
+  weight: ['400'],
+});
+
+export const happyMonkey = Happy_Monkey({
   subsets: ['latin'],
   display: 'swap',
   weight: ['400'],

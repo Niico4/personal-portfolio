@@ -1,4 +1,3 @@
-import { HeroUIProvider } from '@heroui/system';
 import { MotionConfig } from 'framer-motion';
 
 type ProvidersProps = {
@@ -6,9 +5,5 @@ type ProvidersProps = {
 };
 
 export default function Providers({ children }: ProvidersProps) {
-  return (
-    <HeroUIProvider>
-      <MotionConfig reducedMotion="user">{children}</MotionConfig>
-    </HeroUIProvider>
-  );
+  return <MotionConfig reducedMotion="user">{children}</MotionConfig>;
 }

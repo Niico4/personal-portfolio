@@ -5,7 +5,8 @@ import { getProfile } from '@/sanity/lib/fetchers/profile.fetcher';
 import { createPageMetadata } from '@/utils/seo/create-page-metadata';
 import { SectionLabel } from '@/components/atoms/common/section-label';
 import { SectionIntro } from '@/components/molecules/common/section-intro';
-import { poetsenOne } from '@/fonts';
+import { happyMonkey } from '@/fonts';
+import Signature from '@/components/atoms/common/signature';
 
 import { Header } from '../../components/layout/header';
 
@@ -45,7 +46,7 @@ const ServicesPage = async () => {
         <article className="flex flex-col gap-5">
           <div className="flex flex-col gap-2">
             <h1
-              className={`text-2xl sm:text-3xl text-zinc-200 ${poetsenOne.className}`}
+              className={`text-2xl sm:text-3xl text-zinc-200 ${happyMonkey.className}`}
             >
               Desarrollo aplicaciones web a medida, de principio a fin
             </h1>
@@ -83,7 +84,7 @@ const ServicesPage = async () => {
         <hr className="shrink-0 bg-zinc-900 border-none w-full h-[1px] my-2" />
 
         <div className="flex items-center justify-between">
-          <p className="text-xs text-zinc-500 sm:text-sm">— nicoo 🐐</p>
+          <Signature className="text-zinc-500" />
 
           <p className="text-xs text-zinc-500 sm:text-sm">
             © {new Date().getFullYear()}

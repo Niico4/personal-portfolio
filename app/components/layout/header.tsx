@@ -8,7 +8,6 @@ import {
   IconUser,
 } from '@tabler/icons-react';
 
-import { Heading } from '@/components/atoms/common/heading';
 import { ProfileType } from '@/sanity/lib/types/profile.type';
 import { poetsenOne } from '@/fonts';
 
@@ -82,12 +81,16 @@ export const Header = ({
           <article className="flex flex-col gap-0 ssm:gap-1">
             {isServicesPage ? (
               <h2
-                className={`text-3xl sm:text-4xl text-zinc-100 ${poetsenOne.className}`}
+                className={`text-3xl sm:text-4xl text-zinc-200 ${poetsenOne.className}`}
               >
                 Nicolás Garzón
               </h2>
             ) : (
-              <Heading>Nicolás Garzón</Heading>
+              <h1
+                className={`text-3xl sm:text-4xl text-zinc-200 ${poetsenOne.className}`}
+              >
+                Nicolás Garzón
+              </h1>
             )}
             <p className="text-sm text-zinc-200 sm:text-base">
               {professionalTitle}

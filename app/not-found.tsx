@@ -1,4 +1,3 @@
-import { Chip } from '@heroui/chip';
 import { IconHome, IconSparkles } from '@tabler/icons-react';
 import Link from 'next/link';
 
@@ -10,16 +9,10 @@ const NotFoundPage = () => {
     <main className="relative flex min-h-dvh items-center overflow-hidden">
       <section className="mx-auto grid w-full max-w-6xl items-center gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[1fr_0.9fr] lg:gap-20">
         <div className="order-2 flex flex-col items-center text-center lg:order-1 lg:items-start lg:text-left">
-          <Chip
-            className="mb-5 border border-white/10 bg-white/[0.04] px-2 text-zinc-400"
-            radius="full"
-            startContent={
-              <IconSparkles aria-hidden="true" size={14} stroke={1.5} />
-            }
-            variant="flat"
-          >
+          <span className="mb-5 border border-white/10 bg-white/[0.04] px-3 text-zinc-400 rounded-full py-1 flex gap-2 items-center">
+            <IconSparkles aria-hidden="true" size={14} stroke={1.5} />
             Error 404
-          </Chip>
+          </span>
 
           <Heading>Esta ruta se perdió.</Heading>
 

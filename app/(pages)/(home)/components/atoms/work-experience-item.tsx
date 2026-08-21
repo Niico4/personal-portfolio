@@ -41,7 +41,7 @@ export const WorkExperienceItem = ({
         <div className="flex items-center justify-between">
           <div className="flex flex-col gap-1">
             <div className="flex flex-wrap items-baseline gap-x-2">
-              <h3 className="text-xl leading-7 font-semibold text-zinc-300 sm:text-2xl">
+              <h3 className="text-xl leading-7 text-zinc-300 sm:text-2xl">
                 {name}
               </h3>
 
