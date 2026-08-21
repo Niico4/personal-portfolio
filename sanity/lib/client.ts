@@ -16,7 +16,7 @@ export const client = createClient({
   dataset: PublicEnvConfig.sanity.dataset,
   apiVersion: PublicEnvConfig.sanity.api_version,
   token: ServerEnvConfig.sanity.api_read_token,
-  useCdn: true, // Set to false if statically generating pages, using ISR or tag-based revalidation
+  useCdn: false, // Set to false if statically generating pages, using ISR or tag-based revalidation
 });
 
 export async function sanityFetch<const QueryString extends string>({
