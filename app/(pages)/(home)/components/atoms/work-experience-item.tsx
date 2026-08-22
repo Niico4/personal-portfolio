@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useId, useState } from 'react';
 import { IconMinus, IconPlus } from '@tabler/icons-react';
 
 import { WorkExperienceType } from '@/sanity/lib/types/work-experience.type';
@@ -13,6 +13,7 @@ export const WorkExperienceItem = ({
   experience: WorkExperienceType;
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const detailsId = useId();
 
   const {
     description,
@@ -31,7 +32,7 @@ export const WorkExperienceItem = ({
           <div className="flex h-7 items-center">
             <span
               aria-hidden="true"
-              className="size-2 shrink-0 rounded-full bg-zinc-600"
+              className={`size-2 shrink-0 rounded-full transition-colors duration-150 ${isOpen ? 'bg-brand-400/80' : 'bg-zinc-600'}`}
             />
           </div>
         </div>
@@ -72,32 +73,50 @@ export const WorkExperienceItem = ({
 
           <button
             type="button"
+            aria-label={`${isOpen ? 'Ocultar' : 'Mostrar'} detalles de ${role} en ${name}`}
             aria-expanded={isOpen}
+            aria-controls={detailsId}
             onClick={() => setIsOpen((current) => !current)}
-            className="flex items-center gap-1 rounded-full border border-zinc-300/10 bg-zinc-300/5 py-0.5 pl-2.5 pr-2 text-xs font-medium text-zinc-500"
+            className="group flex min-h-11 items-center"
           >
-            ver
-            {isOpen ? (
-              <IconMinus size={12} stroke={1.5} aria-hidden="true" />
-            ) : (
-              <IconPlus size={12} stroke={1.5} aria-hidden="true" />
-            )}
+            <span className="flex items-center gap-1 rounded-full border border-zinc-300/10 bg-zinc-300/5 py-0.5 pl-2.5 pr-2 text-xs font-medium text-zinc-500 transition-all duration-150 ease-out group-hover:border-zinc-300/20 group-hover:bg-zinc-300/[0.08] group-hover:text-zinc-300 group-focus-visible:ring-1 group-focus-visible:ring-brand-400 group-focus-visible:ring-offset-2 group-focus-visible:ring-offset-main group-active:bg-zinc-300/10 group-active:text-zinc-300">
+              ver
+              <span className="relative size-3" aria-hidden="true">
+                <IconPlus
+                  size={12}
+                  stroke={1.5}
+                  className={`absolute inset-0 transition-opacity duration-[120ms] ${isOpen ? 'opacity-0' : 'opacity-100'}`}
+                />
+                <IconMinus
+                  size={12}
+                  stroke={1.5}
+                  className={`absolute inset-0 transition-opacity duration-[120ms] ${isOpen ? 'opacity-100' : 'opacity-0'}`}
+                />
+              </span>
+            </span>
           </button>
         </div>
 
-        {isOpen && (
-          <div className="mt-2 text-sm text-zinc-400 sm:text-base">
-            <p>{description}</p>
+        <div
+          id={detailsId}
+          aria-hidden={!isOpen}
+          inert={!isOpen}
+          className={`grid transition-all ease-[cubic-bezier(0.22,1,0.36,1)] ${isOpen ? 'grid-rows-[1fr] opacity-100 duration-150' : 'grid-rows-[0fr] opacity-0 duration-[120ms]'}`}
+        >
+          <div className="min-h-0 overflow-hidden">
+            <div className="mt-2 text-sm text-zinc-400 sm:text-base">
+              <p>{description}</p>
 
-            {features.length > 0 && (
-              <ul className="mt-2 list-disc space-y-2 pl-5">
-                {features.map((feature) => (
-                  <li key={feature}>{feature}</li>
-                ))}
-              </ul>
-            )}
+              {features.length > 0 && (
+                <ul className="mt-2 list-disc space-y-2 pl-5">
+                  {features.map((feature) => (
+                    <li key={feature}>{feature}</li>
+                  ))}
+                </ul>
+              )}
+            </div>
           </div>
-        )}
+        </div>
       </div>
     </article>
   );

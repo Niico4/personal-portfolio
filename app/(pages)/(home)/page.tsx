@@ -48,8 +48,12 @@ const HomePage = async () => {
         />
 
         <div className="flex flex-col gap-1 border-y border-zinc-300/10 divide-y divide-zinc-300/10">
-          {projects.map((project) => (
-            <ProjectCard key={project.id} project={project} />
+          {projects.map((project, index) => (
+            <ProjectCard
+              key={project.id}
+              project={project}
+              isInitiallyOpen={index === 0}
+            />
           ))}
         </div>
       </section>

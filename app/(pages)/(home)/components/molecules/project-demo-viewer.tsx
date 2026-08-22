@@ -167,7 +167,7 @@ export const ProjectDemoViewer = ({
                     aria-label={`Video demo de ${title}`}
                     controls
                     playsInline
-                    preload="metadata"
+                    preload="auto"
                     className="aspect-video max-h-full w-full bg-black object-contain"
                   />
                 </div>

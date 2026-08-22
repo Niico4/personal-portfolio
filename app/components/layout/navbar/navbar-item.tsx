@@ -19,7 +19,8 @@ export const NavbarItem = ({ item, isActive, activeHref }: NavbarItemProps) => {
       aria-label={item.label}
       className="
           group relative grid size-11 shrink-0 place-items-center rounded-full
-          outline-none transition-transform duration-300 hover:scale-105
+          outline-none focus-visible:ring-1 focus-visible:ring-brand-400
+          focus-visible:ring-offset-2 focus-visible:ring-offset-main
         "
     >
       <span className="sr-only">{item.label}</span>
@@ -42,7 +43,8 @@ export const NavbarItem = ({ item, isActive, activeHref }: NavbarItemProps) => {
       <span
         className={`
             relative z-10 grid size-full place-items-center rounded-full
-            transition-colors duration-300
+            transition-all duration-150 ease-out
+            group-active:scale-[0.98] motion-reduce:transform-none
             ${
               isActive
                 ? 'text-zinc-300'
@@ -50,7 +52,7 @@ export const NavbarItem = ({ item, isActive, activeHref }: NavbarItemProps) => {
             }
           `}
       >
-        <Icon size={24} stroke={1} />
+        <Icon size={24} stroke={1} aria-hidden="true" />
       </span>
     </Link>
   );
