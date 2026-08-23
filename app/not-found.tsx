@@ -23,10 +23,10 @@ const NotFoundPage = () => {
 
           <Link
             href="/"
-            className="flex items-center gap-2 bg-brand-400 text-brand-950 font-medium px-4 py-3 rounded-full mt-8"
+            className="mt-8 flex min-h-11 items-center gap-2 rounded-full bg-brand-400 px-4 py-2.5 font-medium text-brand-950 transition-colors duration-150 ease-out hover:bg-brand-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-main active:bg-brand-500 motion-reduce:transition-none"
           >
             Volver al inicio
-            <IconHome size={20} stroke={1.5} />
+            <IconHome size={20} stroke={1.5} aria-hidden="true" />
           </Link>
         </div>
 

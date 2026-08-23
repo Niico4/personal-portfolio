@@ -44,10 +44,10 @@ export const NavbarItem = ({ item, isActive, activeHref }: NavbarItemProps) => {
         className={`
             relative z-10 grid size-full place-items-center rounded-full
             transition-all duration-150 ease-out
-            group-active:scale-[0.98] motion-reduce:transform-none
+            group-active:scale-[0.97]
             ${
               isActive
-                ? 'text-zinc-300'
+                ? 'text-zinc-300 group-hover:bg-zinc-300/[0.04] group-hover:text-zinc-100'
                 : 'text-zinc-400 group-hover:bg-zinc-800 group-hover:text-zinc-100'
             }
           `}

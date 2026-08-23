@@ -1,7 +1,7 @@
 'use client';
 
 import { IconPlayerPlay, IconX } from '@tabler/icons-react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { useEffect, useId, useRef, useState } from 'react';
 
 interface ProjectDemoViewerProps {
@@ -19,6 +19,7 @@ export const ProjectDemoViewer = ({
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const titleId = useId();
+  const shouldReduceMotion = useReducedMotion();
 
   const closeViewer = () => {
     videoRef.current?.pause();
@@ -86,10 +87,17 @@ export const ProjectDemoViewer = ({
         aria-haspopup="dialog"
         aria-expanded={isOpen}
         onClick={() => setIsOpen(true)}
-        className="flex items-center gap-1 bg-indigo-300/10 border-1 border-indigo-300/10 text-xs text-indigo-400 font- px-2 py-1 rounded-full"
+        className="group -my-2 flex h-11 items-center rounded-full focus-visible:outline-none"
       >
-        <span>Ver demo</span>
-        <IconPlayerPlay stroke={1.2} size={14} aria-hidden="true" />
+        <span className="flex items-center gap-1 rounded-full border border-indigo-300/10 bg-indigo-300/10 px-2 py-1 text-xs text-indigo-400 transition-[color,background-color,border-color,transform] duration-150 ease-out group-hover:border-indigo-300/20 group-hover:bg-indigo-300/[0.14] group-hover:text-indigo-300 group-focus-visible:ring-1 group-focus-visible:ring-brand-400 group-focus-visible:ring-offset-2 group-focus-visible:ring-offset-main group-active:translate-y-px group-active:border-indigo-300/25 group-active:bg-indigo-300/[0.18]">
+          <span>Ver demo</span>
+          <IconPlayerPlay
+            stroke={1.2}
+            size={14}
+            aria-hidden="true"
+            className="transition-transform duration-150 ease-out group-hover:scale-105 group-active:scale-100"
+          />
+        </span>
       </button>
 
       <dialog
@@ -120,7 +128,7 @@ export const ProjectDemoViewer = ({
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{
-                duration: 0.2,
+                duration: shouldReduceMotion ? 0.12 : 0.2,
                 ease: [0.22, 1, 0.36, 1],
               }}
               onPointerDown={(event) => {
@@ -131,11 +139,19 @@ export const ProjectDemoViewer = ({
               className="flex h-dvh w-screen items-center justify-center bg-main/80 [padding-bottom:max(1rem,env(safe-area-inset-bottom))] [padding-left:max(1rem,env(safe-area-inset-left))] [padding-right:max(1rem,env(safe-area-inset-right))] [padding-top:max(1rem,env(safe-area-inset-top))] sm:p-6"
             >
               <motion.section
-                initial={{ opacity: 0, scale: 0.99, y: 8 }}
+                initial={
+                  shouldReduceMotion
+                    ? { opacity: 0 }
+                    : { opacity: 0, scale: 0.99, y: 8 }
+                }
                 animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.995, y: 4 }}
+                exit={
+                  shouldReduceMotion
+                    ? { opacity: 0 }
+                    : { opacity: 0, scale: 0.995, y: 4 }
+                }
                 transition={{
-                  duration: 0.2,
+                  duration: shouldReduceMotion ? 0.12 : 0.2,
                   ease: [0.22, 1, 0.36, 1],
                 }}
                 className="flex h-auto w-[min(100%,calc((100dvh-5rem)*16/9))] min-w-0 flex-col overflow-hidden border border-zinc-300/10 bg-main sm:w-[min(92vw,calc((100dvh-6rem)*16/9))] sm:max-w-7xl"
@@ -154,7 +170,7 @@ export const ProjectDemoViewer = ({
                     type="button"
                     aria-label={`Cerrar demo de ${title}`}
                     onClick={closeViewer}
-                    className="grid size-11 shrink-0 place-items-center rounded-full text-zinc-400 transition-colors duration-300 hover:bg-zinc-300/[0.06] hover:text-zinc-100 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-main active:bg-zinc-300/10"
+                    className="grid size-11 shrink-0 place-items-center rounded-full text-zinc-400 transition-[color,background-color,transform] duration-150 ease-out hover:bg-zinc-300/[0.06] hover:text-zinc-100 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-main active:scale-[0.97] active:bg-zinc-300/10"
                   >
                     <IconX size={20} stroke={1.2} aria-hidden="true" />
                   </button>
