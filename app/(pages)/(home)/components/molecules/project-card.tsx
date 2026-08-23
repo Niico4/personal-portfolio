@@ -91,9 +91,9 @@ export const ProjectCard = ({
                   ))}
                 </ul>
 
-                <ul className="text-zinc-500/90 text-sm sm:text-base">
+                <p className="text-zinc-500/90 text-sm sm:text-base">
                   {technologies.map(({ name }) => name).join(' · ')}
-                </ul>
+                </p>
               </div>
 
               <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
