@@ -79,7 +79,7 @@ export const WorkExperienceItem = ({
             onClick={() => setIsOpen((current) => !current)}
             className="group flex min-h-11 items-center"
           >
-            <span className="flex items-center gap-1 rounded-full border border-zinc-300/10 bg-zinc-300/5 py-0.5 pl-2.5 pr-2 text-xs font-medium text-zinc-500 transition-all duration-150 ease-out group-hover:border-zinc-300/20 group-hover:bg-zinc-300/[0.08] group-hover:text-zinc-300 group-focus-visible:ring-1 group-focus-visible:ring-brand-400 group-focus-visible:ring-offset-2 group-focus-visible:ring-offset-main group-active:bg-zinc-300/10 group-active:text-zinc-300">
+            <span className="flex items-center gap-1 rounded-full border border-zinc-300/10 bg-zinc-300/5 py-0.5 pl-2.5 pr-2 text-xs font-medium text-zinc-500 transition-all duration-150 ease-out group-hover:border-zinc-300/20 group-hover:bg-zinc-300/[0.08] group-hover:text-zinc-300 group-focus-visible:ring-1 group-focus-visible:ring-brand-400 group-focus-visible:ring-offset-2 group-focus-visible:ring-offset-main group-active:translate-y-px group-active:border-zinc-300/25 group-active:bg-zinc-300/10 group-active:text-zinc-300">
               ver
               <span className="relative size-3" aria-hidden="true">
                 <IconPlus

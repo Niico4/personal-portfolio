@@ -23,7 +23,7 @@ const ARIA_LABEL = {
 };
 
 const SOCIAL_ACTION_CLASS_NAME =
-  'group -my-[7px] -ml-3 grid h-11 w-[42px] items-center justify-items-end focus-visible:outline-none';
+  'group -my-[7px] -ml-3 grid size-11 items-center justify-items-end focus-visible:outline-none';
 
 const SOCIAL_ACTION_VISUAL_CLASS_NAME =
   'grid size-[30px] place-items-center rounded-full border border-gray-300/[0.12] bg-gray-300/[0.06] text-gray-400 backdrop-blur-sm transition-all duration-150 ease-out group-hover:border-gray-300/20 group-hover:bg-gray-300/10 group-hover:text-zinc-200 group-focus-visible:ring-1 group-focus-visible:ring-brand-400 group-focus-visible:ring-offset-2 group-focus-visible:ring-offset-main group-active:translate-y-px group-active:border-gray-300/25 group-active:bg-gray-300/[0.12]';
@@ -68,6 +68,7 @@ export const Header = ({
           alt=""
           fill
           preload
+          sizes="(min-width: 1280px) 40vw, (min-width: 640px) 92vw, 100vw"
           className="object-cover object-top [mask-image:linear-gradient(to_bottom,rgb(8,10,15)_0%,rgb(8,10,15)_35%,rgba(8,10,15,0.55)_55%,rgba(8,10,15,0.1)_75%,transparent_100%)]"
         />
       </div>
@@ -79,6 +80,7 @@ export const Header = ({
             alt=""
             fill
             preload
+            sizes="(min-width: 640px) 128px, 112px"
             className="rounded-full"
           />
         </div>
@@ -109,7 +111,7 @@ export const Header = ({
                 href="/"
                 className="group -my-[7px] flex h-11 items-center focus-visible:outline-none"
               >
-                <span className="flex items-center gap-1 rounded-full border border-brand-400/[0.12] bg-brand-400/[0.06] py-1 pl-2.5 pr-2 text-sm font-medium text-brand-400 transition-[color,background-color,border-color] duration-200 ease-out group-hover:border-brand-400/20 group-hover:bg-brand-400/10 group-focus-visible:ring-1 group-focus-visible:ring-brand-400 group-focus-visible:ring-offset-2 group-focus-visible:ring-offset-main group-active:bg-brand-400/15">
+                <span className="flex items-center gap-1 rounded-full border border-brand-400/[0.12] bg-brand-400/[0.06] py-1 pl-2.5 pr-2 text-sm font-medium text-brand-400 transition-[color,background-color,border-color] duration-150 ease-out group-hover:border-brand-400/20 group-hover:bg-brand-400/10 group-focus-visible:ring-1 group-focus-visible:ring-brand-400 group-focus-visible:ring-offset-2 group-focus-visible:ring-offset-main group-active:border-brand-400/25 group-active:bg-brand-400/15">
                   <span>Portfolio</span>
                   <IconUser stroke={1.5} size={16} aria-hidden="true" />
                 </span>
@@ -173,13 +175,13 @@ export const Header = ({
                 target="_blank"
                 className="group -my-2 flex h-11 items-center focus-visible:outline-none"
               >
-                <span className="flex items-center gap-1 rounded-full bg-brand-400 py-1 pl-2.5 pr-2 text-sm font-medium text-brand-950 transition-colors duration-200 ease-out group-hover:bg-brand-300 group-focus-visible:ring-1 group-focus-visible:ring-brand-400 group-focus-visible:ring-offset-2 group-focus-visible:ring-offset-main group-active:bg-brand-500">
+                <span className="flex items-center gap-1 rounded-full bg-brand-400 py-1 pl-2.5 pr-2 text-sm font-medium text-brand-950 transition-colors duration-150 ease-out group-hover:bg-brand-300 group-focus-visible:ring-1 group-focus-visible:ring-brand-400 group-focus-visible:ring-offset-2 group-focus-visible:ring-offset-main group-active:bg-brand-500">
                   <span>Escríbeme</span>
                   <IconMailShare
                     stroke={1.5}
                     size={16}
                     aria-hidden="true"
-                    className="transition-transform duration-200 ease-out group-hover:translate-x-px group-hover:-translate-y-px group-active:translate-x-0 group-active:translate-y-0 "
+                    className="transition-transform duration-150 ease-out group-hover:translate-x-px group-hover:-translate-y-px group-active:translate-x-0 group-active:translate-y-0"
                   />
                 </span>
               </a>
@@ -224,8 +226,8 @@ export const Header = ({
                 <a
                   aria-label={ARIA_LABEL.cv}
                   href={resumeHref}
-                  rel={`${isResumeFile ? 'noopener noreferrer' : undefined}`}
-                  target={`${isResumeFile ? '_blank' : undefined}`}
+                  rel={isResumeFile ? 'noopener noreferrer' : undefined}
+                  target={isResumeFile ? '_blank' : undefined}
                   className={SOCIAL_ACTION_CLASS_NAME}
                 >
                   <span className={SOCIAL_ACTION_VISUAL_CLASS_NAME}>

@@ -65,13 +65,13 @@ const ServicesPage = async () => {
             target="_blank"
             className="group -mt-1.5 mb-0.5 flex h-11 w-max items-center"
           >
-            <span className="flex items-center gap-1 rounded-full bg-brand-400 px-3 py-1 text-base font-medium text-brand-950 transition-colors duration-200 ease-out group-hover:bg-brand-300 group-focus-visible:ring-1 group-focus-visible:ring-brand-400 group-focus-visible:ring-offset-2 group-focus-visible:ring-offset-main group-active:bg-brand-500">
+            <span className="flex items-center gap-1 rounded-full bg-brand-400 px-3 py-1 text-base font-medium text-brand-950 transition-colors duration-150 ease-out group-hover:bg-brand-300 group-focus-visible:ring-1 group-focus-visible:ring-brand-400 group-focus-visible:ring-offset-2 group-focus-visible:ring-offset-main group-active:bg-brand-500">
               <span>Hablemos de tu proyecto</span>
               <IconArrowUpRight
                 stroke={1.5}
                 size={16}
                 aria-hidden="true"
-                className="transition-transform duration-200 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-active:translate-x-0 group-active:translate-y-0"
+                className="transition-transform duration-150 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-active:translate-x-0 group-active:translate-y-0 motion-reduce:transform-none"
               />
             </span>
           </a>
