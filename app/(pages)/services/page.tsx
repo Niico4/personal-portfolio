@@ -5,8 +5,8 @@ import { getProfile } from '@/sanity/lib/fetchers/profile.fetcher';
 import { createPageMetadata } from '@/utils/seo/create-page-metadata';
 import { SectionLabel } from '@/components/atoms/common/section-label';
 import { SectionIntro } from '@/components/molecules/common/section-intro';
-import { happyMonkey } from '@/fonts';
 import Signature from '@/components/atoms/common/signature';
+import { Heading } from '@/components/atoms/common/heading';
 
 import { Header } from '../../components/layout/header';
 
@@ -33,50 +33,50 @@ const ServicesPage = async () => {
     'Tengo un proyecto en mente',
   )}`;
   return (
-    <main className="mx-auto flex flex-col gap-6">
-      <Header
-        contact={contact}
-        professionalTitle={professionalTitle}
-        isServicesPage
-      />
+    <main className="mx-auto flex flex-col gap-y-12 sm:gap-y-16">
+      <div className="flex flex-col gap-6">
+        <Header
+          contact={contact}
+          professionalTitle={professionalTitle}
+          isServicesPage
+        />
 
-      <section className="flex flex-col gap-1">
-        <SectionLabel label="Servicios de desarrollo web" />
+        <section className="flex flex-col gap-1">
+          <SectionLabel label="Servicios de desarrollo web" />
 
-        <article className="flex flex-col gap-5">
-          <div className="flex flex-col gap-2">
-            <h1
-              className={`text-2xl sm:text-3xl text-zinc-200 ${happyMonkey.className}`}
+          <article className="flex flex-col gap-5">
+            <div className="flex flex-col gap-2">
+              <Heading as="h1">
+                Desarrollo aplicaciones web a medida, de principio a fin
+              </Heading>
+
+              <p className="text-content">
+                Desarrollo aplicaciones web y sistemas de gestión, además de
+                sitios web y landing pages cuando el proyecto lo necesita. Puedo
+                encargarme desde definir el alcance hasta desarrollar la
+                interfaz, la lógica y los datos.
+              </p>
+            </div>
+
+            <a
+              href={contactEmailEncoded}
+              rel="noopener noreferrer"
+              target="_blank"
+              className="group -mt-1.5 mb-0.5 flex h-11 w-max items-center focus-visible:outline-none"
             >
-              Desarrollo aplicaciones web a medida, de principio a fin
-            </h1>
-
-            <p className="text-zinc-400">
-              Desarrollo aplicaciones web y sistemas de gestión, además de
-              sitios web y landing pages cuando el proyecto lo necesita. Puedo
-              encargarme desde definir el alcance hasta desarrollar la interfaz,
-              la lógica y los datos.
-            </p>
-          </div>
-
-          <a
-            href={contactEmailEncoded}
-            rel="noopener noreferrer"
-            target="_blank"
-            className="group -mt-1.5 mb-0.5 flex h-11 w-max items-center"
-          >
-            <span className="flex items-center gap-1 rounded-full bg-brand-400 px-3 py-1 text-base font-medium text-brand-950 transition-colors duration-150 ease-out group-hover:bg-brand-300 group-focus-visible:ring-1 group-focus-visible:ring-brand-400 group-focus-visible:ring-offset-2 group-focus-visible:ring-offset-main group-active:bg-brand-500">
-              <span>Hablemos de tu proyecto</span>
-              <IconArrowUpRight
-                stroke={1.5}
-                size={16}
-                aria-hidden="true"
-                className="transition-transform duration-150 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-active:translate-x-0 group-active:translate-y-0 motion-reduce:transform-none"
-              />
-            </span>
-          </a>
-        </article>
-      </section>
+              <span className="flex items-center gap-1 rounded-full bg-brand-400 px-3 py-1 text-base font-medium text-brand-950 transition-colors duration-150 ease-out group-hover:bg-brand-300 group-focus-visible:ring-1 group-focus-visible:ring-brand-400 group-focus-visible:ring-offset-2 group-focus-visible:ring-offset-main group-active:bg-brand-500">
+                <span>Hablemos de tu proyecto</span>
+                <IconArrowUpRight
+                  stroke={1.5}
+                  size={16}
+                  aria-hidden="true"
+                  className="transition-transform duration-150 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-active:translate-x-0 group-active:translate-y-0 motion-reduce:transform-none"
+                />
+              </span>
+            </a>
+          </article>
+        </section>
+      </div>
 
       <section className="flex flex-col gap-6">
         <SectionIntro
@@ -87,13 +87,11 @@ const ServicesPage = async () => {
         <MyServicesContenSection />
       </section>
 
-      <footer className="flex flex-col gap-3">
-        <hr className="shrink-0 bg-zinc-900 border-none w-full h-[1px] my-2" />
-
+      <footer className="flex flex-col gap-3 border-t border-line/10 pt-6">
         <div className="flex items-center justify-between">
-          <Signature className="text-zinc-500" />
+          <Signature className="text-content-muted" />
 
-          <p className="text-xs text-zinc-500 sm:text-sm">
+          <p className="text-xs text-content-muted sm:text-sm">
             © {new Date().getFullYear()}
           </p>
         </div>

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-import { dmSans } from './fonts';
+import { monaSans } from './fonts';
 import { SEO_CONFIG } from './config/seo.config';
 
 import '@/globals.css';
@@ -77,7 +77,7 @@ export default function RootLayout({
   return (
     <html lang={SEO_CONFIG.language} className="bg-main">
       <body
-        className={`${dmSans.className} custom-theme min-h-dvh overflow-x-hidden overscroll-none bg-main text-zinc-20 font-light antialiased`}
+        className={`${monaSans.className} custom-theme min-h-dvh overflow-x-hidden overscroll-none bg-main font-normal text-content antialiased`}
       >
         <div className="relative z-10">{children}</div>
       </body>

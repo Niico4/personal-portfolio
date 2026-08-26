@@ -89,7 +89,7 @@ export const ProjectDemoViewer = ({
         onClick={() => setIsOpen(true)}
         className="group -my-2 flex h-11 items-center rounded-full focus-visible:outline-none"
       >
-        <span className="flex items-center gap-1 rounded-full border border-indigo-300/10 bg-indigo-300/10 px-2 py-1 text-xs text-indigo-400 transition-[color,background-color,border-color,transform] duration-150 ease-out group-hover:border-indigo-300/20 group-hover:bg-indigo-300/[0.14] group-hover:text-indigo-300 group-focus-visible:ring-1 group-focus-visible:ring-brand-400 group-focus-visible:ring-offset-2 group-focus-visible:ring-offset-main group-active:translate-y-px group-active:border-indigo-300/25 group-active:bg-indigo-300/[0.18]">
+        <span className="flex items-center gap-1 rounded-full border border-brand-300/10 bg-brand-300/10 px-2 py-1 text-xs text-brand-400 transition-[color,background-color,border-color,transform] duration-150 ease-out group-hover:border-brand-300/20 group-hover:bg-brand-300/[0.14] group-hover:text-brand-300 group-focus-visible:ring-1 group-focus-visible:ring-brand-400 group-focus-visible:ring-offset-2 group-focus-visible:ring-offset-main group-active:translate-y-px group-active:border-brand-300/25 group-active:bg-brand-300/[0.18] motion-reduce:transform-none motion-reduce:transition-none">
           <span>Ver demo</span>
           <IconPlayerPlay
             stroke={1.2}
@@ -112,7 +112,7 @@ export const ProjectDemoViewer = ({
           setIsOpen(false);
           triggerRef.current?.focus();
         }}
-        className="fixed inset-0 m-0 h-dvh max-h-none w-screen max-w-none overflow-hidden bg-transparent p-0 text-zinc-300 outline-none backdrop:bg-transparent"
+        className="fixed inset-0 m-0 h-dvh max-h-none w-screen max-w-none overflow-hidden bg-transparent p-0 text-content outline-none backdrop:bg-transparent"
       >
         <AnimatePresence
           onExitComplete={() => {
@@ -154,14 +154,16 @@ export const ProjectDemoViewer = ({
                   duration: shouldReduceMotion ? 0.12 : 0.2,
                   ease: [0.22, 1, 0.36, 1],
                 }}
-                className="flex h-auto w-[min(100%,calc((100dvh-5rem)*16/9))] min-w-0 flex-col overflow-hidden border border-zinc-300/10 bg-main sm:w-[min(92vw,calc((100dvh-6rem)*16/9))] sm:max-w-7xl"
+                className="flex h-auto w-[min(100%,calc((100dvh-5rem)*16/9))] min-w-0 flex-col overflow-hidden border border-line/10 bg-main sm:w-[min(92vw,calc((100dvh-6rem)*16/9))] sm:max-w-7xl"
               >
-                <header className="flex min-h-12 shrink-0 items-center justify-between border-b border-zinc-300/10 px-3 sm:px-4">
+                <header className="flex min-h-12 shrink-0 items-center justify-between border-b border-line/10 px-3 sm:px-4">
                   <h2
                     id={titleId}
-                    className="min-w-0 truncate text-sm font-normal text-zinc-300 sm:text-base"
+                    className="min-w-0 truncate text-sm font-medium text-content-primary sm:text-base"
                   >
-                    <span className="text-zinc-500">Demo / </span>
+                    <span className="font-normal text-content-muted">
+                      Demo /{' '}
+                    </span>
                     {title}
                   </h2>
 
@@ -170,7 +172,7 @@ export const ProjectDemoViewer = ({
                     type="button"
                     aria-label={`Cerrar demo de ${title}`}
                     onClick={closeViewer}
-                    className="grid size-11 shrink-0 place-items-center rounded-full text-zinc-400 transition-[color,background-color,transform] duration-150 ease-out hover:bg-zinc-300/[0.06] hover:text-zinc-100 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-main active:scale-[0.97] active:bg-zinc-300/10"
+                    className="grid size-11 shrink-0 place-items-center rounded-full text-content-muted transition-[color,background-color,transform] duration-150 ease-out hover:bg-line/[0.06] hover:text-content-primary focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-main active:scale-[0.97] active:bg-line/10"
                   >
                     <IconX size={20} stroke={1.2} aria-hidden="true" />
                   </button>

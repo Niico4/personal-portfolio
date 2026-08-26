@@ -4,26 +4,7 @@ interface Service {
   description: string;
   features: string[];
   canBeUseful?: string;
-  accent: 'brand' | 'cyan' | 'teal';
 }
-
-const ACCENT_STYLES = {
-  brand: {
-    numberColor: 'text-brand-300',
-    borderLeftColor: 'border-brand-500',
-    bgCanBeUseful: 'bg-brand-300/[0.06] border-brand-300/10',
-  },
-  cyan: {
-    numberColor: 'text-cyan-300',
-    borderLeftColor: 'border-cyan-500',
-    bgCanBeUseful: 'bg-cyan-300/[0.06] border-cyan-300/10',
-  },
-  teal: {
-    numberColor: 'text-teal-300',
-    borderLeftColor: 'border-teal-500',
-    bgCanBeUseful: 'bg-teal-300/[0.06] border-teal-300/10',
-  },
-} as const;
 
 const SERVICES: Service[] = [
   {
@@ -38,7 +19,6 @@ const SERVICES: Service[] = [
     ],
     canBeUseful:
       'Puede servirte si hoy dependes demasiado de Excel, WhatsApp o procesos manuales.',
-    accent: 'brand',
   },
   {
     number: '02',
@@ -52,7 +32,6 @@ const SERVICES: Service[] = [
     ],
     canBeUseful:
       'Puede servirte si ya tienes una aplicación y necesitas seguir construyéndola.',
-    accent: 'cyan',
   },
   {
     number: '03',
@@ -66,7 +45,6 @@ const SERVICES: Service[] = [
     ],
     canBeUseful:
       'Puede servirte si tienes una idea, pero todavía no necesitas construir todo de una vez.',
-    accent: 'teal',
   },
 ];
 
@@ -74,46 +52,40 @@ export const MyServicesContenSection = () => {
   return (
     <div className="flex flex-col">
       {SERVICES.map(
-        (
-          { accent, description, features, number, title, canBeUseful },
-          index,
-        ) => {
-          const styles = ACCENT_STYLES[accent];
+        ({ description, features, number, title, canBeUseful }, index) => {
           const isFirstService = index === 0;
 
           return (
             <div key={number} className="flex flex-col">
               <div key={number} className="flex gap-4 items-start">
                 <span
-                  className={`${styles.numberColor} ${isFirstService ? 'mr-1' : ''}`}
+                  className={`text-brand-300 ${isFirstService ? 'mr-1' : ''}`}
                 >
                   {number}
                 </span>
 
-                <div
-                  className={`flex flex-col gap-2 border-l pl-4 ${styles.borderLeftColor}`}
-                >
-                  <h3 className="text-zinc-300 text-lg">{title}</h3>
+                <div className="flex flex-col gap-2 border-l border-brand-400/40 pl-4">
+                  <h3 className="text-lg font-medium text-content-primary">
+                    {title}
+                  </h3>
 
-                  <p className="text-sm text-zinc-400">{description}</p>
+                  <p className="text-sm text-content">{description}</p>
 
-                  <ul className="space-y-1 text-zinc-400 text-sm ml-2 list-inside list-disc">
+                  <ul className="ml-2 list-inside list-disc space-y-1 text-sm text-content">
                     {features.map((feature, index) => (
                       <li key={index}>{feature}</li>
                     ))}
                   </ul>
 
-                  <div
-                    className={`p-2 border rounded-md sm:mt-2 ${styles.bgCanBeUseful}`}
-                  >
-                    <p className="text-xs text-zinc-400 sm:text-sm">
+                  <div className="rounded-md border border-brand-400/10 bg-brand-400/[0.06] p-2 sm:mt-2">
+                    <p className="text-xs text-content sm:text-sm">
                       {canBeUseful}
                     </p>
                   </div>
                 </div>
               </div>
               {index !== SERVICES.length - 1 && (
-                <hr className="shrink-0 bg-zinc-900 border-none w-full h-[1px] my-5" />
+                <hr className="my-5 h-px w-full shrink-0 border-none bg-line/10" />
               )}
             </div>
           );

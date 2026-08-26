@@ -1,10 +1,6 @@
-import { happyMonkey } from '@/fonts';
-
 const Signature = ({ className }: { className?: string }) => {
   return (
-    <span
-      className={`text-xs sm:text-sm ${happyMonkey.className} ${className}`}
-    >
+    <span className={`text-xs font-normal italic sm:text-sm ${className}`}>
       — nicoo 🐐
     </span>
   );

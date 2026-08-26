@@ -51,13 +51,13 @@ export const FloatingNavbar = () => {
         max-w-[calc(100vw-2rem)]
         -translate-x-1/2
 
-        sm:bottom-[calc(2.5rem+env(safe-area-inset-bottom))]
+        sm:bottom-[calc(2rem+env(safe-area-inset-bottom))]
       "
     >
       <LayoutGroup id="floating-navbar">
         <motion.div
           layout
-          className="flex items-center gap-1"
+          className="flex items-center"
           transition={{
             layout: {
               type: 'spring',
@@ -72,14 +72,14 @@ export const FloatingNavbar = () => {
       items-center
       rounded-full
       border
-      border-zinc-300/[0.05]
-      bg-zinc-300/[0.06]
-      px-2
-      py-1.5
-      backdrop-blur-md
+      border-line/10
+      bg-main/85
+      px-1.5
+      py-1
+      backdrop-blur-xl
     "
           >
-            <ul className="flex items-center gap-2">
+            <ul className="flex items-center gap-1">
               {NAV_ITEMS.map((item) => (
                 <li key={item.href}>
                   <NavbarItem

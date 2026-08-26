@@ -30,7 +30,7 @@ export const NavbarItem = ({ item, isActive, activeHref }: NavbarItemProps) => {
           layoutDependency={activeHref}
           initial={false}
           className="
-              absolute inset-0 rounded-full border border-zinc-300/[0.08] bg-zinc-300/[0.05]
+              absolute inset-0 rounded-full border border-brand-400/[0.12] bg-brand-400/[0.08]
             "
           transition={{
             type: 'spring',
@@ -47,12 +47,12 @@ export const NavbarItem = ({ item, isActive, activeHref }: NavbarItemProps) => {
             group-active:scale-[0.97]
             ${
               isActive
-                ? 'text-zinc-300 group-hover:bg-zinc-300/[0.04] group-hover:text-zinc-100'
-                : 'text-zinc-400 group-hover:bg-zinc-800 group-hover:text-zinc-100'
+                ? 'text-brand-300 group-hover:bg-brand-400/[0.05] group-hover:text-brand-200'
+                : 'text-content-muted group-hover:bg-line/[0.06] group-hover:text-content-primary'
             }
           `}
       >
-        <Icon size={24} stroke={1} aria-hidden="true" />
+        <Icon size={23} stroke={1} aria-hidden="true" />
       </span>
     </Link>
   );

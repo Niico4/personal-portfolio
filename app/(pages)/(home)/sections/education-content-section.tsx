@@ -11,15 +11,15 @@ const EDUCATION_STATUS_MAP: Record<
 > = {
   inProgress: {
     label: 'En curso',
-    className: 'bg-yellow-700/10 border-yellow-700/10 text-yellow-700',
+    className: 'border-yellow-400/15 bg-yellow-400/[0.08] text-yellow-400',
   },
   onHold: {
     label: 'Pausado',
-    className: 'bg-orange-700/10 border-orange-700/10 text-orange-700',
+    className: 'border-orange-400/15 bg-orange-400/[0.08] text-orange-400',
   },
   completed: {
     label: 'Completado',
-    className: 'bg-green-700/10 border-green-700/10 text-green-700',
+    className: 'border-green-400/15 bg-green-400/[0.08] text-green-400',
   },
 };
 
@@ -48,14 +48,16 @@ export const EducationContent = ({
 
           return (
             <div className="flex flex-col" key={id}>
-              <div className="flex flex-col gap-2 items-start justify-start border-l border-zinc-500 pl-4 py-1">
-                <time className="text-xs text-zinc-500 sm:text-sm">
+              <div className="flex flex-col items-start justify-start gap-2 border-l border-line/15 py-1 pl-4">
+                <time className="text-xs text-content-muted sm:text-sm">
                   {getYearRange({ startDate, endDate, isCurrent })}
                 </time>
-                <h3 className="text-zinc-300 sm:text-lg">{academicTitle}</h3>
+                <h3 className="font-medium text-content-primary sm:text-lg">
+                  {academicTitle}
+                </h3>
 
                 <div className="w-full flex gap-4 items-center justify-between">
-                  <div className="text-xs text-zinc-400 sm:text-sm">
+                  <div className="text-xs text-content sm:text-sm">
                     <p>{institutionName}</p>
 
                     <span>{details}</span>
@@ -70,7 +72,7 @@ export const EducationContent = ({
               </div>
 
               {index !== educationList.length - 1 && (
-                <hr className="shrink-0 bg-zinc-900 border-none w-full h-[1px] my-4" />
+                <hr className="my-4 h-px w-full shrink-0 border-none bg-line/10" />
               )}
             </div>
           );

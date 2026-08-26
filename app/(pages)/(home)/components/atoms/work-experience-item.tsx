@@ -28,11 +28,11 @@ export const WorkExperienceItem = ({
   return (
     <article className="flex">
       <div className="flex w-10 shrink-0 justify-center">
-        <div className="flex w-0.5 flex-col items-center bg-[repeating-linear-gradient(to_bottom,#3f3f46_0_4px,transparent_6px_8px)]">
+        <div className="timeline-rail flex w-0.5 flex-col items-center">
           <div className="flex h-7 items-center">
             <span
               aria-hidden="true"
-              className={`size-2 shrink-0 rounded-full transition-colors duration-150 ${isOpen ? 'bg-brand-400/80' : 'bg-zinc-600'}`}
+              className={`size-2 shrink-0 rounded-full transition-colors duration-150 motion-reduce:transition-none ${isOpen ? 'bg-brand-400/80' : 'bg-content-muted/70'}`}
             />
           </div>
         </div>
@@ -42,19 +42,19 @@ export const WorkExperienceItem = ({
         <div className="flex items-center justify-between">
           <div className="flex flex-col gap-1">
             <div className="flex flex-wrap items-baseline gap-x-2">
-              <h3 className="text-xl leading-7 text-zinc-300 sm:text-2xl">
+              <h3 className="text-xl font-medium leading-7 text-content-primary sm:text-2xl">
                 {name}
               </h3>
 
-              <p className="text-xs text-zinc-400 sm:text-sm">
-                <span className="text-sm font-bold text-zinc-500 sm:text-base">
+              <p className="text-xs text-content-muted sm:text-sm">
+                <span className="text-sm font-medium text-brand-400/80 sm:text-base">
                   /
                 </span>{' '}
                 {role}
               </p>
             </div>
 
-            <p className="flex items-center gap-1 text-xs text-zinc-500 sm:text-sm">
+            <p className="flex items-center gap-1 text-xs text-content-muted sm:text-sm">
               {getDateRange({
                 startDate,
                 endDate,
@@ -77,9 +77,9 @@ export const WorkExperienceItem = ({
             aria-expanded={isOpen}
             aria-controls={detailsId}
             onClick={() => setIsOpen((current) => !current)}
-            className="group flex min-h-11 items-center"
+            className="group flex min-h-11 items-center focus-visible:outline-none"
           >
-            <span className="flex items-center gap-1 rounded-full border border-zinc-300/10 bg-zinc-300/5 py-0.5 pl-2.5 pr-2 text-xs font-medium text-zinc-500 transition-all duration-150 ease-out group-hover:border-zinc-300/20 group-hover:bg-zinc-300/[0.08] group-hover:text-zinc-300 group-focus-visible:ring-1 group-focus-visible:ring-brand-400 group-focus-visible:ring-offset-2 group-focus-visible:ring-offset-main group-active:translate-y-px group-active:border-zinc-300/25 group-active:bg-zinc-300/10 group-active:text-zinc-300">
+            <span className="flex items-center gap-1 rounded-full border border-line/10 bg-line/5 py-0.5 pl-2.5 pr-2 text-xs font-medium text-content-muted transition-all duration-150 ease-out group-hover:border-line/20 group-hover:bg-line/[0.08] group-hover:text-content-primary group-focus-visible:ring-1 group-focus-visible:ring-brand-400 group-focus-visible:ring-offset-2 group-focus-visible:ring-offset-main group-active:translate-y-px group-active:border-line/25 group-active:bg-line/10 group-active:text-content-primary motion-reduce:transform-none motion-reduce:transition-none">
               ver
               <span className="relative size-3" aria-hidden="true">
                 <IconPlus
@@ -104,7 +104,7 @@ export const WorkExperienceItem = ({
           className={`grid transition-all ease-[cubic-bezier(0.22,1,0.36,1)] ${isOpen ? 'grid-rows-[1fr] opacity-100 duration-150' : 'grid-rows-[0fr] opacity-0 duration-[120ms]'}`}
         >
           <div className="min-h-0 overflow-hidden">
-            <div className="mt-2 text-sm text-zinc-400 sm:text-base">
+            <div className="mt-2 text-sm text-content sm:text-base">
               <p>{description}</p>
 
               {features.length > 0 && (

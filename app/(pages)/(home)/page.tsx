@@ -29,17 +29,19 @@ const HomePage = async () => {
   const experiences = await getWorkExperience();
 
   return (
-    <main className="flex flex-col gap-6">
-      <Header contact={contact} professionalTitle={professionalTitle} />
+    <main className="flex flex-col gap-y-12 sm:gap-y-16">
+      <div className="flex flex-col gap-6">
+        <Header contact={contact} professionalTitle={professionalTitle} />
 
-      <section className="flex flex-col gap-3">
-        <SectionLabel label="Un poco sobre mí" />
+        <section className="flex flex-col gap-3">
+          <SectionLabel label="Un poco sobre mí" />
 
-        <PortableTextContent
-          value={aboutMe}
-          className="[&_p]:text-zinc-300 space-y-3"
-        />
-      </section>
+          <PortableTextContent
+            value={aboutMe}
+            className="space-y-3 text-content"
+          />
+        </section>
+      </div>
 
       <section className="flex flex-col gap-6">
         <SectionIntro
@@ -47,7 +49,7 @@ const HomePage = async () => {
           description="Proyectos nacidos de necesidades reales, llevados de la idea a una aplicación que funciona."
         />
 
-        <div className="flex flex-col gap-1 border-y border-zinc-300/10 divide-y divide-zinc-300/10">
+        <div className="flex flex-col divide-y divide-line/10 border-y border-line/10">
           {projects.map((project, index) => (
             <ProjectCard
               key={project.id}
@@ -87,27 +89,25 @@ const HomePage = async () => {
         <TechnologiesContent />
       </section>
 
-      <hr className="shrink-0 bg-zinc-900 border-none w-full h-[1px] my-4" />
-
-      <footer className="flex flex-col gap-3">
-        <p className="text-sm text-zinc-400 sm:text-base">
+      <footer className="flex flex-col gap-3 border-t border-line/10 pt-6">
+        <p className="text-sm text-content sm:text-base">
           <span>Diseñado.</span> <br />
           <span>Desarrollado.</span> <br />
           <span>Probablemente refactorizado otra vez.</span>
         </p>
 
         <p className="text-xs sm:text-sm">
-          <span className="text-zinc-500">Sí, otra vez :)</span> <br />
-          <Signature className="text-zinc-400" />
+          <span className="text-content-muted">Sí, otra vez :)</span> <br />
+          <Signature className="text-content-muted" />
         </p>
 
-        <hr className="shrink-0 bg-zinc-900 border-none w-full h-[1px] my-2" />
+        <hr className="my-2 h-px w-full shrink-0 border-none bg-line/10" />
 
         <div className="flex items-center justify-between">
-          <p className="text-xs text-zinc-500 sm:text-sm">
+          <p className="text-xs text-content-muted sm:text-sm">
             Bogotá D.C., Colombia
           </p>
-          <p className="text-xs text-zinc-500 sm:text-sm">
+          <p className="text-xs text-content-muted sm:text-sm">
             © {new Date().getFullYear()}
           </p>
 

@@ -4,14 +4,12 @@ export const SectionLabel = ({ label }: { label: string }) => {
   return (
     <div className="flex items-center gap-1">
       <div className="flex items-center gap-0">
-        {/* Círculo */}
-        <div className="size-1.5 rounded-full bg-zinc-500" />
+        <div className="size-1.5 rounded-full bg-content-muted" />
 
-        {/* Línea */}
-        <div className="w-6 h-[1px] rounded-full bg-zinc-500" />
+        <div className="h-px w-6 rounded-full bg-content-muted" />
       </div>
 
-      <p className="text-zinc-400 italic text-sm">{label}</p>
+      <p className="text-sm italic text-content-muted">{label}</p>
     </div>
   );
 };
