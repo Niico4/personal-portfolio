@@ -4,9 +4,18 @@
 
 @layer base {
   :root {
+    --color-main: 8 10 15;
+    --color-content-primary: 241 241 243;
+    --color-content-body: 181 181 189;
+    --color-content-muted: 133 133 143;
+    --color-line: 241 241 243;
     --primary: #34a6f4;
     --scrollbar-track: #333333;
     --scrollbar-size: 6px;
+  }
+
+  body {
+    color: rgb(var(--color-content-body));
   }
 
   @supports not selector(::-webkit-scrollbar) {
@@ -33,6 +42,14 @@
 }
 
 @layer utilities {
+  .timeline-rail {
+    background-image: repeating-linear-gradient(
+      to bottom,
+      rgb(var(--color-line) / 0.12) 0 4px,
+      transparent 6px 8px
+    );
+  }
+
   .link-underline {
     position: relative;
   }

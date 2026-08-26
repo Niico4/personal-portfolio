@@ -1,7 +1,5 @@
 import { FC } from 'react';
 
-import { happyMonkey } from '@/fonts';
-
 interface HeadingProps {
   as?: 'h1' | 'h2';
   children: React.ReactNode;
@@ -9,8 +7,8 @@ interface HeadingProps {
 }
 
 const headingStyles: Record<NonNullable<HeadingProps['as']>, string> = {
-  h1: 'text-3xl sm:text-4xl text-zinc-50',
-  h2: 'text-2xl sm:text-3xl text-zinc-100',
+  h1: 'text-3xl leading-[1.1] sm:text-[2rem]',
+  h2: 'text-[1.875rem] leading-[1.12] sm:text-[2rem]',
 };
 
 export const Heading: FC<HeadingProps> = ({
@@ -20,7 +18,7 @@ export const Heading: FC<HeadingProps> = ({
 }) => {
   return (
     <Tag
-      className={`${happyMonkey.className} ${headingStyles[Tag]} ${className ?? ''} z-20`}
+      className={`${headingStyles[Tag]} ${className ?? ''} z-20 font-medium tracking-[-0.025em] text-content-primary`}
     >
       {children}
     </Tag>

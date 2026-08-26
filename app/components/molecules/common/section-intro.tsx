@@ -7,10 +7,10 @@ interface SectionIntro {
 
 export const SectionIntro = ({ title, description }: SectionIntro) => {
   return (
-    <div className="flex flex-col gap-1 sm:gap-2">
+    <div className="flex flex-col gap-2">
       <Heading as="h2">{title}</Heading>
 
-      <p className="leading-relaxed text-sm text-zinc-400">{description}</p>
+      <p className="text-sm leading-relaxed text-content">{description}</p>
     </div>
   );
 };

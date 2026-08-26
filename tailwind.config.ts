@@ -10,7 +10,15 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        main: '#080A0F',
+        main: 'rgb(var(--color-main) / <alpha-value>)',
+
+        content: {
+          DEFAULT: 'rgb(var(--color-content-body) / <alpha-value>)',
+          primary: 'rgb(var(--color-content-primary) / <alpha-value>)',
+          muted: 'rgb(var(--color-content-muted) / <alpha-value>)',
+        },
+
+        line: 'rgb(var(--color-line) / <alpha-value>)',
 
         brand: {
           50: '#EDF4FE',

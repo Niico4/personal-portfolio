@@ -26,7 +26,7 @@ const SOCIAL_ACTION_CLASS_NAME =
   'group -my-[7px] -ml-3 grid size-11 items-center justify-items-end focus-visible:outline-none';
 
 const SOCIAL_ACTION_VISUAL_CLASS_NAME =
-  'grid size-[30px] place-items-center rounded-full border border-gray-300/[0.12] bg-gray-300/[0.06] text-gray-400 backdrop-blur-sm transition-all duration-150 ease-out group-hover:border-gray-300/20 group-hover:bg-gray-300/10 group-hover:text-zinc-200 group-focus-visible:ring-1 group-focus-visible:ring-brand-400 group-focus-visible:ring-offset-2 group-focus-visible:ring-offset-main group-active:translate-y-px group-active:border-gray-300/25 group-active:bg-gray-300/[0.12]';
+  'grid size-[30px] place-items-center rounded-full border border-line/[0.12] bg-line/[0.06] text-content-muted backdrop-blur-sm transition-all duration-150 ease-out group-hover:border-line/20 group-hover:bg-line/10 group-hover:text-content-primary group-focus-visible:ring-1 group-focus-visible:ring-brand-400 group-focus-visible:ring-offset-2 group-focus-visible:ring-offset-main group-active:translate-y-px group-active:border-line/25 group-active:bg-line/[0.12] motion-reduce:transform-none motion-reduce:transition-none';
 
 export const Header = ({
   contact,
@@ -67,21 +67,26 @@ export const Header = ({
           src={HERO_IMAGE}
           alt=""
           fill
-          preload
+          fetchPriority="high"
+          loading="eager"
           sizes="(min-width: 1280px) 40vw, (min-width: 640px) 92vw, 100vw"
           className="object-cover object-top [mask-image:linear-gradient(to_bottom,rgb(8,10,15)_0%,rgb(8,10,15)_35%,rgba(8,10,15,0.55)_55%,rgba(8,10,15,0.1)_75%,transparent_100%)]"
         />
       </div>
 
-      <section className="flex items-end gap-2 sm:gap-4">
-        <div aria-hidden="true" className="relative size-28 sm:size-32">
+      <section className="flex items-end gap-3 sm:gap-4">
+        <div
+          aria-hidden="true"
+          className="relative size-[6.5rem] shrink-0 sm:size-[7.25rem]"
+        >
           <Image
             src={AVATAR_IMAGE}
             alt=""
             fill
-            preload
-            sizes="(min-width: 640px) 128px, 112px"
-            className="rounded-full"
+            fetchPriority="high"
+            loading="eager"
+            sizes="(min-width: 640px) 116px, 104px"
+            className="rounded-full brightness-[0.92]"
           />
         </div>
 
@@ -89,18 +94,18 @@ export const Header = ({
           <article className="flex flex-col gap-0 ssm:gap-1">
             {isServicesPage ? (
               <h2
-                className={`text-3xl sm:text-4xl text-zinc-200 ${poetsenOne.className}`}
+                className={`text-3xl text-content-primary sm:text-4xl ${poetsenOne.className}`}
               >
                 Nicolás Garzón
               </h2>
             ) : (
               <h1
-                className={`text-3xl sm:text-4xl text-zinc-200 ${poetsenOne.className}`}
+                className={`text-3xl text-content-primary sm:text-4xl ${poetsenOne.className}`}
               >
                 Nicolás Garzón
               </h1>
             )}
-            <p className="text-sm text-zinc-200 sm:text-base">
+            <p className="text-sm text-content sm:text-base">
               {professionalTitle}
             </p>
           </article>

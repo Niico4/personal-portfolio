@@ -9,7 +9,7 @@ export default function SiteLayout({ children }: Readonly<SiteLayoutProps>) {
   return (
     <Providers>
       <FloatingNavbar />
-      <div className="mx-auto min-h-dvh w-full sm:w-11/12 xl:w-2/5 relative px-5 pb-20">
+      <div className="relative mx-auto min-h-dvh w-full px-5 pb-28 sm:w-11/12 sm:pb-32 xl:w-2/5">
         {children}
       </div>
     </Providers>

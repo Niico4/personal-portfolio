@@ -38,7 +38,7 @@ export const WorkExperienceTimeline = ({
     <>
       {experienceGroups.map(({ year, experiences }) => (
         <div key={year}>
-          <p className="w-10 text-center text-sm text-zinc-600">{year}</p>
+          <p className="w-10 text-center text-sm text-content-muted">{year}</p>
 
           {experiences.map((experience) => (
             <WorkExperienceItem key={experience.id} experience={experience} />
