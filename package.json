@@ -4,7 +4,7 @@
     "name": "portfolio"
   },
   "version": "4.0.0",
-  "description": "Personal portfolio of Nicolás Garzón - Software Developer",
+  "description": "my portfolio :b",
   "author": "Nicolás Garzón (https://github.com/niico4)",
   "private": true,
   "license": "MIT",
@@ -12,7 +12,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint ."
+    "lint": "biome lint .",
+    "format": "biome format --write .",
+    "check": "biome check .",
+    "check:fix": "biome check --write ."
   },
   "dependencies": {
     "@portabletext/react": "6.2.0",
@@ -30,17 +33,12 @@
     "zod": "4.4.3"
   },
   "devDependencies": {
+    "@biomejs/biome": "2.6.8",
     "@svgr/webpack": "8.1.0",
     "@types/node": "22.19.21",
     "@types/react": "19.2.17",
     "@types/react-dom": "19.2.3",
-    "eslint": "9.39.4",
-    "eslint-config-next": "16.2.9",
-    "eslint-config-prettier": "10.1.8",
-    "eslint-plugin-import": "2.32.0",
-    "eslint-plugin-prettier": "5.5.6",
     "postcss": "8.5.15",
-    "prettier": "3.8.4",
     "tailwindcss": "3.4.19",
     "typescript": "5.9.3"
   }

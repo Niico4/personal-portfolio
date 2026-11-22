@@ -1,6 +1,6 @@
 import type { PortableTextBlock } from '@portabletext/types';
 
-import { EducationStatusType } from '@/sanity/schemaTypes/profile';
+import type { EducationStatusType } from '@/sanity/schemaTypes/profile';
 
 export interface ProfileType {
   aboutMe: PortableTextBlock[] | null;

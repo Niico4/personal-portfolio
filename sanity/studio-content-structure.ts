@@ -1,4 +1,3 @@
-import type { StructureResolver } from 'sanity/structure';
 import {
   IconBriefcase,
   IconCode,
@@ -7,6 +6,7 @@ import {
   IconProgress,
   IconUser,
 } from '@tabler/icons-react';
+import type { StructureResolver } from 'sanity/structure';
 
 export const structure: StructureResolver = (S) =>
   S.list()

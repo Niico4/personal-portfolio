@@ -72,8 +72,8 @@ export const MyServicesContenSection = () => {
                   <p className="text-sm text-content">{description}</p>
 
                   <ul className="ml-2 list-inside list-disc space-y-1 text-sm text-content">
-                    {features.map((feature, index) => (
-                      <li key={index}>{feature}</li>
+                    {features.map((feature) => (
+                      <li key={feature}>{feature}</li>
                     ))}
                   </ul>
 

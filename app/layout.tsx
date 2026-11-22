@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
-import { monaSans } from './fonts';
 import { SEO_CONFIG } from './config/seo.config';
+import { monaSans } from './fonts';
 
 import '@/globals.css';
 

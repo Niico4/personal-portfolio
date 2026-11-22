@@ -1,9 +1,9 @@
 'use client';
 
-import { useId, useState } from 'react';
 import { IconMinus, IconPlus } from '@tabler/icons-react';
+import { useId, useState } from 'react';
 
-import { WorkExperienceType } from '@/sanity/lib/types/work-experience.type';
+import type { WorkExperienceType } from '@/sanity/lib/types/work-experience.type';
 import { calculateDuration } from '@/utils/calculate-duration';
 import { getDateRange } from '@/utils/get-date-range';
 

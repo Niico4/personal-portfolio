@@ -1,7 +1,7 @@
-import Link from 'next/link';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 
-import { NavItem } from './navbar.config';
+import type { NavItem } from './navbar.config';
 
 interface NavbarItemProps {
   item: NavItem;

@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/suspicious/noUnknownAtRules: Tailwind v3, but without migrating to v4*/
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -55,7 +56,7 @@
   }
 
   .link-underline::after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: 0;
     left: 50%;

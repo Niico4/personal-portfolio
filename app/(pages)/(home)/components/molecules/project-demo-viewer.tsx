@@ -185,6 +185,7 @@ export const ProjectDemoViewer = ({
                     aria-label={`Video demo de ${title}`}
                     controls
                     playsInline
+                    muted
                     preload="auto"
                     className="aspect-video max-h-full w-full bg-black object-contain"
                   />

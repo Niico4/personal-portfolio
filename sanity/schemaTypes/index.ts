@@ -1,11 +1,11 @@
-import { type SchemaTypeDefinition } from 'sanity';
+import type { SchemaTypeDefinition } from 'sanity';
 
-import { projectType } from './project';
-import { workExperienceType } from './work-experience';
-import { profileType } from './profile';
 import { portableTextType } from './objects/portable-text';
-import { technologyType } from './technology';
+import { profileType } from './profile';
+import { projectType } from './project';
 import { projectStatusType } from './project-status';
+import { technologyType } from './technology';
+import { workExperienceType } from './work-experience';
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [

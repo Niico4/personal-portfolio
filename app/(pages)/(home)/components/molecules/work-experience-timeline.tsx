@@ -1,4 +1,4 @@
-import { WorkExperienceType } from '@/sanity/lib/types/work-experience.type';
+import type { WorkExperienceType } from '@/sanity/lib/types/work-experience.type';
 
 import { WorkExperienceItem } from '../atoms/work-experience-item';
 

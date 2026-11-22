@@ -2,7 +2,7 @@ import 'server-only';
 
 import { sanityFetch } from '../client';
 import { PROJECT_LIST_QUERY } from '../queries/project.query';
-import { ProjectType } from '../types/project.type';
+import type { ProjectType } from '../types/project.type';
 
 export const getProjectList = (): Promise<ProjectType[]> => {
   return sanityFetch({
