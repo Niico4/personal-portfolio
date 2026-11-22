@@ -8,7 +8,6 @@ import {
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { poetsenOne } from '@/fonts';
 import type { ProfileType } from '@/sanity/lib/types/profile.type';
 
 const HERO_IMAGE = '/hero.webp';
@@ -94,13 +93,13 @@ export const Header = ({
           <article className="flex flex-col gap-0 ssm:gap-1">
             {isServicesPage ? (
               <h2
-                className={`text-3xl text-content-primary sm:text-4xl ${poetsenOne.className}`}
+                className={`text-content-primary font-display text-3xl sm:text-4xl`}
               >
                 Nicolás Garzón
               </h2>
             ) : (
               <h1
-                className={`text-3xl text-content-primary sm:text-4xl ${poetsenOne.className}`}
+                className={`text-content-primary font-display text-3xl sm:text-4xl`}
               >
                 Nicolás Garzón
               </h1>
