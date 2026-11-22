@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 import { SEO_CONFIG } from './config/seo.config';
-import { monaSans } from './fonts';
+import { monaSans, syne } from './fonts';
 
 import '@/globals.css';
 
@@ -75,9 +75,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang={SEO_CONFIG.language} className="bg-main">
+    <html
+      lang={SEO_CONFIG.language}
+      // biome-ignore lint/nursery/useTailwindStaticClassStrings: next/font returns a string that is not static
+      className={`${monaSans.variable} ${syne.variable} scrollbar-thin scrollbar-thumb-brand scrollbar-track-background hover:scrollbar-thumb-brand/95`}
+    >
       <body
-        className={`${monaSans.className} custom-theme min-h-dvh overflow-x-hidden overscroll-none bg-main font-normal text-content antialiased`}
+        className={`min-h-dvh overflow-x-hidden overscroll-none bg-background font-sans text-fg-default antialiased`}
       >
         <div className="relative z-10">{children}</div>
       </body>
