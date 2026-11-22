@@ -1,20 +1,20 @@
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 
-import { getProfile } from '@/sanity/lib/fetchers/profile.fetcher';
-import { createPageMetadata } from '@/utils/seo/create-page-metadata';
-import { SEO_CONFIG } from '@/config/seo.config';
-import { PortableTextContent } from '@/components/atoms/common/portable-text-content';
-import { getProjectList } from '@/sanity/lib/fetchers/project.fetcher';
-import { SectionIntro } from '@/components/molecules/common/section-intro';
 import { ProjectCard } from '@/(pages)/(home)/components/molecules/project-card';
-import { getWorkExperience } from '@/sanity/lib/fetchers/work-experience.fetcher';
+import { PortableTextContent } from '@/components/atoms/common/portable-text-content';
 import { SectionLabel } from '@/components/atoms/common/section-label';
-import { Header } from '@/components/layout/header';
 import Signature from '@/components/atoms/common/signature';
+import { Header } from '@/components/layout/header';
+import { SectionIntro } from '@/components/molecules/common/section-intro';
+import { SEO_CONFIG } from '@/config/seo.config';
+import { getProfile } from '@/sanity/lib/fetchers/profile.fetcher';
+import { getProjectList } from '@/sanity/lib/fetchers/project.fetcher';
+import { getWorkExperience } from '@/sanity/lib/fetchers/work-experience.fetcher';
+import { createPageMetadata } from '@/utils/seo/create-page-metadata';
 
 import { WorkExperienceTimeline } from './components/molecules/work-experience-timeline';
-import { TechnologiesContent } from './sections/technologies-content-section';
 import { EducationContent } from './sections/education-content-section';
+import { TechnologiesContent } from './sections/technologies-content-section';
 
 export const metadata: Metadata = createPageMetadata({
   title: SEO_CONFIG.defaultTitle,

@@ -1,0 +1,110 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.6.8/schema.json",
+
+  // Integración con Git: respeta los archivos ignorados.
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
+  },
+
+  // Archivos que Biome puede analizar.
+  // !! excluye completamente archivos o directorios.
+  "files": {
+    "includes": [
+      "**",
+      "!!**/.next",
+      "!!**/out",
+      "!!**/build",
+      "!!**/dist",
+      "!!**/coverage",
+      "!!**/next-env.d.ts"
+    ]
+  },
+
+  // Reglas generales de formato (reemplaza a Prettier)
+  "formatter": {
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 80,
+    "lineEnding": "lf",
+    "useEditorconfig": true
+  },
+
+  // Formato específico para JS, JSX, TS y TSX.
+  "javascript": {
+    "formatter": {
+      "quoteStyle": "single",
+      "jsxQuoteStyle": "double",
+      "semicolons": "always",
+      "trailingCommas": "all"
+    }
+  },
+
+  "linter": {
+    // Reglas recomendadas para cada framework.
+    "domains": {
+      "next": "recommended",
+      "react": "recommended"
+    },
+
+    "rules": {
+      // Activa las reglas recomendadas de Biome.
+      "preset": "recommended",
+
+      "correctness": {
+        // Detecta variables declaradas y no utilizadas.
+        "noUnusedVariables": "error"
+      },
+
+      "style": {
+        // Prefiere ES Modules en lugar de CommonJS.
+        "noCommonJs": "error"
+      },
+
+      "suspicious": {
+        "noExplicitAny": "error",
+
+        // Prohíbe console, excepto console.error.
+        "noConsole": {
+          "level": "error",
+          "options": {
+            "allow": ["error"]
+          }
+        }
+      }
+    }
+  },
+
+  // Acciones automáticas para mantener el código ordenado.
+  "assist": {
+    "actions": {
+      "source": {
+        "organizeImports": {
+          "level": "on",
+          "options": {
+            // Orden de grupos:
+            // 1. Node.js y paquetes externos.
+            // 2. Aliases internos (@/).
+            // 3. Rutas relativas (./ y ../).
+            // Separa cada grupo con una línea vacía.
+            "groups": [
+              [":NODE:", ":PACKAGE:"],
+              ":BLANK_LINE:",
+              ":ALIAS:",
+              ":BLANK_LINE:",
+              ":PATH:"
+            ],
+
+            // Orden natural: item2 antes que item10.
+            "identifierOrder": "natural",
+
+            // No reordena imports que solo generan efectos.
+            // Ejemplo: import './globals.css';
+            "sortBareImports": false
+          }
+        }
+      }
+    }
+  }
+}

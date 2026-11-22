@@ -1,15 +1,14 @@
-import type { Metadata } from 'next';
 import { IconArrowUpRight } from '@tabler/icons-react';
+import type { Metadata } from 'next';
 
+import { Heading } from '@/components/atoms/common/heading';
+import { SectionLabel } from '@/components/atoms/common/section-label';
+import Signature from '@/components/atoms/common/signature';
+import { SectionIntro } from '@/components/molecules/common/section-intro';
 import { getProfile } from '@/sanity/lib/fetchers/profile.fetcher';
 import { createPageMetadata } from '@/utils/seo/create-page-metadata';
-import { SectionLabel } from '@/components/atoms/common/section-label';
-import { SectionIntro } from '@/components/molecules/common/section-intro';
-import Signature from '@/components/atoms/common/signature';
-import { Heading } from '@/components/atoms/common/heading';
 
 import { Header } from '../../components/layout/header';
-
 import { MyServicesContenSection } from './sections/services-content-section';
 
 export const metadata: Metadata = createPageMetadata({

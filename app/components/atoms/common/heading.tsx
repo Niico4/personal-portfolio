@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import type { FC } from 'react';
 
 interface HeadingProps {
   as?: 'h1' | 'h2';

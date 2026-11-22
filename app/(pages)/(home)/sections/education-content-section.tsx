@@ -1,5 +1,5 @@
-import { ProfileType } from '@/sanity/lib/types/profile.type';
-import { EducationStatusType } from '@/sanity/schemaTypes/profile';
+import type { ProfileType } from '@/sanity/lib/types/profile.type';
+import type { EducationStatusType } from '@/sanity/schemaTypes/profile';
 import { getYearRange } from '@/utils/get-year-range';
 
 const EDUCATION_STATUS_MAP: Record<

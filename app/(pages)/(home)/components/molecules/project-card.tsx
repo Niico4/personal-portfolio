@@ -1,13 +1,13 @@
 'use client';
 
-import { useId, useState } from 'react';
 import {
-  IconChevronDown,
   IconArrowUpRight,
   IconBrandGithub,
+  IconChevronDown,
 } from '@tabler/icons-react';
+import { useId, useState } from 'react';
 
-import { ProjectType } from '@/sanity/lib/types/project.type';
+import type { ProjectType } from '@/sanity/lib/types/project.type';
 
 import { ProjectDemoViewer } from './project-demo-viewer';
 
@@ -88,8 +88,8 @@ export const ProjectCard = ({
                 </p>
 
                 <ul className="ml-2 list-inside list-disc space-y-2 text-sm text-content sm:text-base">
-                  {features.map((feature, index) => (
-                    <li key={index}>{feature}</li>
+                  {features.map((feature) => (
+                    <li key={feature}>{feature}</li>
                   ))}
                 </ul>
 

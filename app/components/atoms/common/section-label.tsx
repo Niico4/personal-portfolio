@@ -1,5 +1,3 @@
-import React from 'react';
-
 export const SectionLabel = ({ label }: { label: string }) => {
   return (
     <div className="flex items-center gap-1">

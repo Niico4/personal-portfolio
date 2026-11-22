@@ -1,8 +1,8 @@
 import 'server-only';
 
-import { WORK_EXPERIENCE_LIST_QUERY } from '../queries/work-experience.query';
-import { WorkExperienceType } from '../types/work-experience.type';
 import { sanityFetch } from '../client';
+import { WORK_EXPERIENCE_LIST_QUERY } from '../queries/work-experience.query';
+import type { WorkExperienceType } from '../types/work-experience.type';
 
 export const getWorkExperience = (): Promise<WorkExperienceType[]> => {
   return sanityFetch({

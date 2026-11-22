@@ -16,20 +16,20 @@
   grid-template-columns: repeat(14, 1fr);
   grid-template-rows: repeat(14, 1fr);
   grid-template-areas:
-    'a1  a2  a3  a4  a5  top0  top0  top0  top0  a10 a11 a12 a13 a14'
-    'b1  b2  b3  top1 top1 top1 top1 top1 top1 top1 top1 b12 b13 b14'
-    'c1 c2 top2 top2 top2 top2 top2 top2 top2 top2 top2 top2 c13 c14'
-    'd1 top3 top3 top3 top3 top3 top3 top3 top3 top3 top3 top3 top3 d14'
-    'e1 top3 top3 top3 top3 top3 top3 top3 top3 top3 top3 top3 top3 e14'
-    'f1 top3 top3 top3 top3 top3 top3 top3 top3 top3 top3 top3 top3 f14'
-    'top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4'
-    'top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4'
-    'top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4'
-    'top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4'
-    'top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4'
-    'top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4'
-    'st0 st0 an4 st1 an7 st2 an10 an10 st3 an13 st4 an16 st5 st5'
-    'an1 an2 an3 an5 an6 an8 an9 an9 an11 an12 an14 an15 an17 an18';
+    "a1  a2  a3  a4  a5  top0  top0  top0  top0  a10 a11 a12 a13 a14"
+    "b1  b2  b3  top1 top1 top1 top1 top1 top1 top1 top1 b12 b13 b14"
+    "c1 c2 top2 top2 top2 top2 top2 top2 top2 top2 top2 top2 c13 c14"
+    "d1 top3 top3 top3 top3 top3 top3 top3 top3 top3 top3 top3 top3 d14"
+    "e1 top3 top3 top3 top3 top3 top3 top3 top3 top3 top3 top3 top3 e14"
+    "f1 top3 top3 top3 top3 top3 top3 top3 top3 top3 top3 top3 top3 f14"
+    "top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4"
+    "top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4"
+    "top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4"
+    "top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4"
+    "top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4"
+    "top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4 top4"
+    "st0 st0 an4 st1 an7 st2 an10 an10 st3 an13 st4 an16 st5 st5"
+    "an1 an2 an3 an5 an6 an8 an9 an9 an11 an12 an14 an15 an17 an18";
   animation: upNDown 0.5s infinite;
 }
 
@@ -202,7 +202,7 @@
   width: 20px;
   height: 50px;
   background-color: var(--ghost-eye-color);
-  content: '';
+  content: "";
   transform: translateX(10px);
 }
 
@@ -213,7 +213,7 @@
   width: 40px;
   height: 30px;
   background-color: var(--ghost-eye-color);
-  content: '';
+  content: "";
   transform: translateY(10px);
 }
 

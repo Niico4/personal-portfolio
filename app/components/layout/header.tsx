@@ -1,5 +1,3 @@
-import Link from 'next/link';
-import Image from 'next/image';
 import {
   IconBrandGithub,
   IconBrandLinkedin,
@@ -7,9 +5,11 @@ import {
   IconMailShare,
   IconUser,
 } from '@tabler/icons-react';
+import Image from 'next/image';
+import Link from 'next/link';
 
-import { ProfileType } from '@/sanity/lib/types/profile.type';
 import { poetsenOne } from '@/fonts';
+import type { ProfileType } from '@/sanity/lib/types/profile.type';
 
 const HERO_IMAGE = '/hero.webp';
 const AVATAR_IMAGE = '/avatar-profile.webp';

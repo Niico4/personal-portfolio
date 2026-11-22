@@ -1,13 +1,13 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
 import { AnimatePresence, LayoutGroup, motion } from 'framer-motion';
+import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 import { ScrollToTopButton } from '@/(pages)/(home)/components/atoms/scroll-to-top-button';
 
-import { NavbarItem } from './navbar-item';
 import { NAV_ITEMS } from './navbar.config';
+import { NavbarItem } from './navbar-item';
 
 const getActiveHref = (pathname: string) => {
   return NAV_ITEMS.find((item) => {
@@ -25,6 +25,7 @@ export const FloatingNavbar = () => {
 
   const [showScrollToTop, setShowScrollToTop] = useState(false);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies(pathname): Reobserve header after navigation
   useEffect(() => {
     const header = document.getElementById('header');
 
