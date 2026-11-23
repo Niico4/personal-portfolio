@@ -1,6 +1,11 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
 :root {
+  color-scheme: dark;
+
+  /* ========= Foundations =========  */
   --neutral-50: oklch(95.3% 0.003 265);
   --neutral-100: oklch(92.1% 0.005 265);
   --neutral-200: oklch(88.8% 0.007 265);
@@ -14,19 +19,59 @@
   --neutral-900: oklch(20.4% 0.014 265);
   --neutral-950: oklch(16% 0.012 265);
 
-  /* Background */
   --background: oklch(0.1504 0.0134 270.18);
-
-  /* Brand */
   --brand-base: oklch(0.6983 0.1513 243.77);
+  --brand-secondary: oklch(0.3264 0.0469 290.77);
+
+  /* ========= shadcn/ui =========  */
+  --foreground: var(--neutral-50);
+
+  --card: var(--neutral-900);
+  --card-foreground: var(--neutral-50);
+
+  --popover: var(--neutral-850);
+  --popover-foreground: var(--neutral-50);
+
+  --primary: var(--brand-base);
+  --primary-foreground: var(--neutral-950);
+
+  --secondary: var(--brand-secondary);
+  --secondary-foreground: var(--neutral-200);
+
+  --muted: var(--neutral-850);
+  --muted-foreground: var(--neutral-400);
+
+  --accent: var(--neutral-800);
+  --accent-foreground: var(--neutral-50);
+
+  --destructive: oklch(0.704 0.191 22.216);
+  --destructive-foreground: var(--neutral-950);
+
+  --border: var(--neutral-800);
+  --input: var(--neutral-800);
+  --ring: var(--brand-base);
+
+  --radius: 0.625rem;
 }
 
 @theme inline {
-  /* Typography */
+  /* ========= Foundations =========  */
   --font-sans: var(--font-mona-sans);
   --font-display: var(--font-syne);
 
-  /* Foreground */
+  --color-neutral-50: var(--neutral-50);
+  --color-neutral-100: var(--neutral-100);
+  --color-neutral-200: var(--neutral-200);
+  --color-neutral-300: var(--neutral-300);
+  --color-neutral-400: var(--neutral-400);
+  --color-neutral-500: var(--neutral-500);
+  --color-neutral-600: var(--neutral-600);
+  --color-neutral-700: var(--neutral-700);
+  --color-neutral-800: var(--neutral-800);
+  --color-neutral-850: var(--neutral-850);
+  --color-neutral-900: var(--neutral-900);
+  --color-neutral-950: var(--neutral-950);
+
   --color-fg-strong: var(--neutral-50);
   --color-fg-emphasis: var(--neutral-100);
   --color-fg-default: var(--neutral-200);
@@ -35,12 +80,44 @@
   --color-fg-muted: var(--neutral-600);
   --color-fg-inverse: var(--neutral-800);
 
-  /* Background */
   --color-background: var(--background);
-
-  /* Borders */
   --color-border-subtle: var(--neutral-900);
 
-  /* Brand */
   --color-brand: var(--brand-base);
+
+  /* ========= shadcn/ui Colors =========*/
+  --color-foreground: var(--foreground);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
 }
