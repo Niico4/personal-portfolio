@@ -8,8 +8,13 @@
     "useIgnoreFile": true
   },
 
+  "tailwind": {
+    "stylesheet": "./app/globals.css"
+  },
+
   // Archivos que Biome puede analizar.
-  // !! excluye completamente archivos o directorios.
+  // ! excluye del linting y formato, pero permite analizar tipos.
+  // !! excluye completamente, incluso del análisis de tipos.
   "files": {
     "includes": [
       "**",
@@ -18,7 +23,8 @@
       "!!**/build",
       "!!**/dist",
       "!!**/coverage",
-      "!!**/next-env.d.ts"
+      "!**/next-env.d.ts",
+      "!app/components/ui"
     ]
   },
 
@@ -72,6 +78,13 @@
             "allow": ["error"]
           }
         }
+      },
+
+      "nursery": {
+        // Ordena las clases siguiendo la convención de tailwind v4
+        "useTailwindSortedClasses": "warn",
+        // Evita construir clases dinámicas que Tailwind no pueda detectar
+        "useTailwindStaticClassStrings": "warn"
       }
     }
   },

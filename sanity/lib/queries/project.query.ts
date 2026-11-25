@@ -7,32 +7,51 @@ const PROJECT_FIELDS = `
   shortDescription,
   description,
 
-  "features": features[],
-  
-  "status": status->{
-    "id": _id,
+  "technologyGroups": coalesce(technologyGroups[]{
+    "id": _key,
     name,
-    "value": value.current
-  },
+    "technologies": technologies[]->{
+      "id": _id,
+      name
+    }
+  }, []),
 
-  "links": {
-    "demoVideo": links.demoVideo.asset->url,
-    "liveURL": links.liveDemoUrl,
-    "repositoryURL": links.repositoryUrl
-  },
+  media {
+    "coverURL": cover.asset->url,
+    "iconURL": icon.asset->url,
+    "demoVideoURL": demoVideo.asset->url,
 
-  "technologies": technologies[]->{
-    "id": _id,
-    name
+    "gallery": coalesce(gallery[]{
+      "id": _key,
+      "url": asset->url,
+      alt,
+      caption,
+      "width": asset->metadata.dimensions.width,
+      "height": asset->metadata.dimensions.height
+    }, []),
+
+    "liveUrl": liveDemoUrl,
+    repositoryUrl,
+    figmaUrl
   }
 `;
 
 export const PROJECT_LIST_QUERY = groq`
   *[
-    _type == "project" && 
+    _type == "project" &&
     defined(slug.current) &&
     isVisible == true
   ] | order(displayOrder asc) {
+    ${PROJECT_FIELDS}
+  }
+`;
+
+export const PROJECT_DETAIL_QUERY = groq`
+  *[
+    _type == "project" &&
+    slug.current == $slug &&
+    isVisible == true
+  ][0] {
     ${PROJECT_FIELDS}
   }
 `;

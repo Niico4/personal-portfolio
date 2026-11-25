@@ -1,23 +1,5 @@
 import { IconUserCircle } from '@tabler/icons-react';
-import { defineArrayMember, defineField, defineType } from 'sanity';
-
-const EDUCATION_STATUS_OPTIONS = [
-  {
-    title: 'In Progress',
-    value: 'inProgress',
-  },
-  {
-    title: 'Completed',
-    value: 'completed',
-  },
-  {
-    title: 'On Hold',
-    value: 'onHold',
-  },
-] as const;
-
-export type EducationStatusType =
-  (typeof EDUCATION_STATUS_OPTIONS)[number]['value'];
+import { defineField, defineType } from 'sanity';
 
 export const profileType = defineType({
   name: 'profile',
@@ -34,10 +16,6 @@ export const profileType = defineType({
     {
       name: 'contact',
       title: 'Contact & Links',
-    },
-    {
-      name: 'education',
-      title: 'Education',
     },
   ],
 
@@ -59,12 +37,12 @@ export const profileType = defineType({
     defineField({
       name: 'aboutMeDescription',
       title: 'Introduction',
-      type: 'portableText',
+      type: 'richText',
       group: 'identity',
       description:
         'Main introduction shown in the portfolio. Keep it focused on your experience, what you do and how you work.',
       validation: (Rule) =>
-        Rule.required().error('Add your profile introduction.'),
+        Rule.required().min(1).error('Add your profile introduction.'),
     }),
 
     defineField({
@@ -98,11 +76,15 @@ export const profileType = defineType({
           if (!resume) return true;
 
           const value = resume as {
-            file?: unknown;
+            file?: {
+              asset?: {
+                _ref?: string;
+              };
+            };
             externalUrl?: string;
           };
 
-          if (!value.file && !value.externalUrl) {
+          if (!value.file?.asset?._ref && !value.externalUrl) {
             return 'Add a PDF or external URL, or remove the empty resume field.';
           }
 
@@ -148,154 +130,16 @@ export const profileType = defineType({
       validation: (Rule) =>
         Rule.required().error('Add your contact information.'),
     }),
-
-    defineField({
-      name: 'education',
-      title: 'Education',
-      type: 'array',
-      group: 'education',
-      description:
-        'Education and training shown in the portfolio. Drag the items to change their display order.',
-      of: [
-        defineArrayMember({
-          name: 'institution',
-          title: 'Education Entry',
-          type: 'object',
-
-          fields: [
-            defineField({
-              name: 'academicTitle',
-              title: 'Program / Qualification',
-              type: 'string',
-              description:
-                'Name of the degree, program, course or certification.',
-              validation: (Rule) =>
-                Rule.min(2)
-                  .max(150)
-                  .error('Enter a program name under 150 characters.'),
-            }),
-
-            defineField({
-              name: 'institutionName',
-              title: 'Institution',
-              type: 'string',
-              description:
-                'University, institution, academy or learning platform. Example: Udemy.',
-              validation: (Rule) =>
-                Rule.min(2)
-                  .max(100)
-                  .error('Enter an institution name under 100 characters.'),
-            }),
-
-            defineField({
-              name: 'startDate',
-              title: 'Start Date',
-              type: 'date',
-              description:
-                'When the program started. Use the first day of the month if only the month and year matter.',
-              validation: (Rule) =>
-                Rule.required().error('Enter the start date.'),
-            }),
-
-            defineField({
-              name: 'status',
-              title: 'Status',
-              type: 'string',
-              description:
-                'Choose the option that best describes the current state of this program.',
-              options: {
-                list: EDUCATION_STATUS_OPTIONS.map((value) => value),
-                layout: 'dropdown',
-              },
-              initialValue: 'inProgress',
-              validation: (Rule) =>
-                Rule.required().error(
-                  'Select the current status of this program.',
-                ),
-            }),
-
-            defineField({
-              name: 'endDate',
-              title: 'End / Pause Date',
-              type: 'date',
-              description:
-                'When the program ended or was paused. Leave empty while it is in progress.',
-              hidden: ({ parent }) => parent?.status === 'inProgress',
-              validation: (Rule) =>
-                Rule.custom((endDate, { parent }) => {
-                  const { startDate, status } = (parent ?? {}) as {
-                    startDate?: string;
-                    status?: EducationStatusType;
-                  };
-
-                  if (status === 'inProgress') {
-                    if (endDate) {
-                      return 'Remove the end date while the program is in progress.';
-                    }
-
-                    return true;
-                  }
-
-                  if (!endDate) {
-                    return status === 'onHold'
-                      ? 'Enter the date when the program was paused.'
-                      : 'Enter the program end date.';
-                  }
-
-                  if (startDate && endDate < startDate) {
-                    return 'The end date cannot be earlier than the start date.';
-                  }
-
-                  return true;
-                }),
-            }),
-
-            defineField({
-              name: 'details',
-              title: 'Additional Details',
-              type: 'text',
-              rows: 2,
-              description:
-                'Extra context worth showing, such as the location or study format.',
-            }),
-          ],
-
-          preview: {
-            select: {
-              academicTitle: 'academicTitle',
-              institutionName: 'institutionName',
-              status: 'status',
-            },
-
-            prepare({ academicTitle, institutionName, status }) {
-              const statusLabel =
-                EDUCATION_STATUS_OPTIONS.find(
-                  (option) => option.value === status,
-                )?.title ?? 'No status';
-
-              return {
-                title: academicTitle ?? 'Untitled education',
-                subtitle: `${institutionName ?? 'No institution'} · ${statusLabel}`,
-              };
-            },
-          },
-        }),
-      ],
-    }),
   ],
 
   preview: {
     select: {
       professionalTitle: 'professionalTitle',
-      location: 'location',
     },
-
-    prepare({ professionalTitle, location }) {
-      const details = [professionalTitle, location].filter(Boolean).join(' · ');
-
+    prepare({ professionalTitle }) {
       return {
         title: 'Profile',
-        subtitle: details || 'Profile information',
+        subtitle: professionalTitle || 'Profile information',
       };
     },
   },

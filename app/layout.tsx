@@ -1,7 +1,9 @@
 import type { Metadata } from 'next';
 
+import { cn } from '@/lib/utils';
+
 import { SEO_CONFIG } from './config/seo.config';
-import { monaSans } from './fonts';
+import { monaSans, syne } from './fonts';
 
 import '@/globals.css';
 
@@ -14,58 +16,37 @@ export const metadata: Metadata = {
   },
 
   description: SEO_CONFIG.defaultDescription,
-
   applicationName: SEO_CONFIG.applicationName,
 
   authors: [
     {
-      name: SEO_CONFIG.siteName,
+      name: SEO_CONFIG.author.name,
+      url: SEO_CONFIG.siteUrl,
     },
   ],
 
-  creator: SEO_CONFIG.siteName,
-  publisher: SEO_CONFIG.siteName,
+  creator: SEO_CONFIG.author.name,
+  publisher: SEO_CONFIG.author.name,
 
-  robots: SEO_CONFIG.indexingEnabled
-    ? {
-        index: true,
-        follow: true,
-        googleBot: {
-          index: true,
-          follow: true,
-          'max-image-preview': 'large',
-          'max-snippet': -1,
-          'max-video-preview': -1,
-        },
-      }
-    : {
-        index: false,
-        follow: false,
-        googleBot: {
-          index: false,
-          follow: false,
-        },
-      },
+  robots: {
+    index: SEO_CONFIG.indexingEnabled,
+    follow: SEO_CONFIG.indexingEnabled,
+  },
 
   openGraph: {
     type: 'website',
-    locale: SEO_CONFIG.locale,
     siteName: SEO_CONFIG.siteName,
-    title: SEO_CONFIG.defaultTitle,
-    description: SEO_CONFIG.defaultDescription,
+    locale: SEO_CONFIG.locale,
+    title: SEO_CONFIG.social.title,
+    description: SEO_CONFIG.social.description,
     images: [SEO_CONFIG.defaultImage],
   },
 
   twitter: {
     card: 'summary_large_image',
-    title: SEO_CONFIG.defaultTitle,
-    description: SEO_CONFIG.defaultDescription,
-    images: [
-      {
-        url: SEO_CONFIG.defaultImage.url,
-        alt: SEO_CONFIG.defaultImage.alt,
-      },
-    ],
+    title: SEO_CONFIG.social.title,
+    description: SEO_CONFIG.social.description,
+    images: [SEO_CONFIG.defaultImage],
   },
 };
 
@@ -75,11 +56,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang={SEO_CONFIG.language} className="bg-main">
-      <body
-        className={`${monaSans.className} custom-theme min-h-dvh overflow-x-hidden overscroll-none bg-main font-normal text-content antialiased`}
-      >
-        <div className="relative z-10">{children}</div>
+    <html
+      lang={SEO_CONFIG.language}
+      className={cn(
+        'scrollbar-thin',
+        'scrollbar-thumb-brand',
+        'scrollbar-track-background',
+        'hover:scrollbar-thumb-brand/95',
+        monaSans.variable,
+        syne.variable,
+      )}
+    >
+      <body className="bg-background font-sans text-fg-default antialiased">
+        {children}
       </body>
     </html>
   );

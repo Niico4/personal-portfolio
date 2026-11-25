@@ -1,17 +1,16 @@
+import type { ReactNode } from 'react';
+
 import { FloatingNavbar } from '@/components/layout/navbar/navbar';
-import Providers from '@/providers';
+import { Footer } from '@/components/layout/footer';
 
-type SiteLayoutProps = {
-  children: React.ReactNode;
-};
-
-export default function SiteLayout({ children }: Readonly<SiteLayoutProps>) {
+export default function PortfolioLayout({ children }: { children: ReactNode }) {
   return (
-    <Providers>
+    <div className="mx-auto min-h-dvh w-full max-w-3xl px-5 py-20 sm:px-8">
       <FloatingNavbar />
-      <div className="relative mx-auto min-h-dvh w-full px-5 pb-28 sm:w-11/12 sm:pb-32 xl:w-2/5">
-        {children}
-      </div>
-    </Providers>
+
+      <main className="flex-1">{children}</main>
+
+      <Footer />
+    </div>
   );
 }

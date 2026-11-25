@@ -18,8 +18,8 @@ export const projectType = defineType({
       title: 'Technologies & Tools',
     },
     {
-      name: 'links',
-      title: 'Links & Media',
+      name: 'media',
+      title: 'Media',
     },
     {
       name: 'settings',
@@ -31,12 +31,7 @@ export const projectType = defineType({
     {
       title: 'Display Order',
       name: 'displayOrderAsc',
-      by: [
-        {
-          field: 'displayOrder',
-          direction: 'asc',
-        },
-      ],
+      by: [{ field: 'displayOrder', direction: 'asc' }],
     },
   ],
 
@@ -47,12 +42,8 @@ export const projectType = defineType({
       type: 'string',
       group: 'overview',
       description:
-        'The public name of the project. Used in cards, headings and the project page.',
-      validation: (Rule) =>
-        Rule.required()
-          .min(2)
-          .max(100)
-          .error('Enter a project name between 2 and 100 characters long.'),
+        'The public name of the project. Used in cards, headings and metadata.',
+      validation: (Rule) => Rule.required().min(2).max(100),
     }),
 
     defineField({
@@ -60,22 +51,11 @@ export const projectType = defineType({
       title: 'URL Slug',
       type: 'slug',
       group: 'overview',
-      description:
-        'Used in the project URL. Generate it from the project name and only change it when needed.',
+      description: 'Used in the project URL. Only change it when necessary.',
       options: {
         source: 'title',
         maxLength: 96,
       },
-      validation: (Rule) =>
-        Rule.required().error('Generate a URL slug for this project.'),
-    }),
-
-    defineField({
-      name: 'status',
-      title: 'Status',
-      type: 'reference',
-      group: 'overview',
-      to: [{ type: 'projectStatus' }],
       validation: (Rule) => Rule.required(),
     }),
 
@@ -86,93 +66,184 @@ export const projectType = defineType({
       group: 'overview',
       rows: 3,
       description:
-        'A quick explanation of what the project does. This is shown before opening the full project details.',
-      validation: (Rule) =>
-        Rule.required()
-          .max(220)
-          .error('Keep the short description under 220 characters.'),
+        'A short introduction used in project cards, page headers and metadata.',
+      validation: (Rule) => Rule.required().max(220),
     }),
 
     defineField({
       name: 'description',
       title: 'Project Description',
-      type: 'text',
+      type: 'richText',
       group: 'overview',
       description:
-        'Briefly explain what the project does, why it exist or the context needed to understand it.',
-      validation: (Rule) =>
-        Rule.required().error('Add a description of this project.'),
+        'Explain the context, your contribution, the decisions you made and what you built.',
+      validation: (Rule) => Rule.required().min(1),
     }),
 
     defineField({
-      name: 'features',
-      title: 'Key Highlights',
-      type: 'array',
-      group: 'overview',
-      description:
-        'Add the most relevant details about the project. Focus on things that help explain what makes it useful or interesting.',
-      of: [
-        defineArrayMember({
-          type: 'string',
-        }),
-      ],
-      validation: (Rule) =>
-        Rule.required()
-          .min(1)
-          .max(6)
-          .error('Add between 1 and 6 project highlights.'),
-    }),
-
-    defineField({
-      name: 'technologies',
-      title: 'Technologies & Tools',
+      name: 'technologyGroups',
+      title: 'Technology Groups',
       type: 'array',
       group: 'technologies',
       description:
-        'Technologies, tools and platforms used in the project. Optional when the project is still a concept and the stack has not been decided.',
+        'Organize the technologies and tools used in the project into meaningful groups.',
       of: [
         defineArrayMember({
-          type: 'reference',
-          to: [{ type: 'technology' }],
+          name: 'technologyGroup',
+          title: 'Technology Group',
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'name',
+              title: 'Group Name',
+              type: 'string',
+              description:
+                'Example: Frontend, Backend & Data, Design or Tools.',
+              validation: (Rule) => Rule.required(),
+            }),
+
+            defineField({
+              name: 'technologies',
+              title: 'Technologies',
+              type: 'array',
+              of: [
+                defineArrayMember({
+                  type: 'reference',
+                  to: [{ type: 'technology' }],
+                }),
+              ],
+              validation: (Rule) => Rule.required().min(1).unique(),
+            }),
+          ],
+
+          preview: {
+            select: {
+              title: 'name',
+              technologies: 'technologies',
+            },
+
+            prepare({ title, technologies }) {
+              const count = technologies?.length ?? 0;
+
+              return {
+                title,
+                subtitle: `${count} technologies`,
+              };
+            },
+          },
         }),
       ],
-
-      validation: (Rule) => Rule.unique(),
     }),
 
     defineField({
-      name: 'links',
-      title: 'Links & Media',
+      name: 'media',
+      title: 'Media',
       type: 'object',
-      group: 'links',
-      description:
-        'Add only the links or media that visitors are allowed to access.',
+      group: 'media',
+      description: 'Manage visual assets, project showcases and public links.',
+      validation: (Rule) =>
+        Rule.required().custom((media) => {
+          const value = media as
+            | {
+                demoVideo?: {
+                  asset?: {
+                    _ref?: string;
+                  };
+                };
+                gallery?: unknown[];
+              }
+            | undefined;
+
+          if (value?.demoVideo?.asset?._ref && value.gallery?.length) {
+            return 'Choose either a demo video or an image gallery, not both.';
+          }
+
+          return true;
+        }),
+
       fields: [
         defineField({
+          name: 'cover',
+          title: 'Cover Image',
+          type: 'image',
+          description: 'Main image used in project cards and social previews.',
+          validation: (Rule) => Rule.required().assetRequired(),
+        }),
+
+        defineField({
+          name: 'icon',
+          title: 'Project Icon',
+          type: 'image',
+          description:
+            'Optional project icon, preferably with a transparent background.',
+        }),
+
+        defineField({
           name: 'demoVideo',
-          title: 'Demo Video',
+          title: 'Video Showcase',
           type: 'file',
           description:
-            'Optional. Upload a short video showing the project in use.',
+            'Upload a video showcasing the project. Use this instead of an image gallery.',
           options: {
-            accept: 'video/mp4,video/webm,video/quicktime',
+            accept: 'video/mp4,video/webm',
           },
+        }),
+
+        defineField({
+          name: 'gallery',
+          title: 'Image Gallery',
+          type: 'array',
+          description:
+            'Upload screenshots or design previews in the order they should appear.',
+          of: [
+            defineArrayMember({
+              type: 'image',
+              options: {
+                hotspot: true,
+              },
+
+              fields: [
+                defineField({
+                  name: 'alt',
+                  title: 'Alternative Text',
+                  type: 'string',
+                  description: 'Describe what the screenshot or design shows.',
+                  validation: (Rule) => Rule.required(),
+                }),
+
+                defineField({
+                  name: 'caption',
+                  title: 'Caption',
+                  type: 'string',
+                  description: 'Optional context about the screen or feature.',
+                }),
+              ],
+
+              validation: (Rule) => Rule.required().assetRequired(),
+            }),
+          ],
         }),
 
         defineField({
           name: 'liveDemoUrl',
           title: 'Live URL',
           type: 'url',
-          description:
-            'Public URL where visitors can open or test the project. Required when the project is published.',
+          description: 'Public URL where visitors can explore the project.',
         }),
 
         defineField({
           name: 'repositoryUrl',
           title: 'Repository URL',
           type: 'url',
+          description: 'Public repository containing the project source code.',
+        }),
+
+        defineField({
+          name: 'figmaUrl',
+          title: 'Figma URL',
+          type: 'url',
           description:
-            'Optional. Add it only when the source code is publicly available.',
+            'Public link to the Figma design or interactive prototype.',
         }),
       ],
     }),
@@ -183,13 +254,9 @@ export const projectType = defineType({
       type: 'number',
       group: 'settings',
       description:
-        'Controls where the project appears in the portfolio. Lower numbers appear first.',
+        'Controls the order in which projects appear in the portfolio.',
       initialValue: 1,
-      validation: (Rule) =>
-        Rule.required()
-          .integer()
-          .min(1)
-          .error('Enter a whole number of 1 or higher'),
+      validation: (Rule) => Rule.required().integer().min(1),
     }),
 
     defineField({
@@ -197,29 +264,25 @@ export const projectType = defineType({
       title: 'Show in Portfolio',
       type: 'boolean',
       group: 'settings',
-      description:
-        'Turn this off to keep the project in the CMS without making it visible on the website.',
+      description: 'Controls whether the project is publicly visible.',
       initialValue: true,
-      validation: (Rule) =>
-        Rule.required().error(
-          'Choose whether to show this project in the portfolio.',
-        ),
+      validation: (Rule) => Rule.required(),
     }),
   ],
 
   preview: {
     select: {
       title: 'title',
-      status: 'status.name',
       isVisible: 'isVisible',
+      icon: 'media.icon',
+      cover: 'media.cover',
     },
 
-    prepare({ title, status, isVisible }) {
-      const projectTitle = title ?? 'Untitled project';
-
+    prepare({ title, isVisible, icon, cover }) {
       return {
-        title: projectTitle,
-        subtitle: `${status} · ${isVisible ? 'Visible' : 'Hidden'}`,
+        title: title ?? 'Untitled project',
+        subtitle: isVisible ? 'Visible' : 'Hidden',
+        media: icon ?? cover,
       };
     },
   },

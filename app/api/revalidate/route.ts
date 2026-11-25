@@ -38,7 +38,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    revalidateTag(body._type, 'max');
+    revalidateTag(body._type, { expire: 0 });
 
     return NextResponse.json({
       revalidated: true,

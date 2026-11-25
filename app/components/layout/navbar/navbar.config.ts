@@ -1,4 +1,4 @@
-import { IconBriefcase, IconUser } from '@tabler/icons-react';
+import { IconLayoutGrid, IconUser } from '@tabler/icons-react';
 
 export const NAV_ITEMS = [
   {
@@ -7,9 +7,9 @@ export const NAV_ITEMS = [
     icon: IconUser,
   },
   {
-    label: 'Servicios',
-    href: '/services',
-    icon: IconBriefcase,
+    label: 'Proyectos',
+    href: '/projects',
+    icon: IconLayoutGrid,
   },
 ] as const;
 

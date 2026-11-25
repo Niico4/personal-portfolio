@@ -1,9 +1,8 @@
 import {
   IconBriefcase,
   IconCode,
-  IconList,
-  IconMoodUnamused,
-  IconProgress,
+  IconLayersIntersect,
+  IconLayoutGrid,
   IconUser,
 } from '@tabler/icons-react';
 import type { StructureResolver } from 'sanity/structure';
@@ -25,29 +24,28 @@ export const structure: StructureResolver = (S) =>
             .documentId('profile'),
         ),
 
-      S.listItem()
-        .id('projects')
-        .title('Projects')
-        .icon(IconCode)
-        .child(
-          S.list()
-            .title('Projects')
-            .items([
-              S.documentTypeListItem('project')
-                .title('All Projects')
-                .icon(IconList),
-
-              S.documentTypeListItem('projectStatus')
-                .title('Statuses')
-                .icon(IconProgress),
-
-              S.documentTypeListItem('technology')
-                .title('My Technologies')
-                .icon(IconMoodUnamused),
-            ]),
-        ),
+      S.documentTypeListItem('project').title('Projects').icon(IconLayoutGrid),
 
       S.documentTypeListItem('workExperience')
         .title('Work Experience')
         .icon(IconBriefcase),
+
+      S.listItem()
+        .id('skills')
+        .title('Skill Groups')
+        .icon(IconLayersIntersect)
+        .schemaType('skills')
+        .child(
+          S.document()
+            .id('skills')
+            .title('Skill Groups')
+            .schemaType('skills')
+            .documentId('skills'),
+        ),
+
+      S.divider(),
+
+      S.documentTypeListItem('technology')
+        .title('Technology Catalog')
+        .icon(IconCode),
     ]);
