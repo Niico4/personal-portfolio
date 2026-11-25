@@ -33,7 +33,7 @@ export const SEO_CONFIG = {
   },
 
   defaultImage: {
-    url: '/seo/og-default-image.png',
+    url: '/og-default-image.png',
     width: 1200,
     height: 630,
     alt: 'Portfolio de Nicolás Garzón, desarrollador full stack.',

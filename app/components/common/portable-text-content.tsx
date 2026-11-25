@@ -97,9 +97,7 @@ const components: PortableTextComponents = {
     em: ({ children }) => <em className="italic">{children}</em>,
 
     underline: ({ children }) => (
-      <span className="underline decoration-brand decoration-wavy decoration-1 underline-offset-2">
-        {children}
-      </span>
+      <span className="underline underline-brand">{children}</span>
     ),
 
     'strike-through': ({ children }) => (

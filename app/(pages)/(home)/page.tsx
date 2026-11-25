@@ -1,5 +1,6 @@
 import {
   IconArrowRight,
+  IconArrowUpRight,
   IconBrandGithub,
   IconBrandLinkedin,
   IconFileCv,
@@ -12,7 +13,6 @@ import { Fragment } from 'react';
 import { Header } from '@/(pages)/(home)/components/header';
 import { PortableTextContent } from '@/components/common/portable-text-content';
 import { ProjectCard } from '@/components/common/project-card';
-import { Footer } from '@/components/layout/footer';
 import { Accordion } from '@/components/ui/accordion';
 import { buttonVariants } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
@@ -195,7 +195,7 @@ const HomePage = async () => {
               variant: 'outline',
               size: 'sm',
             }),
-            'group w-fit gap-2.5 self-center rounded-full px-3.5 font-normal text-fg-muted',
+            'group w-fit gap-2.5 self-center rounded-full px-3.5 text-fg-secondary',
           )}
         >
           Ver todos los proyectos
@@ -234,44 +234,46 @@ const HomePage = async () => {
         </div>
       </section>
 
-      <section
-        aria-labelledby="services-cta-title"
-        className="flex flex-col items-center gap-5 py-8 text-center"
-      >
-        <div className="space-y-3">
-          <h3
-            id="services-cta-title"
-            className="text-2xl font-medium tracking-tight text-balance text-fg-emphasis"
-          >
-            ¿Tienes un proyecto en mente?
-          </h3>
-
-          <p className="mx-auto max-w-[38ch] text-sm leading-normal text-pretty text-fg-muted">
-            Cuéntame qué quieres construir o mejorar. Veamos cómo hacerlo
-            realidad.
-          </p>
-        </div>
-
-        <Link
-          href="/services"
-          className={cn(
-            buttonVariants({
-              variant: 'default',
-              size: 'default',
-            }),
-            'group h-9 gap-3 rounded-full px-5 font-medium',
-          )}
+      {contactEmailHref && (
+        <section
+          aria-labelledby="contact-cta-title"
+          className="flex flex-col items-center gap-5 py-8 text-center sm:py-10"
         >
-          Ver mis servicios
-          <IconArrowRight
-            aria-hidden="true"
-            stroke={1.5}
-            className="size-4 motion-safe:transition-transform motion-safe:duration-200 motion-safe:group-hover:translate-x-0.5"
-          />
-        </Link>
-      </section>
+          <div className="space-y-3">
+            <h2
+              id="contact-cta-title"
+              className="text-xl font-medium tracking-tight text-balance text-fg-emphasis sm:text-2xl"
+            >
+              ¿Construimos algo juntos?
+            </h2>
 
-      <Footer />
+            <p className="mx-auto max-w-[42ch] text-sm leading-relaxed text-pretty text-fg-muted sm:text-base">
+              Si tienes una idea, un proyecto o simplemente algo interesante de
+              lo que hablar, escríbeme.
+            </p>
+          </div>
+
+          <a
+            href={contactEmailHref}
+            className={cn(
+              buttonVariants({
+                variant: 'default',
+                size: 'default',
+              }),
+              'group h-9 gap-3 rounded-full px-5 font-medium',
+            )}
+          >
+            Hablemos
+            <IconArrowUpRight
+              aria-hidden="true"
+              stroke={1.5}
+              className="size-4 motion-safe:transition-transform motion-safe:duration-200 motion-safe:group-hover:translate-x-0.5 motion-safe:group-hover:-translate-y-0.5"
+            />
+          </a>
+        </section>
+      )}
+
+      {/* <Footer /> */}
     </div>
   );
 };

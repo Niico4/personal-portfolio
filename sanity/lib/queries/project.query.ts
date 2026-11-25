@@ -7,20 +7,32 @@ const PROJECT_FIELDS = `
   shortDescription,
   description,
 
-  "features": features[],
+  "technologyGroups": coalesce(technologyGroups[]{
+    "id": _key,
+    name,
+    "technologies": technologies[]->{
+      "id": _id,
+      name
+    }
+  }, []),
 
   media {
     "coverURL": cover.asset->url,
     "iconURL": icon.asset->url,
     "demoVideoURL": demoVideo.asset->url,
-    "liveURL": liveDemoUrl,
-    "repositoryURL": repositoryUrl,
-    "figmaURL": figmaUrl
-  },
 
-  "technologies": technologies[]->{
-    "id": _id,
-    name
+    "gallery": coalesce(gallery[]{
+      "id": _key,
+      "url": asset->url,
+      alt,
+      caption,
+      "width": asset->metadata.dimensions.width,
+      "height": asset->metadata.dimensions.height
+    }, []),
+
+    "liveUrl": liveDemoUrl,
+    repositoryUrl,
+    figmaUrl
   }
 `;
 
