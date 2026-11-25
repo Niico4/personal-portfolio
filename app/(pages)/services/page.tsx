@@ -8,7 +8,7 @@ import { SectionIntro } from '@/components/molecules/common/section-intro';
 import { getProfile } from '@/sanity/lib/fetchers/profile.fetcher';
 import { createPageMetadata } from '@/utils/seo/create-page-metadata';
 
-import { Header } from '../../components/layout/header';
+import { Header } from '../(home)/components/header';
 import { MyServicesContenSection } from './sections/services-content-section';
 
 export const metadata: Metadata = createPageMetadata({
@@ -26,7 +26,7 @@ export const metadata: Metadata = createPageMetadata({
 });
 
 const ServicesPage = async () => {
-  const { contact, professionalTitle } = await getProfile();
+  const { contact } = await getProfile();
 
   const contactEmailEncoded = `mailto:${contact.email}?subject=${encodeURIComponent(
     'Tengo un proyecto en mente',
@@ -35,9 +35,9 @@ const ServicesPage = async () => {
     <main className="mx-auto flex flex-col gap-y-12 sm:gap-y-16">
       <div className="flex flex-col gap-6">
         <Header
-          contact={contact}
-          professionalTitle={professionalTitle}
-          isServicesPage
+        // contact={contact}
+        // professionalTitle={professionalTitle}
+        // isServicesPage
         />
 
         <section className="flex flex-col gap-1">

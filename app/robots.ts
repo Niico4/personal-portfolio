@@ -4,21 +4,14 @@ import { SEO_CONFIG } from './config/seo.config';
 import { getAbsoluteUrl } from './utils/seo/get-absolute-url';
 
 const robots = (): MetadataRoute.Robots => {
-  if (!SEO_CONFIG.indexingEnabled) {
-    return {
-      rules: {
-        userAgent: '*',
-        disallow: '/',
-      },
-    };
-  }
-
   return {
     rules: {
       userAgent: '*',
       allow: '/',
     },
-    sitemap: getAbsoluteUrl('/sitemap.xml'),
+    ...(SEO_CONFIG.indexingEnabled && {
+      sitemap: getAbsoluteUrl('/sitemap.xml'),
+    }),
   };
 };
 

@@ -1,5 +1,7 @@
 import type { MetadataRoute } from 'next';
 
+import { getProjectList } from '@/sanity/lib/fetchers/project.fetcher';
+
 import { SEO_CONFIG } from './config/seo.config';
 import { getAbsoluteUrl } from './utils/seo/get-absolute-url';
 
@@ -8,16 +10,22 @@ const sitemap = async (): Promise<MetadataRoute.Sitemap> => {
     return [];
   }
 
-  const staticPages: MetadataRoute.Sitemap = [
+  const projects = await getProjectList();
+
+  return [
     {
       url: getAbsoluteUrl('/'),
     },
     {
+      url: getAbsoluteUrl('/projects'),
+    },
+    {
       url: getAbsoluteUrl('/services'),
     },
+    ...projects.map(({ slug }) => ({
+      url: getAbsoluteUrl(`/projects/${slug}`),
+    })),
   ];
-
-  return [...staticPages];
 };
 
 export default sitemap;

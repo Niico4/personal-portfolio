@@ -1,10 +1,15 @@
-import { IconBriefcase, IconUser } from '@tabler/icons-react';
+import { IconBriefcase, IconLayoutGrid, IconUser } from '@tabler/icons-react';
 
 export const NAV_ITEMS = [
   {
     label: 'Inicio',
     href: '/',
     icon: IconUser,
+  },
+  {
+    label: 'Proyectos',
+    href: '/projects',
+    icon: IconLayoutGrid,
   },
   {
     label: 'Servicios',

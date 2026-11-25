@@ -5,8 +5,10 @@ export const WORK_EXPERIENCE_LIST_QUERY = groq`
     _type == "workExperience"
   ] | order(startDate desc, endDate desc) {
     "id": _id,
-    "name": organizationName,
+    organizationName,
+    "organizationLogoURL": organizationLogo.asset->url,
     role,
+    "isFreelance": coalesce(isFreelance, false),
     startDate,
     endDate,
     isCurrentPosition,

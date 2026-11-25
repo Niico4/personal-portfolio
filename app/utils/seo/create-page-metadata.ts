@@ -4,13 +4,14 @@ import { SEO_CONFIG } from '@/config/seo.config';
 
 import { getAbsoluteUrl } from './get-absolute-url';
 
-type SeoPath = '/' | `/${string}`;
+type SeoPath = `/${string}`;
 
 export type SeoImage = {
   url: string;
   alt: string;
   width?: number;
   height?: number;
+  type?: string;
 };
 
 type CreatePageMetadataParams = {
@@ -18,6 +19,7 @@ type CreatePageMetadataParams = {
   description: string;
   path: SeoPath;
   socialTitle?: string;
+  socialDescription?: string;
   image?: SeoImage;
   absoluteTitle?: boolean;
   noIndex?: boolean;
@@ -29,6 +31,7 @@ export const createPageMetadata = ({
   description,
   path,
   socialTitle = title,
+  socialDescription = description,
   image = SEO_CONFIG.defaultImage,
   absoluteTitle = false,
   noIndex = false,
@@ -36,17 +39,14 @@ export const createPageMetadata = ({
 }: CreatePageMetadataParams): Metadata => {
   const shouldIndex = SEO_CONFIG.indexingEnabled && !noIndex;
   const canonicalUrl = getAbsoluteUrl(path);
+
   const socialImage = {
     ...image,
     url: getAbsoluteUrl(image.url),
   };
 
   return {
-    title: absoluteTitle
-      ? {
-          absolute: title,
-        }
-      : title,
+    title: absoluteTitle ? { absolute: title } : title,
 
     description,
 
@@ -54,26 +54,19 @@ export const createPageMetadata = ({
       canonical: canonicalUrl,
     },
 
-    robots: shouldIndex
-      ? {
-          index: true,
-          follow: true,
-          googleBot: {
-            index: true,
-            follow: true,
-            'max-image-preview': 'large',
-            'max-snippet': -1,
-            'max-video-preview': -1,
-          },
-        }
-      : {
-          index: false,
-          follow: false,
-          googleBot: {
-            index: false,
-            follow: false,
-          },
-        },
+    robots: {
+      index: shouldIndex,
+      follow: shouldIndex,
+      googleBot: {
+        index: shouldIndex,
+        follow: shouldIndex,
+        ...(shouldIndex && {
+          'max-image-preview': 'large',
+          'max-snippet': -1,
+          'max-video-preview': -1,
+        }),
+      },
+    },
 
     openGraph: {
       type: openGraphType,
@@ -81,14 +74,14 @@ export const createPageMetadata = ({
       siteName: SEO_CONFIG.siteName,
       url: canonicalUrl,
       title: socialTitle,
-      description,
+      description: socialDescription,
       images: [socialImage],
     },
 
     twitter: {
       card: 'summary_large_image',
       title: socialTitle,
-      description,
+      description: socialDescription,
       images: [
         {
           url: socialImage.url,

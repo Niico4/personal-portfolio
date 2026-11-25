@@ -1,26 +1,21 @@
-interface NamedReference {
-  id: string;
-  name: string;
-}
+import type { TechnologyType } from './technology';
 
 export interface ProjectType {
   id: string;
   title: string;
   slug: string;
-  status: Status;
   shortDescription: string;
   description: string;
   features: string[];
-  technologies: NamedReference[];
-  links: ProjectLinks;
+  technologies: TechnologyType[];
+  media: ProjectMedia;
 }
 
-interface Status extends NamedReference {
-  value: string;
-}
-
-interface ProjectLinks {
-  demoVideo: string | null;
+interface ProjectMedia {
+  coverURL: string;
+  iconURL: string | null;
+  demoVideoURL: string | null;
   liveURL: string | null;
   repositoryURL: string | null;
+  figmaURL: string | null;
 }

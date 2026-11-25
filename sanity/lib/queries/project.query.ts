@@ -8,17 +8,14 @@ const PROJECT_FIELDS = `
   description,
 
   "features": features[],
-  
-  "status": status->{
-    "id": _id,
-    name,
-    "value": value.current
-  },
 
-  "links": {
-    "demoVideo": links.demoVideo.asset->url,
-    "liveURL": links.liveDemoUrl,
-    "repositoryURL": links.repositoryUrl
+  media {
+    "coverURL": cover.asset->url,
+    "iconURL": icon.asset->url,
+    "demoVideoURL": demoVideo.asset->url,
+    "liveURL": liveDemoUrl,
+    "repositoryURL": repositoryUrl,
+    "figmaURL": figmaUrl
   },
 
   "technologies": technologies[]->{
@@ -29,10 +26,20 @@ const PROJECT_FIELDS = `
 
 export const PROJECT_LIST_QUERY = groq`
   *[
-    _type == "project" && 
+    _type == "project" &&
     defined(slug.current) &&
     isVisible == true
   ] | order(displayOrder asc) {
+    ${PROJECT_FIELDS}
+  }
+`;
+
+export const PROJECT_DETAIL_QUERY = groq`
+  *[
+    _type == "project" &&
+    slug.current == $slug &&
+    isVisible == true
+  ][0] {
     ${PROJECT_FIELDS}
   }
 `;

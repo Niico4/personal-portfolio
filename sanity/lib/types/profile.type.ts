@@ -1,32 +1,19 @@
 import type { PortableTextBlock } from '@portabletext/types';
 
-import type { EducationStatusType } from '@/sanity/schemaTypes/profile';
-
 export interface ProfileType {
-  aboutMe: PortableTextBlock[] | null;
+  aboutMeDescription: PortableTextBlock[] | null;
   professionalTitle: string;
   contact: Contact;
-  education: EducationItemType[];
+  resume: Resume;
 }
 
 interface Contact {
   email: string;
-  githubURL: string | null;
-  linkedinURL: string | null;
-  resume: Resume;
+  githubUrl: string | null;
+  linkedinUrl: string | null;
 }
 
 interface Resume {
   fileUrl: string | null;
   externalUrl: string | null;
-}
-
-interface EducationItemType {
-  id: string;
-  academicTitle: string;
-  institutionName: null | string;
-  status: EducationStatusType;
-  startDate: string;
-  endDate: string | null;
-  details: string;
 }
