@@ -56,7 +56,7 @@ export const WorkExperienceItem = ({ experience }: WorkExperienceItemProps) => {
 
           <span className="flex min-w-0 flex-col gap-0.5 text-left">
             <span className="flex flex-wrap items-baseline gap-x-1.5">
-              <span className="text-sm font-medium text-fg-default decoration-brand decoration-wavy decoration-1 underline-offset-2 group-aria-expanded/experience:underline sm:text-base">
+              <span className="text-sm font-medium text-fg-default underline-brand group-aria-expanded/experience:underline sm:text-base">
                 {organizationName}
               </span>
 
@@ -70,7 +70,7 @@ export const WorkExperienceItem = ({ experience }: WorkExperienceItemProps) => {
               </span>
             </span>
 
-            <span className="text-xs leading-normal text-fg-secondary sm:text-sm">
+            <span className="text-xs leading-normal text-fg-subtle sm:text-sm">
               {role}
               {isFreelance && ' · Freelance'}
             </span>
@@ -95,7 +95,7 @@ export const WorkExperienceItem = ({ experience }: WorkExperienceItemProps) => {
       </AccordionTrigger>
 
       <AccordionContent className="p-0">
-        <ul className="list-disc space-y-2 pt-4 pb-1 pl-4 text-sm leading-normal text-fg-secondary marker:text-fg-muted sm:text-base">
+        <ul className="list-disc space-y-2 pt-4 pb-1 pl-4 text-[13px] leading-normal font-normal text-fg-secondary marker:text-fg-muted sm:text-sm">
           {features.map((feature) => (
             <li key={feature}>{feature}</li>
           ))}

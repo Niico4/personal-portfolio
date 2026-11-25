@@ -7,7 +7,7 @@ import { Separator } from '@/components/ui/separator';
 
 export const Footer = () => {
   return (
-    <footer className="space-y-5 pb-6">
+    <footer className="mt-16 space-y-5 pb-6">
       <Separator className="bg-border/50" />
 
       <div className="space-y-4">
@@ -34,7 +34,7 @@ export const Footer = () => {
           type="button"
           variant="outline"
           size="sm"
-          className="rounded-full"
+          className="rounded-full text-fg-muted"
           aria-label="Volver arriba"
           onClick={() => window.scrollTo({ top: 0 })}
         >

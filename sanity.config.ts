@@ -8,6 +8,8 @@ import { PublicEnvConfig } from '@/config/public-env.config';
 
 import { schema } from './sanity/schemaTypes';
 import { structure } from './sanity/studio-content-structure';
+import { StudioIcon } from '@/studio/studio-icon';
+import { studioTheme } from './sanity/theme';
 
 const singletonTypes = new Set(['profile']);
 
@@ -19,7 +21,8 @@ const allowedSingletonActions = new Set([
 
 export default defineConfig({
   name: 'default',
-  title: 'Portfolio CMS',
+  title: 'nicoo.studio',
+  icon: StudioIcon,
 
   basePath: '/studio',
   projectId: PublicEnvConfig.sanity.project_id,
@@ -47,4 +50,6 @@ export default defineConfig({
     structureTool({ structure }),
     visionTool({ defaultApiVersion: PublicEnvConfig.sanity.api_version }),
   ],
+
+  theme: studioTheme,
 });

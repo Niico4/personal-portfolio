@@ -121,3 +121,7 @@
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
 }
+
+@utility underline-brand {
+  @apply decoration-brand decoration-wavy decoration-1 underline-offset-2;
+}

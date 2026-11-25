@@ -7,7 +7,6 @@ import {
   IconH4,
   IconHighlight,
   IconItalic,
-  IconLink,
   IconList,
   IconListNumbers,
   IconQuote,
@@ -16,7 +15,7 @@ import {
   IconSuperscript,
   IconUnderline,
 } from '@tabler/icons-react';
-import { defineArrayMember, defineField, defineType } from 'sanity';
+import { defineArrayMember, defineType } from 'sanity';
 
 export const richText = defineType({
   name: 'richText',

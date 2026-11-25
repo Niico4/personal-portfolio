@@ -13,15 +13,9 @@ const sitemap = async (): Promise<MetadataRoute.Sitemap> => {
   const projects = await getProjectList();
 
   return [
-    {
-      url: getAbsoluteUrl('/'),
-    },
-    {
-      url: getAbsoluteUrl('/projects'),
-    },
-    {
-      url: getAbsoluteUrl('/services'),
-    },
+    { url: getAbsoluteUrl('/') },
+    { url: getAbsoluteUrl('/projects') },
+
     ...projects.map(({ slug }) => ({
       url: getAbsoluteUrl(`/projects/${slug}`),
     })),

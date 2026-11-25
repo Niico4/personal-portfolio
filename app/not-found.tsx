@@ -74,9 +74,7 @@ const NotFoundPage = () => {
 
         <p lang="en" className="mt-12 text-xs text-fg-muted/70">
           everything looks fine. except{' '}
-          <span className="underline decoration-brand decoration-wavy decoration-1 underline-offset-2">
-            this route.
-          </span>
+          <span className="underline underline-brand">this route.</span>
         </p>
       </section>
     </main>
