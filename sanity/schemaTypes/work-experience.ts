@@ -48,6 +48,16 @@ export const workExperienceType = defineType({
     }),
 
     defineField({
+      name: 'organizationLogo',
+      title: 'Organization Logo',
+      type: 'image',
+      group: 'overview',
+      description: 'Upload a square logo or brand symbol of the organization.',
+      validation: (Rule) =>
+        Rule.required().error('Upload the organization logo.'),
+    }),
+
+    defineField({
       name: 'role',
       title: 'Role',
       type: 'string',
@@ -56,6 +66,17 @@ export const workExperienceType = defineType({
         'The role you had in this experience. Example: Software Developer.',
       validation: (Rule) =>
         Rule.required().error('Enter the role for this experience.'),
+    }),
+
+    defineField({
+      name: 'isFreelance',
+      title: 'Freelance',
+      type: 'boolean',
+      group: 'overview',
+      description:
+        'Turn this on if this experience was completed as a freelance engagement.',
+      initialValue: false,
+      validation: (Rule) => Rule.required(),
     }),
 
     defineField({
@@ -113,18 +134,6 @@ export const workExperienceType = defineType({
     }),
 
     defineField({
-      name: 'description',
-      title: 'Experience Summary',
-      type: 'text',
-      rows: 3,
-      group: 'details',
-      description:
-        'Briefly explain what you worked on and the context needed to understand your role.',
-      validation: (Rule) =>
-        Rule.required().error('Add a short summary of this experience.'),
-    }),
-
-    defineField({
       name: 'features',
       title: 'Key Highlights',
       type: 'array',
@@ -144,15 +153,18 @@ export const workExperienceType = defineType({
   preview: {
     select: {
       organizationName: 'organizationName',
+      organizationLogo: 'organizationLogo',
       role: 'role',
-      isCurrentPosition: 'isCurrentPosition',
-      endDate: 'endDate',
+      isFreelance: 'isFreelance',
     },
 
-    prepare({ organizationName, role }) {
+    prepare({ organizationName, organizationLogo, role, isFreelance }) {
       return {
         title: organizationName ?? 'Unnamed experience',
-        subtitle: `${role ?? 'No role'}`,
+        subtitle: isFreelance
+          ? `${role ?? 'No role'} · Freelance`
+          : (role ?? 'No role'),
+        media: organizationLogo,
       };
     },
   },

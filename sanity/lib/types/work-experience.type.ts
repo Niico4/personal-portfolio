@@ -1,10 +1,11 @@
 export interface WorkExperienceType {
   id: string;
-  name: string;
+  organizationName: string;
+  organizationLogoURL: string;
   role: string;
-  description: string;
   startDate: string;
   endDate: string | null;
   isCurrentPosition: boolean;
+  isFreelance: boolean;
   features: string[];
 }

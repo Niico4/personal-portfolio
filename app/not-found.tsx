@@ -1,58 +1,83 @@
-import { IconHome, IconSparkles } from '@tabler/icons-react';
+import { IconArrowLeft, IconArrowUpRight } from '@tabler/icons-react';
 import Link from 'next/link';
 
-import { Heading } from './components/atoms/common/heading';
-import { LoaderGhost } from './components/atoms/loader-ghost/loader-ghost';
+import { Badge } from '@/components/ui/badge';
+import { buttonVariants } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
+
+import { LoaderGhost } from './components/common/loader-ghost/loader-ghost';
 
 const NotFoundPage = () => {
   return (
-    <main className="relative flex min-h-dvh items-center overflow-hidden">
-      <section className="mx-auto grid w-full max-w-6xl items-center gap-12 px-4 py-16 sm:px-6 lg:grid-cols-[1fr_0.9fr] lg:gap-20">
-        <div className="order-2 flex flex-col items-center text-center lg:order-1 lg:items-start lg:text-left">
-          <span className="mb-5 border border-white/10 bg-white/[0.04] px-3 text-zinc-400 rounded-full py-1 flex gap-2 items-center">
-            <IconSparkles aria-hidden="true" size={14} stroke={1.5} />
-            Error 404
-          </span>
+    <main className="mx-auto flex min-h-dvh w-full max-w-3xl flex-col items-center justify-center px-5 py-16 sm:px-8">
+      <div
+        aria-hidden="true"
+        className="relative mb-8 flex items-center justify-center"
+      >
+        <span className="font-display text-[clamp(8rem,30vw,16rem)] leading-none font-semibold tracking-tighter text-fg-muted/5 select-none">
+          404
+        </span>
 
-          <Heading>Esta ruta se perdió.</Heading>
+        <div className="absolute scale-90 sm:scale-110">
+          <LoaderGhost />
+        </div>
+      </div>
 
-          <p className="mt-4 max-w-lg text-base leading-7 text-zinc-400 sm:text-lg">
-            No encontré nada por acá. Puedes volver al inicio o seguir
-            explorando mis proyectos.
-          </p>
+      <section className="flex flex-col items-center text-center">
+        <Badge
+          variant="outline"
+          className="rounded-full px-3 font-normal text-fg-muted"
+        >
+          Error 404
+        </Badge>
 
+        <h1 className="mt-4 font-display text-3xl font-medium tracking-tight text-fg-strong sm:text-4xl">
+          Esta ruta se perdió.
+        </h1>
+
+        <p className="mt-3 max-w-sm text-sm leading-relaxed text-fg-muted sm:text-base">
+          No encontré nada por acá. Parece que hasta las rutas necesitan un poco
+          de refactoring.
+        </p>
+
+        <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
           <Link
             href="/"
-            className="mt-8 flex min-h-11 items-center gap-2 rounded-full bg-brand-400 px-4 py-2.5 font-medium text-brand-950 transition-colors duration-150 ease-out hover:bg-brand-300 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-brand-400 focus-visible:ring-offset-2 focus-visible:ring-offset-main active:bg-brand-500 motion-reduce:transition-none"
+            className={cn(
+              buttonVariants({ variant: 'default' }),
+              'group gap-2.5 rounded-full px-4',
+            )}
           >
+            <IconArrowLeft
+              aria-hidden="true"
+              stroke={1.5}
+              className="size-4 motion-safe:transition-transform motion-safe:group-hover:-translate-x-0.5"
+            />
             Volver al inicio
-            <IconHome size={20} stroke={1.5} aria-hidden="true" />
+          </Link>
+
+          <Link
+            href="/projects"
+            className={cn(
+              buttonVariants({ variant: 'outline' }),
+              'group gap-2.5 rounded-full px-4 font-normal',
+            )}
+          >
+            Ver proyectos
+            <IconArrowUpRight
+              aria-hidden="true"
+              stroke={1.5}
+              className="size-4 motion-safe:transition-transform motion-safe:group-hover:translate-x-0.5 motion-safe:group-hover:-translate-y-0.5"
+            />
           </Link>
         </div>
 
-        <div
-          aria-hidden="true"
-          className="order-1 flex min-h-[280px] items-center justify-center lg:order-2 lg:min-h-[420px]"
-        >
-          <div className="relative flex items-center justify-center">
-            <span
-              className="
-                select-none
-                text-[clamp(9rem,30vw,18rem)]
-                font-semibold
-                leading-none
-                tracking-[-0.08em]
-                text-white/[0.025]
-              "
-            >
-              404
-            </span>
-
-            <div className="absolute scale-90 sm:scale-110 lg:scale-125">
-              <LoaderGhost />
-            </div>
-          </div>
-        </div>
+        <p lang="en" className="mt-12 text-xs text-fg-muted/70">
+          everything looks fine. except{' '}
+          <span className="underline decoration-brand decoration-wavy decoration-1 underline-offset-2">
+            this route.
+          </span>
+        </p>
       </section>
     </main>
   );

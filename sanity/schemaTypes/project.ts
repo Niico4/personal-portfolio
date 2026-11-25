@@ -18,8 +18,8 @@ export const projectType = defineType({
       title: 'Technologies & Tools',
     },
     {
-      name: 'links',
-      title: 'Links & Media',
+      name: 'media',
+      title: 'Media',
     },
     {
       name: 'settings',
@@ -68,15 +68,6 @@ export const projectType = defineType({
       },
       validation: (Rule) =>
         Rule.required().error('Generate a URL slug for this project.'),
-    }),
-
-    defineField({
-      name: 'status',
-      title: 'Status',
-      type: 'reference',
-      group: 'overview',
-      to: [{ type: 'projectStatus' }],
-      validation: (Rule) => Rule.required(),
     }),
 
     defineField({
@@ -141,13 +132,30 @@ export const projectType = defineType({
     }),
 
     defineField({
-      name: 'links',
-      title: 'Links & Media',
+      name: 'media',
+      title: 'Media',
       type: 'object',
-      group: 'links',
+      group: 'media',
       description:
-        'Add only the links or media that visitors are allowed to access.',
+        'Manage the visual assets, demo video and public links for the project.',
+      validation: (Rule) => Rule.required(),
       fields: [
+        defineField({
+          name: 'cover',
+          title: 'Cover Image',
+          type: 'image',
+          description: 'Upload a screenshot that represents the project.',
+          validation: (Rule) => Rule.required(),
+        }),
+
+        defineField({
+          name: 'icon',
+          title: 'Project Icon',
+          type: 'image',
+          description:
+            'Optional. Upload the project icon, preferably with a transparent background.',
+        }),
+
         defineField({
           name: 'demoVideo',
           title: 'Demo Video',
@@ -173,6 +181,14 @@ export const projectType = defineType({
           type: 'url',
           description:
             'Optional. Add it only when the source code is publicly available.',
+        }),
+
+        defineField({
+          name: 'figmaUrl',
+          title: 'Figma URL',
+          type: 'url',
+          description:
+            'Optional. Add a public link to the project’s Figma design or interactive prototype.',
         }),
       ],
     }),
@@ -210,16 +226,15 @@ export const projectType = defineType({
   preview: {
     select: {
       title: 'title',
-      status: 'status.name',
       isVisible: 'isVisible',
     },
 
-    prepare({ title, status, isVisible }) {
+    prepare({ title, isVisible }) {
       const projectTitle = title ?? 'Untitled project';
 
       return {
         title: projectTitle,
-        subtitle: `${status} · ${isVisible ? 'Visible' : 'Hidden'}`,
+        subtitle: `${isVisible ? 'Visible' : 'Hidden'}`,
       };
     },
   },

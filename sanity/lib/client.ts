@@ -1,3 +1,5 @@
+import 'server-only';
+
 import { createClient, type QueryParams } from 'next-sanity';
 
 import { PublicEnvConfig } from '@/config/public-env.config';
@@ -5,10 +7,10 @@ import { ServerEnvConfig } from '@/config/server-env.config';
 
 export const SANITY_TAGS = {
   profile: 'profile',
-  projects: 'project',
+  project: 'project',
   technology: 'technology',
-  projectStatus: 'projectStatus',
   workExperience: 'workExperience',
+  skills: 'skills',
 } as const;
 
 export const client = createClient({
@@ -16,7 +18,8 @@ export const client = createClient({
   dataset: PublicEnvConfig.sanity.dataset,
   apiVersion: PublicEnvConfig.sanity.api_version,
   token: ServerEnvConfig.sanity.api_read_token,
-  useCdn: false, // Set to false if statically generating pages, using ISR or tag-based revalidation
+  perspective: 'published',
+  useCdn: false,
 });
 
 export async function sanityFetch<const QueryString extends string>({

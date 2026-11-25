@@ -1,156 +1,40 @@
 'use client';
 
-import { AnimatePresence, LayoutGroup, motion } from 'framer-motion';
 import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
-
-import { ScrollToTopButton } from '@/(pages)/(home)/components/atoms/scroll-to-top-button';
 
 import { NAV_ITEMS } from './navbar.config';
 import { NavbarItem } from './navbar-item';
 
-const getActiveHref = (pathname: string) => {
-  return NAV_ITEMS.find((item) => {
-    if (item.href === '/') {
-      return pathname === '/';
-    }
-
-    return pathname === item.href || pathname.startsWith(`${item.href}/`);
-  })?.href;
-};
-
 export const FloatingNavbar = () => {
   const pathname = usePathname();
-  const activeHref = getActiveHref(pathname);
 
-  const [showScrollToTop, setShowScrollToTop] = useState(false);
-
-  // biome-ignore lint/correctness/useExhaustiveDependencies(pathname): Reobserve header after navigation
-  useEffect(() => {
-    const header = document.getElementById('header');
-
-    if (!header) return;
-
-    const observer = new IntersectionObserver(([entry]) => {
-      setShowScrollToTop(!entry.isIntersecting);
-    });
-
-    observer.observe(header);
-
-    return () => observer.disconnect();
-  }, [pathname]);
+  const activeIndex = NAV_ITEMS.findIndex(({ href }) =>
+    href === '/'
+      ? pathname === '/'
+      : pathname === href || pathname.startsWith(`${href}/`),
+  );
 
   return (
-    <motion.nav
-      layoutRoot
+    <nav
       aria-label="Navegación principal"
-      className="
-        fixed
-        bottom-[calc(1rem+env(safe-area-inset-bottom))]
-        left-1/2
-        z-50
-        max-w-[calc(100vw-2rem)]
-        -translate-x-1/2
-
-        sm:bottom-[calc(2rem+env(safe-area-inset-bottom))]
-      "
+      className="fixed bottom-[calc(1rem+env(safe-area-inset-bottom))] left-1/2 z-50 -translate-x-1/2 rounded-full border border-white/10 bg-muted/60 p-1.5 shadow-lg shadow-black/20 backdrop-blur-2xl backdrop-saturate-150 sm:bottom-[calc(2rem+env(safe-area-inset-bottom))]"
     >
-      <LayoutGroup id="floating-navbar">
-        <motion.div
-          layout
-          className="flex items-center"
-          transition={{
-            layout: {
-              type: 'spring',
-              stiffness: 400,
-              damping: 30,
-            },
-          }}
-        >
-          <div
-            className="
-      flex
-      items-center
-      rounded-full
-      border
-      border-line/10
-      bg-main/85
-      px-1.5
-      py-1
-      backdrop-blur-xl
-    "
-          >
-            <ul className="flex items-center gap-1">
-              {NAV_ITEMS.map((item) => (
-                <li key={item.href}>
-                  <NavbarItem
-                    item={item}
-                    isActive={item.href === activeHref}
-                    activeHref={activeHref}
-                  />
-                </li>
-              ))}
-              <AnimatePresence mode="popLayout">
-                {showScrollToTop && (
-                  <motion.li
-                    layout
-                    initial={{
-                      opacity: 0,
-                      scale: 0.8,
-                      x: -8,
-                    }}
-                    animate={{
-                      opacity: 1,
-                      scale: 1,
-                      x: 0,
-                    }}
-                    exit={{
-                      opacity: 0,
-                      scale: 0.8,
-                      x: -8,
-                    }}
-                    transition={{
-                      duration: 0.2,
-                      ease: [0.22, 1, 0.36, 1],
-                    }}
-                  >
-                    <ScrollToTopButton />
-                  </motion.li>
-                )}
-              </AnimatePresence>
-            </ul>
-          </div>
+      <ul className="relative flex items-center gap-1">
+        {NAV_ITEMS.map((item, index) => (
+          <li key={item.href}>
+            <NavbarItem item={item} isActive={index === activeIndex} />
+          </li>
+        ))}
 
-          {/* <AnimatePresence mode="popLayout">
-            {showScrollToTop && (
-              <motion.div
-                layout
-                initial={{
-                  opacity: 0,
-                  scale: 0.8,
-                  x: -8,
-                }}
-                animate={{
-                  opacity: 1,
-                  scale: 1,
-                  x: 0,
-                }}
-                exit={{
-                  opacity: 0,
-                  scale: 0.8,
-                  x: -8,
-                }}
-                transition={{
-                  duration: 0.2,
-                  ease: [0.22, 1, 0.36, 1],
-                }}
-              >
-                <ScrollToTopButton />
-              </motion.div>
-            )}
-          </AnimatePresence> */}
-        </motion.div>
-      </LayoutGroup>
-    </motion.nav>
+        <li
+          aria-hidden="true"
+          className="pointer-events-none absolute top-0 left-0 size-11 rounded-full border border-white/10 bg-white/8 motion-safe:transition-[transform,opacity] motion-safe:duration-350 motion-safe:ease-[cubic-bezier(0.22,1,0.36,1)]"
+          style={{
+            transform: `translateX(calc(var(--spacing) * ${Math.max(activeIndex, 0) * 12}))`,
+            opacity: activeIndex === -1 ? 0 : 1,
+          }}
+        />
+      </ul>
+    </nav>
   );
 };
