@@ -40,18 +40,18 @@ export const WorkExperienceItem = ({ experience }: WorkExperienceItemProps) => {
   } = experience;
 
   return (
-    <AccordionItem value={id} className="border-none not-last:border-b-0">
-      <AccordionTrigger className="group/experience cursor-pointer items-center gap-3 border-0 p-0 font-normal hover:no-underline *:data-[slot=accordion-trigger-icon]:hidden!">
-        <span
-          data-experience-summary
-          className="flex min-w-0 flex-1 items-center gap-3 motion-safe:transition-opacity motion-safe:duration-200"
-        >
+    <AccordionItem value={id} className="not-last:border-b-0">
+      <AccordionTrigger
+        showIcon={false}
+        className="group/experience min-h-12 cursor-pointer items-center gap-3 border-0 p-0 font-normal [-webkit-tap-highlight-color:transparent] hover:bg-foreground/4 hover:no-underline focus-visible:bg-foreground/4 active:bg-primary/10 motion-safe:ease-[cubic-bezier(0.22,0.72,0.24,1)]"
+      >
+        <span className="flex min-w-0 flex-1 items-center gap-3">
           <Image
             src={organizationLogoURL}
             alt=""
             width={40}
             height={40}
-            className="size-9 shrink-0 rounded-lg object-contain sm:size-10"
+            className="size-9 shrink-0 rounded-lg object-contain motion-safe:transition-transform motion-safe:duration-250 motion-safe:ease-[cubic-bezier(0.22,0.72,0.24,1)] motion-safe:group-hover/experience:scale-[1.04] motion-safe:group-active/experience:scale-[0.97] sm:size-10"
           />
 
           <span className="flex min-w-0 flex-col gap-0.5 text-left">
@@ -84,18 +84,18 @@ export const WorkExperienceItem = ({ experience }: WorkExperienceItemProps) => {
               variant: 'outline',
               size: 'icon-sm',
             }),
-            'group-aria-expanded/experience:bg-muted',
+            'group-aria-expanded/experience:bg-muted motion-reduce:transition-none',
           )}
         >
           <IconChevronDown
             stroke={1.5}
-            className="group-aria-expanded/experience:rotate-180 motion-safe:transition-transform motion-safe:duration-200"
+            className="group-aria-expanded/experience:rotate-180 motion-safe:transition-transform motion-safe:duration-250"
           />
         </span>
       </AccordionTrigger>
 
       <AccordionContent className="p-0">
-        <ul className="list-disc space-y-2 pt-4 pb-1 pl-4 text-[13px] leading-normal font-normal text-fg-secondary marker:text-fg-muted sm:text-sm">
+        <ul className="ml-[clamp(0.35rem,3vw,2.25rem)] max-w-[62ch] list-disc space-y-2 pt-4 pb-1 pl-4 text-[13px] leading-normal font-normal text-fg-secondary marker:text-fg-muted motion-safe:transition-transform motion-safe:duration-250 motion-safe:ease-[cubic-bezier(0.22,0.72,0.24,1)] motion-safe:group-data-ending-style/accordion-panel:-translate-y-0.75 motion-safe:group-data-starting-style/accordion-panel:-translate-y-0.75 sm:text-sm">
           {features.map((feature) => (
             <li key={feature}>{feature}</li>
           ))}

@@ -26,11 +26,8 @@ export function LocalTime() {
   }, []);
 
   return (
-    <div className="flex w-full items-center gap-2 text-xs text-fg-muted">
-      <span aria-hidden="true" className="relative flex size-1.5">
-        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand opacity-75"></span>
-        <span className="relative inline-flex size-1.5 rounded-full bg-brand"></span>
-      </span>
+    <div className="flex items-center gap-2 text-xs whitespace-nowrap text-fg-subtle">
+      <span aria-hidden="true" className="size-1.5 rounded-full bg-brand" />
 
       <span>Bogotá, CO</span>
 
@@ -39,8 +36,6 @@ export function LocalTime() {
       <time dateTime={now?.toISOString()} className="font-mono tabular-nums">
         {now ? timeFormatter.format(now) : '--:--:--'}
       </time>
-
-      <span aria-hidden="true" className="h-px flex-1 bg-current opacity-15" />
     </div>
   );
 }

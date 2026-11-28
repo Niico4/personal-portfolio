@@ -1,35 +1,37 @@
-import Link from 'next/link';
+import Link, { useLinkStatus } from 'next/link';
 
-import { buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
 import type { NavItem } from './navbar.config';
 
 interface NavbarItemProps {
   item: NavItem;
-  isActive: boolean;
+  ariaCurrent?: 'page' | 'location';
 }
 
-export const NavbarItem = ({ item, isActive }: NavbarItemProps) => {
-  const Icon = item.icon;
+const NavbarItemLabel = ({ label }: { label: NavItem['label'] }) => {
+  const { pending } = useLinkStatus();
 
+  return <span aria-busy={pending}>{label}</span>;
+};
+
+export const NavbarItem = ({ item, ariaCurrent }: NavbarItemProps) => {
   return (
     <Link
       href={item.href}
-      aria-current={isActive ? 'page' : undefined}
-      aria-label={item.label}
+      aria-current={ariaCurrent}
       className={cn(
-        buttonVariants({
-          variant: 'ghost',
-          size: 'icon',
-        }),
-        'relative z-10 size-11 rounded-full hover:bg-transparent',
-        'motion-safe:transition-[color,scale]',
-        'motion-safe:duration-200 motion-safe:active:scale-94',
-        isActive ? 'text-fg-emphasis' : 'text-fg-muted hover:text-fg-emphasis',
+        'relative inline-flex min-h-11 min-w-11 items-center justify-center text-[0.86rem]',
+        'text-muted-foreground hover:text-foreground',
+        'after:pointer-events-none after:absolute after:inset-x-[0.2rem] after:bottom-[0.42rem] after:h-px after:origin-left after:scale-x-0 after:bg-primary after:content-[""]',
+        'hover:after:scale-x-100 active:text-primary active:after:scale-x-100',
+        'focus-visible:text-foreground focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-ring focus-visible:after:scale-x-100',
+        'motion-safe:after:transition-transform motion-safe:after:duration-150 motion-safe:after:ease-out',
+        'has-aria-busy:text-foreground has-aria-busy:after:scale-x-100',
+        ariaCurrent && 'text-foreground after:scale-x-100',
       )}
     >
-      <Icon aria-hidden="true" stroke={1.4} className="size-5!" />
+      <NavbarItemLabel label={item.label} />
     </Link>
   );
 };

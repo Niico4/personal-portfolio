@@ -2,39 +2,47 @@
 
 import { usePathname } from 'next/navigation';
 
+import { LocalTime } from '@/components/layout/navbar/local-time';
+
 import { NAV_ITEMS } from './navbar.config';
 import { NavbarItem } from './navbar-item';
 
-export const FloatingNavbar = () => {
+export const Navbar = () => {
   const pathname = usePathname();
 
-  const activeIndex = NAV_ITEMS.findIndex(({ href }) =>
-    href === '/'
-      ? pathname === '/'
-      : pathname === href || pathname.startsWith(`${href}/`),
-  );
-
   return (
-    <nav
-      aria-label="Navegación principal"
-      className="fixed bottom-[calc(1rem+env(safe-area-inset-bottom))] left-1/2 z-50 -translate-x-1/2 rounded-full border border-white/10 bg-muted/60 p-1.5 shadow-lg shadow-black/20 backdrop-blur-2xl backdrop-saturate-150 sm:bottom-[calc(2rem+env(safe-area-inset-bottom))]"
-    >
-      <ul className="relative flex items-center gap-1">
-        {NAV_ITEMS.map((item, index) => (
-          <li key={item.href}>
-            <NavbarItem item={item} isActive={index === activeIndex} />
-          </li>
-        ))}
+    <header className="grid grid-cols-[auto_1fr_auto] items-center gap-x-[clamp(1.25rem,4vw,2rem)] border-b border-border pb-4 max-[426px]:grid-cols-[1fr_auto] max-[426px]:gap-y-1 max-[426px]:pb-1">
+      <span className="font-display text-[1.22rem] font-bold tracking-[-0.06em]">
+        nicoo
+      </span>
 
-        <li
-          aria-hidden="true"
-          className="pointer-events-none absolute top-0 left-0 size-11 rounded-full border border-white/10 bg-white/8 motion-safe:transition-[transform,opacity] motion-safe:duration-350 motion-safe:ease-[cubic-bezier(0.22,1,0.36,1)]"
-          style={{
-            transform: `translateX(calc(var(--spacing) * ${Math.max(activeIndex, 0) * 12}))`,
-            opacity: activeIndex === -1 ? 0 : 1,
-          }}
-        />
-      </ul>
-    </nav>
+      <nav
+        aria-label="Navegación principal"
+        className="max-[426px]:col-span-2 max-[426px]:row-start-2 max-[426px]:-ml-1"
+      >
+        <ul className="flex items-center gap-[0.8rem]">
+          {NAV_ITEMS.map((item) => {
+            const isPage = pathname === item.href;
+            const isLocation =
+              item.href !== '/' && pathname.startsWith(`${item.href}/`);
+
+            return (
+              <li key={item.href}>
+                <NavbarItem
+                  item={item}
+                  ariaCurrent={
+                    isPage ? 'page' : isLocation ? 'location' : undefined
+                  }
+                />
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
+
+      <div className="max-[426px]:col-start-2 max-[426px]:row-start-1">
+        <LocalTime />
+      </div>
+    </header>
   );
 };
