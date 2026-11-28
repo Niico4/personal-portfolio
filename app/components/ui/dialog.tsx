@@ -2,7 +2,7 @@
 
 import { Dialog as DialogPrimitive } from '@base-ui/react/dialog';
 import { IconX } from '@tabler/icons-react';
-import { cn } from 'cn';
+import { cn } from '@/lib/utils';
 import type * as React from 'react';
 
 import { Button } from '@/components/ui/button';
@@ -43,13 +43,15 @@ function DialogContent({
   className,
   children,
   showCloseButton = true,
+  overlayClassName,
   ...props
 }: DialogPrimitive.Popup.Props & {
   showCloseButton?: boolean;
+  overlayClassName?: string;
 }) {
   return (
     <DialogPortal>
-      <DialogOverlay />
+      <DialogOverlay className={overlayClassName}/>
       <DialogPrimitive.Popup
         data-slot="dialog-content"
         className={cn(

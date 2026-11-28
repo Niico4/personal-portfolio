@@ -1,6 +1,11 @@
 import { IconCode } from '@tabler/icons-react';
 import { defineArrayMember, defineField, defineType } from 'sanity';
 
+import {
+  createProjectImageMember,
+  projectDetailSections,
+} from './project-fields';
+
 export const projectType = defineType({
   name: 'project',
   title: 'Project',
@@ -12,6 +17,10 @@ export const projectType = defineType({
       name: 'overview',
       title: 'Overview',
       default: true,
+    },
+    {
+      name: 'story',
+      title: 'Project Story',
     },
     {
       name: 'technologies',
@@ -79,6 +88,8 @@ export const projectType = defineType({
         'Explain the context, your contribution, the decisions you made and what you built.',
       validation: (Rule) => Rule.required().min(1),
     }),
+
+    projectDetailSections,
 
     defineField({
       name: 'technologyGroups',
@@ -171,6 +182,42 @@ export const projectType = defineType({
         }),
 
         defineField({
+          name: 'detailCover',
+          title: 'Detail Cover',
+          type: 'image',
+          description:
+            'Optional image for the project detail page. Falls back to the Cover Image. Crop it to choose the detail shown; the enlarged view uses the original image.',
+          options: {
+            hotspot: true,
+          },
+          fields: [
+            defineField({
+              name: 'alt',
+              title: 'Alternative Text',
+              type: 'string',
+              description: 'Describe what the detail cover shows.',
+              validation: (Rule) =>
+                Rule.custom((value, { parent }) => {
+                  const asset = (
+                    parent as { asset?: { _ref?: string } } | undefined
+                  )?.asset?._ref;
+
+                  return asset && !value
+                    ? 'Alternative text is required when an image is uploaded.'
+                    : true;
+                }),
+            }),
+
+            defineField({
+              name: 'caption',
+              title: 'Caption',
+              type: 'string',
+              description: 'Optional context shown under the image.',
+            }),
+          ],
+        }),
+
+        defineField({
           name: 'icon',
           title: 'Project Icon',
           type: 'image',
@@ -195,33 +242,7 @@ export const projectType = defineType({
           type: 'array',
           description:
             'Upload screenshots or design previews in the order they should appear.',
-          of: [
-            defineArrayMember({
-              type: 'image',
-              options: {
-                hotspot: true,
-              },
-
-              fields: [
-                defineField({
-                  name: 'alt',
-                  title: 'Alternative Text',
-                  type: 'string',
-                  description: 'Describe what the screenshot or design shows.',
-                  validation: (Rule) => Rule.required(),
-                }),
-
-                defineField({
-                  name: 'caption',
-                  title: 'Caption',
-                  type: 'string',
-                  description: 'Optional context about the screen or feature.',
-                }),
-              ],
-
-              validation: (Rule) => Rule.required().assetRequired(),
-            }),
-          ],
+          of: [createProjectImageMember()],
         }),
 
         defineField({

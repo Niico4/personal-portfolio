@@ -7,17 +7,17 @@ import {
   PROJECT_DETAIL_QUERY,
   PROJECT_LIST_QUERY,
 } from '../queries/project.query';
-import type { ProjectType } from '../types/project.type';
+import type { ProjectDetailType, ProjectListItem } from '../types/project.type';
 
-export const getProjectList = (): Promise<ProjectType[]> => {
+export const getProjectList = (): Promise<ProjectListItem[]> => {
   return sanityFetch({
     query: PROJECT_LIST_QUERY,
-    tags: [SANITY_TAGS.project, SANITY_TAGS.technology],
+    tags: [SANITY_TAGS.project],
   });
 };
 
-export const getProjectBySlug = cache(
-  (slug: string): Promise<ProjectType | null> => {
+export const getProjectDetailBySlug = cache(
+  (slug: string): Promise<ProjectDetailType | null> => {
     return sanityFetch({
       query: PROJECT_DETAIL_QUERY,
       params: { slug },

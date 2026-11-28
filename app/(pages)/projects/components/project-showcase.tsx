@@ -8,9 +8,14 @@ import { ProjectGallery } from './project-gallery';
 interface ProjectShowcaseProps {
   title: string;
   media: Pick<ProjectType['media'], 'coverURL' | 'demoVideoURL' | 'gallery'>;
+  preload?: 'none' | 'metadata';
 }
 
-export const ProjectShowcase = ({ title, media }: ProjectShowcaseProps) => {
+export const ProjectShowcase = ({
+  title,
+  media,
+  preload = 'metadata',
+}: ProjectShowcaseProps) => {
   const { coverURL, demoVideoURL, gallery } = media;
 
   if (demoVideoURL) {
@@ -18,12 +23,12 @@ export const ProjectShowcase = ({ title, media }: ProjectShowcaseProps) => {
       <figure className="flex flex-col gap-2">
         <video
           src={demoVideoURL}
-          poster={coverURL}
+          poster={coverURL ?? undefined}
           aria-label={`Video demostrativo de ${title}`}
           controls
           muted
           playsInline
-          preload="metadata"
+          preload={preload}
           className="block aspect-video w-full rounded-xl border border-border bg-black object-contain"
         />
 
@@ -42,7 +47,7 @@ export const ProjectShowcase = ({ title, media }: ProjectShowcaseProps) => {
   return (
     <div className="relative aspect-video overflow-hidden rounded-xl border border-border bg-muted">
       <Image
-        src={coverURL}
+        src={coverURL ?? '/og-default-image.png'}
         alt={`Vista previa de ${title}`}
         fill
         sizes="(min-width: 768px) 704px, calc(100vw - 40px)"

@@ -1,139 +1,211 @@
-import { IconArrowLeft } from '@tabler/icons-react';
+import {
+  IconArrowLeft,
+  IconArrowRight,
+  IconArrowUpRight,
+} from '@tabler/icons-react';
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { Fragment } from 'react';
 
-import { SkillGroup } from '@/(pages)/(home)/components/skills-group';
-import { PortableTextContent } from '@/components/common/portable-text-content';
-import { buttonVariants } from '@/components/ui/button';
-import { Separator } from '@/components/ui/separator';
-import { cn } from '@/lib/utils';
-import { getProjectBySlug } from '@/sanity/lib/fetchers/project.fetcher';
+import { DetailCover } from '@/(pages)/projects/components/detail-cover';
+import { ProjectSections } from '@/(pages)/projects/components/project-sections';
+import {
+  getProjectDetailBySlug,
+  getProjectList,
+} from '@/sanity/lib/fetchers/project.fetcher';
+import type {
+  DetailCover as DetailCoverType,
+  ProjectDetailType,
+  ProjectListItem,
+} from '@/sanity/lib/types/project.type';
 import { createPageMetadata } from '@/utils/seo/create-page-metadata';
 
-import { ProjectActions } from '../components/project-actions';
-import { ProjectShowcase } from '../components/project-showcase';
+type Props = {
+  params: Promise<{ slug: string }>;
+};
 
-interface ProjectPageProps {
-  params: Promise<{
-    slug: string;
-  }>;
-}
+const getAdjacentProjects = (projects: ProjectListItem[], slug: string) => {
+  const index = projects.findIndex((project) => project.slug === slug);
 
-export const generateMetadata = async ({
-  params,
-}: ProjectPageProps): Promise<Metadata> => {
-  const { slug } = await params;
-  const project = await getProjectBySlug(slug);
+  return {
+    previousProject: index > 0 ? projects[index - 1] : null,
+    nextProject: index >= 0 ? (projects[index + 1] ?? null) : null,
+  };
+};
 
-  if (!project) {
-    notFound();
+const getDetailCover = ({
+  detailCover,
+  media,
+}: ProjectDetailType): DetailCoverType | null => {
+  if (detailCover) return detailCover;
+
+  const { coverURL, coverWidth, coverHeight } = media;
+
+  if (
+    !coverURL ||
+    coverWidth === null ||
+    coverHeight === null ||
+    coverWidth <= 0 ||
+    coverHeight <= 0
+  ) {
+    return null;
   }
+
+  return {
+    url: coverURL,
+    width: coverWidth,
+    height: coverHeight,
+    crop: null,
+    alt: null,
+    caption: null,
+  };
+};
+
+const resourceLinkClassName =
+  'flex min-h-11 items-center gap-[0.3rem] text-[0.85rem] text-muted-foreground hover:text-primary active:text-primary focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-ring';
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const project = await getProjectDetailBySlug(slug);
+
+  if (!project) notFound();
 
   return createPageMetadata({
     title: project.title,
     description: project.shortDescription,
     path: `/projects/${project.slug}`,
-    image: {
-      url: project.media.coverURL,
-      alt: `Vista previa de ${project.title}`,
-    },
+    image: project.media.coverURL
+      ? {
+          url: project.media.coverURL,
+          alt: `Vista previa de ${project.title}`,
+        }
+      : undefined,
   });
-};
+}
 
-const ProjectPage = async ({ params }: ProjectPageProps) => {
+export default async function ProjectDetailPage({ params }: Props) {
   const { slug } = await params;
-  const project = await getProjectBySlug(slug);
 
-  if (!project) {
-    notFound();
-  }
+  const [project, projects] = await Promise.all([
+    getProjectDetailBySlug(slug),
+    getProjectList(),
+  ]);
 
-  const { title, shortDescription, description, technologyGroups, media } =
-    project;
+  if (!project) notFound();
+
+  const { title, shortDescription, media } = project;
+
+  const { previousProject, nextProject } = getAdjacentProjects(projects, slug);
+  const cover = getDetailCover(project);
+
+  const resources = [
+    { label: 'Diseño en Figma', url: media.figmaUrl },
+    { label: 'Repositorio', url: media.repositoryUrl },
+    { label: 'Abrir demo', url: media.liveUrl },
+  ];
 
   return (
-    <article className="flex min-w-0 flex-col gap-8 sm:gap-10">
-      <header className="flex flex-col gap-3">
-        <div className="flex items-center gap-3">
-          <Link
-            href="/projects"
-            aria-label="Volver a proyectos"
-            className={cn(
-              buttonVariants({
-                variant: 'outline',
-                size: 'icon-sm',
-              }),
-              'group size-9 shrink-0 rounded-lg text-fg-muted',
-            )}
-          >
-            <IconArrowLeft
-              aria-hidden="true"
-              stroke={1.5}
-              className="size-4 motion-safe:transition-transform motion-safe:group-hover:-translate-x-0.5"
+    <article>
+      <header className="pt-[clamp(2.25rem,6vw,4.3rem)] pb-6">
+        <div className="flex items-center gap-[0.9rem]">
+          {media.iconURL && (
+            <Image
+              src={media.iconURL}
+              alt=""
+              width={52}
+              height={52}
+              className="size-12 shrink-0 object-contain"
             />
-          </Link>
+          )}
 
-          <div className="flex min-w-0 items-center gap-2.5">
-            {media.iconURL && (
-              <Image
-                src={media.iconURL}
-                alt=""
-                width={40}
-                height={40}
-                className="size-8 shrink-0 rounded-xs object-contain sm:size-10"
-              />
-            )}
-
-            <h1 className="min-w-0 font-display text-2xl font-medium tracking-tight wrap-break-word text-fg-strong sm:text-3xl">
-              {title}
-            </h1>
-          </div>
+          <h1 className="font-display text-[clamp(2.2rem,5vw,3rem)] leading-[1.05] font-semibold tracking-[-0.035em] wrap-anywhere">
+            {title}
+          </h1>
         </div>
 
-        <p className="text-sm leading-relaxed text-fg-secondary sm:text-base">
+        <p className="mt-[1.2rem] max-w-[47ch] text-[clamp(1.12rem,2.4vw,1.4rem)] leading-[1.48] tracking-[-0.02em] text-pretty">
           {shortDescription}
         </p>
+
+        {resources.some(({ url }) => url) && (
+          <ul className="mt-3 flex flex-wrap items-center gap-x-5">
+            {resources.map(
+              ({ label, url }) =>
+                url && (
+                  <li key={label}>
+                    <a
+                      href={url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={resourceLinkClassName}
+                    >
+                      {label}
+                      <IconArrowUpRight aria-hidden="true" size={15} />
+                    </a>
+                  </li>
+                ),
+            )}
+          </ul>
+        )}
       </header>
 
-      <div className="flex min-w-0 flex-col gap-4">
-        <ProjectShowcase media={media} title={title} />
+      {cover && <DetailCover title={title} image={cover} />}
 
-        <ProjectActions media={media} />
-      </div>
+      <ProjectSections project={project} />
 
-      <PortableTextContent
-        value={description}
-        className="space-y-4 text-sm leading-relaxed text-fg-default sm:text-base"
-      />
+      <nav
+        aria-label="Navegación entre proyectos"
+        className="mt-8 border-t border-border pt-[1.2rem]"
+      >
+        {(previousProject || nextProject) && (
+          <div className="grid gap-4 min-[541px]:grid-cols-2">
+            {previousProject && (
+              <Link
+                href={`/projects/${previousProject.slug}`}
+                className="group grid min-w-0 gap-1 focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-ring"
+              >
+                <small className="text-xs text-muted-foreground">
+                  Proyecto anterior
+                </small>
 
-      {technologyGroups.length > 0 && (
-        <section
-          aria-labelledby="project-technologies"
-          className="flex flex-col gap-5"
-        >
-          <h2
-            id="project-technologies"
-            className="font-display text-xl text-fg-emphasis sm:text-2xl"
-          >
-            Tecnologías
-          </h2>
+                <span className="flex items-center gap-2 font-display text-[1.45rem] font-semibold tracking-[-0.035em] group-hover:text-primary">
+                  <IconArrowLeft
+                    size={20}
+                    aria-hidden="true"
+                    className="shrink-0 motion-safe:transition-transform motion-safe:duration-160 motion-safe:group-hover:-translate-x-0.5"
+                  />
+                  <span className="min-w-0 wrap-anywhere">
+                    {previousProject.title}
+                  </span>
+                </span>
+              </Link>
+            )}
 
-          <div className="flex flex-col gap-4">
-            {technologyGroups.map((group, index) => (
-              <Fragment key={group.id}>
-                {index > 0 && <Separator className="bg-border/50" />}
+            {nextProject && (
+              <Link
+                href={`/projects/${nextProject.slug}`}
+                className="group grid min-w-0 gap-1 text-right focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-ring min-[541px]:col-start-2"
+              >
+                <small className="text-xs text-muted-foreground">
+                  Siguiente proyecto
+                </small>
 
-                <SkillGroup group={group} />
-              </Fragment>
-            ))}
+                <span className="flex items-center justify-end gap-2 font-display text-[1.45rem] font-semibold tracking-[-0.035em] group-hover:text-primary">
+                  <span className="min-w-0 wrap-anywhere">
+                    {nextProject.title}
+                  </span>
+                  <IconArrowRight
+                    size={20}
+                    aria-hidden="true"
+                    className="shrink-0 motion-safe:transition-transform motion-safe:duration-160 motion-safe:group-hover:translate-x-0.5"
+                  />
+                </span>
+              </Link>
+            )}
           </div>
-        </section>
-      )}
+        )}
+      </nav>
     </article>
   );
-};
-
-export default ProjectPage;
+}

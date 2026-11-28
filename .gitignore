@@ -41,3 +41,7 @@ next-env.d.ts
 
 .history/*
 .vscode/*
+
+.codex
+.agents
+skills-lock.json
